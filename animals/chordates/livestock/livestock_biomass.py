@@ -7,214 +7,116 @@
 # 
 # Here are samples of the data:
 
-# In[8]:
+# In[1]:
 
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+pd.options.display.float_format = '{:,.1e}'.format
 # Load global stocks data
-stocks = pd.read_excel('livestock_stocks.xlsx')
+stocks = pd.read_csv('FAOSTAT_stock_data_mammals.csv')
 stocks.head()
 
 
-# In[9]:
+# In[2]:
 
 
 # Load species body mass data
-body_mass = pd.read_excel('livestock_body_mass.xlsx',skiprows=1) 
+body_mass = pd.read_excel('livestock_body_mass.xlsx',skiprows=1,index_col=0) 
 body_mass.head()
 
 
-# The body weight of each aminal is dependent on the continent from which it arrives and the use type (Cattle - dairy and non-dairy. We therefore calculate the total number of animals in each category and multiply the total number of animals in each caterogy by the body mass.
-# 
-# We first standardize the data in terms of units, region definitions and animal categories:
+# We pivot the stocks DataFrame to have a view of each kind of animal at each region:
 
-# In[10]:
+# In[3]:
 
 
-# Define transformation between the regions reported in FAOStat and IPCC
-region_mappings_subcat =  {'Africa': 'Africa + (Total)',
-                    'Eastern Europe':' --Eastern Europe + (Total)',
-                    'Western Europe': ' --Western Europe + (Total)',
-                    'Oceania':'Oceania + (Total)',
-                    'Northern America': ' --Northern America + (Total)',
-                    'Latin America': 'Americas + (Total)',
-                    'Indian Subcontinent': ' --Southern Asia + (Total)',
-                    'Asia': 'Asia + (Total)',
-                    #'Middle east': ''
-                    }
+# Replace NaN with zeros
+stocks.fillna(value=0,inplace=True)
+stock_pivot = pd.pivot(stocks.Area,stocks.Item, stocks.Value).astype(float)
 
-region_mappings_numbers =  {'Africa': 'Africa',
-                    'Eastern Europe':'Eastern Europe',
-                    'Western Europe': 'Western Europe',
-                    'Oceania':'Oceania',
-                    'Northern America': 'Northern America',
-                    'Latin America': 'Americas',
-                    'Indian Subcontinent': 'Southern Asia',
-                    'Asia': 'Asia',
-                    #'Middle east': ''
-                    }
-region_mappings_numbers_reverse = dict ( (v,k) for k, v in region_mappings_numbers.items() )
-region_mappings_subcat_reverse= dict ( (v,k) for k, v in region_mappings_subcat.items() )
+# Replace NaN with zeros
+stock_pivot.fillna(value=0,inplace=True)
 
-# Define the animal categories in the body mass data and in the final data
-animal_categories_mass = ['Asses','Buffaloes','Camelids, other','Camels','Cattle - dairy','Cattle - non-dairy','Chickens - Broilers','Chickens - Layers','Ducks','Goats','Horses','Mules','Swine - market','Swine - breeding','Sheep','Turkeys']
-animal_categories_final = ['Asses','Buffaloes','Camelids, other','Camels','Cattle','Chickens','Ducks','Goats','Horses','Mules','Pigs','Sheep','Turkeys']
-
-# Standardize units - change places in which units are reported in 1000s to standard units.
-stocks.loc[stocks['Unit'] == '1000 Head', 'Value'] *=1000
+stock_pivot
 
 
+# There is a difference between the body mass of a dairy producing cow to a non-dairy producing cow. We thus count seperately the dairy producing cattle from the non-dairy producing cattle. Data about the amount of dairy cattle comes from the FAOStat domain Production - Livestock Primary.
+# There is also a difference in body mass between breeding and non-breeding pigs. We assume 90% of the population is breeding based on IPCC, 2006, Vol.4, Ch.10,Table.10.19.
 
-# To calculate the number of laying and non-laying poulry and number of dairy and non-dairy cattle, we load data from the FAOStat. We preprocess it so we could merge it with the stocks data.
-
-# In[13]:
-
-
-# Load data on the number of egg laying poultry and dairy producing cattle
-subcategories = pd.read_excel('dairy_egg_global_data.xlsx',index_col=0)
-
-subcategories.loc[region_mappings_subcat.values()] 
-# Filter only the countries which are continents (region mappings subcat)
-filtered_subcat = subcategories.loc[region_mappings_subcat.values()] 
-
-# Calculte the total number of egg laying and non-laying poultry
-# Filter only egg layers, remove 5 first colomns and reset index
-chicken_cat = 1000*filtered_subcat[filtered_subcat['element'] == 'Laying (1000 Head)'][filtered_subcat.columns[5:]].reset_index()
-
-# Melt the pivot by country
-chicken_melt = pd.melt(chicken_cat,id_vars=['countries'],value_vars=[x for x in chicken_cat.columns[1:]])
-
-# Remove a row called Unnamed: 58
-chicken_melt = chicken_melt.loc[chicken_melt['variable']!='Unnamed: 58']
-
-# Change variable type to int
-chicken_melt['variable'] = chicken_melt['variable'].astype('int') 
-
-# Change the names of the regions to standard regions
-chicken_melt = chicken_melt.replace({'countries':region_mappings_subcat_reverse}) 
-
-# Change the name of the columns
-chicken_melt.columns = ['Country','Year','Chickens - Layers'] 
+# In[4]:
 
 
-# Cattle 
-# Filter only dairy producers, remove 5 first colomns and reset index
-dairy_cat = filtered_subcat[filtered_subcat['element'] == 'Milk Animals (Head)'][filtered_subcat.columns[5:]].reset_index() 
+# Load data on the number of dairy producing cattle
+dairy = pd.read_csv('FAOSTAT_cattle_dairy_data.csv')
 
-# Melt the pivot by country
-dairy_melt = pd.melt(dairy_cat,id_vars=['countries'],value_vars=[x for x in dairy_cat.columns[1:]])
+# Set the index of the DataFrame to be the region so we can compare with the stocks data
+dairy.set_index('Area',inplace=True)
 
-# Remove a row called Unnamed: 58
-dairy_melt = dairy_melt.loc[dairy_melt['variable']!='Unnamed: 58'] 
+# Add a category of dairy producing cattle
+stock_pivot['Cattle - dairy'] = dairy.Value
 
-# Change variable type to int
-dairy_melt['variable'] = dairy_melt['variable'].astype('int') 
+# Set the amount of non-dairy producing cattle to be the total number minus the dairy producing cattle
+stock_pivot['Cattle'] = stock_pivot['Cattle']-stock_pivot['Cattle - dairy']
 
-# Change the names of the regions to standard regions
-dairy_melt = dairy_melt.replace({'countries':region_mappings_subcat_reverse}) 
+# Rename the Cattle column name to Cattle - non-dairy
+stock_pivot.rename(columns={'Cattle': 'Cattle - non-dairy'}, inplace=True)
 
-# Change the name of the columns
-dairy_melt.columns = ['Country','Year','Cattle - dairy'] 
+# Set the amount of non-breeding (market) pigs (swine) to 10% of the total amount of pigs
+stock_pivot['Swine - market'] = 0.1*stock_pivot['Pigs']
 
-world_data = stocks[stocks['Country'] == 'World']
+# Set the amount of breeding pigs (swine) to 90% of the total amount of pigs
+stock_pivot['Pigs'] *= 0.9
+
+# Rename the Pigs column name to Swine - breeding
+stock_pivot.rename(columns={'Pigs': 'Swine - breeding'}, inplace=True)
+
+stock_pivot
 
 
-# We preprocess the stocks DataFrame and merge it with the dairy data:
+# Data on the mass of animals is divided into different regions than the FAOStat data so we need preprocess the stocks DataFrame and merge it with the body mass data:
 
-# In[15]:
+# In[5]:
 
 
 # Preprocessing the stocks DataFrame
 
-# Only use the region data, and only the columns country, item, year and value
-region_data = stocks[stocks['Country'].isin(region_mappings_numbers.values())][['Country','Item','Year','Value']] 
+# Calculate the total number of animals in Latin America by subtracting values for Northern America from the total
+# values for the Americas
+stock_pivot.loc['Americas'] -= stock_pivot.loc['Northern America']
 
-# Only use the animal types we consider here 
-region_data = region_data[region_data['Item'].isin(animal_categories_final)] 
+# Change name of Americas to Latin America
+stock_pivot.rename(index={'Americas': 'Latin America'},inplace=True)
 
-# Pivot table by animal type
-region_data_piv = pd.pivot_table(region_data,values='Value',index=['Country','Year'],columns='Item') 
+# Calculate the total number of animals in Asia without the Indian Subcontinent by subtracting values for the Southern Asia 
+# from the total values for the Asia
+stock_pivot.loc['Asia'] -= stock_pivot.loc['Southern Asia']
 
-# Reset the index of the DataFrame
-region_data_piv = region_data_piv.reset_index() 
-
-# Replace Southern Asia region to Indian Subcontinent 
-region_data_piv = region_data_piv.replace({'Country':{'Southern Asia':'Indian Subcontinent'}}) 
-# Replace Americas region to Latin America
-region_data_piv = region_data_piv.replace({'Country':{'Americas':'Latin America'}}) 
-
-# Merge total abundance and egg and dairy data
-# Merge egg-layers data
-merged_data = pd.merge(region_data_piv,chicken_melt,how='left',on=['Country','Year']) 
-# Merge dairy data
-merged_data = pd.merge(merged_data,dairy_melt,how='left',on=['Country','Year'])
-
-## Replace the data for Asia with the data from Asia minus Southern Asia
-# Extract the data for Total Asia
-asia = merged_data.loc[merged_data.Country == 'Asia'].reset_index() 
-
-# Extract the data for only India
-india = merged_data.loc[merged_data.Country == 'Indian Subcontinent'].reset_index() 
-
-# Replace the data for Asia with the data for Asia minus India
-merged_data.loc[merged_data.Country == 'Asia',asia.columns[3:]] = np.nan_to_num(asia[asia.columns[3:]].values)-np.nan_to_num(india[india.columns[3:]].values) 
-
-## Replace the data for Americas with the data from Americas minus Northern America
-# Extract the data for total Americas
-americas = merged_data.loc[merged_data.Country == 'Latin America'].reset_index() 
-
-# Extract the data for only Northen America
-north_america = merged_data.loc[merged_data.Country == 'Northern America'].reset_index() #extract north america
-
-# Replace the data in Americas with the data for Americas minus Northern America
-merged_data.loc[merged_data.Country == 'Latin America',americas.columns[3:]] = np.nan_to_num(americas[americas.columns[3:]].values)-np.nan_to_num(north_america[north_america.columns[3:]].values) 
-
-## Replace the data for Cattle with the data for Cattle minus the data for "Cattle - non-dairy"
-cattle = merged_data['Cattle']
-merged_data['Cattle'] = cattle.values- merged_data['Cattle - dairy'].values
-
-## Replace the data for Chickens with the data for Chickens minus the data for "Chickens - Broilers"
-merged_data['Chickens'] = merged_data['Chickens'].values- merged_data['Chickens - Layers'].values
+# Change name of Southern Asia to Indian Subcontinent
+stock_pivot.rename(index={'Southern Asia': 'Indian Subcontinent'},inplace=True)
 
 
-# We now multiply the stocks of each animal type and for each region:
-
-# In[25]:
+stock_pivot
 
 
-# Copy the stocks data to the new mass DataFrame
-mass_data = merged_data[merged_data.columns[:-2]].copy()
+# We now multiply the stocks of each animal type and for each region by the characteristic body weight of each animal:
 
-# For each animal type and for each region, multiply the stocks data by the characteristic body mass of the animal
-for animal in animal_categories_final:
-    for region in body_mass.index:
-        if animal == 'Cattle':
-            mass_data.loc[mass_data.Country == region,animal] = merged_data.loc[merged_data.Country == region]['Cattle']*body_mass.loc[region]['Cattle - non-dairy'] + merged_data.loc[merged_data.Country == region]['Cattle - dairy']*body_mass.loc[region]['Cattle - dairy']
-        elif animal == 'Chickens':
-            mass_data.loc[mass_data.Country == region,animal] = merged_data.loc[merged_data.Country == region]['Chickens']*body_mass.loc[region]['Chicken - Broilers'] + merged_data.loc[merged_data.Country == region]['Chickens - Layers']*body_mass.loc[region]['Chicken - Layers']
-        elif animal == 'Pigs':
-            # Assuming 10% of the pig population are for breeding
-            mass_data.loc[mass_data.Country == region,animal] = merged_data.loc[merged_data.Country == region]['Pigs']*(0.9*body_mass.loc[region]['Swine - market'] + 0.1*body_mass.loc[region]['Swine - breeding'])
-        elif animal == 'Camelids, other':
-            mass_data.loc[mass_data.Country == region,animal] = merged_data.loc[merged_data.Country == region][animal]*body_mass.loc[region]['Llamas']
-        else:
-            mass_data.loc[mass_data.Country == region,animal] = merged_data.loc[merged_data.Country == region][animal]*body_mass.loc[region][animal]
+# In[6]:
 
-# Sum over all regions to get total mass of each animals at each year
-total_mass = mass_data.groupby(['Year']).sum()
 
-#Remove year after 2012 as no all data is available for them
-total_mass = total_mass.loc[total_mass.index<2012]
+wet_biomass =(body_mass*stock_pivot)
+wet_biomass
 
-# Generate summaries for each animal category
-mass_sum = total_mass[['Cattle','Chickens']].copy()
-mass_sum['Cattle'] = total_mass['Cattle'] + total_mass['Buffaloes']
-mass_sum['Chickens'] = total_mass.sum(axis=1) - mass_sum['Cattle']
-mass_sum.columns = ['Cattle','Other Livestock']
 
-carbon_content = 0.15
-print(mass_sum*carbon_content*1000)
+# We sum over all regions and convert units from kg wet weight to Gt C carbon by assuming carbon is ≈15% of the wet weight (30% dry weight of wet weight and carbon is 50% of dry weight).
+
+# In[7]:
+
+
+# conversion factor from kg wet weight to Gt C
+kg_to_gt_c = 1000*0.15/1e15
+total_biomass = wet_biomass.sum()*kg_to_gt_c
+best_estimate = total_biomass.sum()
+print('Our best estimate for the biomass of mammal livestock is %.1f Gt C' % best_estimate)
 

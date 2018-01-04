@@ -11790,13 +11790,16 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
 <span class="c1"># Genaral parameters used in the estimate</span>
 <span class="n">ocean_area</span> <span class="o">=</span> <span class="mf">3.6e14</span>
 <span class="n">liters_in_m3</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e3</span>
@@ -11810,11 +11813,13 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">buitenhuis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_prok_cell_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Buitenhuis&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the datasets</span>
+<span class="n">buitenhuis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_prok_cell_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Buitenhuis&#39;</span><span class="p">)</span>
 <span class="n">aristegui</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_prok_cell_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Aristegui&#39;</span><span class="p">)</span>
+<span class="n">aristegui</span><span class="p">[[</span><span class="s1">&#39;Cell abundance (cells m-2)&#39;</span><span class="p">,</span><span class="s1">&#39;SE&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">aristegui</span><span class="p">[[</span><span class="s1">&#39;Cell abundance (cells m-2)&#39;</span><span class="p">,</span><span class="s1">&#39;SE&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">lloyd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_prok_cell_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Lloyd&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -11834,76 +11839,13 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">aristegui</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Zone</th>
-      <th>Cell abundance (cells m-2)</th>
-      <th>SE</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Epipelagic (0-200 m)</td>
-      <td>110000000000000</td>
-      <td>8000000000000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Mesopelagic (200-1000 m)</td>
-      <td>171000000000000</td>
-      <td>10000000000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Bathypelagic (1000-4000 m)</td>
-      <td>194000000000000</td>
-      <td>14000000000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -11919,31 +11861,13 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">buitenhuis</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(39767, 12)
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -11959,197 +11883,13 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">lloyd</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[59]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>paper</th>
-      <th>Sample</th>
-      <th>Water Depth (m)</th>
-      <th>Cells per cc</th>
-      <th>CARDFISH Bac per cc</th>
-      <th>CARDFISH Arc per cc</th>
-      <th>CARDFISH Total per cc</th>
-      <th>FISH yield</th>
-      <th>Fraction Arc CARDFISH</th>
-      <th>Fish or cardFish</th>
-      <th>...</th>
-      <th>Fixative</th>
-      <th>Bac permeabilization</th>
-      <th>Arc permeabilization</th>
-      <th>Bac probe</th>
-      <th>Arc probe</th>
-      <th>Counting method</th>
-      <th>qPCR-Bacteria (copies/mL water)</th>
-      <th>qPCR-Archaea (copies/mL water)</th>
-      <th>qPCR-MCG (copies/mL water)</th>
-      <th>Total qPCR(copies/mL water)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Al Ali 2009</td>
-      <td>La Seyne-sur-Mer, French Mediterranean coast</td>
-      <td>25.0</td>
-      <td>1.006814e+06</td>
-      <td>748643.605956</td>
-      <td>91732.680493</td>
-      <td>840376.286449</td>
-      <td>0.834689</td>
-      <td>0.109157</td>
-      <td>CARDFISH</td>
-      <td>...</td>
-      <td>formaldehyde</td>
-      <td>lysozyme/achromopeptidase</td>
-      <td>proteinase K</td>
-      <td>EUB338</td>
-      <td>ARCH915</td>
-      <td>Microscope-eye</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Al Ali 2009</td>
-      <td>La Seyne-sur-Mer, French Mediterranean coast</td>
-      <td>100.0</td>
-      <td>7.052370e+05</td>
-      <td>434866.528556</td>
-      <td>112726.903524</td>
-      <td>547593.432080</td>
-      <td>0.776467</td>
-      <td>0.205859</td>
-      <td>CARDFISH</td>
-      <td>...</td>
-      <td>formaldehyde</td>
-      <td>lysozyme/achromopeptidase</td>
-      <td>proteinase K</td>
-      <td>EUB338</td>
-      <td>ARCH915</td>
-      <td>Microscope-eye</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Al Ali 2009</td>
-      <td>La Seyne-sur-Mer, French Mediterranean coast</td>
-      <td>500.0</td>
-      <td>1.024631e+05</td>
-      <td>53193.071683</td>
-      <td>27834.910030</td>
-      <td>81027.981713</td>
-      <td>0.790801</td>
-      <td>0.343522</td>
-      <td>CARDFISH</td>
-      <td>...</td>
-      <td>formaldehyde</td>
-      <td>lysozyme/achromopeptidase</td>
-      <td>proteinase K</td>
-      <td>EUB338</td>
-      <td>ARCH915</td>
-      <td>Microscope-eye</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Al Ali 2009</td>
-      <td>La Seyne-sur-Mer, French Mediterranean coast</td>
-      <td>1000.0</td>
-      <td>6.932569e+04</td>
-      <td>33161.079514</td>
-      <td>20777.141546</td>
-      <td>53938.221060</td>
-      <td>0.778041</td>
-      <td>0.385203</td>
-      <td>CARDFISH</td>
-      <td>...</td>
-      <td>formaldehyde</td>
-      <td>lysozyme/achromopeptidase</td>
-      <td>proteinase K</td>
-      <td>EUB338</td>
-      <td>ARCH915</td>
-      <td>Microscope-eye</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Al Ali 2009</td>
-      <td>La Seyne-sur-Mer, French Mediterranean coast</td>
-      <td>1800.0</td>
-      <td>6.378625e+04</td>
-      <td>26317.852958</td>
-      <td>20321.327068</td>
-      <td>46639.180026</td>
-      <td>0.731179</td>
-      <td>0.435714</td>
-      <td>CARDFISH</td>
-      <td>...</td>
-      <td>formaldehyde</td>
-      <td>lysozyme/achromopeptidase</td>
-      <td>proteinase K</td>
-      <td>EUB338</td>
-      <td>ARCH915</td>
-      <td>Microscope-eye</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 21 columns</p>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12165,7 +11905,7 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">aristegui_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">aristegui</span><span class="p">[</span><span class="s1">&#39;Cell abundance (cells m-2)&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ocean_area</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -12173,24 +11913,6 @@ The estimate is based on three data sources:
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Total number of cells based on Aristegui et al.: 1.7e+29
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12206,7 +11928,7 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Define depth range every 100 m from 0 to 4000 meters</span>
@@ -12231,24 +11953,6 @@ The estimate is based on three data sources:
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Total number of cells based on Buitenhuis et al.: 1.3e+29
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12261,7 +11965,7 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Define the regression equation for the number of bacteria in the top 64 m:</span>
@@ -12312,24 +12016,6 @@ The estimate is based on three data sources:
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Total number of cells based on Lloyd et al.: 6.2e+28
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12342,7 +12028,7 @@ The estimate is based on three data sources:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">fish_yield</span> <span class="o">=</span> <span class="n">lloyd</span><span class="p">[</span><span class="s1">&#39;FISH yield&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -12366,25 +12052,6 @@ The estimate is based on three data sources:
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The mean yield of FISH is 0.8
-After correcting for FISH yield, the estimate for the total number of bacteria and archaea based on Lloyd et al is 8.1e+28
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12397,7 +12064,7 @@ After correcting for FISH yield, the estimate for the total number of bacteria a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">estimates</span> <span class="o">=</span> <span class="p">[</span><span class="n">aristegui_total</span><span class="p">,</span><span class="n">buitenhuis_total</span><span class="p">,</span><span class="n">lloyd_total</span><span class="p">]</span>
@@ -12410,64 +12077,29 @@ After correcting for FISH yield, the estimate for the total number of bacteria a
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the total number of marine bacteria and archaea is 1.2e+29
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Uncertainty-analysis">Uncertainty analysis<a class="anchor-link" href="#Uncertainty-analysis">&#182;</a></h1><p>To calculate the uncertainty associated with the estimate for the total number of of bacteria and archaea, we first collect all available uncertainties and then take the largest value as our best projection for the uncertainty. 
-We first survey the uncertainties reported in each of the studies. Aristegui et al. report a sandard error of ≈10% for the average cell concentration per unit area. Buitenhuis et al. and Lloyd et al. do not report uncertainties.
-We estimate the 95% multiplicative error of the geometric mean of the values from the three studies.</p>
+<h1 id="Uncertainty-analysis">Uncertainty analysis<a class="anchor-link" href="#Uncertainty-analysis">&#182;</a></h1><p>To calculate the uncertainty associated with the estimate for the total number of of bacteria and archaea, we first collect all available uncertainties and then take the largest value as our best projection for the uncertainty.</p>
+<h2 id="Intra-study-uncertainties">Intra-study uncertainties<a class="anchor-link" href="#Intra-study-uncertainties">&#182;</a></h2><p>We first survey the uncertainties reported in each of the studies. Aristegui et al. report a sandard error of ≈10% for the average cell concentration per unit area. Buitenhuis et al. and Lloyd et al. do not report uncertainties.</p>
+<h2 id="Interstudy-uncertainties">Interstudy uncertainties<a class="anchor-link" href="#Interstudy-uncertainties">&#182;</a></h2><p>We estimate the 95% multiplicative error of the geometric mean of the values from the three studies.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">([</span><span class="n">estimates</span><span class="p">])</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">estimates</span><span class="p">))</span><span class="o">*</span><span class="mf">1.96</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The interstudy uncertainty is about </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The interstudy uncertainty is about 1.4
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12484,33 +12116,25 @@ Our final parameters are:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total number of marine bacteria and archaea: </span><span class="si">%.1e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the total number of marine bacteria and archaea: </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
+
+<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+                <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Total number of marine bacteria and archaea&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_estimate</span><span class="p">),</span>
+                <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Cells&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="s2">&quot;{0:.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mul_CI</span><span class="p">)</span>
+                <span class="p">})</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Total number of marine bacteria and archaea: 1.2e+29
-Uncertainty associated with the total number of marine bacteria and archaea: 1.4-fold
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
