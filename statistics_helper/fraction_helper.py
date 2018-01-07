@@ -2,23 +2,25 @@
 import numpy as np
 
 def frac_mean(fractions,weights=None):
-    # This functions calculates the geometric mean of several fractions. 
-    # We assume the fractions themselves are not distributed log normally.
-    # A fraction can be defined as f = X/(X+Y), where f is the fraction 
-    # and X and Y are two parts of the population (X is the component for which
-    # we calculate the fraction and Y is the rest).
-    # because f is bound by [0,1], we transform the fractions to a quantity 
-    # which is not bound, ramely a = X/Y.
-    # a = f/(1-f)
-    # We calculate the geometric mean of a, and then convert back a to f by the relation
-    # f = 1/(1+1/a)
-    #
-    # Input: 
-    #   fractions: a numpy array of the fractions for which we calculate the geometric mean
-    #   weights: an optional array of weights for each fraction, in case we want to calculate
-    #            weighted averages
-    #   Output: the geometric mean of fractions
+    """
+    This functions calculates the geometric mean of several fractions. 
+    We assume the fractions themselves are not distributed log normally.
+    A fraction can be defined as f = X/(X+Y), where f is the fraction 
+    and X and Y are two parts of the population (X is the component for which
+    we calculate the fraction and Y is the rest).
+    because f is bound by [0,1], we transform the fractions to a quantity 
+    which is not bound, ramely a = X/Y.
+    a = f/(1-f)
+    We calculate the geometric mean of a, and then convert back a to f by the relation
+    f = 1/(1+1/a)
     
+    Input: 
+        fractions: a numpy array of the fractions for which we calculate the geometric mean
+        weights: an optional array of weights for each fraction, in case we want to calculate
+                 weighted averages
+    Output: the geometric mean of fractions
+    """
+
     alpha = fractions/(1.-fractions)
     log_alpha = np.log10(alpha)
     if weights is not None:
@@ -29,23 +31,25 @@ def frac_mean(fractions,weights=None):
     return mean_frac
 
 def frac_CI(fractions):
-    # This functions calculates the 95% multiplicative confidence interval of the geometric mean of several fractions. 
-    # We assume the fractions themselves are not distributed log normally.
-    # A fraction can be defined as f = X/(X+Y), where f is the fraction 
-    # and X and Y are two parts of the population (X is the component for which
-    # we calculate the fraction and Y is the rest).
-    # because f is bound by [0,1], we transform the fractions to a quantity 
-    # which is not bound, ramely a = X/Y.
-    # a = f/(1-f)
-    # We calculate the 95% confidence interval of a, and then convert back a to f by the relation
-    # f = 1/(1+1/a)
-    # 
-    # Input: 
-    #   fractions: a numpy array of the fractions for which we calculate the geometric mean
-    #   weights: an optional array of weights for each fraction, in case we want to calculate
-    #            weighted averages
-    #   Output: the geometric mean of fractions
-
+    """
+    This functions calculates the 95% multiplicative confidence interval of the geometric mean of several fractions. 
+    We assume the fractions themselves are not distributed log normally.
+    A fraction can be defined as f = X/(X+Y), where f is the fraction 
+    and X and Y are two parts of the population (X is the component for which
+    we calculate the fraction and Y is the rest).
+    because f is bound by [0,1], we transform the fractions to a quantity 
+    which is not bound, ramely a = X/Y.
+    a = f/(1-f)
+    We calculate the 95% confidence interval of a, and then convert back a to f by the relation
+    f = 1/(1+1/a)
+     
+    Input: 
+        fractions: a numpy array of the fractions for which we calculate the geometric mean
+        weights: an optional array of weights for each fraction, in case we want to calculate
+                 weighted averages
+    Output: the geometric mean of fractions
+    """
+    
     alpha = fractions/(1.-fractions)
     log_alpha = np.log(alpha)
     se_alpha = np.std(log_alpha,ddof=1)/np.sqrt(log_alpha.shape[0])
