@@ -14,13 +14,6 @@ best_land_mammal_biomass = gmean([smil_estimate,shai_meiri_estimate])*0.15
 land_mammal_CI = geo_CI_calc(np.array([smil_estimate,shai_meiri_estimate]))
 ```
 
-
-
-
-    0.0017516474401065806
-
-
-
 # Estimating the biomass of wild marine mammals
 
 
@@ -36,12 +29,9 @@ plt.scatter(np.log10(comparison_data['Biomass estimate from Christensen']),np.lo
 christensen = pd.read_excel('marine_mammal_data.xlsx','Christensen',skiprows=1,index_col=0)
 best_christensen = christensen.loc[2000,'Mean']*0.15
 best_IUCN = comparison_data['Biomass estimate from IUCN'].sum()*1e6*0.15
-print(best_IUCN/best_christensen)
+
 comparison_data.corr(method='spearman')
 ```
-
-    1.2683131822
-
 
 
 
@@ -86,7 +76,7 @@ comparison_data.corr(method='spearman')
 
 
 
-![png](output_3_2.png)
+![png](output_3_1.png)
 
 
 # Estimating the total biomass of wild mammals
@@ -94,7 +84,7 @@ comparison_data.corr(method='spearman')
 
 ```python
 best_wild_mammals = best_christensen+best_land_mammal_biomass
-marine_mammal_CI = christensen.loc[2000,'Max']/christensen.loc[2000,'Mean']
+marine_mammal_CI = np.max([geo_CI_calc(np.array([best_IUCN,best_christensen])),christensen.loc[2000,'Max']/christensen.loc[2000,'Mean']])
 mul_CI = CI_sum_prop(np.array([best_wild_mammals,best_christensen]), np.array([land_mammal_CI,marine_mammal_CI]))
 mul_CI
 ```
@@ -102,6 +92,6 @@ mul_CI
 
 
 
-    2.4128420415589833
+    2.4085292902816984
 
 
