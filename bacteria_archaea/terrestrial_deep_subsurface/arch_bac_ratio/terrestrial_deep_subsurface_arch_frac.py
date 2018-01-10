@@ -10,7 +10,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 import sys
@@ -36,7 +35,6 @@ seq_data.head()
 
 # In[2]:
 
-
 seq_bin = seq_data.groupby('Study')
 
 seq_study_mean = seq_bin.apply(frac_geo_mean_groupby)
@@ -47,7 +45,6 @@ seq_study_mean
 
 # In[3]:
 
-
 seq_mean = frac_mean(seq_study_mean)
 print('The characteristic 16S rDNA sequencing-based fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep susurface is ' + '{:,.1f}%'.format(seq_mean*100))
 
@@ -57,7 +54,6 @@ print('The characteristic 16S rDNA sequencing-based fraction of archaea out of t
 
 # In[4]:
 
-
 qpcr_data = pd.read_excel('terrestrial_deep_subsurface_arch_frac_data.xlsx','qPCR')
 qpcr_data.head()
 
@@ -65,7 +61,6 @@ qpcr_data.head()
 # We calculate the geometric mean of the fraction of archaea out of the total population of bacteria and archea for each study:
 
 # In[5]:
-
 
 qpcr_bin = qpcr_data.groupby('Study')
 
@@ -77,7 +72,6 @@ qpcr_study_mean
 
 # In[6]:
 
-
 qpcr_mean = frac_mean(qpcr_study_mean)
 print('The characteristic qPCR-based fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep susurface is ' + '{:,.1f}%'.format(qpcr_mean*100))
 
@@ -87,7 +81,6 @@ print('The characteristic qPCR-based fraction of archaea out of the total popula
 # Our best estimate for the fraction of archaea out of the total population of bacteria and archaea is the geometric mean of these three sources of data:
 
 # In[7]:
-
 
 # As a third data source we use our estimate for the fraction of archaea out of the total population of bacteria
 # and archaea in subseafloor sediments.
@@ -108,7 +101,6 @@ print('Our best estimate for the fraction of archaea out of the total population
 
 # In[8]:
 
-
 seq_arc_CI = seq_bin.apply(frac_CI_groupby)
 
 seq_data_bac = seq_data.copy()
@@ -127,7 +119,6 @@ print(seq_bac_CI)
 # We calculate the intra-study 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using qPCR.
 
 # In[9]:
-
 
 qpcr_arc_CI = qpcr_bin.apply(frac_CI_groupby)
 
@@ -149,7 +140,6 @@ print(qpcr_bac_CI)
 
 # In[10]:
 
-
 inter_seq_arc_CI = frac_CI(seq_study_mean)
 inter_seq_bac_CI = frac_CI(1-seq_study_mean)
 print('The interstudy uncertainty of the 16S rDNA sequencing-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' % inter_seq_arc_CI)
@@ -161,7 +151,6 @@ print('The interstudy uncertainty of the 16S rDNA sequencing-based estimate of t
 
 # In[11]:
 
-
 inter_qpcr_arc_CI = frac_CI(qpcr_study_mean)
 inter_qpcr_bac_CI = frac_CI(1-qpcr_study_mean)
 print('The interstudy uncertainty of the qPCR-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' % inter_qpcr_arc_CI)
@@ -172,7 +161,6 @@ print('The interstudy uncertainty of the qPCR-based estimate of the fraction of 
 # We calculate the interstudy 95% confidence inteval for the geometric mean of the estimates from the three different sources - the 16S rDNA sequencing-based estimate, the pPCR-based estiamte and the estimate for the fraction of archea out of the total population of bacteria and archaea in subseafloor sediments.
 
 # In[12]:
-
 
 inter_method_arc_CI = frac_CI(np.array([seq_mean,qpcr_mean,subseafloor_sed_arch_frac]))
 inter_method_bac_CI = frac_CI(1-np.array([seq_mean,qpcr_mean,subseafloor_sed_arch_frac]))
@@ -187,7 +175,6 @@ print('The inter-method uncertainty of the estimate of the fraction of bacteria 
 # Our final parameters are:
 
 # In[13]:
-
 
 # Take the maximum uncertainty as our best projection of uncertainty
 arc_mul_CI = np.max([seq_arc_CI.max(),qpcr_arc_CI.max(),inter_seq_arc_CI,inter_method_arc_CI])

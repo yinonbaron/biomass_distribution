@@ -9,7 +9,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -22,7 +21,6 @@ data
 # The data in Fierer et al. does not include biomass density of nematodes in savanna, pastures and cropland. We use the geometric mean of values from other biomes as our best estimate for the biomass density of nematodes in these biomes:
 
 # In[2]:
-
 
 # Calculate the geometric mean of the biomass density across biomes
 average_biomass_density = gmean(data['Average biomass density [g C m^-2]'].dropna())
@@ -43,7 +41,6 @@ data.loc['Crops','Median biomass density [g C m^-2]'] = median_biomass_density
 # For each biome, we multiply the sum of the biomass density of nematodes by the total area of that biome taken from the book [Biogeochemistry: An analysis of Global Change](https://www.sciencedirect.com/science/book/9780123858740) by Schlesinger & Bernhardt.:
 
 # In[3]:
-
 
 # Load biome area data
 area = pd.read_excel('nematode_biomass_data.xlsx','Biome area', skiprows=1, index_col='Biome')
@@ -70,7 +67,6 @@ print('Our best estimate of total biomass of terrestrial nematodes based on Fier
 # Our best estimate for the total biomass of nematodes is the sum of our estimates for the biomass of terrestrial nematodes and marine nematodes:
 
 # In[4]:
-
 
 # As noted above, our best estimate for the biomass of marine nematodes is ≈0.01 Gt C
 best_marine_biomass = 0.014e15

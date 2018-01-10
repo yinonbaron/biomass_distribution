@@ -12,7 +12,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -28,7 +27,6 @@ ml_in_m3 = 1e6
 
 # In[2]:
 
-
 # Load the datasets
 buitenhuis = pd.read_excel('marine_prok_cell_num_data.xlsx','Buitenhuis')
 aristegui = pd.read_excel('marine_prok_cell_num_data.xlsx','Aristegui')
@@ -40,14 +38,12 @@ lloyd = pd.read_excel('marine_prok_cell_num_data.xlsx','Lloyd')
 
 # In[3]:
 
-
 aristegui.head()
 
 
 # From the data in Buitenhuis et al.:
 
 # In[4]:
-
 
 buitenhuis.head()
 
@@ -56,14 +52,12 @@ buitenhuis.head()
 
 # In[5]:
 
-
 lloyd.head()
 
 
 # For Aristegui et al. we estimate the total number of cells by multiplying each layer by the surface area of the ocean
 
 # In[6]:
-
 
 aristegui_total = (aristegui['Cell abundance (cells m-2)']*ocean_area).sum()
 print('Total number of cells based on Aristegui et al.: %.1e' % aristegui_total)
@@ -72,7 +66,6 @@ print('Total number of cells based on Aristegui et al.: %.1e' % aristegui_total)
 # For Buitenhuis et al. we bin the data along 100 meter depth bins, and estimate the average cell abundance in each bin. We then multiply the total number of cells per liter by the volume at each depth and sum across layers.
 
 # In[7]:
-
 
 # Define depth range every 100 m from 0 to 4000 meters
 depth_range = np.linspace(0,4000,41)
@@ -95,7 +88,6 @@ print('Total number of cells based on Buitenhuis et al.: %.1e' % buitenhuis_tota
 # For Lloyd et al., we rely on the sum of the total number of bacteria and archaea. The estimate for the number of bacteria and archaea is based on the regression of the concentration of bacteria and archaea with depth. We use the equations reported in Lloyd et al. to extrapolate the number of cells of bacteria and archaea across the average ocean depth of 4000 km.
 
 # In[8]:
-
 
 # Define the regression equation for the number of bacteria in the top 64 m:
 def bac_surf(depth):
@@ -145,7 +137,6 @@ print('Total number of cells based on Lloyd et al.: %.1e' % lloyd_total)
 
 # In[9]:
 
-
 fish_yield = lloyd['FISH yield'].dropna()
 
 # Values which are not feasible are turned to the maximal value. We do not use 1 because of numerical reasons
@@ -168,7 +159,6 @@ print('After correcting for FISH yield, the estimate for the total number of bac
 
 # In[10]:
 
-
 estimates = [aristegui_total,buitenhuis_total,lloyd_total]
 best_estimate = 10**(np.log10(estimates).mean())
 
@@ -188,7 +178,6 @@ print('Our best estimate for the total number of marine bacteria and archaea is 
 
 # In[11]:
 
-
 mul_CI = geo_CI_calc(estimates)
 
 print('The interstudy uncertainty is about %.1f' % mul_CI)
@@ -198,7 +187,6 @@ print('The interstudy uncertainty is about %.1f' % mul_CI)
 # Our final parameters are:
 
 # In[12]:
-
 
 print('Total number of marine bacteria and archaea: %.1e' % best_estimate)
 print('Uncertainty associated with the total number of marine bacteria and archaea: %.1f-fold' % mul_CI)

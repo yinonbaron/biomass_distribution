@@ -6,12 +6,11 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
 import matplotlib.pyplot as plt
-get_ipython().magic('matplotlib inline')
+get_ipython().magic(u'matplotlib inline')
 import sys
 sys.path.insert(0, '../../../statistics_helper')
 from CI_helper import *
@@ -34,7 +33,6 @@ plt.legend()
 
 # In[2]:
 
-
 geo_mean_ratio = gmean(data['Phage concentration [virions cm^-3]']/data['Cells concentration [cells cm^-3]'])
 print('Our best estimate for the ratio between the concentration of phage-like particles and cells in subseafloor sediments is ≈%.0f.' %geo_mean_ratio)
 
@@ -42,7 +40,6 @@ print('Our best estimate for the ratio between the concentration of phage-like p
 # To calculate the total number of phages in subseafloor sediments, we multiply the ratio of phage-like particles to prokaryotes by our estimate for the total number of prokaryotes in subseafloor sediments.
 
 # In[3]:
-
 
 prokaryote_estimate = pd.read_excel('../../../bacteria_archaea/marine_deep_subsurface/marine_deep_subsurface_prok_biomass_estimate.xlsx')
 best_estimate = prokaryote_estimate.loc[0]['Value']*geo_mean_ratio

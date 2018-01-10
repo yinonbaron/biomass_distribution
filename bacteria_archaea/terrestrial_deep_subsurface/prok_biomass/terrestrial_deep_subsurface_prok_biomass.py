@@ -9,7 +9,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -72,7 +71,6 @@ bin_geo_mean = tmp.set_index('Depth bin')
 # We multiply the average cell concentration at each bin by the total volume of groundwater at each bin, and sum over all bins to calculate the total number of cells in groundwater. We have two estimates for the total number of cells in groundwater, one based on arithmetic means of cell concentrations at each bin and the second based on geometric means.
 
 # In[2]:
-
 
 
 # Total volume of groundwater [mL], based on Gleeson et al.
@@ -138,7 +136,6 @@ writer.close()
 
 # In[3]:
 
-
 # Fraction of attached/unattached cells (geometric mean of 10^2 and 10^3)
 attached_unattached_ratio = gmean([1e2,1e3])
 
@@ -154,7 +151,6 @@ print('Our estimate for the total of number of cells cells in the terrestrial de
 
 # In[4]:
 
-
 best_tot_cell_num = gmean([tot_cell_num_mean,tot_cell_num_geo_mean])
 print('Our best estimate for the total of number of cells cells in the terrestrial deep subsurface %.1e cells.' %best_tot_cell_num)
 
@@ -166,7 +162,6 @@ print('Our best estimate for the total of number of cells cells in the terrestri
 # To estimate the total biomass of bacteria and archaea in the terrestrial deep subsurface, we muliply our best estimate for the total number of cells in the terrestrial deep subsurface by the characteristic carbon content of cells in the terrestrial deep subsurface. Our best estimate is ≈60 Gt C.
 
 # In[5]:
-
 
 # The characteristic carbon content of a single prokaryote in the terrestrial deep subsurface
 carb_content = 26e-15
@@ -188,7 +183,6 @@ print('We estimate a total biomass of bacteria and archaea in the terrestrial de
 # We estimate the uncertainty around the estimate of cell concentration at each depth bin, and then propagate the uncertainty at each depth bin to the final estimate of the average cell concentration. 
 
 # In[6]:
-
 
 # Define a function that will estimate the 95% confidence interval for the arithmetic mean of each bin
 def bin_se(input):
@@ -221,7 +215,6 @@ print('The uncertainty associated with the geometric mean of cell concentrations
 
 # In[7]:
 
-
 inter_method_CI = geo_CI_calc(np.array([tot_cell_num_mean,tot_cell_num_geo_mean]))
 print('The total uncertainty of the geometric mean of our estimates based on the two different methodologies for calculating the average cell concentration at each depth bin is ≈%.1f-fold' %inter_method_CI)
 
@@ -229,7 +222,6 @@ print('The total uncertainty of the geometric mean of our estimates based on the
 # As our best projection for the uncertainty associated with the average concentration of cells in groundwater, we take the maximum uncertainty from the intra-depth bin and inter-method uncertainties, which is ≈2.3-fold.
 
 # In[8]:
-
 
 av_cell_CI = np.max([av_conc_mean_CI,av_conc_geo_mean_CI,inter_method_CI])
 print('Our best projection for the uncertainty associated with the average concentration of cell in groundwater is ≈%.1f-fold' %av_cell_CI)
@@ -239,7 +231,6 @@ print('Our best projection for the uncertainty associated with the average conce
 # As a measure of the uncertainty associated with the total volume of groundwater, we use the range reported in Gleeson et al. of ≈2.2-fold. This range does not represent 95% confidence interval, but rather a 25% and 75% range.  As no 95% confidence interval is available, we assume the distribution of estimates of the global volume of groundwater is nearly gaussian, and take about two standard deviations as our estimate for the 95% confidence interval. We calculate the fold change of the 95% confidence interval relative to the mean estimate.
 
 # In[9]:
-
 
 # We take the lower and upper range reported by Gleeson et al.
 lower_gleeson = 1.6e22
@@ -263,7 +254,6 @@ print('Our estimate for the uncertainty associated with the total volume of grou
 
 # In[10]:
 
-
 attached_unattached_CI = geo_CI_calc(np.array([100,1000]))
 
 carbon_content_CI = 2.2
@@ -277,7 +267,6 @@ print('The uncertainty associated with the biomass of bacteria and archaea in th
 # As we state in the Supplementary Information, there are other sources of uncertainty that for which we are not able to provide a quantitative estimate. The procedure of binning cell concentrations with depth and fitting an equation which extrapolates cell concentrations across all depths has uncertainty associated with it, and while we did calculate some uncertainty associated with this process, it probably does not represent the entire uncertainty associated with this process. The uncertainty stemming from possible contribution from groundwater deeper than 2 km is also hard to quantify, as the cell concentration at those depths and the volume of groundwater are poorly explored. We thus chose to project an uncertainty of ≈20-fold as our best projection of the uncertainty associated with the biomass of bacteria and archaea in the terrestrial deep subsurface.
 
 # In[11]:
-
 
 # Modify the uncertainty of the estimate
 mul_CI = 20

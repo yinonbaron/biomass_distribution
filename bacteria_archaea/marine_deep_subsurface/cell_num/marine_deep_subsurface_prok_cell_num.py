@@ -6,7 +6,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 import sys
@@ -33,7 +32,6 @@ print('Our best estimate for the total number of cells of bacteria and archaea t
 
 # In[2]:
 
-
 parkes_low = 1.95e29
 parkes_high = 4.34e30
 parkes_mean_ex_ocean_gyre = 8.65e29
@@ -52,7 +50,6 @@ print('The intra-study uncertainty of the estimate by Parkes et al. is %.1f-fold
 
 # In[3]:
 
-
 kallmeyer_low = 1.2e29
 kallmeyer_high = 8e29
 
@@ -70,7 +67,6 @@ print('The intra-study uncertainty of the estimate by Kallmeyer et al. is %.1f-f
 
 # In[4]:
 
-
 inter_mul_CI = geo_CI_calc(np.array([parkes,kallmeyer]))
 
 print('The interstudy uncertainty of the geometric mean of the estimates by Parkes et al. and Kallmeyer et al. is %.1f-fold' % inter_mul_CI)
@@ -79,7 +75,6 @@ print('The interstudy uncertainty of the geometric mean of the estimates by Park
 # We use the highest uncertainty among the intra-study and interstudy uncertainties as our projection of the uncertainty associated with the estimate of the total number of cells of bacteria and archaea in the marine deep subsurface. Are final parameters are:
 
 # In[5]:
-
 
 # Take the maximal uncetainty as our best projection of uncertainty
 mul_CI = np.max([parkes_mul_CI,kallmeyer_mul_CI,inter_mul_CI])

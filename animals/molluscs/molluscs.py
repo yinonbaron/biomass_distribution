@@ -11,7 +11,6 @@
 
 # In[1]:
 
-
 from scipy.stats import gmean
 
 # The estimate of pteropod biomass based on average biomass density
@@ -32,7 +31,6 @@ print('Our best estimate for the total biomass of pteropods is ≈%.2f Gt C' %(p
 
 # In[2]:
 
-
 # Estimate for the total biomass of cephalopods from Rodhouse & Nigmatullin
 cephalopod_biomass = 0.05e15
 
@@ -40,7 +38,6 @@ cephalopod_biomass = 0.05e15
 # Our best estimate for the total biomass of molluscs is the sum of our estimates for the total biomass of pteropods and cephalopods:
 
 # In[3]:
-
 
 best_estimate = pteropod_estimate +cephalopod_biomass
 print('Our best estimate for the total biomass of molluscs is %.1f Gt C' %(best_estimate/1e15))

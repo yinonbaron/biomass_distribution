@@ -7,7 +7,6 @@
 
 # In[1]:
 
-
 import numpy as np
 import pandas as pd
 pd.options.display.float_format = '{:,.1e}'.format
@@ -21,7 +20,6 @@ results
 # We multiply all the relevant parameters to arrive at our best estimate for the biomass of marine deep subsurface archaea and bacteria, and propagate the uncertainties associated with each parameter to calculate the uncertainty associated with the estimate for the total biomass.
 
 # In[2]:
-
 
 # Calculate the total biomass of marine archaea and bacteria
 total_arch_biomass = results['Value'][0]*results['Value'][1]*1e-15*results['Value'][2]
@@ -37,6 +35,4 @@ bac_biomass_uncertainty = CI_prod_prop(results.iloc[[0,1,3]]['Uncertainty'])
 
 print('The uncertainty associated with the estimate for the biomass of archaea is %.1f-fold' %arch_biomass_uncertainty)
 print('The uncertainty associated with the estimate for the biomass of bacteria is %.1f-fold' %bac_biomass_uncertainty)
-
-CI_sum_prop(np.array([58,1.3,8,7]),np.array([10.2,1.8,2.02,7.6]))
 

@@ -3,12 +3,11 @@
 
 # # Estimating the biomass of livestock
 # To estimate the biomass of livestock, we rely on data on global stocks of cattle, sheep goats, and pigs fro the Food and Agriculture Organization database FAOStat. We downloaded data from the domain Production/Live animals.
-# We combined data on the total stocks of each animal with estimates of the mean mass of each type of animal species from [Dong et al.](http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_10_Ch10_Livestock.pdf), Annex 10A.2, Tables 10A-4 to 10A-9.
+# We combined data on the total stocks of each animal with estimates of the mean mass of each type of animal species (in kg) from [Dong et al.](http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_10_Ch10_Livestock.pdf), Annex 10A.2, Tables 10A-4 to 10A-9.
 # 
 # Here are samples of the data:
 
 # In[1]:
-
 
 import pandas as pd
 import numpy as np
@@ -21,7 +20,6 @@ stocks.head()
 
 # In[2]:
 
-
 # Load species body mass data
 body_mass = pd.read_excel('livestock_body_mass.xlsx',skiprows=1,index_col=0) 
 body_mass.head()
@@ -30,7 +28,6 @@ body_mass.head()
 # We pivot the stocks DataFrame to have a view of each kind of animal at each region:
 
 # In[3]:
-
 
 # Replace NaN with zeros
 stocks.fillna(value=0,inplace=True)
@@ -46,7 +43,6 @@ stock_pivot
 # There is also a difference in body mass between breeding and non-breeding pigs. We assume 90% of the population is breeding based on IPCC, 2006, Vol.4, Ch.10,Table.10.19.
 
 # In[4]:
-
 
 # Load data on the number of dairy producing cattle
 dairy = pd.read_csv('FAOSTAT_cattle_dairy_data.csv')
@@ -79,7 +75,6 @@ stock_pivot
 
 # In[5]:
 
-
 # Preprocessing the stocks DataFrame
 
 # Calculate the total number of animals in Latin America by subtracting values for Northern America from the total
@@ -104,7 +99,6 @@ stock_pivot
 
 # In[6]:
 
-
 wet_biomass =(body_mass*stock_pivot)
 wet_biomass
 
@@ -113,10 +107,18 @@ wet_biomass
 
 # In[7]:
 
+pd.options.display.float_format = '{:,.3f}'.format
 
 # conversion factor from kg wet weight to Gt C
 kg_to_gt_c = 1000*0.15/1e15
 total_biomass = wet_biomass.sum()*kg_to_gt_c
+total_biomass
+
+
+# We sum over all animal categories to generate our best estimate for the total biomass of livestock
+
+# In[8]:
+
 best_estimate = total_biomass.sum()
 print('Our best estimate for the biomass of mammal livestock is %.1f Gt C' % best_estimate)
 

@@ -8,7 +8,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import sys
 sys.path.insert(0,'../statistics_helper/')
@@ -24,7 +23,6 @@ estimate
 
 # In[2]:
 
-
 best_estimate = estimate['Value'].prod()
 
 print('Our best estimate for the total biomass of phages is %.1f Gt C' %(best_estimate/1e15))
@@ -33,7 +31,6 @@ print('Our best estimate for the total biomass of phages is %.1f Gt C' %(best_es
 # We propagate the uncertainties associated with each of the parameters to project the uncertainty of our estimate of the total biomass of phages:
 
 # In[3]:
-
 
 mul_CI = CI_prod_prop(estimate['Uncertainty'])
 

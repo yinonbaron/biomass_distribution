@@ -13,7 +13,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 from scipy.stats import gmean
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
@@ -25,15 +24,14 @@ picophyto_biomsss = gmean([0.28e15,0.64e15])
 
 # In[2]:
 
-
 euk_frac = gmean([0.49,0.69])
 auto_picoeuk_biomass = picophyto_biomsss*euk_frac
+auto_picoeuk_biomass/2e15
 
 
 # Picoeukaryotes contain both protists and plant species (like chlorophytes). It seems that, from the available literature, the biomass distribution between them is not strongly favored towards one class ([Li et al.](http://dx.doi.org/10.1016/0198-0149(92)90085-8)). We thus estimate the protist fraction at about 50% of the biomass of picoeukaryotes:
 
 # In[3]:
-
 
 auto_pico_protists_fraction = 0.5
 auto_pico_protists_biomass = auto_picoeuk_biomass*auto_pico_protists_fraction
@@ -45,7 +43,6 @@ auto_pico_protists_biomass = auto_picoeuk_biomass*auto_pico_protists_fraction
 
 # In[4]:
 
-
 pd.options.display.float_format = '{:,.1f}'.format
 # Load data from de Vargas on the ratio between autotrophic and heterotrophic protists
 pico_nano_data = pd.read_excel('marine_protists_data.xlsx',skiprows=1)
@@ -56,7 +53,6 @@ pico_nano_data.head()
 
 # In[5]:
 
-
 hetero_photo_ratio = gmean(pico_nano_data['Heterotrophic protist'])/gmean(pico_nano_data['Phototrophic protists'])
 print('Our best estimate of the ratio between heterotrophic and phototrophic protists in pico-nanoplankton is ≈%.f-fold' %hetero_photo_ratio)
 
@@ -64,7 +60,6 @@ print('Our best estimate of the ratio between heterotrophic and phototrophic pro
 # We add the contribution of heterotrophic pico-nanoprotists to our estimate:
 
 # In[6]:
-
 
 pico_protists_biomass = (1+hetero_photo_ratio)*auto_pico_protists_biomass
 
@@ -76,7 +71,6 @@ pico_protists_biomass = (1+hetero_photo_ratio)*auto_pico_protists_biomass
 
 # In[7]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for microzooplankton
 microzoo_biomsss = gmean([0.48e15,0.73e15])
@@ -87,7 +81,6 @@ microzoo_biomsss = gmean([0.48e15,0.73e15])
 
 # In[8]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for diatoms
 diatom_biomsss = gmean([0.1e15,0.94e15])
@@ -97,7 +90,6 @@ diatom_biomsss = gmean([0.1e15,0.94e15])
 # For Phaeocystis, reports a "minimum" estimate of 0.11 Gt C and a "maximum" estimate of 0.71 Gt C for the biomass of picophytoplankton. We calculate the geometric mean of those estimates:
 
 # In[9]:
-
 
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for Phaeocystis
@@ -111,14 +103,12 @@ phaeocystis_biomsss = gmean([0.11e15,0.71e15])
 
 # In[10]:
 
-
 rhizaria_biomass = 0.2e15
 
 
 # To estimate the total biomass of marine protists, we sum up all of our estimates of the biomass of the different groups of protists:
 
 # In[11]:
-
 
 best_estimate = rhizaria_biomass + phaeocystis_biomsss + diatom_biomsss + microzoo_biomsss + pico_protists_biomass
 

@@ -6,7 +6,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -21,7 +20,6 @@ data
 # For each biome, we multiply the sum of the biomass density of Enchytraeids and Earthworms by the total area of that biome taken from the book [Biogeochemistry: An analysis of Global Change](https://www.sciencedirect.com/science/book/9780123858740) by Schlesinger & Bernhardt.:
 
 # In[2]:
-
 
 # Load biome area data
 area = pd.read_excel('annelid_biomass_data.xlsx','Biome area', skiprows=1, index_col='Biome')
@@ -41,7 +39,6 @@ print('The total biomass of annelids based on Fierer et al. based on median biom
 
 # In[3]:
 
-
 supp_biome_data = pd.read_excel('annelid_biomass_data.xlsx','Supplementary biomes')
 supp_biome_data
 
@@ -49,7 +46,6 @@ supp_biome_data
 # For each biome, we calculate the average and median annelid biomass density, and multiply by the total area of the biome:
 
 # In[4]:
-
 
 # Calculate average and median biomass densities for each additional biome
 mean_supp_biome_biomass_density = supp_biome_data.groupby('Biome').mean()['Biomass density [g C m^-2]']
@@ -66,7 +62,6 @@ print('Our estimate for the biomass of annelids based on median biomass densitie
 # As noted above, for our best estimate we use the geometric mean of the estimates based on the average and median biomass densities at each biome:
 
 # In[5]:
-
 
 # Calculate the geometric mean of the average-based and median-based estimates
 best_estimate = gmean([total_biomass_mean,total_biomass_median])

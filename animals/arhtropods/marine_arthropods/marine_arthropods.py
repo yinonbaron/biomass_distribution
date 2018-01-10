@@ -27,7 +27,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -53,7 +52,6 @@ print('The average fraction of Rhizaria in 18S rDNA sequencing data in the deep 
 
 # In[2]:
 
-
 # Define the relative fraction of arthropods out of the total mesozooplankton excluding Rhizaria
 arth_frac_surf = seq_data['Arthropod surface']/(1-seq_data['Rhizaria surface'])
 arth_frac_dcm = seq_data['Arthropod DCM']/(1-seq_data['Rhizaria DCM'])
@@ -71,7 +69,6 @@ print('The average fraction of arthropods out of the total biomass of mesozoopla
 
 # In[3]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 buitenhuis_estimate = gmean([0.33e15,0.59e15])
 
@@ -79,7 +76,6 @@ buitenhuis_estimate = gmean([0.33e15,0.59e15])
 # We than use 80% of the geometric mean as an estimate for the biomass of mesozooplankton arthropods:
 
 # In[4]:
-
 
 # Calculate the mean fraction of arthropods between surface water and DCM
 arth_frac = frac_mean(np.array([mean_arth_frac_dcm,mean_arth_frac_surf]))
@@ -91,7 +87,6 @@ meso_arth_biomass = buitenhuis_estimate*arth_frac
 # Most of the data in the MAREDAT databased was collected using 300 µm nets, and thus some of the lower size fraction of mesozooplankton was not collected. To correct for this fact, we use a relation between biomass estimated using 200 µm nets and 300 µm nets [O'brian 2005](https://www.st.nmfs.noaa.gov/copepod/2005/documents/fspo73_abbreviated.pdf). The relation is: $$ B_{300} = 0.619× B_{200}$$ Where $B_{300}$ is the biomass sampled with 300 µm nets and $B_{200}$ is the biomass sampled with 200 µm nets. We correct for this factor to get our best estimate for the biomass of mesozooplankton arthropods:
 
 # In[5]:
-
 
 # Correct for the use of 300 µm nets when sampling mesozooplankton biomass
 meso_arth_biomass /= 0.619
@@ -106,7 +101,6 @@ print('Our best estimate for the biomass of mesozooplankton arthropods is ≈%.2
 
 # In[6]:
 
-
 macro_biomass = gmean([0.2e15,1.5e15])
 print('Our best estimate for the biomass of macrozooplankton is ≈%.1f Gt C' %(macro_biomass/1e15))
 
@@ -116,7 +110,6 @@ print('Our best estimate for the biomass of macrozooplankton is ≈%.1f Gt C' %(
 # We also subtract from the total biomass of macrozooplankton the contribution by gelatinous zooplankton which also contains some species in the same size range as macrozooplankton. We estimate a global biomass of ≈0.04 Gt C (for details on the estimate of the biomass of gelatinous plankton see the cnidarians section in the Supplementary Information).
 
 # In[7]:
-
 
 # Calculate the total biomass of macrozooplankton arthropods by
 # subtacting the biomass of pteropods and gelatinous zooplankton
@@ -128,7 +121,6 @@ print('our best estimate for the total biomass of macrozooplankton arthropods is
 # We sum up the biomass of arthropods in the mesezooplankton and macrozooplankton size fractions as our best estimate for the biomass of marine arthropods:
 
 # In[8]:
-
 
 best_estimate = meso_arth_biomass+macro_arth_biomass
 print('Our best estimate for the biomass of marine arthropods is %.1f Gt C' %(best_estimate/1e15))

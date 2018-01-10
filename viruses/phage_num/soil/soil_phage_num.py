@@ -8,7 +8,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 from scipy.stats import gmean
 import sys
@@ -40,7 +39,6 @@ print('The upper bound of the number of phages per m^2 of soil is ≈%.1e phages
 
 # In[2]:
 
-
 # Use the geometric mean of the lower and upper phage concentrations as our best estimate
 best_phage_per_m2 = gmean([lower_phage_per_m2,upper_phage_per_m2])
 
@@ -59,7 +57,6 @@ print('Our best estimate for the total number of phages in soils is ≈%.1e phag
 # Our final parameters are:
 
 # In[3]:
-
 
 mul_CI = 10**1.5
 

@@ -10,7 +10,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 import sys
@@ -32,7 +31,6 @@ lloyd.head()
 
 # In[2]:
 
-
 # Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than
 # 10 cm and with CARD-FISH with proteinase K permeabilization
 # Also remove NaN values and zeros
@@ -51,7 +49,6 @@ print('The geometric mean of the fraction of archaea out of the population of ba
 # For the qPCR-based estimate of the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we also rely on data from Lloyd et al. We also consider only samples deeper than 10 cm. We exclude measurements using the ARCH516 as an archaeal primer or TaqMan probe, as measurements based on these primers of probes were shown to be unreliable.
 
 # In[3]:
-
 
 # Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than
 # 10 cm and not with the ARCH516 as an archaeal primer or TaqMan probe.
@@ -74,7 +71,6 @@ print('The geometric mean of the fraction of archaea out of the population of ba
 # In[4]:
 
 
-
 best_estimate = frac_mean(np.array([fish_frac,qpcr_frac]))
 print('Our best estimate for the fraction of archaea out of the population marine deep subsurface bacteria and archaea is ' + '{:,.0f}%'.format(best_estimate*100))
 
@@ -89,7 +85,6 @@ print('Our best estimate for the fraction of archaea out of the population marin
 
 # In[5]:
 
-
 fish_arc_CI = frac_CI(lloyd_fish['Fraction Arc CARDFISH'])
 fish_bac_CI = frac_CI(1-lloyd_fish['Fraction Arc CARDFISH'])
 print('The uncertainty of the CARD-FISH-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' %fish_arc_CI)
@@ -101,7 +96,6 @@ print('The uncertainty of the CARD-FISH-based estimate of the fraction of bacter
 
 # In[6]:
 
-
 qpcr_arc_CI = frac_CI(lloyd_qpcr['Fraction Arc qPCR'])
 qpcr_bac_CI = frac_CI(1-lloyd_qpcr['Fraction Arc qPCR'])
 print('The uncertainty of the qPCR-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' %qpcr_arc_CI)
@@ -112,7 +106,6 @@ print('The uncertainty of the qPCR-based estimate of the fraction of bacteria ou
 # We calculate the 95% confidence inteval for the geometric mean of the estiamtes based on CARD-FISH and qPCR for the fraction of archaea out of the total population of bacteria and archaea. This serves as a measure of the inter-method uncertainty of our estimate.
 
 # In[7]:
-
 
 inter_arc_CI = frac_CI(np.array([fish_frac,qpcr_frac]))
 inter_bac_CI = frac_CI(np.array([1-fish_frac,1-qpcr_frac]))
@@ -128,7 +121,6 @@ print('The inter-method uncertainty of the estimate of the fraction of bacteria 
 # Our final parameters are:
 
 # In[8]:
-
 
 # Take the maximum uncertainty as our best projection of uncertainty
 arc_mul_CI = np.max([fish_arc_CI,qpcr_arc_CI,inter_arc_CI])

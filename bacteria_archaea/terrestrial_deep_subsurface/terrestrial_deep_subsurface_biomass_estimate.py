@@ -7,7 +7,6 @@
 
 # In[1]:
 
-
 import numpy as np
 import pandas as pd
 pd.options.display.float_format = '{:,.1e}'.format
@@ -21,7 +20,6 @@ results
 # We multiply all the relevant parameters to arrive at our best estimate for the biomass of terrestrial deep subsurface archaea and bacteria, and propagate the uncertainties associated with each parameter to calculate the uncertainty associated with the estimate for the total biomass.
 
 # In[2]:
-
 
 # Calculate the total biomass of marine archaea and bacteria
 total_arch_biomass = results['Value'][0]*results['Value'][1]

@@ -6,7 +6,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -19,21 +18,18 @@ data['Total biomass estimate [g C]'] = data['Total biomass estimate [g C]'].asty
 data
 
 
-# As best estimate of the total biomass of plants, we use the geometric mean of the seven different estimates:
+# As best estimate of the total biomass of plants, we use the value reported in Erb et al. of 450 Gt C.
 
 # In[2]:
 
-
-best_estimate = gmean(data['Total biomass estimate [g C]'])
-
-print('Our best estimate for the biomass of plants is ≈%.1f Gt C' %(best_estimate/1e15))
+best_estimate = 450e15
+print('Our best estimate for the biomass of plants is ≈%.0f Gt C' %(best_estimate/1e15))
 
 
 # # Uncertainty analysis
 # As noted in the plants section in the Supplementary Information, one possible strategy to assess the uncertainty associated with the estimate of the total biomass of plants is to calculate the 95% confidence interval around the best estimate:
 
 # In[3]:
-
 
 estimate_CI = geo_CI_calc(data['Total biomass estimate [g C]'])
 print('The 95 percent confidence interval around our best estimate for the total biomass of plants is ≈%.1f-fold' %estimate_CI)
@@ -42,7 +38,6 @@ print('The 95 percent confidence interval around our best estimate for the total
 # In order to account for additional sources of uncertainty not captured by calculating the 95% confidence interval, we use the ratio between uper and lower most estimates relative to our best estimate as our best projection for the uncertainty associated with our estimate of the total biomass of plants:
 
 # In[4]:
-
 
 upper_CI = data['Total biomass estimate [g C]'].max()/best_estimate
 lower_CI = best_estimate/data['Total biomass estimate [g C]'].min()

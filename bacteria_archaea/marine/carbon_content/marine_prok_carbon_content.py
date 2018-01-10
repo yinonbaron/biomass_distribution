@@ -7,7 +7,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 import sys
@@ -22,7 +21,6 @@ summary.head()
 
 # In[2]:
 
-
 best_estimate = 10**(np.log10(summary['fg C cell-1']).mean())
 print('Our best estimate for the carbon content of marine bacteria and arcaea is %0.1f fg C cell^-1' % best_estimate)
 
@@ -36,7 +34,6 @@ print('Our best estimate for the carbon content of marine bacteria and arcaea is
 
 # In[3]:
 
-
 print(summary[['Reference','Intra-study uncertainty']])
 
 
@@ -44,7 +41,6 @@ print(summary[['Reference','Intra-study uncertainty']])
 # We estimate the 95% multiplicative confidence interval around the geometric mean of the values from the different studies. 
 
 # In[4]:
-
 
 mul_CI = geo_CI_calc(summary['fg C cell-1'])
 print('The interstudy uncertainty is ≈%.1f-fold' % mul_CI)
@@ -54,7 +50,6 @@ print('The interstudy uncertainty is ≈%.1f-fold' % mul_CI)
 # Our final parameters are:
 
 # In[5]:
-
 
 print('Carbon content of marine bacteria and archaea: %.1f fg C cell^-1' % best_estimate)
 print('Uncertainty associated with the carbon content of marine bacteria and archaea: %.1f-fold' % mul_CI)

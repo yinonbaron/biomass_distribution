@@ -10,7 +10,6 @@
 
 # In[1]:
 
-
 import pandas as pd
 import numpy as np
 import sys
@@ -30,7 +29,6 @@ lloyd.head()
 # The data in Lloyd et al. contains estimates for the number of bacteria and archaea. Lloyd et al. generated regression equations for the concentration of bacteria and archaea as a function of depth. We use these equations to estimate the total number of archaea and bacteria at each of the three depth layers.
 
 # In[2]:
-
 
 # Define the regression equation for the number of bacteria in the top 64 m:
 def bac_surf(depth):
@@ -97,7 +95,6 @@ print('The fraction of archaea in the bathypelagic layer based on FISH is %.1f p
 
 # In[3]:
 
-
 sunagawa = pd.read_excel('marine_arch_frac_data.xlsx','Sunagawa')
 salazar = pd.read_excel('marine_arch_frac_data.xlsx','Salazar')
 
@@ -106,14 +103,12 @@ salazar = pd.read_excel('marine_arch_frac_data.xlsx','Salazar')
 
 # In[4]:
 
-
 sunagawa.head()
 
 
 # Here are samples from the data in Salazar et al.:
 
 # In[5]:
-
 
 salazar.head()
 
@@ -122,7 +117,6 @@ salazar.head()
 # For the epipelagic layer, we will use the sum of the fractions of Thaumarcheota and Euryarchaeota, two main archaeal phyla. We will use the geometric mean of the fractions in surface waters and the deep chlorophyll maximum.
 
 # In[6]:
-
 
 sunagawa_sum = (sunagawa['Thaumarcheota'] + sunagawa['Euryarchaeota'])/100
 seq_arch_frac_epi = frac_mean(sunagawa_sum.loc[['DCM','SRF']])
@@ -135,7 +129,6 @@ print('The fraction of archaea in the mesopelagic layer based on 16S rDNA sequen
 
 # In[7]:
 
-
 seq_arch_frac_bathy = frac_mean(salazar['Archaea'])
 print('The fraction of archaea in the bathypelagic layer based on 16S rDNA sequencing is %.1f percent' % (seq_arch_frac_bathy*100))
 
@@ -143,7 +136,6 @@ print('The fraction of archaea in the bathypelagic layer based on 16S rDNA seque
 # Our best estimate for the fraction of archaea out of the total population of marine bacteria and archaea at each layer is the geometric mean of the estimates of the fraction of archaea based on FISH and on 16S rDNA sequencing, corrected for the lower rDNA operon copy number
 
 # In[8]:
-
 
 best_arch_frac_epi = frac_mean(np.array([FISH_arch_frac_epi,seq_arch_frac_epi*2]))
 best_arch_frac_meso = frac_mean(np.array([FISH_arch_frac_meso,seq_arch_frac_meso*2]))
@@ -158,7 +150,6 @@ print('The best estimate for the fraction of archaea in the bathypelagic layer i
 
 # In[9]:
 
-
 # Load the datasets
 buitenhuis = pd.read_excel('../cell_num/marine_prok_cell_num_data.xlsx','Buitenhuis')
 aristegui = pd.read_excel('../cell_num/marine_prok_cell_num_data.xlsx','Aristegui')
@@ -167,7 +158,6 @@ aristegui = pd.read_excel('../cell_num/marine_prok_cell_num_data.xlsx','Aristegu
 # For Lloyd et al., we already calculated the total number of bacteria and archaea at each layer, so we can estimate what is the relative fraction of cells in each layer
 
 # In[10]:
-
 
 # For lloyd et al. we calculate fraction of the sum of bacteria and archaea in each layer out of the 
 # total number of bacteria and archaea
@@ -187,7 +177,6 @@ print('The fraction of cells in the bathypelagic layer according to Lloyd et al.
 
 For Buitenhuis et al., we bin the data along the depth of each sample in 100 m bins. We calculate the average concentration of cells at each bin. For each bin, we calculate the total number of cells in the bin by multiplying the average concentration by the total volume of water in the bin. We calculate the total number of cells in each layer by dividing the bins to each of the layers and summing across all the bins that belong to the same layer.
 # In[11]:
-
 
 # Define depth range every 100 m from 0 to 4000 meters
 depth_range = np.linspace(0,4000,41)
@@ -227,7 +216,6 @@ print('Total fraction of cells in the bathypelagic layer based on Buitenhuis et 
 
 # In[12]:
 
-
 aristegui_total = aristegui['Cell abundance (cells m-2)'].sum()
 aristegui_frac_epi = aristegui.iloc[0]['Cell abundance (cells m-2)']/aristegui_total
 aristegui_frac_meso = aristegui.iloc[1]['Cell abundance (cells m-2)']/aristegui_total
@@ -242,7 +230,6 @@ print('Total fraction of cells in the bathypelagic layer based on Aristegui et a
 # In[13]:
 
 
-
 best_frac_epi = frac_mean(np.array([lloyd_epi_frac,buitenhuis_frac_epi,aristegui_frac_epi]))
 best_frac_meso = frac_mean(np.array([lloyd_meso_frac,buitenhuis_frac_meso,aristegui_frac_meso]))
 best_frac_bathy = frac_mean(np.array([lloyd_bathy_frac,buitenhuis_frac_bathy,aristegui_frac_bathy]))
@@ -255,7 +242,6 @@ print('The best estimate for the fraction of cells in the bathypelagic layer is 
 # Our best estimate for the fraction of archaea out of the total population of marine bacteria and archaea is the weighted sum of the fraction of archaea in each layer and the fraction of total cells in each layer
 
 # In[14]:
-
 
 best_arch_frac = best_arch_frac_epi*best_frac_epi + best_arch_frac_meso*best_frac_meso+best_arch_frac_bathy*best_frac_bathy
 print('Our best estimate for the fraction of archaea out of the total population of marine bacteria and archaea is %.1f percent' %(best_arch_frac*100))
@@ -273,7 +259,6 @@ print('Our best estimate for the fraction of archaea out of the total population
 
 # In[15]:
 
-
 # Set zero values to a small number for numerical stability of the fraction
 lloyd_arc_frac = lloyd['Fraction Arc CARDFISH'].dropna()
 lloyd_arc_frac[lloyd_arc_frac == 0] = 0.001
@@ -288,7 +273,6 @@ print('The intra-study uncertainty of measurements using FISH for the fraction o
 
 # In[16]:
 
-
 print('The intra-study uncertainty of measurements using 16S rDNA sequencing for the fraction of archaea is %.1f-fold' % frac_CI(salazar['Archaea']))
 print('The intra-study uncertainty of measurements using 16S rDNA sequencing for the fraction of bacteria is %.2f-fold' % frac_CI(1.-salazar['Archaea']))
 
@@ -298,7 +282,6 @@ print('The intra-study uncertainty of measurements using 16S rDNA sequencing for
 # We calculate the uncertainty (95% multiplicative confidence interval) between the estimates using the two methods - FISH and 16S rDNA sequencing.
 
 # In[17]:
-
 
 # For each layer, calculate the uncertainty between methods
 from fractions import *
@@ -325,7 +308,6 @@ print('The uncertainty of the fraction of bacteria out of the total population o
 # Our final parameters are:
 
 # In[18]:
-
 
 print('Fraction of marine archaea out of the total population of marine bacteria and archaea: %.1f percent' %(best_arch_frac*100))
 print('Fraction of marine bacteria out of the total population of marine bacteria and archaea: %.1f percent' %(100.-best_arch_frac*100))

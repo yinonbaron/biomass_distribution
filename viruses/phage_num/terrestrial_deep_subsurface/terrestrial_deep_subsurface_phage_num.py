@@ -10,7 +10,6 @@
 
 # In[1]:
 
-
 naive_ratio = 10
 
 
@@ -21,7 +20,6 @@ naive_ratio = 10
 
 # In[2]:
 
-
 engelhardt_ratio = lambda x: 271.8*x**0.768
 
 
@@ -31,7 +29,6 @@ engelhardt_ratio = lambda x: 271.8*x**0.768
 
 # In[3]:
 
-
 kyle_ratio = lambda x: 10**(1.3*np.log10(x)-0.62)
 
 
@@ -40,7 +37,6 @@ kyle_ratio = lambda x: 10**(1.3*np.log10(x)-0.62)
 # 
 
 # In[4]:
-
 
 import pandas as pd
 pd.options.display.float_format = '{:,.1e}'.format
@@ -61,7 +57,6 @@ print('Our estimate for the ratio between the concentration of phage-like partic
 
 # In[5]:
 
-
 roundnew_data = pd.read_excel('terrestrial_deep_subsurface_phage_num_data.xlsx','Roundnew',skiprows=1)
 roundnew_ratio = gmean(roundnew_data['Virus:Bacteria ratio'])
 print('Our estimate for the ratio between the concentration of phage-like particles and prokaryotes based on Roundnew et al. is ≈%.0f.' % roundnew_ratio)
@@ -80,7 +75,6 @@ print('Our estimate for the ratio between the concentration of phage-like partic
 
 # In[6]:
 
-
 # Load data on the concentrations of prokaryotes in each depth bin from our analysis of the biomass
 # of terrestrial deep subsurface prokaryotes
 prok_concentration = pd.read_excel('terrestrial_deep_subsurface_prok_num.xlsx','Cell concentration')
@@ -92,7 +86,6 @@ prok_concentration
 
 # In[7]:
 
-
 # Load data on the total volume of groundwater in each depth bin from our analysis of the biomass
 # of terrestrial deep subsurface prokaryotes
 water_vol = pd.read_excel('terrestrial_deep_subsurface_prok_num.xlsx','Water volume')
@@ -103,7 +96,6 @@ water_vol
 # To calculate the total number of phages based on the naive method and based on the data in Pan et al. and Roundnew et al., we calculate the total number of prokaryotes by multiplying the cell concentration at each depth bin by the total volume of water at that depth bin, and sum over depth bins:
 
 # In[8]:
-
 
 tot_prok = pd.DataFrame()
 
@@ -118,7 +110,6 @@ tot_prok.sum()
 
 # In[9]:
 
-
 # Estimate the total number of prokaryotes in groundwater as the geometric mean of the estimates based on 
 # arithmetic and geometric mean cell concentrations
 tot_prok_num_gw = gmean(tot_prok.sum())
@@ -131,7 +122,6 @@ print('Our best estimate for the total number of prokaryotes in groundwater for 
 # As stated above, to go from the total number of phages in groundwater to our estimate for the total number of phages in the terrestrial deep subsurface, we multiply our estimate of the total number of phages by a scaling factor. As our best estimate for this scaling factor we use geometric mean of three estimates. The first takes into account only groundwater (and thus the scaling factor is 1), and the other two assume an attached to unattached ratios of $10^2-10^3$ as in [McMahon & Parnell](http://dx.doi.org/10.1111/1574-6941.12196).
 
 # In[10]:
-
 
 # Define the scaling factor from number of cells in groundwater to cells relevant for calculating the total
 # Number of phages
@@ -155,7 +145,6 @@ print('Our estimate for the total number of phages in the terrestrial deep subsu
 
 # In[11]:
 
-
 engelhardt_phage_conc_geo_mean = engelhardt_ratio(prok_concentration['Geometric mean cell concentration [cells mL-1]'])
 engelhardt_phage_conc_mean = engelhardt_ratio(prok_concentration['Mean cell concentration [cells mL-1]'])
 
@@ -166,7 +155,6 @@ kyle_phage_conc_geo_mean = kyle_ratio(prok_concentration['Geometric mean cell co
 # We calculate the total number of phages based on the arithmetic and geometric mean concentration in each depth bin by multiplying by the total volume of groundwater at each depth bin and by the scaling factor we used for the previous method to convert from number of phages in groundwater to total number of phages in the terrestrial deep subsurface.
 
 # In[12]:
-
 
 engelhardt_tot_phage_mean = (engelhardt_phage_conc_mean*water_vol['Water volume [mL]']).sum()*scaling_factor
 engelhardt_tot_phage_geo_mean = (engelhardt_phage_conc_geo_mean*water_vol['Water volume [mL]']).sum()*scaling_factor
@@ -179,7 +167,6 @@ kyle_tot_phage_geo_mean = (kyle_phage_conc_geo_mean*water_vol['Water volume [mL]
 
 # In[13]:
 
-
 engelhardt_tot_phage = gmean([engelhardt_tot_phage_geo_mean,engelhardt_tot_phage_mean])
 kyle_tot_phage = gmean([kyle_tot_phage_geo_mean,kyle_tot_phage_mean])
 
@@ -191,7 +178,6 @@ print('Our best estimate for the total number of phages in the terrestrial deep 
 
 # In[14]:
 
-
 estimates = pd.Series([tot_phage_naive,tot_phage_pan,tot_phage_roundnew,engelhardt_tot_phage,kyle_tot_phage],
                      index = ['Naive estimate','Pan et al.','Roundnew et al.','Engelhardt et al.','Kyle et al.'])
 estimates
@@ -200,7 +186,6 @@ estimates
 # To generate our best estimate for the total number of phages in the terrestrial deep subsurface, we calculate the geometric mean of the estimates from our five different methods:
 
 # In[15]:
-
 
 best_estimate = gmean(estimates)
 print('Our best estimate for the total number of phages in the the terrestrial deep subsurface is %.0e' % best_estimate)
@@ -217,7 +202,6 @@ print('Our best estimate for the total number of phages in the the terrestrial d
 
 # In[16]:
 
-
 pan_CI = geo_CI_calc(pan_data['Virus-to-cell ratio (VCR)'])
 roundnew_CI = geo_CI_calc(roundnew_data['Virus:Bacteria ratio'])
 print('The 95 percent confidence interval of the geometric mean of the values in Pan et al. is ≈%.1f-fold' % pan_CI)
@@ -228,7 +212,6 @@ print('The 95 percent confidence interval of the geometric mean of the values in
 # We calculate the 95% confidence interval of the geometric mean of the estimates from our five different methodologies for measuring the ratio between the concentration of phage-like particles and prokaryotes. We use this range as a measure of the interstudy uncertainty associated with the estimate of the ratio:
 
 # In[17]:
-
 
 ratio_inter_CI = geo_CI_calc(estimates)
 print('The interstudy uncertainty associated with our estimate of the ratio between the concentration of phage-like particles and prokaryotes is ≈%.1f-fold' % ratio_inter_CI)
@@ -244,7 +227,6 @@ ratio_CI = np.max([ratio_inter_CI,pan_CI,roundnew_CI])
 # We calculate the 95% confidence interval of the geometric mean of the estimates of the total number of phages using arithmetic and geometric mean concentrations of prokaryotes. This yields an uncertainty for each one of the five methods to estimate the ratio between the concentration of phage-like particles and prokaryotes. We use the maximal uncertainty of those five uncertainties as our best projection for the uncertainty associated with the total number of prokaryotes.
 
 # In[18]:
-
 
 # For the naive estimate, the Pan et al. based ratio and the Roundnew et al. based ratio
 # The uncertainty is the 95% confidence interval of the total number of prokaryotes in
@@ -267,7 +249,6 @@ print('Our best projection for uncertainty in the total number of phages in the 
 
 # In[19]:
 
-
 scaling_factor_CI = geo_CI_calc(np.array([1,100,1000]))
 print('The uncertainty associated with the scaling factor from number of phages in groundwater to the total number of phages is ≈%.1f-fold' %scaling_factor_CI)
 
@@ -276,7 +257,6 @@ print('The uncertainty associated with the scaling factor from number of phages 
 
 # In[20]:
 
-
 mul_CI = CI_prod_prop(np.array([ratio_CI,tot_prok_CI,scaling_factor_CI]))
 print('Our best projection for the uncertainty associated with the total number of phages in the terrestrial deep subsurface is ≈%.0f-fold' %mul_CI)
 
@@ -284,7 +264,6 @@ print('Our best projection for the uncertainty associated with the total number 
 # Our final parameters are:
 
 # In[21]:
-
 
 
 print('Our best estimate for the total number of phages in the terrestrial deep subsurface: %.0e' % best_estimate)

@@ -10,7 +10,6 @@
 
 # In[1]:
 
-
 # Import dependencies
 import pandas as pd
 import numpy as np
@@ -30,7 +29,6 @@ macro.head()
 
 # In[2]:
 
-
 # Calculate the mean fraction of particle-attached cells whitin each study
 macro_study_mean = macro.groupby('Reference')['Fraction of cells in aggregates'].apply(np.nanmean)
 macro_study_gmean = macro.groupby('Reference')['Fraction of cells in aggregates'].apply(frac_mean)
@@ -39,7 +37,6 @@ macro_study_gmean = macro.groupby('Reference')['Fraction of cells in aggregates'
 # We then calculate the mean fraction of particle-attached cells between different studies. We calculate both the arithmetic mean fraction as well as the geometric mean fraction of cells. We thus generate two estimates for the fraction of particle-attached cells out of the total population of marine bacteria and archaea- one based on arithmetic means and one based on geometric means. The estimate based on the arithmetic mean is more susceptible to sampling bias, as even a single measurement which is not characteristic of the global population (such as samples which are contaminated with organic carbon sources, or samples which have some technical biases associated with them) might shift the average concentration significantly. On the other hand, the estimate based on the geometric mean might underestimate global biomass as it will reduce the effect of biologically relevant high biomass concentrations. As a compromise between these two caveats, we chose to use as our best estimate the geometric mean of the estimates from the two methodologies.
 
 # In[3]:
-
 
 # Calculate the mean fraction of particle-attached cells between different studies
 macro_mean = np.nanmean(macro_study_mean)
@@ -56,7 +53,6 @@ print('Our best estimate for the fraction of the toal number of marine bacteria 
 
 # In[4]:
 
-
 # Load the data on microaggregates
 micro = pd.read_excel('poc_data.xlsx','Microaggregates')
 micro.head()
@@ -66,7 +62,6 @@ micro.head()
 
 # In[5]:
 
-
 # Calculate the mean fraction of particle-attached cells whitin each study
 micro_study_mean = micro.groupby('Reference')['Fraction of attached cells'].apply(np.nanmean)
 micro_study_gmean = micro.groupby('Reference')['Fraction of attached cells'].apply(frac_mean)
@@ -75,7 +70,6 @@ micro_study_gmean = micro.groupby('Reference')['Fraction of attached cells'].app
 # We then calculate the mean fraction of particle-attached cells between different studies. We calculate both the arithmetic mean fraction as well as the geometric mean fraction of cells. We thus generate two estimates for the fraction of particle-attached cells out of the total population of marine bacteria and archaea- one based on arithmetic means and one based on geometric means. We use as our best estimate the geometric mean of the estimates from the two methodologies.
 
 # In[6]:
-
 
 # Calculate the mean fraction of particle-attached cells between different studies
 micro_mean = micro_study_mean.mean()
@@ -95,7 +89,6 @@ print('Our best estimate for the fraction of the toal number of marine bacteria 
 
 # In[7]:
 
-
 # Calculate the geometric mean of the relative size of particle attached cells within each study
 rel_size_study = macro.groupby(['Location','Reference'])['Size of cells relative to free-living cells'].apply(gmean)
 
@@ -112,7 +105,6 @@ print('Our best estimate for the size of particle-attached cells relative to fre
 
 # In[8]:
 
-
 # Calculate the geometric mean of the volume of particle-attached cells reported within each study
 vol_study = macro.groupby('Reference')['Volume of cells [µm^3]'].apply(gmean)
 
@@ -120,7 +112,6 @@ vol_study = macro.groupby('Reference')['Volume of cells [µm^3]'].apply(gmean)
 # We then calculate the geometric mean of volumes reported in different studies. We convert our best estimate to the volume of particle-attached cells to carbon content based on the formula reported in Simon & Azam. We calculate the carbon content of particle-attached cells relative to free-living cells based on our estimate for the carbon content of free-living bacteria and archaea in the ocean of ≈11 fg C (see the relevant section in the Supplementary Information for more details).
 
 # In[9]:
-
 
 # Calculate the geometric mean of volumes reported in different studies
 best_vol = gmean(vol_study.dropna())
@@ -144,7 +135,6 @@ print('Our best estimate for the carbon content of particle-attached cells relat
 
 # In[10]:
 
-
 best_rel_cc= gmean([best_rel_size,vol_rel_size])
 print('Our best estimate for the carbon content of particle-attached cells relative to free-living cells is ≈%1.f-fold' % best_rel_cc)
 
@@ -152,7 +142,6 @@ print('Our best estimate for the carbon content of particle-attached cells relat
 # To estimate the fraction of the total biomass of marine bacteria and archaea which is particle-attached, we sum up the fraction of the total number of cells contributed by cells attached to micro- and macroaggregates, and multiply it by the relative carbon content of particle-attached cells:
 
 # In[11]:
-
 
 best_estimate = (best_macro_frac+best_micro_frac)*best_rel_cc
 
@@ -172,7 +161,6 @@ print('Our best estimate for the fraction of the total biomass of marine bacteri
 
 # In[12]:
 
-
 # Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates 
 # within each study
 micro_study_CI = micro.groupby('Reference')['Fraction of attached cells'].apply(frac_CI)
@@ -182,7 +170,6 @@ micro_study_CI = micro.groupby('Reference')['Fraction of attached cells'].apply(
 # We calculate the 95% confidence interval around the mean fraction of microaggregate-attached cells between differnt studies:
 
 # In[13]:
-
 
 # Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates 
 # between different studies
@@ -194,7 +181,6 @@ micro_CI = frac_CI(micro_study_gmean)
 
 # In[14]:
 
-
 # Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means
 # and geometric means
 micro_inter_method_CI = frac_CI(np.array([micro_mean,micro_gmean]))
@@ -203,7 +189,6 @@ micro_inter_method_CI = frac_CI(np.array([micro_mean,micro_gmean]))
 # We use the maximum of the collection of uncertainties as our best projection for the uncertainty associated with our estimate of the fraction of the total number of bacteria and archaea which is attached to microaggregates:
 
 # In[15]:
-
 
 micro_frac_CI = np.max([micro_inter_method_CI,micro_study_CI.max(),micro_CI])
 print('Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to microaggregates is ≈%.1f-fold' %micro_frac_CI)
@@ -216,7 +201,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 # In[16]:
 
-
 # Calculate the 95% confidence interval around the mean fraction of cells attached to macroaggregates 
 # within each study
 macro_study_CI = macro.groupby('Reference')['Fraction of cells in aggregates'].apply(frac_CI)
@@ -226,7 +210,6 @@ macro_study_CI = macro.groupby('Reference')['Fraction of cells in aggregates'].a
 # We calculate the 95% confidence interval around the mean fraction of macroaggregate-attached cells between differnt studies:
 
 # In[17]:
-
 
 # Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates 
 # between different studies
@@ -238,7 +221,6 @@ macro_CI = frac_CI(macro_study_gmean)
 
 # In[18]:
 
-
 # Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means
 # and geometric means
 macro_inter_method_CI = frac_CI(np.array([macro_mean,macro_gmean]))
@@ -248,7 +230,6 @@ macro_inter_method_CI = frac_CI(np.array([macro_mean,macro_gmean]))
 
 # In[19]:
 
-
 macro_frac_CI = np.max([macro_inter_method_CI,macro_study_CI.max(),macro_CI])
 print('Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to macroaggregates is ≈%.1f-fold' %macro_frac_CI)
 
@@ -256,7 +237,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 # We propagate the uncertainties associated with the estimates of the fraction of the total number of marine bacteria and archaea attached to micro- and macroaggregates to the final estimate of the fraction of marine bacteria and archaea which is particle-attached:
 
 # In[20]:
-
 
 # Propagate the uncertainties of the fraction of cells attached to micro- and macroaggregates
 # to the estiamte of the fraction of cells which is particle-attached
@@ -273,7 +253,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 # In[21]:
 
-
 size_intra_CI = macro.groupby(['Location','Reference'])['Size of cells relative to free-living cells'].apply(geo_CI_calc)
 
 
@@ -281,7 +260,6 @@ size_intra_CI = macro.groupby(['Location','Reference'])['Size of cells relative 
 # We calculate the 95% confidence interval around the mean size of particle-attached cells reltive to free-living cells between different studies:
 
 # In[22]:
-
 
 size_inter_CI = geo_CI_calc(rel_size_study.dropna())
 
@@ -293,7 +271,6 @@ size_inter_CI = geo_CI_calc(rel_size_study.dropna())
 
 # In[23]:
 
-
 vol_intra_CI = macro.groupby('Reference')['Volume of cells [µm^3]'].apply(geo_CI_calc)
 
 
@@ -301,7 +278,6 @@ vol_intra_CI = macro.groupby('Reference')['Volume of cells [µm^3]'].apply(geo_C
 # We calculate the 95% confidence interval around the mean volume of particle-attached cells between different studies:
 
 # In[24]:
-
 
 vol_inter_CI = geo_CI_calc(vol_study.dropna())
 
@@ -311,14 +287,12 @@ vol_inter_CI = geo_CI_calc(vol_study.dropna())
 
 # In[25]:
 
-
 cc_inter_method_CI = geo_CI_calc(np.array([vol_rel_size,best_rel_size]))
 
 
 # We use the maximum of the collection of uncertainties for both the volume-based methoda and the size based method as our best projection of the uncertainty associated with our estimate of the relative carbon content of particle-attached bacteria and archaea:
 
 # In[26]:
-
 
 cc_CI = np.max([cc_inter_method_CI,vol_inter_CI,vol_intra_CI.max(),size_inter_CI,size_intra_CI.max()])
 print('Our best projection for the uncertainty associated with our estimate of the relative carbon content of particles-attached bacteria and archaea is ≈%.1f-fold' %cc_CI)
@@ -328,7 +302,25 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 # In[27]:
 
-
 mul_CI = CI_prod_prop(np.array([cc_CI,num_frac_CI]))
 print('Our best projection for the uncertainty associated with our estimate of the fraction of the total biomass of marine bactetia and archaea which is particle-attached is ≈%.1f-fold' %mul_CI)
+
+
+# Our final parameters are:
+
+# In[28]:
+
+print('Fraction of the total biomass of marine bacteria and archaea which is particle-attahced: %.1e' % best_estimate)
+print('Uncertainty associated with the fraction of the biomass of marine bacteria and archaea which is particle-attached: %.1f-fold' % mul_CI)
+
+old_results = pd.read_excel('../marine_prok_biomass_estimate.xlsx')
+result = old_results.copy()
+result.loc[4] = pd.Series({
+                'Parameter': 'Fraction of the total biomass of marine bacteria and archaea which is particle-attached',
+                'Value': best_estimate,
+                'Units': 'Unitless',
+                'Uncertainty': "{0:.1f}".format(mul_CI)
+                })
+
+result.to_excel('../marine_prok_biomass_estimate.xlsx',index=False)
 

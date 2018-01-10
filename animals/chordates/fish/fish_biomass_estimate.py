@@ -16,11 +16,10 @@
 
 # In[1]:
 
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-get_ipython().magic('matplotlib inline')
+get_ipython().magic(u'matplotlib inline')
 pd.options.display.float_format = '{:,.1e}'.format
 from scipy.stats import gmean
 import sys
@@ -38,7 +37,6 @@ scatter
 
 # In[2]:
 
-
 # Calculate the geometric mean of values from Irigoien et al.
 irigoien_backscatter = gmean(scatter['Total backscatter [m^2]'])
 print('The geometric mean of global backscatter from Irigoien et al. is ≈%.1e m^2' %irigoien_backscatter)
@@ -47,7 +45,6 @@ print('The geometric mean of global backscatter from Irigoien et al. is ≈%.1e 
 # As our best estimate for the global backscatter of mesopelagic fish, we use the geometric mean of the average value from Irigoien et al. and the value reported in Proud et al.
 
 # In[3]:
-
 
 # The global backscatter reported by Proud et al.
 proud_backscatter = 6.02e9
@@ -65,7 +62,6 @@ print('Our best estimate for the global backscatter of mesapelagic fish is %.0e 
 
 # In[4]:
 
-
 # Load terget strength data
 ts = pd.read_excel('irigoien_et_al_data.xlsx', 'Target strength')
 
@@ -81,7 +77,6 @@ plt.ylabel('Counts')
 
 # In[5]:
 
-
 # Calculate the average TS per kg for fish with and without swimbladder
 TS_bin = ts.groupby('Swimbladder').mean()
 TS_bin['dB kg^-1']
@@ -90,7 +85,6 @@ TS_bin['dB kg^-1']
 # We use our best estimate for the target strength per unit biomass to estimate the total biomass of mesopelagic fish. We transform the TS to backscattering cross-section, and then calculate the effective population backscattering cross-section based on the assumption that fish with or without swimbladder represent equal portions of the population.
 
 # In[6]:
-
 
 # The conversion equation from global backscatter and terget strength per unit biomass
 biomass_estimator = lambda TS1,TS2,bs,frac: bs/(frac*10**(TS1/10.) + (1.-frac)*10**(TS2/10.))
@@ -104,7 +98,6 @@ print('Our best sonar-based estimate for the biomass of mesopelagic fish is ≈%
 
 # In[7]:
 
-
 # The estimate of the global biomass of mesopelagic fish based on trawling reported in Lan & Pauly
 trawling_biomass = 1.5e14
 
@@ -116,7 +109,6 @@ print('Our best estimate for the biomass of mesopelagic fish is ≈%.1f Gt C' %(
 # Finally, we add to our estimate of the biomass of mesopelagic fish the estimate of biomass of non-mesopelagic fish made by [Wilson et al.](http://dx.doi.org/10.1126/science.1157972) to generate our estimate for the total biomass of fish.
 
 # In[8]:
-
 
 # The estimate of non-mesopelagic fish based on Wilson et al.
 non_mesopelagic_fish_biomass = 1.5e14
@@ -145,7 +137,6 @@ print('Our best estimate for the biomass of fish is ≈%.1f Gt C' %(best_estimat
 
 # In[9]:
 
-
 # Calculate the intra-study uncertainty of Irigoien et al.
 irigoien_CI = geo_CI_calc(scatter['Total backscatter [m^2]'])
 
@@ -160,7 +151,6 @@ print('The intra-study uncertainty of the total backscatter estimate of Proud et
 # As a measure of the interstudy uncertainty of the global backscatter, we calculate the 95% confidence interval of the geometric mean of the estimate from Irigoien et al. and Proud et al.:
 
 # In[10]:
-
 
 # Calculate the interstudy uncertainty of the global backscatter
 bs_inter_CI = geo_CI_calc([irigoien_backscatter,proud_backscatter])
@@ -180,7 +170,6 @@ bs_CI = np.max([irigoien_CI,proud_CI,bs_inter_CI])
 # We calculate the 95% confidence interval of the target strength of fish with or withour swimbladder, and propagate this confidence interval to the total estimate of biomass to assess the uncertainty associated with the estimate of the target strength. We calculated an uncertainty of ≈1.3-fold. associated with te estimate of the target strength per unit biomass of fish.
 
 # In[11]:
-
 
 # Define the function that will estimate the 95% confidence interval
 def CI_groupby(input):
@@ -214,7 +203,6 @@ print('Our best projection for the uncertainty associated with the estimate of t
 
 # In[12]:
 
-
 # Sample different fractions of fish with swimbladder
 ratio_range = np.linspace(0,1,1000)
 
@@ -231,7 +219,6 @@ plt.ylabel('Biomass estimate [Gt C]')
 
 # In[13]:
 
-
 # Calculate the upper and lower bounds of the influence of the fraction of fish with swimbladder on biomass estimate
 ratio_upper_CI = (biomass_estimator(*TS_bin['dB kg^-1'],best_backscatter,0.975)*1000*0.15)/sonar_biomass
 ratio_lower_CI = sonar_biomass/(biomass_estimator(*TS_bin['dB kg^-1'],best_backscatter,0)*1000*0.15)
@@ -244,7 +231,6 @@ print('Our best projection for the uncertainty associated with the fraction of f
 
 # In[14]:
 
-
 sonar_CI = CI_prod_prop(np.array([ratio_CI,ts_CI,bs_CI]))
 print('Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈%.1f-fold' %sonar_CI)
 
@@ -253,7 +239,6 @@ print('Our best projection for the uncertainty associated with the sonar-based e
 # As a measure of the inter-method uncertainty of our estimate of the biomass of mesopelagic fish, we calculate the 95% confidence interval of the geometric mean of the sonar-based estiamte and the trawling-based estimate.
 
 # In[15]:
-
 
 meso_inter_CI = geo_CI_calc(np.array([sonar_biomass,trawling_biomass]))
 print('Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈%.1f-fold' %meso_inter_CI)
@@ -269,7 +254,6 @@ meso_CI = np.max([meso_inter_CI,sonar_CI])
 # For estimating the biomass of non-mesopelagic fish, we rely on estimates by Wilson et al., which does not report an uncertainty range for the biomass of non-meso pelagic fish. A later study ([Jennings et al.](https://doi.org/10.1371/journal.pone.0133794), gave an estimate for the total biomass of fish with body weight of 1 g to 1000 kg, based on ecological models. Jenning et al. reports a 90% confidence interval of 0.34-26.12 Gt wet weight, with a median estimate of ≈5 Gt wet weight. We take this range as a crude measure of the uncertainty associated with the estimate of the biomass of non-mesopelagic fish.
 
 # In[16]:
-
 
 # Calculate the uncertainty of the non-mesopelagic fish biomass
 non_meso_CI = np.max([26.12/5,5/0.34])
