@@ -3,14 +3,14 @@ This repository contains all source data and code for the analysis found in "The
 
 An index for the structure of this repository is given below:
 
-* **[`plants`](./plants)|** Data and code for estimating the total biomass of plants
+* **[`plants/`](./plants)|** Data and code for estimating the total biomass of plants
 
-* **[`bacteria_archaea`](./bacteria_archaea)|** Data and code for estimating the total biomass of bacteria & arechaea
+* **[`bacteria_archaea/`](./bacteria_archaea)|** Data and code for estimating the total biomass of bacteria & arechaea
 
-* **[`fungi`](./fungi)|** Data and code for estimating the total biomass of fungi
+* **[`fungi/`](./fungi)|** Data and code for estimating the total biomass of fungi
 
-* **[`protists`](./protists)|** Data and code for estimating the total biomass of fungi
+* **[`protists/`](./protists)|** Data and code for estimating the total biomass of fungi
 
-* **[`animals`](./animals)|** Data and code for estimating the total biomass of animals
+* **[`animals/`](./animals)|** Data and code for estimating the total biomass of animals
 
-* **[`viruses`](./viruses)|** Data and code for estimating the total biomass of viruses
+* **[`viruses/`](./viruses)|** Data and code for estimating the total biomass of viruses
