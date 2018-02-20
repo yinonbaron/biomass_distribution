@@ -1,6 +1,7 @@
-# **`biomass_distribution/plants/`**
+### **`biomass_distribution/plants/`**
 
 This directory details our estimate of the total biomass of plants.
+
 An index for the structure of this directory is given below:
 
 * **[`non_wood_biomass/`](./non_wood_biomass)|**
