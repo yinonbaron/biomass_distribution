@@ -18,3 +18,5 @@ An index for the structure of this repository is given below:
 * **[`MAREDAT_consistency_check/`](./MAREDAT_consistency_check)|** Consistency checks for estimates based on the MARine Ecosystem DATa (MEREDATA)
 
 * **[`statistics_helper/`](./statistics_helper)|** Helper functions for generating our best estimates as well as uncertainty projections
+
+Each directory contain Jupyter notebooks detailing the analysis leading to our estimates. To make our analysis accessible, we provide the notebooks in three file formats: `.ipynb` files, `.html` files and `.py` files.
