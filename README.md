@@ -17,4 +17,4 @@ An index for the structure of this repository is given below:
 
 * **[`MAREDAT_consistency_check/`](./MAREDAT_consistency_check)|** Consistency checks for estimates based on the MARine Ecosystem DATa (MEREDATA)
 
-* **[`statistics_helper]`(./statistics_helper)|** Helper functions for generating our best estimates as well as uncertainty projections
+* **[`statistics_helper/`](./statistics_helper)|** Helper functions for generating our best estimates as well as uncertainty projections
