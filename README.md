@@ -8,4 +8,4 @@ An index for the structure of this repository is given below:
 3. [Fungi](/fungi)
 4. [Protists](/protists)
 5. [Animals](/animals)
-6. [Viruses](/viruses)
+6. [Viruses](./viruses)
