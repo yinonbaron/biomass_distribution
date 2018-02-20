@@ -15,7 +15,7 @@ An index for the structure of this repository is given below:
 
 * **[`viruses/`](./viruses)|** Data and code for estimating the total biomass of viruses
 
-* **[`MAREDAT_consistency_check/`](./MAREDAT_consistency_check)|** Consistency checks for estimates based on the MARine Ecosystem DATa (MEREDATA)
+* **[`MAREDAT_consistency_check/`](./MAREDAT_consistency_check)|** Consistency checks for estimates based on the MARine Ecosystem DATa (MEREDAT)
 
 * **[`statistics_helper/`](./statistics_helper)|** Helper functions for generating our best estimates as well as uncertainty projections
 
