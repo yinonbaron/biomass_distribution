@@ -3,7 +3,7 @@ This repository contains all source data and code for the analysis found in the 
 
 An index for the structure of this repository is given below:
 
-1. [Plants](./plants)
+1. **[`plants`](./plants)|**
 2. [Bacteria & Archaea](./bacteria_archaea)
 3. [Fungi](./fungi)
 4. [Protists](./protists)
