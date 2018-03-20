@@ -56,7 +56,7 @@ def frac_CI(fractions):
     mean_alpha = np.mean(log_alpha)
     # To turn a into f, we assume a is lognormally distributed, so we sample from a lognormal 
     # distribution with a mean that is equal to the mean a and an std equal to the std of a.
-    alpha_dist = np.random.lognormal(mean_alpha,se_alpha,1000)
+    alpha_dist = np.random.lognormal(mean_alpha,se_alpha,100000)
     # We calculate f based on a to generate a distribution of fractions f    
     frac_dist = 1./(1.+1./alpha_dist)
     # We calculate the multiplicative value of the 97.5 percentile of the distribution of fraction relative to the mean
