@@ -1,13 +1,8 @@
 
 # coding: utf-8
 
-# # Estimating the fraction of archaea out of the total soil prokaryote population
-# In order to estimate the fraction of archaea out of the total population of soil bacteria and archaea, we rely of four independent methods: fluorescent in-situ hybridization (FISH), CARD-FISH and 16S rDNA sequencing and 16S rDNA qPCR.
-# 
-# ## FISH-based estimate
-# In order to estimate the fraction of archaea out of the total biomass of soil bacteria and archae, we collected data from several studies. Here is a sample of the data:
-
 # In[1]:
+
 
 # Load dependencies
 import pandas as pd
@@ -16,6 +11,16 @@ import sys
 sys.path.insert(0, '../../statistics_helper/')
 from fraction_helper import *
 from CI_helper import *
+from excel_utils import *
+
+
+# # Estimating the fraction of archaea out of the total soil prokaryote population
+# In order to estimate the fraction of archaea out of the total population of soil bacteria and archaea, we rely of four independent methods: fluorescent in-situ hybridization (FISH), CARD-FISH and 16S rDNA sequencing and 16S rDNA qPCR.
+# 
+# ## FISH-based estimate
+# In order to estimate the fraction of archaea out of the total biomass of soil bacteria and archae, we collected data from several studies. Here is a sample of the data:
+
+# In[2]:
 
 
 # Load FISH data
@@ -25,21 +30,24 @@ FISH_data.head()
 
 # We Calculate the geometric mean of the fractions for each study in each habitat to generate characteristic values for each study:
 
-# In[2]:
+# In[3]:
+
 
 FISH_study_mean = FISH_data.groupby(['Habitat','DOI'])['Fraction of archaea'].apply(frac_mean)
 
 
 # We then calculate the geometric mean between different studies in the same habitat to generate characteristic values for each habitat:
 
-# In[3]:
+# In[4]:
+
 
 FISH_habitat_mean = FISH_study_mean.groupby('Habitat').apply(frac_mean)
 
 
 # Finally, we calculate the geometric mean between the characteristic values in each habitat as our best estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea based on FISH:
 
-# In[4]:
+# In[5]:
+
 
 FISH_mean = frac_mean(FISH_habitat_mean)
 
@@ -49,7 +57,8 @@ print('Our best estimate of the fraction of archaea out of the total biomass of 
 # ## CARD-FISH-based estimate
 # In order to estimate the fraction of archaea out of the total biomass of soil bacteria and archae, we collected data from several studies. Here is a sample of the data:
 
-# In[5]:
+# In[6]:
+
 
 # Load CARD-FISH data
 CARDFISH_data = pd.read_excel('soil_bac_arch_data.xlsx','CARD-FISH')
@@ -58,14 +67,16 @@ CARDFISH_data.head()
 
 # We Calculate the geometric mean of the fractions for each study in each habitat to generate characteristic values for each study:
 
-# In[6]:
+# In[7]:
+
 
 CARDFISH_study_mean = CARDFISH_data.groupby('DOI')['Fraction of archaea'].apply(frac_mean)
 
 
 # Finally, we calculate the geometric mean between the characteristic values in each study as our best estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea based on CARD-FISH:
 
-# In[7]:
+# In[8]:
+
 
 CARDFISH_mean = frac_mean(CARDFISH_study_mean)
 print('Our best estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea based on CARD-FISH is ≈%.0f percent' %(CARDFISH_mean*100))
@@ -74,7 +85,8 @@ print('Our best estimate of the fraction of archaea out of the total biomass of 
 # ## 16S rDNA sequencing-based estimate
 # For our 16S rDNA sequencing-based estimate, we rely on a study which reported values for the fraction of archaea out of the total population of soil bacteria and archaea in 146 soils from across the globe ([Bates et al.](http://dx.doi.org/10.1038/ismej.2010.171)). We calculate the geometric mean of values within each biome, and then calculate the geometric mean of the characteristic values of each biome. We account for the lower rRNA operon copy number in archaea ([Sun et al.](http://dx.doi.org/10.1128/AEM.01282-13)) by multiplying the measured fractions by a factor of 2. 
 
-# In[8]:
+# In[9]:
+
 
 # 16S sequencing data from Bates et al. corrected for lower operon copy number
 bates_data = pd.read_excel('soil_bac_arch_data.xlsx','bates',skiprows=1)
@@ -87,7 +99,8 @@ seq = frac_mean(bates_data.groupby('Biome')['Fraction of archaea'].apply(frac_me
 # ## 16S rDNA qPCR-based estimate
 # For our 16S qPCR-based estimate, we rely on a recent study which reported the fraction of archaea out of the total population of soil bacteria and archaea in grasslands, forests and croplands in Korea ([Hong & Cho](http://dx.doi.org/10.1371/journal.pone.0133763)). The mean fraction of archaea reported by Hong & Cho is ≈3%.
 
-# In[9]:
+# In[10]:
+
 
 # qPCR data from Hong & Cho
 qpcr = 0.027
@@ -95,7 +108,8 @@ qpcr = 0.027
 
 # We use the geomtric mean of our estimates from the four different methods as our best estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea
 
-# In[10]:
+# In[11]:
+
 
 best_frac = frac_mean(np.array([seq,qpcr,FISH_mean,CARDFISH_mean]))
 
@@ -104,10 +118,18 @@ print('Our best estimate for the fraction of archaea out of the total biomass of
 
 # We multiply the fraction of archaea out of the total biomass of soil bacteria and archaea by our estimate for the total biomass of soil bacteria and archaea to estimate the total biomass of soil archaea:
 
-# In[11]:
+# In[12]:
+
 
 # Load fungi biomass estimate
 fungi_biomass_estimate = pd.read_excel('../../fungi/fungi_biomass_estimate.xlsx')
+
+# In case soil fungi biomass estimate is empty, run the scripts 
+if(fungi_biomass_estimate.shape[0]==0):
+    import os
+    os.system('jupyter nbconvert --execute ../../fungi/soil_microbial_biomass/soil_microbial_biomass.ipynb' )
+    os.system('jupyter nbconvert --execute ../../fungi/fungi_fraction/fungi_fraction.ipynb' )
+    fungi_biomass_estimate = pd.read_excel('../../fungi/fungi_biomass_estimate.xlsx')
 
 # Calculate the total biomass of soil bactria and archaea
 soil_prok_biomass = fungi_biomass_estimate['Value'][0]*(1-fungi_biomass_estimate['Value'][1])
@@ -130,7 +152,8 @@ print('Our best estimate for the total biomass of soil bacteria is ≈%.1f Gt C'
 # ### FISH
 # We calculate the 95% confidence interval of the geometric mean of values within each study. We use the maximal uncertainty as our best projection of the intra-study uncertainty of studies using FISH:
 
-# In[12]:
+# In[13]:
+
 
 FISH_intra_arch_CI = FISH_data.groupby(['Habitat','DOI'])['Fraction of archaea'].apply(frac_CI)
 FISH_data['Fraction of bacteria'] = 1 - FISH_data['Fraction of archaea']
@@ -142,7 +165,8 @@ print('Our best projection of the intra-study uncertainty associated with the fr
 # ### CARD-FISH
 # We calculate the 95% confidence interval of the geometric mean of values within each study. We use the maximal uncertainty as our best projection of the intra-study uncertainty of studies using CARD-FISH:
 
-# In[13]:
+# In[14]:
+
 
 CARDFISH_data['Fraction of bacteria'] = 1 - CARDFISH_data['Fraction of archaea']
 CARDFISH_intra_arch_CI = CARDFISH_data.groupby('DOI')['Fraction of archaea'].apply(frac_CI)
@@ -154,7 +178,8 @@ print('Our best projection of the intra-study uncertainty associated with the fr
 # ### 16S rDNA sequencing
 # We calculate the 95% confidence interval of the geometric mean of values reported in Bates et al.:
 
-# In[14]:
+# In[15]:
+
 
 bates_data['Fraction of bacteria'] = 1 - bates_data['Fraction of archaea']
 seq_intra_arch_CI = frac_CI(bates_data['Fraction of archaea'])
@@ -166,7 +191,8 @@ print('Our best projection of the intra-study uncertainty associated with the fr
 # ### 16S rDNA qPCR
 # We rely on the standard deviation reported in Hong & Cho of 1.5%. We use 1.96 stantard deviations as our best projection of the intra-study uncertainty associated with the fraction of archaea out of the total biomass of soil bacteria and archaea:
 
-# In[15]:
+# In[16]:
+
 
 # Calculate the multiplicative error using 1.96 standard deviations to approximate 95%
 # confidence interval
@@ -179,7 +205,8 @@ print('Our best projection of the intra-study uncertainty associated with the fr
 # ## Inter-study uncertainty
 # For our FISH and CARD-FISH-based estimates, we rely in several studies. We calculate the 95% confidence interval around the geometric mean of the values from different studies within the same habitat as our best projection of the inter-study uncertainty associates with the fraction of archaea out of the total biomass of soil bacteria and archaea.
 
-# In[16]:
+# In[17]:
+
 
 FISH_interstudy_arch_CI = FISH_study_mean.groupby('Habitat').apply(frac_CI)
 FISH_interstudy_bac_CI = (1-FISH_study_mean).groupby('Habitat').apply(frac_CI)
@@ -197,7 +224,8 @@ print('Our best projection of the inter-study uncertainty associated with the fr
 # ## Inter-habitat uncertainty
 # For the FISH-based estimate, we also rely on characteristic values in different habitats to estimate the fraction of archaea of of the total biomass of soil bacteria and archaea. We calculate the 95% confidence interval around the geometric mean of the characteristic values from different habitats as a measure of the inter-habitat uncertainty associated with our estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea. 
 
-# In[17]:
+# In[18]:
+
 
 FISH_inter_habitat_arch_CI = frac_CI(FISH_habitat_mean)
 FISH_inter_habitat_bac_CI = frac_CI(1-FISH_habitat_mean)
@@ -209,7 +237,8 @@ print('Our best projection of the inter-habitat uncertainty associated with the 
 # ## Inter-method uncertainty
 # We calculate the 95% confidence interval around the geometric mean of the estimates from the four different values as our best projection of the 
 
-# In[18]:
+# In[19]:
+
 
 inter_arch_CI = frac_CI(np.array([seq,qpcr,FISH_mean,CARDFISH_mean]))
 inter_bac_CI = frac_CI(1-np.array([seq,qpcr,FISH_mean,CARDFISH_mean]))
@@ -219,7 +248,8 @@ print('Our best projection of the inter-method uncertainty associated with the f
 
 # We use the maximal uncertainty out of the collection of uncertainties calculated abouce as our best projection of the uncertainty associated with the estimate of the fraction of archaea out of the total biomass of soil bacteria and archaea.
 
-# In[19]:
+# In[20]:
+
 
 
 arch_frac_mul_CI = np.max([FISH_intra_arch_CI.max(),CARDFISH_intra_arch_CI.max(),seq_intra_arch_CI,qpcr_intra_arch_CI,FISH_interstudy_arch_CI.max(),CARDFISH_interstudy_arch_CI.max(),FISH_inter_habitat_arch_CI,inter_arch_CI])
@@ -231,7 +261,8 @@ print('Our best projection of the uncertainty associated with the fraction of ba
 
 # We combine the uncertainty associated with the fraction of archaea out of the total biomass of soil bacteria and archaea with the uncertainty of the total biomass of soil bacteria and archaea as our best projection of the uncertainty associated with the our estimate of the total biomass of soil archaea.
 
-# In[20]:
+# In[21]:
+
 
 # Our best projection for the uncertainty associated with the total biomass of soil bacteria and archaea
 soil_prok_CI = CI_prod_prop(np.array([fungi_biomass_estimate['Uncertainty'][0],fungi_biomass_estimate['Uncertainty'][1]]))
@@ -243,4 +274,50 @@ bac_mul_CI = CI_prod_prop(np.array([arch_frac_mul_CI,soil_prok_CI]))
 
 print('Our best projection of the uncertainty associated with our estimate of the biomass of soil archaea is ≈%.1f-fold.' %arch_mul_CI)
 print('Our best projection of the uncertainty associated with our estimate of the biomass of soil bacteria is ≈%.1f-fold.' %bac_mul_CI)
+
+
+# # Estimating the total number of soil bacterial and archaeal cells
+# To estimate the total number of bacterial and archaeal cells in soils, we divide our estimates for the total biomass of soil bacteria and archaea by the characteristic carbon content of a single cell. We use a characteristic carbon content of a single cell of ≈30 fg C cell$^{-1}$, based on [Bakken](http://aem.asm.org/content/49/6/1482.abstract).
+
+# In[22]:
+
+
+# Characteristic carbon content of bacterial and archaeal cells in soil from Bakken
+carbon_content = 30e-15
+
+# Calculate the total number of bacterial and archaeal cells in the soil
+tot_bac_num = best_soil_bac_biomass/carbon_content
+tot_arch_num = best_soil_arch_biomass/carbon_content
+
+
+# In[23]:
+
+
+# Feed bacteria results to Table 1 & Fig. 1
+update_results(sheet='Table1 & Fig1', 
+               row=('Bacteria','Soil'), 
+               col=['Biomass [Gt C]', 'Uncertainty'],
+               values=[best_soil_bac_biomass/1e15,bac_mul_CI],
+               path='../../results.xlsx')
+
+# Feed archaea results to Table 1 & Fig. 1
+update_results(sheet='Table1 & Fig1', 
+               row=('Archaea','Soil'), 
+               col=['Biomass [Gt C]', 'Uncertainty'],
+               values=[best_soil_arch_biomass/1e15,arch_mul_CI],
+               path='../../results.xlsx')
+
+# Feed bacteria results to Table S1
+update_results(sheet='Table S1', 
+               row=('Bacteria','Soil'), 
+               col=['Number of individuals'],
+               values= tot_bac_num,
+               path='../../results.xlsx')
+
+# Feed archaea results to Table S1
+update_results(sheet='Table S1', 
+               row=('Archaea','Soil'), 
+               col=['Number of individuals'],
+               values= tot_arch_num,
+               path='../../results.xlsx')
 

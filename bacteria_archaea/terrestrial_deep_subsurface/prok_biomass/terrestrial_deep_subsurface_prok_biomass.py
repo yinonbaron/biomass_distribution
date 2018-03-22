@@ -1,14 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the total biomass of bacteria and archaea in the terrestrial deep subsurface
-# This notebook details the procedure for estimating the total biomass of  of prokaryotes (bacteria and archaea) in the terrestrial deep subsurface. Our estimate is based on the data on cellconcentration in the terrestrial deep subsurface collected by [McMahon & Parnell](http://dx.doi.org/10.1111/1574-6941.12196), as well as data on the global volume of groundwater from [Gleeson et al.](http://dx.doi.org/10.1038/ngeo2590).
-# 
-# ## Number of cells
-# To estimate the total number of cells of bacteria and archaea in the terrestrial deep subsurface, we follow a similar methodology to that detailed in McMahon & Parnell. We use ≈100 measurements of cell concentration in groundwater samples from depths of 0-2000 m. We bin the samples based on their depths to 250 meter bins. For each bin we calculate both the arithmetic and geometric means. Depth bins missing from the data were extrapolated by using a regression equation that predicts the concentration of cells from the depth of the sample. This yields two estimates for the characteristic cell concentration at each depth bin.
-
 # In[1]:
 
+
+# Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -17,8 +13,19 @@ import sys
 sys.path.insert(0, '../../../statistics_helper')
 from CI_helper import *
 
+
+# # Estimating the total biomass of bacteria and archaea in the terrestrial deep subsurface
+# This notebook details the procedure for estimating the total biomass of  of prokaryotes (bacteria and archaea) in the terrestrial deep subsurface. Our estimate is based on the data on cellconcentration in the terrestrial deep subsurface collected by [McMahon & Parnell](http://dx.doi.org/10.1111/1574-6941.12196), as well as data on the global volume of groundwater from [Gleeson et al.](http://dx.doi.org/10.1038/ngeo2590).
+# 
+# ## Number of cells
+# To estimate the total number of cells of bacteria and archaea in the terrestrial deep subsurface, we follow a similar methodology to that detailed in McMahon & Parnell. We use ≈100 measurements of cell concentration in groundwater samples from depths of 0-2000 m. We bin the samples based on their depths to 250 meter bins. For each bin we calculate both the arithmetic and geometric means. Depth bins missing from the data were extrapolated by using a regression equation that predicts the concentration of cells from the depth of the sample. This yields two estimates for the characteristic cell concentration at each depth bin.
+
+# In[2]:
+
+
+
 # Load original data from Figure 1 of McMahon & Parnell
-mp_data = pd.read_csv('terrestrial_deep_subsurface_prok_cell_num.csv',skiprows=1)
+mp_data = pd.read_excel('terrestrial_deep_subsurface_prok_biomass_data.xlsx', 'McMahon & Parnell', skiprows=1)
 
 # Define depth bins every 250 meter 
 bins = np.linspace(0,2000,9)
@@ -70,14 +77,15 @@ bin_geo_mean = tmp.set_index('Depth bin')
 # 
 # We multiply the average cell concentration at each bin by the total volume of groundwater at each bin, and sum over all bins to calculate the total number of cells in groundwater. We have two estimates for the total number of cells in groundwater, one based on arithmetic means of cell concentrations at each bin and the second based on geometric means.
 
-# In[2]:
+# In[3]:
+
 
 
 # Total volume of groundwater [mL], based on Gleeson et al.
 tot_gw_vol = 2.26e22
 
 # Load data from Gleeson et al. on the distribution of groundwater with depth
-gw_depth_dist = pd.read_csv('gleeson_fraction_gw_data.csv', skiprows=1)
+gw_depth_dist = pd.read_excel('terrestrial_deep_subsurface_prok_biomass_data.xlsx', 'Gleeson', skiprows=1)
 
 # Generate functions to fit the data an calculate partial integrals
 def func(x,a,b,c):
@@ -134,7 +142,8 @@ writer.close()
 
 # Most of the cells in the terrestrial subsurface are actually found attached to surfaces and not free-living in groundwater. McMahon & Parnell rely on data from the literature of the attached to unattached cell number ratio, and report a range of $10^2-10^3$ for this range. We use as our best estimate for this ratio the geometric mean of this range, which is roughly 300. Multiplying the total number of cells in groundwater by this ratio gives us an estimate for the total number of bacteria and archaea in the terrestrial deep subsurface. 
 
-# In[3]:
+# In[4]:
+
 
 # Fraction of attached/unattached cells (geometric mean of 10^2 and 10^3)
 attached_unattached_ratio = gmean([1e2,1e3])
@@ -149,7 +158,8 @@ print('Our estimate for the total of number of cells cells in the terrestrial de
 
 # We generated two types of estimates for the total number of cells in the terrestrial deep subsurface: an estimate which uses the arithmetic mean of cell concentrations at each depth bin, and an estimate which uses the geometric mean of cell concentrations at each depth bin. The estimate based on the arithmetic mean is more susceptible to sampling bias, as even a single measurement which is not characteristic of the global population (such as samples which are contaminated with organic carbon sources, or samples which have some technical biases associated with them) might shift the average concentration significantly. On the other hand, the estimate based on the geometric mean might underestimate global biomass as it will reduce the effect of biologically relevant high biomass concentrations. As a compromise between these two caveats, we chose to use as our best estimate the geometric mean of the estimates from the two methodologies.
 
-# In[4]:
+# In[5]:
+
 
 best_tot_cell_num = gmean([tot_cell_num_mean,tot_cell_num_geo_mean])
 print('Our best estimate for the total of number of cells cells in the terrestrial deep subsurface %.1e cells.' %best_tot_cell_num)
@@ -161,7 +171,8 @@ print('Our best estimate for the total of number of cells cells in the terrestri
 # 
 # To estimate the total biomass of bacteria and archaea in the terrestrial deep subsurface, we muliply our best estimate for the total number of cells in the terrestrial deep subsurface by the characteristic carbon content of cells in the terrestrial deep subsurface. Our best estimate is ≈60 Gt C.
 
-# In[5]:
+# In[6]:
+
 
 # The characteristic carbon content of a single prokaryote in the terrestrial deep subsurface
 carb_content = 26e-15
@@ -182,7 +193,8 @@ print('We estimate a total biomass of bacteria and archaea in the terrestrial de
 # Based on the data of cell concentrations, we estimate the 95% confidence interval for the average cell concentration at each depth bin, and propagate this uncertainty to the total number of cells. We estimate the 95% confidence interval for both the arithmetic mean and geometric mean of the cell concentration at each depth bin.
 # We estimate the uncertainty around the estimate of cell concentration at each depth bin, and then propagate the uncertainty at each depth bin to the final estimate of the average cell concentration. 
 
-# In[6]:
+# In[7]:
+
 
 # Define a function that will estimate the 95% confidence interval for the arithmetic mean of each bin
 def bin_se(input):
@@ -213,7 +225,8 @@ print('The uncertainty associated with the geometric mean of cell concentrations
 # For our best estimate of the total number of cells in the terrestrial deep subsurface, we used the geometric mean of the two estimates - the one based on arithmetic means of cells concentrations at each depth bin and the one based on the geometric mean of cell concentrations at each depth bin. We estimate the 95% confidence interval fo the geometric mean of these two estimates, which is ≈
 # We calculate an uncertainty of ≈1.3-fold from this source. Combining these two sources together, we estimate ≈1.4-fold uncertainty associated with the average concentration of cells of bacteria and archaea in the terrestrial deep subsurface.
 
-# In[7]:
+# In[8]:
+
 
 inter_method_CI = geo_CI_calc(np.array([tot_cell_num_mean,tot_cell_num_geo_mean]))
 print('The total uncertainty of the geometric mean of our estimates based on the two different methodologies for calculating the average cell concentration at each depth bin is ≈%.1f-fold' %inter_method_CI)
@@ -221,7 +234,8 @@ print('The total uncertainty of the geometric mean of our estimates based on the
 
 # As our best projection for the uncertainty associated with the average concentration of cells in groundwater, we take the maximum uncertainty from the intra-depth bin and inter-method uncertainties, which is ≈2.3-fold.
 
-# In[8]:
+# In[9]:
+
 
 av_cell_CI = np.max([av_conc_mean_CI,av_conc_geo_mean_CI,inter_method_CI])
 print('Our best projection for the uncertainty associated with the average concentration of cell in groundwater is ≈%.1f-fold' %av_cell_CI)
@@ -230,7 +244,8 @@ print('Our best projection for the uncertainty associated with the average conce
 # ## Total volume of groundwater
 # As a measure of the uncertainty associated with the total volume of groundwater, we use the range reported in Gleeson et al. of ≈2.2-fold. This range does not represent 95% confidence interval, but rather a 25% and 75% range.  As no 95% confidence interval is available, we assume the distribution of estimates of the global volume of groundwater is nearly gaussian, and take about two standard deviations as our estimate for the 95% confidence interval. We calculate the fold change of the 95% confidence interval relative to the mean estimate.
 
-# In[9]:
+# In[10]:
+
 
 # We take the lower and upper range reported by Gleeson et al.
 lower_gleeson = 1.6e22
@@ -252,7 +267,8 @@ print('Our estimate for the uncertainty associated with the total volume of grou
 # ## Carbon content of single cells
 # McMahon & Parnell do not suply an uncertainty analysis for the carbon content of single cells in the terrestrial deep subsurface. Our estimate for carbon content of subseafloor sediments is similar to the value used by McMahon & Parnell. Therefore, we use the values for the uncertainty associated with the carbon content of cells in subseafloor sediments as a measure of the uncertainty associated with the carbon content of cells in the terrestrial deep subsurface. The uncertainty we calculated for the carbon content of cell in subseafloor sediments is ≈2.2-fold.
 
-# In[10]:
+# In[11]:
+
 
 attached_unattached_CI = geo_CI_calc(np.array([100,1000]))
 
@@ -266,7 +282,8 @@ print('The uncertainty associated with the biomass of bacteria and archaea in th
 # Combining all the uncertainty of the factors above, we calculate an uncertainty of ≈14-fold in the biomass of bacteria and archaea in the terrestrial deep subsurface.
 # As we state in the Supplementary Information, there are other sources of uncertainty that for which we are not able to provide a quantitative estimate. The procedure of binning cell concentrations with depth and fitting an equation which extrapolates cell concentrations across all depths has uncertainty associated with it, and while we did calculate some uncertainty associated with this process, it probably does not represent the entire uncertainty associated with this process. The uncertainty stemming from possible contribution from groundwater deeper than 2 km is also hard to quantify, as the cell concentration at those depths and the volume of groundwater are poorly explored. We thus chose to project an uncertainty of ≈20-fold as our best projection of the uncertainty associated with the biomass of bacteria and archaea in the terrestrial deep subsurface.
 
-# In[11]:
+# In[12]:
+
 
 # Modify the uncertainty of the estimate
 mul_CI = 20
@@ -283,6 +300,12 @@ result.loc[0] = pd.Series({
                 'Uncertainty': "{0:.1f}".format(mul_CI)
                 })
 
-result.to_excel('../terrestrial_deep_subsurface_prok_biomass_estimate.xlsx',index=False)
+result.loc[3] = pd.Series({
+                'Parameter': 'Carbon content of a single cell',
+                'Value': carb_content,
+                'Units': 'g C',
+                'Uncertainty': np.nan
+                })
 
+result.to_excel('../terrestrial_deep_subsurface_prok_biomass_estimate.xlsx',index=False)
 

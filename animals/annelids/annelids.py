@@ -1,15 +1,23 @@
 
 # coding: utf-8
 
-# # Estimating the biomass of Annelids
-# To estimate the total biomass of annelids, we rely on data collected in a recent study by [Fierer et al.](http://dx.doi.org/10.1111/j.1461-0248.2009.01360.x). Fierer et al. collected data on the biomass density of two major groups on annelids (Enchytraeids & Earthworms) in different biomes. Here is a sample from the data:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
+import sys
+sys.path.insert(0, '../../statistics_helper/')
+from excel_utils import *
+
+
+# # Estimating the biomass of Annelids
+# To estimate the total biomass of annelids, we rely on data collected in a recent study by [Fierer et al.](http://dx.doi.org/10.1111/j.1461-0248.2009.01360.x). Fierer et al. collected data on the biomass density of two major groups on annelids (Enchytraeids & Earthworms) in different biomes. Here is a sample from the data:
+
+# In[2]:
+
 
 # Load the data taken from Fierer et al.
 data = pd.read_excel('annelid_biomass_data.xlsx','Fierer',skiprows=1)
@@ -20,7 +28,7 @@ data
 # 
 # For each biome, we multiply the sum of the biomass density of Enchytraeids and Earthworms by the total area of that biome taken from the book [Biogeochemistry: An analysis of Global Change](https://www.sciencedirect.com/science/book/9780123858740) by Schlesinger & Bernhardt.:
 
-# In[2]:
+# In[3]:
 
 
 # Load biome area data
@@ -39,7 +47,7 @@ print('The total biomass of annelids based on Fierer et al. based on median biom
 
 # The data in Fierer et al. does not account two biomes - croplands and tropical savannas. To estimate the biomass contribution of annelids from those biomes, we collected data from the literature on the biomass density of annelids (mostly earthworms) from these biomes. The data we collected is provided below:
 
-# In[3]:
+# In[4]:
 
 
 supp_biome_data = pd.read_excel('annelid_biomass_data.xlsx','Supplementary biomes')
@@ -48,7 +56,7 @@ supp_biome_data
 
 # For each biome, we calculate the average and median annelid biomass density, and multiply by the total area of the biome:
 
-# In[4]:
+# In[5]:
 
 
 # Calculate average and median biomass densities for each additional biome
@@ -58,7 +66,7 @@ median_supp_biome_biomass_density = supp_biome_data.groupby('Biome').median()['B
 
 # We do no know the specifc division in terms of area between pastures and savanna. We thus make two estimates - one assumes the entire area of tropical savannas is filled with savanna, and the second assumes the entire area is pastures. We generate four estimates - median and mean-based estimates with considering only savanna or pastures. As our best estimate for the total biomass of soil annelids, we use the geometric mean of those four estimates:
 
-# In[5]:
+# In[6]:
 
 
 # Consider only savanna
@@ -83,9 +91,9 @@ print('Our best estimate for the biomass of annelids is %.1f Gt C' %(best_estima
 
 
 # # Estimating the total number of annelids
-# We consider only the Enchytraeids as they are ≈200-fold smaller than earthworms (Fierer et al.). We calculate the total biomass of Enchytraeids and divide it by the carbon content of Enchytraeids, which is ≈25 µg (Fierer et al.):
+# We consider only the Enchytraeids as they are ≈200-fold smaller than earthworms (Fierer et al.). We calculate the total biomass of Enchytraeids and divide it by the carbon content of Enchytraeids, which is ≈25 µg C (Fierer et al.):
 
-# In[6]:
+# In[7]:
 
 
 num_data = data.set_index('Biome')
@@ -103,4 +111,29 @@ ench_carbon_content = 25e-6
 tot_ench_num = ench_biomass/ench_carbon_content
 
 print('Our best estimate for the total number of Enchytraeids is ≈%.0e' % tot_ench_num)
+
+
+# In[8]:
+
+
+# Feed results to the animal biomass data
+old_results = pd.read_excel('../animal_biomass_estimate.xlsx',index_col=0)
+result = old_results.copy()
+result.loc['Annelids',(['Biomass [Gt C]','Uncertainty'])] = (best_estimate/1e15,np.nan)
+result.to_excel('../animal_biomass_estimate.xlsx')
+
+# Feed results to Table 1 & Fig. 1
+update_results(sheet='Table1 & Fig1', 
+               row=('Animals','Annelids'), 
+               col=['Biomass [Gt C]', 'Uncertainty'],
+               values=[best_estimate/1e15,None],
+               path='../../results.xlsx')
+
+
+# Feed results to Table S1
+update_results(sheet='Table S1', 
+               row=('Animals','Annelids'), 
+               col=['Number of individuals'],
+               values=tot_ench_num,
+               path='../../results.xlsx')
 

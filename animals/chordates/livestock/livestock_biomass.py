@@ -1,24 +1,36 @@
 
 # coding: utf-8
 
-# # Estimating the biomass of livestock
-# To estimate the biomass of livestock, we rely on data on global stocks of cattle, sheep goats, and pigs fro the Food and Agriculture Organization database FAOStat. We downloaded data from the domain Production/Live animals.
-# We combined data on the total stocks of each animal with estimates of the mean mass of each type of animal species (in kg) from [Dong et al.](http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_10_Ch10_Livestock.pdf), Annex 10A.2, Tables 10A-4 to 10A-9.
-# 
-# Here are samples of the data:
-
 # In[1]:
 
+
+# Load dependencies
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 pd.options.display.float_format = '{:,.1e}'.format
+import sys
+pd.options.display.float_format = '{:,.1e}'.format
+sys.path.insert(0,'../../../statistics_helper/')
+from excel_utils import *
+
+
+# # Estimating the biomass of livestock
+# To estimate the biomass of livestock, we rely on data on global stocks of cattle, sheep goats, and pigs froms the Food and Agriculture Organization database FAOStat. We downloaded data from the domain Production/Live animals.
+# We combined data on the total stocks of each animal with estimates of the mean mass of each type of animal species (in kg) from [Dong et al.](http://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/V4_10_Ch10_Livestock.pdf), Annex 10A.2, Tables 10A-4 to 10A-9.
+# 
+# Here are samples of the data:
+
+# In[2]:
+
+
 # Load global stocks data
 stocks = pd.read_csv('FAOSTAT_stock_data_mammals.csv')
 stocks.head()
 
 
-# In[2]:
+# In[3]:
+
 
 # Load species body mass data
 body_mass = pd.read_excel('livestock_body_mass.xlsx',skiprows=1,index_col=0) 
@@ -27,7 +39,8 @@ body_mass.head()
 
 # We pivot the stocks DataFrame to have a view of each kind of animal at each region:
 
-# In[3]:
+# In[4]:
+
 
 # Replace NaN with zeros
 stocks.fillna(value=0,inplace=True)
@@ -42,7 +55,8 @@ stock_pivot
 # There is a difference between the body mass of a dairy producing cow to a non-dairy producing cow. We thus count seperately the dairy producing cattle from the non-dairy producing cattle. Data about the amount of dairy cattle comes from the FAOStat domain Production - Livestock Primary.
 # There is also a difference in body mass between breeding and non-breeding pigs. We assume 90% of the population is breeding based on IPCC, 2006, Vol.4, Ch.10,Table.10.19.
 
-# In[4]:
+# In[5]:
+
 
 # Load data on the number of dairy producing cattle
 dairy = pd.read_csv('FAOSTAT_cattle_dairy_data.csv')
@@ -73,7 +87,8 @@ stock_pivot
 
 # Data on the mass of animals is divided into different regions than the FAOStat data so we need preprocess the stocks DataFrame and merge it with the body mass data:
 
-# In[5]:
+# In[6]:
+
 
 # Preprocessing the stocks DataFrame
 
@@ -97,7 +112,8 @@ stock_pivot
 
 # We now multiply the stocks of each animal type and for each region by the characteristic body weight of each animal:
 
-# In[6]:
+# In[7]:
+
 
 wet_biomass =(body_mass*stock_pivot)
 wet_biomass
@@ -105,7 +121,8 @@ wet_biomass
 
 # We sum over all regions and convert units from kg wet weight to Gt C carbon by assuming carbon is ≈15% of the wet weight (30% dry weight of wet weight and carbon is 50% of dry weight).
 
-# In[7]:
+# In[8]:
+
 
 pd.options.display.float_format = '{:,.3f}'.format
 
@@ -117,8 +134,33 @@ total_biomass
 
 # We sum over all animal categories to generate our best estimate for the total biomass of livestock
 
-# In[8]:
+# In[9]:
+
 
 best_estimate = total_biomass.sum()
 print('Our best estimate for the biomass of mammal livestock is %.1f Gt C' % best_estimate)
+
+
+# In[10]:
+
+
+# Feed results to the chordate biomass data
+old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)
+result = old_results.copy()
+result.loc['Livestock',(['Biomass [Gt C]','Uncertainty'])] = (best_estimate,None)
+result.to_excel('../../animal_biomass_estimate.xlsx')
+
+# Feed results to Table 1 & Fig. 1
+update_results(sheet='Table1 & Fig1', 
+               row=('Animals','Livestock'), 
+               col='Biomass [Gt C]',
+               values=best_estimate,
+               path='../../../results.xlsx')
+
+# Feed results to Table S1
+update_results(sheet='Table S1', 
+               row=('Animals','Livestock'), 
+               col='Number of individuals',
+               values=stock_pivot.sum().sum(),
+               path='../../../results.xlsx')
 

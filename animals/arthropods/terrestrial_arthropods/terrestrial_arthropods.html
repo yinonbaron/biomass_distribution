@@ -11,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2536,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3027,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8758,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8984,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9120,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9209,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9253,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9549,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9569,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11244,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11556,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11569,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11629,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11701,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11724,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11748,8 +11767,29 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1">#Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11762,18 +11802,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper/&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="c1"># Load global stocks data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load global stocks data</span>
 <span class="n">gc_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Gist &amp; Crossley&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">gc_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11786,7 +11818,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11884,8 +11920,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11896,10 +11931,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bm_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Brockie &amp; Moeed&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">bm_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Brockie &amp; Moeed&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">bm_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -11911,7 +11946,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11997,8 +12036,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12009,10 +12047,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gc_study</span> <span class="o">=</span> <span class="n">gc_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">gc_study</span> <span class="o">=</span> <span class="n">gc_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">bm_study</span> <span class="o">=</span> <span class="n">bm_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The estimate from Brockie &amp; Moeed:&#39;</span><span class="p">)</span>
@@ -12027,14 +12065,22 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The estimate from Brockie &amp; Moeed:
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12100,10 +12146,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The estimate from Gist &amp; Crossley:&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The estimate from Gist &amp; Crossley:&#39;</span><span class="p">)</span>
 <span class="n">gc_study</span>
 </pre></div>
 
@@ -12115,14 +12161,22 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The estimate from Gist &amp; Crossley:
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12202,8 +12256,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12214,10 +12267,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Concat the data from the two studies</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Concat the data from the two studies</span>
 <span class="n">conc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">gc_study</span><span class="p">,</span><span class="n">bm_study</span><span class="p">])</span>
 <span class="n">conc_mean</span> <span class="o">=</span> <span class="n">conc</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">conc</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">conc_mean</span>
@@ -12231,7 +12284,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12323,8 +12380,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12335,10 +12391,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fill places with no dry weight estimate with 30% of the wet weight estimate </span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Fill places with no dry weight estimate with 30% of the wet weight estimate </span>
 <span class="n">conc_mean</span><span class="p">[</span><span class="s1">&#39;Dry weight [g m^-2]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">conc_mean</span><span class="p">[</span><span class="s1">&#39;Wet weight [g m^-2]&#39;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.3</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Calculate carbon biomass as 50% of dry weight</span>
@@ -12354,7 +12410,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12376,8 +12436,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12388,10 +12447,10 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">litter_biomass_density</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">conc_mean</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">litter_biomass_density</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">conc_mean</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass density of arthropods in litter is ≈</span><span class="si">%.0f</span><span class="s1"> g C m^-2&#39;</span> <span class="o">%</span><span class="k">litter_biomass_density</span>)
 </pre></div>
 
@@ -12403,7 +12462,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass density of arthropods in litter is ≈1 g C m^-2
 </pre>
@@ -12414,8 +12477,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12426,10 +12488,10 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load additional data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load additional data</span>
 <span class="n">soil_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Soil&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Reference&#39;</span><span class="p">)</span>
 <span class="n">soil_data</span>
 </pre></div>
@@ -12442,7 +12504,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12519,8 +12585,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12531,10 +12596,10 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the estimates of the biomass density of soil arthropods</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates of the biomass density of soil arthropods</span>
 <span class="n">soil_biomass_density</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">soil_data</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass density of arthropods in soils is ≈</span><span class="si">%.0f</span><span class="s1"> g C m^-2&#39;</span> <span class="o">%</span><span class="k">soil_biomass_density</span>)
@@ -12548,7 +12613,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass density of arthropods in soils is ≈1 g C m^-2
 </pre>
@@ -12559,8 +12628,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12569,8 +12637,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12581,10 +12648,10 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data on the biomass density of canopy arthropods</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data on the biomass density of canopy arthropods</span>
 <span class="n">canopy_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Canopy&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Reference&#39;</span><span class="p">)</span>
 <span class="n">canopy_data</span>
 </pre></div>
@@ -12597,7 +12664,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12674,8 +12745,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12686,10 +12756,10 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the estimates of biomass densitiy of canopy arthropods</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates of biomass densitiy of canopy arthropods</span>
 <span class="n">canopy_biomass_density</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">canopy_data</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass density of arthropods in canopies is ≈</span><span class="si">%.1f</span><span class="s1"> g C m^-2&#39;</span> <span class="o">%</span><span class="k">canopy_biomass_density</span>)
 </pre></div>
@@ -12702,7 +12772,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass density of arthropods in canopies is ≈0.7 g C m^-2
 </pre>
@@ -12713,8 +12787,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12725,16 +12798,16 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sum the biomass densities of arthropods in soils and in canopies</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Sum the biomass densities of arthropods in soils and in canopies</span>
 <span class="n">total_denisty</span> <span class="o">=</span> <span class="n">litter_biomass_density</span><span class="o">+</span><span class="n">soil_biomass_density</span><span class="o">+</span><span class="n">canopy_biomass_density</span>
 
 <span class="c1"># Apply the average biomass density across the entire ice-free land surface</span>
 <span class="n">method1_estimate</span> <span class="o">=</span> <span class="n">total_denisty</span><span class="o">*</span><span class="mf">1.3e14</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12745,7 +12818,11 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈0.4 Gt C
 </pre>
@@ -12756,8 +12833,7 @@ Name: Biomass density [g C m^-2], dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12769,10 +12845,10 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
 
 <span class="c1"># Calculate the carbon content of a single arthropod by dividing the dry weight by 2 (assuming 50% carbon in</span>
 <span class="c1"># dry weight) and dividing the result by the total number of individuals</span>
@@ -12789,7 +12865,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12877,8 +12957,7 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12889,10 +12968,10 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load additional data sources</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load additional data sources</span>
 <span class="n">other_carbon_content_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Carbon content&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Reference&#39;</span><span class="p">)</span>
 
 <span class="n">other_carbon_content_data</span>
@@ -12906,7 +12985,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12983,8 +13066,7 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12995,10 +13077,10 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the estimates from the different studies on the average carbon content of a single arthropod.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates from the different studies on the average carbon content of a single arthropod.</span>
 <span class="n">average_carbon_content</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">other_carbon_content_data</span><span class="p">,</span><span class="n">gc_study</span><span class="p">])[</span><span class="s1">&#39;Carbon content [g C per individual]&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the carbon content of a characteristic arthropod is </span><span class="si">%.1e</span><span class="s1"> g C&#39;</span> <span class="o">%</span> <span class="n">average_carbon_content</span><span class="p">)</span>
 </pre></div>
@@ -13011,7 +13093,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the carbon content of a characteristic arthropod is 1.2e-04 g C
 </pre>
@@ -13022,8 +13108,7 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13034,15 +13119,15 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Total number of insects estimated by Williams</span>
-<span class="n">tot_num_arthropods</span> <span class="o">=</span> <span class="mf">1e18</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Total number of insects estimated by Williams</span>
+<span class="n">tot_num_arthropods</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e18</span>
 
 <span class="c1"># Calculate the total biomass of arthropods</span>
 <span class="n">method2_estimate</span> <span class="o">=</span> <span class="n">average_carbon_content</span><span class="o">*</span><span class="n">tot_num_arthropods</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method2_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method2_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -13053,7 +13138,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of terrestrial arthropods using average biomass densities is ≈0.1 Gt C
 </pre>
@@ -13064,8 +13153,7 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13076,12 +13164,12 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the estimates using the two methods</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates using the two methods</span>
 <span class="n">best_estimate</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">method1_estimate</span><span class="p">,</span><span class="n">method2_estimate</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>             
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of terrestrial arthropods is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>             
 </pre></div>
 
 </div>
@@ -13092,7 +13180,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of terrestrial arthropods is ≈0.2 Gt C
 </pre>
@@ -13103,8 +13195,7 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13116,10 +13207,10 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">litter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">conc_mean</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">litter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">conc_mean</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
 <span class="n">soil_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">soil_data</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
 <span class="n">canopy_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">canopy_data</span><span class="p">[</span><span class="s1">&#39;Biomass density [g C m^-2]&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 95 percent confidence interval for the average biomass density of soil arthropods is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">litter_CI</span>)
@@ -13135,7 +13226,11 @@ We rely both on data from Gist &amp; Crossley which detail the total number of a
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The 95 percent confidence interval for the average biomass density of soil arthropods is ≈2.0-fold
 The 95 percent confidence interval for the average biomass density of soil arthropods is ≈1.8-fold
@@ -13148,8 +13243,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13160,10 +13254,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">method1_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">litter_biomass_density</span><span class="p">,</span><span class="n">soil_biomass_density</span><span class="p">,</span><span class="n">canopy_biomass_density</span><span class="p">]),</span><span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">litter_CI</span><span class="p">,</span><span class="n">soil_CI</span><span class="p">,</span><span class="n">canopy_CI</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">method1_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">litter_biomass_density</span><span class="p">,</span><span class="n">soil_biomass_density</span><span class="p">,</span><span class="n">canopy_biomass_density</span><span class="p">]),</span><span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">litter_CI</span><span class="p">,</span><span class="n">soil_CI</span><span class="p">,</span><span class="n">canopy_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 95 percent confidence interval biomass of arthropods using the biomass densities method is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">method1_CI</span>)
 </pre></div>
 
@@ -13175,7 +13269,11 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The 95 percent confidence interval biomass of arthropods using the biomass densities method is ≈1.5-fold
 </pre>
@@ -13186,8 +13284,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13198,10 +13295,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">carbon_content_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">other_carbon_content_data</span><span class="p">,</span><span class="n">gc_study</span><span class="p">])[</span><span class="s1">&#39;Carbon content [g C per individual]&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">carbon_content_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">other_carbon_content_data</span><span class="p">,</span><span class="n">gc_study</span><span class="p">])[</span><span class="s1">&#39;Carbon content [g C per individual]&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 95 percent confidence interval of the carbon content of a single arthropod is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">carbon_content_CI</span>)
 </pre></div>
 
@@ -13213,7 +13310,11 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The 95 percent confidence interval of the carbon content of a single arthropod is ≈4.1-fold
 </pre>
@@ -13224,8 +13325,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13236,10 +13336,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The uncertainty of the total number of insects from Williams</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The uncertainty of the total number of insects from Williams</span>
 <span class="n">tot_num_arthropods_CI</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1"># Combine the uncertainties of the average carbon content of a single arthropod and the uncertainty of </span>
@@ -13256,7 +13356,11 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The 95 percent confidence interval biomass of arthropods using the average carbon content method is ≈14.9-fold
 </pre>
@@ -13267,8 +13371,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13279,10 +13382,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">method1_estimate</span><span class="p">,</span><span class="n">method2_estimate</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">method1_estimate</span><span class="p">,</span><span class="n">method2_estimate</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The inter-method uncertainty of the geometric mean of the estimates of the biomass of arthropods is ≈</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">inter_CI</span><span class="p">)</span>
 </pre></div>
 
@@ -13294,7 +13397,11 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The inter-method uncertainty of the geometric mean of the estimates of the biomass of arthropods is ≈3.0
 </pre>
@@ -13305,8 +13412,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13317,10 +13423,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">inter_CI</span><span class="p">,</span><span class="n">method1_CI</span><span class="p">,</span><span class="n">method2_CI</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">inter_CI</span><span class="p">,</span><span class="n">method1_CI</span><span class="p">,</span><span class="n">method2_CI</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the biomass of terrestrial arthropods is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">mul_CI</span>)
 </pre></div>
 
@@ -13332,7 +13438,11 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with the estimate of the biomass of terrestrial arthropods is ≈14.9-fold
 </pre>
@@ -13343,8 +13453,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13355,10 +13464,10 @@ The 95 percent confidence interval for the average biomass density of canopy art
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load termite data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load termite data</span>
 <span class="n">termite_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_arthropods_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Sanderson&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Multiply biomass density by biome area and sum over biomes</span>
@@ -13367,7 +13476,7 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <span class="c1"># Calculate carbon mass assuming carbon is 15% of wet weight</span>
 <span class="n">termite_biomass</span> <span class="o">*=</span> <span class="mf">0.15</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The estimate of the total biomass of termites based on Sanderson is ≈</span><span class="si">%.2f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">termite_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The estimate of the total biomass of termites based on Sanderson is ≈</span><span class="si">%.2f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">termite_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -13378,13 +13487,55 @@ The 95 percent confidence interval for the average biomass density of canopy art
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The estimate of the total biomass of termites based on Sanderson is ≈0.07 Gt C
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to the animal biomass data</span>
+<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Terrestrial arthropods&#39;</span><span class="p">,([</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span><span class="s1">&#39;Uncertainty&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">)</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Feed results to Table 1 &amp; Fig. 1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Terrestrial arthropods&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Feed results to Table S1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table S1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Terrestrial arthropods&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of individuals&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">tot_num_arthropods</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Update the biomass of termites in the MS</span>
+<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="s1">&#39;Biomass of termites&#39;</span><span class="p">,</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">termite_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 

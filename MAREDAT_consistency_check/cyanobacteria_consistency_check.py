@@ -8,6 +8,7 @@
 
 # In[1]:
 
+
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -23,6 +24,7 @@ syn_cc = gmean(carbon_content['Synechococcus [fg C cell^-1]'].dropna())*1e-15
 # We multiply the total number of cells of Prochlorococcus and Synechococcus by the carbon content of Prochlorococcus and Synechococcus to estimate their total biomass. The total biomass of cyanobacteria is the sum of the total biomass of Prochlorococcus and Synechococcus:
 
 # In[2]:
+
 
 # The total number of Prochlorococcus and Synechococcus from Flombaum et al.
 pro_cell_num = 3e27
@@ -40,6 +42,7 @@ print('The total biomass of cyanobacteria is ≈%.1f Gt C' %(cyano_biomass/1e15)
 # We note in the section detailing our estimate of the total biomass of marine protists that the total biomass of picophytoplankton based on the MAREDAT database is ≈0.42 Gt C. Buithenhuis et al. estimates based on data from the MAREDAT database that cyanobacteria account for 31-51% out of the total biomass of picophytoplankton, which are equivalent to:
 
 # In[3]:
+
 
 # The estimate of the biomass of picophytoplankton based on MAREDAT data
 picophyto_biomass = 0.42e15

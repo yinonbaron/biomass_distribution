@@ -11,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2536,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3027,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8758,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8984,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9120,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9209,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9253,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9549,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9569,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11244,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11556,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11569,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11629,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11701,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11724,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11748,8 +11767,27 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11761,18 +11799,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load dependencies</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="c1"># Load data from Poorter et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data from Poorter et al.</span>
 <span class="n">fractions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Poorter&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">fractions</span>
 </pre></div>
@@ -11785,7 +11815,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11877,8 +11911,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11889,10 +11922,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data on the total plant biomass in each biome from Erb et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the total plant biomass in each biome from Erb et al.</span>
 <span class="n">biomes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Erb&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">biomes</span>
 </pre></div>
@@ -11905,7 +11938,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11985,8 +12022,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11997,10 +12033,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the sum of the mass fractions of leaves and roots</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the sum of the mass fractions of leaves and roots</span>
 <span class="n">non_wood_frac</span> <span class="o">=</span> <span class="p">(</span><span class="n">fractions</span><span class="p">[</span><span class="s1">&#39;LMF&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">fractions</span><span class="p">[</span><span class="s1">&#39;RMF&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">fractions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Calculate the total biomass of each biome by the biomes reported in Poorter et al.</span>
@@ -12026,7 +12062,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our global average for non-woody mass fraction is ≈32 percent
 </pre>
@@ -12037,8 +12077,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12049,17 +12088,17 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Our best estimate for the total biomass</span>
-<span class="n">tot_plant_biomass</span> <span class="o">=</span> <span class="mf">450e15</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Our best estimate for the total biomass</span>
+<span class="n">tot_plant_biomass</span> <span class="o">=</span> <span class="mi">450</span><span class="n">e15</span>
 
 <span class="c1"># Multiply our estimate for the non-woody mass fraction by our estimate</span>
 <span class="c1"># of the total plant biomass</span>
 <span class="n">method1_non_wood_biomass</span> <span class="o">=</span> <span class="n">mean_non_wood_frac</span><span class="o">*</span><span class="n">tot_plant_biomass</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass based on the fraction of roots and leaves is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_non_wood_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass based on the fraction of roots and leaves is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_non_wood_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12070,7 +12109,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total non-wood plant biomass based on the fraction of roots and leaves is ≈142 Gt C
 </pre>
@@ -12081,8 +12124,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12093,10 +12135,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">roots_jackson</span> <span class="o">=</span> <span class="mf">146e15</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">roots_jackson</span> <span class="o">=</span> <span class="mi">146</span><span class="n">e15</span>
 </pre></div>
 
 </div>
@@ -12104,8 +12146,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12116,10 +12157,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">biome_LAI</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Asner&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">biome_LAI</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Asner&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">biome_LAI</span>
 </pre></div>
 
@@ -12131,7 +12172,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12231,8 +12276,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12243,10 +12287,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load biome area data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load biome area data</span>
 <span class="n">biome_area</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Biome area&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Calculate the mean LAI for boreal forests</span>
@@ -12277,7 +12321,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the total leaf area is ≈3.1e+14 m^2
 </pre>
@@ -12288,8 +12336,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12300,10 +12347,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the glopnet data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the glopnet data</span>
 <span class="n">glopnet_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;non_wood_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;glopnet_data&#39;</span><span class="p">)</span>
 
 <span class="c1"># Calculate the geometric mean of the LMA</span>
@@ -12312,7 +12359,7 @@ div#notebook {
 <span class="c1"># Convert the global leaf area to global leaf biomass</span>
 <span class="n">tot_leaf_biomass</span> <span class="o">=</span> <span class="n">tot_leaf_area</span><span class="o">*</span><span class="n">geomean_LMA</span><span class="o">/</span><span class="mi">2</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the global leaf biomass is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">tot_leaf_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the global leaf biomass is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">tot_leaf_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12323,7 +12370,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the global leaf biomass is ≈16.6 Gt C
 </pre>
@@ -12334,8 +12385,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12346,11 +12396,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">method2_non_wood_biomass</span> <span class="o">=</span> <span class="n">tot_leaf_biomass</span> <span class="o">+</span> <span class="n">roots_jackson</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass based on estimates of the total biomass of roots and leaves is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method2_non_wood_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">method2_non_wood_biomass</span> <span class="o">=</span> <span class="n">tot_leaf_biomass</span> <span class="o">+</span> <span class="n">roots_jackson</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass based on estimates of the total biomass of roots and leaves is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method2_non_wood_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12361,7 +12411,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total non-wood plant biomass based on estimates of the total biomass of roots and leaves is ≈163 Gt C
 </pre>
@@ -12372,8 +12426,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12384,11 +12437,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_non_wood_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">method1_non_wood_biomass</span><span class="p">,</span><span class="n">method2_non_wood_biomass</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_non_wood_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_non_wood_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">method1_non_wood_biomass</span><span class="p">,</span><span class="n">method2_non_wood_biomass</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total non-wood plant biomass is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_non_wood_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12399,7 +12452,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total non-wood plant biomass is ≈152 Gt C
 </pre>
@@ -12410,8 +12467,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12423,10 +12479,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the root mass fraction in each biome based on data from Poorter et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the root mass fraction in each biome based on data from Poorter et al.</span>
 <span class="n">root_frac</span> <span class="o">=</span> <span class="p">(</span><span class="n">fractions</span><span class="p">[</span><span class="s1">&#39;RMF&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">fractions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># For the temperate steppe, desert and mountain, we use the mean values from grassland and shrubland in Poorter et al.</span>
@@ -12450,7 +12506,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the global average root mass fraction is ≈27.2 percent
 </pre>
@@ -12461,8 +12521,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12473,12 +12532,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">method1_root_biomass</span> <span class="o">=</span> <span class="n">mean_root_frac</span><span class="o">*</span><span class="n">tot_plant_biomass</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">method1_root_biomass</span> <span class="o">=</span> <span class="n">mean_root_frac</span><span class="o">*</span><span class="n">tot_plant_biomass</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate of the total root biomass based on the global average root mass fraction is ≈</span><span class="si">%0.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_root_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate of the total root biomass based on the global average root mass fraction is ≈</span><span class="si">%0.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">method1_root_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12489,7 +12548,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate of the total root biomass based on the global average root mass fraction is ≈122.6 Gt C
 </pre>
@@ -12500,8 +12563,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12512,12 +12574,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_root_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">method1_root_biomass</span><span class="p">,</span><span class="n">roots_jackson</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_root_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">method1_root_biomass</span><span class="p">,</span><span class="n">roots_jackson</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total belowground plant biomass is ≈</span><span class="si">%0.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_root_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total belowground plant biomass is ≈</span><span class="si">%0.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_root_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12528,9 +12590,57 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total belowground plant biomass is ≈133.8 Gt C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to Fig S1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;FigS1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Plants&#39;</span><span class="p">,</span><span class="s1">&#39;Plants&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">best_non_wood_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Feed results to Data mentioned in MS</span>
+<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="s1">&#39;Biomass of roots&#39;</span><span class="p">,</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">best_root_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python3.5/dist-packages/ipykernel/ipkernel.py:196: PerformanceWarning: indexing past lexsort depth may impact performance.
+  res = shell.run_cell(code, store_history=store_history, silent=silent)
+/usr/local/lib/python3.5/dist-packages/IPython/core/interactiveshell.py:2683: PerformanceWarning: indexing past lexsort depth may impact performance.
+  interactivity=interactivity, compiler=compiler, result=result)
 </pre>
 </div>
 </div>

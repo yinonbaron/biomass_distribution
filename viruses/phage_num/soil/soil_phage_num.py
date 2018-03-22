@@ -8,6 +8,7 @@
 
 # In[1]:
 
+
 import pandas as pd
 from scipy.stats import gmean
 import sys
@@ -39,6 +40,7 @@ print('The upper bound of the number of phages per m^2 of soil is ≈%.1e phages
 
 # In[2]:
 
+
 # Use the geometric mean of the lower and upper phage concentrations as our best estimate
 best_phage_per_m2 = gmean([lower_phage_per_m2,upper_phage_per_m2])
 
@@ -58,6 +60,7 @@ print('Our best estimate for the total number of phages in soils is ≈%.1e phag
 
 # In[3]:
 
+
 mul_CI = 10**1.5
 
 print('Our best estimate for the total number of phages in soils: %.0e Gt C' % best_estimate)
@@ -65,7 +68,7 @@ print('Uncertainty associated with the estiamte of the total number of phages in
 
 old_results = pd.read_excel('../phage_num_estimate.xlsx')
 result = old_results.copy()
-result.loc[3] = pd.Series({
+result.loc[2] = pd.Series({
                 'Parameter': 'Total number of phages in soils',
                 'Value': best_estimate,
                 'Units': 'Number of individuals',

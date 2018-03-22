@@ -6,10 +6,11 @@
 
 # In[1]:
 
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().magic(u'matplotlib inline')
+get_ipython().magic('matplotlib inline')
 from scipy.stats import  gmean
 from scipy.optimize import curve_fit
 pd.options.display.float_format = '{:,.1e}'.format
@@ -20,6 +21,7 @@ data.head()
 # We bin the data based to ten depth bins so that each bin contains the same amount of data. The abundance of virions seems to follow an exponential deacy with depth:
 
 # In[2]:
+
 
 # Bin data to 10 depth bins with equal data
 data['Depth_bin_equal'], bins = pd.qcut(data['DEPTH'], 10, retbins=True)
@@ -47,6 +49,7 @@ plt.legend()
 # We calculate the total number of virions by multiplying the average concentration of virions in each depth bin by the total volume of each depth bin:
 
 # In[3]:
+
 
 # Ocean surface area in m^2
 ocean_surface_area = 3.6e14

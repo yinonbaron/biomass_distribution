@@ -11,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2536,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3027,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8758,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8984,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9120,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9209,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9253,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9549,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9569,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11244,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11556,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11569,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11629,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11701,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11724,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11748,8 +11767,30 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gdal</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11762,21 +11803,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Initialization</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">gdal</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-
-<span class="c1"># Load data</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Density of Individuals&#39;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11789,7 +11819,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11899,8 +11933,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11911,10 +11944,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the function to calculate the geometric mean of number of each group of protists per gram</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Define the function to calculate the geometric mean of number of each group of protists per gram</span>
 <span class="k">def</span> <span class="nf">groupby_gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">:</span> <span class="n">gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
                         <span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">:</span> <span class="n">gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
@@ -11952,19 +11985,23 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/lib/python3/dist-packages/scipy/stats/stats.py:315: RuntimeWarning: Mean of empty slice.
+<pre>/usr/local/lib/python3.5/dist-packages/scipy/stats/stats.py:315: RuntimeWarning: Mean of empty slice.
   return np.exp(log_a.mean(axis=axis))
-/home/yinon/.local/lib/python3.6/site-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.5/dist-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in double_scalars
   ret = ret.dtype.type(ret / rcount)
-/usr/lib/python3/dist-packages/ipykernel_launcher.py:10: RuntimeWarning: Mean of empty slice
+/usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:10: RuntimeWarning: Mean of empty slice
   # Remove the CWD from sys.path while we load stuff.
-/usr/lib/python3/dist-packages/ipykernel_launcher.py:11: RuntimeWarning: Mean of empty slice
+/usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:11: RuntimeWarning: Mean of empty slice
   # This is added back by InteractiveShellApp.init_path()
-/usr/lib/python3/dist-packages/ipykernel_launcher.py:13: RuntimeWarning: Mean of empty slice
+/usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:13: RuntimeWarning: Mean of empty slice
   del sys.path[0]
-/usr/lib/python3/dist-packages/ipykernel_launcher.py:12: RuntimeWarning: Mean of empty slice
+/usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:12: RuntimeWarning: Mean of empty slice
   if sys.path[0] == &#39;&#39;:
 </pre>
 </div>
@@ -11974,8 +12011,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11986,10 +12022,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">habitat_gmean</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">habitat_gmean</span>
 </pre></div>
 
 </div>
@@ -12000,7 +12036,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12123,8 +12163,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12136,10 +12175,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fill missing values for boreal forests</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Fill missing values for boreal forests</span>
 <span class="n">habitat_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Boreal Forest&#39;</span><span class="p">,[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of flagellates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">habitat_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Temperate Forest&#39;</span><span class="p">,[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of flagellates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">]]</span>
 <span class="n">habitat_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Boreal Forest&#39;</span><span class="p">,[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of flagellates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">habitat_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Temperate Forest&#39;</span><span class="p">,[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of flagellates [# g^-1]&#39;</span><span class="p">,</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">]]</span>
 
@@ -12167,7 +12206,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12290,8 +12333,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12302,10 +12344,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load soil density map from Hengl et al. (in the top 15 cm, reduced in resolution to 1 degree resolution)</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load soil density map from Hengl et al. (in the top 15 cm, reduced in resolution to 1 degree resolution)</span>
 <span class="n">gtif</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s1">&#39;bulk_density_data.tif&#39;</span><span class="p">)</span>
 <span class="n">bulk_density_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gtif</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">())</span>
 
@@ -12325,7 +12367,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the global mean bulk density of soil in the top 15 cm is ≈1.2e+06 g m^3
 </pre>
@@ -12336,8 +12382,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12348,10 +12393,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the average sampling depth </span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the average sampling depth </span>
 <span class="n">sampling_depth</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;DOI&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Sampling Depth [cm]&#39;</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average sampling depth of soil protists is ≈</span><span class="si">%.0f</span><span class="s1"> cm&#39;</span> <span class="o">%</span><span class="k">sampling_depth</span>)
@@ -12365,7 +12410,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The average sampling depth of soil protists is ≈8 cm
 </pre>
@@ -12376,8 +12425,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12388,10 +12436,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The beta coefficient from Jackson et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The beta coefficient from Jackson et al.</span>
 <span class="n">jackson_beta</span> <span class="o">=</span> <span class="mf">0.966</span>
 
 <span class="c1"># Calculate the fraction of the biomass of soil protists found in the top 8 cm</span>
@@ -12408,7 +12456,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the fraction of biomass of soil protists found in soil layers sampled, based on Jackson et al. is ≈23 percent
 </pre>
@@ -12419,8 +12471,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12433,10 +12484,10 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The fraction of microbial biomass found in layer shallower than depth x based on Fierer et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The fraction of microbial biomass found in layer shallower than depth x based on Fierer et al.</span>
 <span class="n">fierer_eq</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mf">0.132</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">0.605</span><span class="p">)</span>
 <span class="n">fierer_frac</span> <span class="o">=</span> <span class="n">fierer_eq</span><span class="p">(</span><span class="n">sampling_depth</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the fraction of biomass of soil protists found in soil layers sampled, based on Fierer et al. is ≈</span><span class="si">%.0f</span><span class="s1"> percent&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">fierer_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
@@ -12450,7 +12501,11 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the fraction of biomass of soil protists found in soil layers sampled, based on Fierer et al. is ≈66 percent
 </pre>
@@ -12461,8 +12516,7 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12473,10 +12527,10 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_depth_frac</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">jackson_fraction</span><span class="p">,</span><span class="n">fierer_frac</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_depth_frac</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">jackson_fraction</span><span class="p">,</span><span class="n">fierer_frac</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the fraction of biomass of soil protists found in soil layers sampled is ≈</span><span class="si">%.0f</span><span class="s1"> percent&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_depth_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 
@@ -12488,7 +12542,11 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the fraction of biomass of soil protists found in soil layers sampled is ≈44 percent
 </pre>
@@ -12499,8 +12557,7 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12511,10 +12568,10 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># convert number of individuals per gram soil to number of individuals per m^2</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># convert number of individuals per gram soil to number of individuals per m^2</span>
 <span class="n">habitat_per_m2_gmean</span> <span class="o">=</span> <span class="p">(</span><span class="n">habitat_gmean</span><span class="o">*</span><span class="n">bulk_density</span><span class="o">*</span><span class="n">sampling_depth</span><span class="o">/</span><span class="mi">100</span><span class="o">/</span><span class="n">best_depth_frac</span><span class="p">)</span>
 <span class="n">habitat_per_m2_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">habitat_mean</span><span class="o">*</span><span class="n">bulk_density</span><span class="o">*</span><span class="n">sampling_depth</span><span class="o">/</span><span class="mi">100</span><span class="o">/</span><span class="n">best_depth_frac</span><span class="p">)</span>
 </pre></div>
@@ -12524,8 +12581,7 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12536,10 +12592,10 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">habitat_area</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Biome area&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">habitat_area</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Biome area&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">habitat_area</span>
 </pre></div>
 
@@ -12551,7 +12607,11 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12633,8 +12693,7 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12645,10 +12704,10 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Tropical Savanna&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;Tropical Forest&#39;</span><span class="p">,</span><span class="s1">&#39;Woodland&#39;</span><span class="p">,</span><span class="s1">&#39;Shrubland&#39;</span><span class="p">,</span><span class="s1">&#39;Grassland&#39;</span><span class="p">]])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Tropical Savanna&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;Tropical Forest&#39;</span><span class="p">,</span><span class="s1">&#39;Woodland&#39;</span><span class="p">,</span><span class="s1">&#39;Shrubland&#39;</span><span class="p">,</span><span class="s1">&#39;Grassland&#39;</span><span class="p">]])</span>
 <span class="n">habitat_per_m2_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Tropical Savanna&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;Tropical Forest&#39;</span><span class="p">,</span><span class="s1">&#39;Woodland&#39;</span><span class="p">,</span><span class="s1">&#39;Shrubland&#39;</span><span class="p">,</span><span class="s1">&#39;Grassland&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">tot_num_gmean</span> <span class="o">=</span> <span class="n">habitat_per_m2_gmean</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">habitat_area</span><span class="p">[</span><span class="s1">&#39;Area [m^2]&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -12666,7 +12725,11 @@ Where f is the fraction microbial biomass found below sampling depth d (in cm). 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Number of ciliates [# g^-1]          2.3e+22
 Number of flagellates [# g^-1]       4.2e+25
@@ -12678,7 +12741,7 @@ Number of flagellates [# g^-1]       2.1e+25
 Number of naked amoebae [# g^-1]     1.5e+24
 Number of testate amoebae [# g^-1]   3.0e+23
 dtype: float64
-[  1.44276795e+22   3.00988524e+25   1.60717111e+24   3.63538279e+23]
+[1.44276795e+22 3.00988524e+25 1.60717111e+24 3.63538279e+23]
 </pre>
 </div>
 </div>
@@ -12687,8 +12750,7 @@ dtype: float64
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12699,10 +12761,10 @@ dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tot_num_protist</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">tot_num_mean</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">tot_num_protist</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">tot_num_mean</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
 <span class="n">tot_num_protist</span>
 </pre></div>
 
@@ -12714,12 +12776,15 @@ dtype: float64
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([  1.44276795e+22,   3.00988524e+25,   1.60717111e+24,
-         3.63538279e+23])</pre>
+<pre>array([1.44276795e+22, 3.00988524e+25, 1.60717111e+24, 3.63538279e+23])</pre>
 </div>
 
 </div>
@@ -12728,8 +12793,7 @@ dtype: float64
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12740,10 +12804,10 @@ dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_data</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Carbon content&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">cc_data</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Carbon content&#39;</span><span class="p">)</span>
 <span class="n">cc_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -12755,7 +12819,11 @@ dtype: float64
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12847,8 +12915,7 @@ dtype: float64
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12859,10 +12926,10 @@ dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data from Finlay &amp; Fenchel</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data from Finlay &amp; Fenchel</span>
 <span class="n">ff_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_protist_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Finlay &amp; Fenchel&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Define the function to calculate the weighted average for each group of protists</span>
@@ -12877,8 +12944,7 @@ dtype: float64
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12891,10 +12957,10 @@ Where V is the cell volume in $µm^3$ and L is the cell length in µm.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cell_volumes</span> <span class="o">=</span> <span class="mf">0.6</span><span class="o">*</span><span class="n">cell_lengths</span><span class="o">**</span><span class="mf">2.36</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">cell_volumes</span> <span class="o">=</span> <span class="mf">0.6</span><span class="o">*</span><span class="n">cell_lengths</span><span class="o">**</span><span class="mf">2.36</span>
 <span class="n">cell_volumes</span>
 </pre></div>
 
@@ -12906,7 +12972,11 @@ Where V is the cell volume in $µm^3$ and L is the cell length in µm.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12924,8 +12994,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12936,11 +13005,11 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ff_carbon_content</span> <span class="o">=</span> <span class="n">cell_volumes</span><span class="o">*</span><span class="mf">150e-15</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">ff_carbon_content</span> <span class="o">=</span> <span class="n">cell_volumes</span><span class="o">*</span><span class="mi">150</span><span class="n">e</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="n">ff_carbon_content</span>
 </pre></div>
 
@@ -12952,7 +13021,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[18]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12970,8 +13043,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12982,10 +13054,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cc_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;Reference&#39;</span><span class="p">:</span> <span class="s1">&#39;Finlay &amp; Fenchel&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">cc_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cc_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;Reference&#39;</span><span class="p">:</span> <span class="s1">&#39;Finlay &amp; Fenchel&#39;</span><span class="p">,</span>
                    <span class="s1">&#39;DOI&#39;</span><span class="p">:</span> <span class="s1">&#39;http://dx.doi.org/10.1078/1434-4610-00060&#39;</span><span class="p">,</span>
                    <span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">ff_carbon_content</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Ciliate&#39;</span><span class="p">],</span>
                    <span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">ff_carbon_content</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Naked amoebae&#39;</span><span class="p">],</span>
@@ -12999,8 +13071,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13011,10 +13082,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">groupby_gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">groupby_gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
                         <span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
                         <span class="s1">&#39;Carbon content of testate amoebae [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">gmean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of testate amoebae [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
@@ -13033,11 +13104,15 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/lib/python3/dist-packages/scipy/stats/stats.py:315: RuntimeWarning: Mean of empty slice.
+<pre>/usr/local/lib/python3.5/dist-packages/scipy/stats/stats.py:315: RuntimeWarning: Mean of empty slice.
   return np.exp(log_a.mean(axis=axis))
-/home/yinon/.local/lib/python3.6/site-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.5/dist-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in double_scalars
   ret = ret.dtype.type(ret / rcount)
 </pre>
 </div>
@@ -13049,10 +13124,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gmean</span><span class="p">(</span><span class="n">study_mean_cc</span><span class="p">[</span><span class="s1">&#39;Carbon content of flagellates [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">gmean</span><span class="p">(</span><span class="n">study_mean_cc</span><span class="p">[</span><span class="s1">&#39;Carbon content of flagellates [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
 <span class="n">mean_cc</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 
@@ -13064,7 +13139,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -13120,8 +13199,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13132,14 +13210,13 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the total biomass of protists</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the total biomass of protists</span>
 <span class="n">best_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="n">tot_num_protist</span><span class="o">*</span><span class="n">mean_cc</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the total biomass of soil protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
-<span class="n">tot_num_protist</span><span class="o">*</span><span class="n">mean_cc</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the total biomass of soil protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -13150,71 +13227,22 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate of the total biomass of soil protists is ≈1.6 Gt C
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>Carbon content of ciliates [g C cell^-1]</th>
-      <th>Carbon content of flagellates [g C cell^-1]</th>
-      <th>Carbon content of naked amoebae [g C cell^-1]</th>
-      <th>Carbon content of testate amoebae [g C cell^-1]</th>
-    </tr>
-    <tr>
-      <th>level_1</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <th>0</th>
-      <td>1.3e+13</td>
-      <td>6.7e+14</td>
-      <td>3.3e+14</td>
-      <td>5.9e+14</td>
-    </tr>
-  </tbody>
-</table>
 </div>
 </div>
 
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13227,10 +13255,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
 
 <span class="c1"># Define the function ot calculate the 95% confidence interval around the</span>
 <span class="c1"># geometric mean of number of each group of protists per gram</span>
@@ -13253,8 +13281,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13265,10 +13292,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Group the representative values by habitat, and calculate the 95% confidence interval</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Group the representative values by habitat, and calculate the 95% confidence interval</span>
 <span class="c1"># around the geometric mean of values within habitat</span>
 <span class="n">inter_study_habitat_num_CI</span> <span class="o">=</span> <span class="n">grouped_data_gmean</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Habitat&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">groupby_geo_CI</span><span class="p">)</span>
 <span class="n">inter_study_habitat_num_CI</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">inter_study_habitat_num_CI</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13283,7 +13310,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[24]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -13406,8 +13437,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13418,10 +13448,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use the maximum of the intra-study and interstudy uncertainty as our best projection of the uncertainty </span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Use the maximum of the intra-study and interstudy uncertainty as our best projection of the uncertainty </span>
 <span class="c1"># of the number of protists in each habitat</span>
 <span class="n">tot_num_habitat_CI</span> <span class="o">=</span> <span class="n">inter_study_habitat_num_CI</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">inter_study_habitat_num_CI</span> <span class="o">&gt;</span> <span class="n">intra_num_CI</span><span class="p">,</span> <span class="n">intra_num_CI</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">inter_study_habitat_num_CI</span><span class="p">)</span>
 
@@ -13446,7 +13476,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[25]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -13576,8 +13610,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13588,10 +13621,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tot_num_habitat_CI</span> <span class="o">=</span> <span class="n">tot_num_habitat_CI</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">tot_num_habitat_CI</span> <span class="o">=</span> <span class="n">tot_num_habitat_CI</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
 
 <span class="n">ciliate_num_per_g_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">],</span><span class="n">mul_CIs</span><span class="o">=</span><span class="n">tot_num_habitat_CI</span><span class="p">[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">])</span>
 <span class="n">flagellate_num_per_g_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">],</span><span class="n">mul_CIs</span><span class="o">=</span><span class="n">tot_num_habitat_CI</span><span class="p">[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">])</span>
@@ -13609,14 +13642,18 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[26]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>Number of ciliates [# g^-1]           3.7
 Number of flagellates [# g^-1]        3.7
 Number of naked amoebae [# g^-1]      1.3
-Number of testate amoebae [# g^-1]   30.6
+Number of testate amoebae [# g^-1]   25.3
 dtype: float64</pre>
 </div>
 
@@ -13626,8 +13663,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13638,10 +13674,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inter_method_num_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">tot_num_mean</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">sum</span><span class="p">()]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">inter_method_num_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">tot_num_mean</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">tot_num_gmean</span><span class="o">.</span><span class="n">sum</span><span class="p">()]))</span>
 <span class="n">inter_method_num_CI</span>
 </pre></div>
 
@@ -13653,7 +13689,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[27]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13670,8 +13710,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13682,10 +13721,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_num_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">num_per_g_CI</span><span class="p">,</span><span class="n">inter_method_num_CI</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_num_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">num_per_g_CI</span><span class="p">,</span><span class="n">inter_method_num_CI</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">best_num_CI</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">best_num_CI</span><span class="p">,</span><span class="n">index</span><span class="o">=</span> <span class="n">inter_method_num_CI</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">best_num_CI</span>
 </pre></div>
@@ -13698,14 +13737,18 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>Number of ciliates [# g^-1]           3.7
 Number of flagellates [# g^-1]        3.7
 Number of naked amoebae [# g^-1]      1.3
-Number of testate amoebae [# g^-1]   30.6
+Number of testate amoebae [# g^-1]   25.3
 dtype: float64</pre>
 </div>
 
@@ -13715,8 +13758,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13729,10 +13771,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We use a crude estimate of ≈2-fold as our measure of the uncertainty associated with</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># We use a crude estimate of ≈2-fold as our measure of the uncertainty associated with</span>
 <span class="c1"># the average bulk density of soils</span>
 <span class="n">bulk_density_CI</span> <span class="o">=</span> <span class="mi">2</span>
 
@@ -13750,9 +13792,13 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our projection for the uncertainty associated with our estimate of the fraction of the total biomass of soil protists found in the top 8 cm of soil is ≈2.7-fold
+<pre>Our projection for the uncertainty associated with our estimate of the fraction of the total biomass of soil protists found in the top 8 cm of soil is ≈2.9-fold
 </pre>
 </div>
 </div>
@@ -13761,8 +13807,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13773,10 +13818,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ciliate_num_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_num_CI</span><span class="p">[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">],</span><span class="n">bulk_density_CI</span><span class="p">,</span><span class="n">depth_frac_CI</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">ciliate_num_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_num_CI</span><span class="p">[</span><span class="s1">&#39;Number of ciliates [# g^-1]&#39;</span><span class="p">],</span><span class="n">bulk_density_CI</span><span class="p">,</span><span class="n">depth_frac_CI</span><span class="p">]))</span>
 <span class="n">flagellates_num_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_num_CI</span><span class="p">[</span><span class="s1">&#39;Number of flagellates [# g^-1]&#39;</span><span class="p">],</span><span class="n">bulk_density_CI</span><span class="p">,</span><span class="n">depth_frac_CI</span><span class="p">]))</span>
 <span class="n">naked_amoebae_num_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_num_CI</span><span class="p">[</span><span class="s1">&#39;Number of naked amoebae [# g^-1]&#39;</span><span class="p">],</span><span class="n">bulk_density_CI</span><span class="p">,</span><span class="n">depth_frac_CI</span><span class="p">]))</span>
 <span class="n">testate_amoebae_num_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_num_CI</span><span class="p">[</span><span class="s1">&#39;Number of testate amoebae [# g^-1]&#39;</span><span class="p">],</span><span class="n">bulk_density_CI</span><span class="p">,</span><span class="n">depth_frac_CI</span><span class="p">]))</span>
@@ -13792,14 +13837,18 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[29]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[30]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Number of ciliates [# g^-1]           5.9
-Number of flagellates [# g^-1]        5.9
-Number of naked amoebae [# g^-1]      3.4
-Number of testate amoebae [# g^-1]   37.5
+<pre>Number of ciliates [# g^-1]           6.2
+Number of flagellates [# g^-1]        6.2
+Number of naked amoebae [# g^-1]      3.7
+Number of testate amoebae [# g^-1]   32.3
 dtype: float64</pre>
 </div>
 
@@ -13809,8 +13858,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13822,10 +13870,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">groupby_geo_CI</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">groupby_geo_CI</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
                         <span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
                         <span class="s1">&#39;Carbon content of testate amoebae [g C cell^-1]&#39;</span><span class="p">:</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Carbon content of testate amoebae [g C cell^-1]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()),</span>
@@ -13840,8 +13888,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13852,10 +13899,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">study_mean_cc</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">cc_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">study_mean_cc</span><span class="p">)</span>
 <span class="n">cc_inter_CI</span>
 </pre></div>
 
@@ -13867,7 +13914,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[31]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[32]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13884,8 +13935,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13896,10 +13946,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_cc_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">cc_intra_CI</span><span class="p">,</span><span class="n">cc_inter_CI</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_cc_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">cc_intra_CI</span><span class="p">,</span><span class="n">cc_inter_CI</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">best_cc_CI</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">best_cc_CI</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">cc_inter_CI</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">best_cc_CI</span>
 </pre></div>
@@ -13912,7 +13962,11 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[32]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[33]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13929,8 +13983,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13941,10 +13994,10 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ciliate_biomass_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ciliate_num_CI</span><span class="p">,</span><span class="n">best_cc_CI</span><span class="p">[</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">]]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">ciliate_biomass_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ciliate_num_CI</span><span class="p">,</span><span class="n">best_cc_CI</span><span class="p">[</span><span class="s1">&#39;Carbon content of ciliates [g C cell^-1]&#39;</span><span class="p">]]))</span>
 <span class="n">flagellates_biomass_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">flagellates_num_CI</span><span class="p">,</span><span class="n">best_cc_CI</span><span class="p">[</span><span class="s1">&#39;Carbon content of flagellates [g C cell^-1]&#39;</span><span class="p">]]))</span>
 <span class="n">naked_amoebae_biomass_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">naked_amoebae_num_CI</span><span class="p">,</span><span class="n">best_cc_CI</span><span class="p">[</span><span class="s1">&#39;Carbon content of naked amoebae [g C cell^-1]&#39;</span><span class="p">]]))</span>
 <span class="n">testate_amoebae_biomass_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">testate_amoebae_num_CI</span><span class="p">,</span><span class="n">best_cc_CI</span><span class="p">[</span><span class="s1">&#39;Carbon content of testate amoebae [g C cell^-1]&#39;</span><span class="p">]]))</span>
@@ -13955,8 +14008,7 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13967,11 +14019,11 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="p">(</span><span class="n">tot_num_protist</span><span class="o">*</span><span class="n">mean_cc</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">mul_CIs</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ciliate_biomass_CI</span><span class="p">,</span> <span class="n">flagellates_biomass_CI</span><span class="p">,</span> <span class="n">naked_amoebae_biomass_CI</span><span class="p">,</span> <span class="n">testate_amoebae_biomass_CI</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the total biomass of protists is ≈%0.f-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="p">(</span><span class="n">tot_num_protist</span><span class="o">*</span><span class="n">mean_cc</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">mul_CIs</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ciliate_biomass_CI</span><span class="p">,</span> <span class="n">flagellates_biomass_CI</span><span class="p">,</span> <span class="n">naked_amoebae_biomass_CI</span><span class="p">,</span> <span class="n">testate_amoebae_biomass_CI</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the total biomass of terrestrial protists is ≈%0.f-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13982,9 +14034,67 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the estimate of the total biomass of protists is ≈8-fold
+<pre>Our best projection for the uncertainty associated with the estimate of the total biomass of terrestrial protists is ≈7-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our final parameters are:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Biomass of terrestrial protists: </span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the estimate of the total biomass of terrestrial protists: ≈</span><span class="si">%.0f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
+
+
+<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../protists_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+                <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Biomass of terrestrial protists&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">best_estimate</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+                <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Gt C&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="n">mul_CI</span>
+                <span class="p">})</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../protists_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Biomass of terrestrial protists: 1.6 Gt C
+Uncertainty associated with the estimate of the total biomass of terrestrial protists: ≈7-fold
 </pre>
 </div>
 </div>

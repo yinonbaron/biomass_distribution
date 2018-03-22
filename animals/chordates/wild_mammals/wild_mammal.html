@@ -11,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2536,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3027,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8758,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8984,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9120,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9209,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9253,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9549,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9569,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11244,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11556,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11569,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11629,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11701,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11724,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11748,30 +11767,22 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-biomass-of-wild-land-mammals">Estimating the biomass of wild land mammals<a class="anchor-link" href="#Estimating-the-biomass-of-wild-land-mammals">&#182;</a></h1>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">smil_estimate</span> <span class="o">=</span> <span class="mf">0.025e15</span>
-<span class="n">shai_meiri_estimate</span> <span class="o">=</span> <span class="mi">5454700007879</span> 
-<span class="n">barnosky_estimate</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mf">10.72</span><span class="o">*</span><span class="mi">1000</span> <span class="c1">#From figure 3</span>
-<span class="n">prehuman_barnosky_biomass</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mf">11.165</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span> <span class="c1">#From figure 3</span>
-<span class="n">best_land_mammal_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">smil_estimate</span><span class="p">,</span><span class="n">shai_meiri_estimate</span><span class="p">,</span><span class="n">barnosky_estimate</span><span class="p">])</span><span class="o">*</span><span class="mf">0.15</span>
-<span class="n">land_mammal_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">smil_estimate</span><span class="p">,</span><span class="n">shai_meiri_estimate</span><span class="p">,</span><span class="n">barnosky_estimate</span><span class="p">]))</span>
+<span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
 </div>
@@ -11779,12 +11790,13 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-biomass-of-wild-marine-mammals">Estimating the biomass of wild marine mammals<a class="anchor-link" href="#Estimating-the-biomass-of-wild-marine-mammals">&#182;</a></h1>
+<h1 id="Estimating-the-biomass-of-wild-mammals">Estimating the biomass of wild mammals<a class="anchor-link" href="#Estimating-the-biomass-of-wild-mammals">&#182;</a></h1><p>To estimate the total biomass of wild mammals, we first estimate the total biomass of wild land mammals and wild marine mammals.</p>
+<h2 id="Estimating-the-biomass-of-wild-land-mammals">Estimating the biomass of wild land mammals<a class="anchor-link" href="#Estimating-the-biomass-of-wild-land-mammals">&#182;</a></h2><p>To estimate the total biomass of land mammals living today we rely on three sources. The first is <a href="http://vaclavsmil.com/wp-content/uploads/PDR37-4.Smil_.pgs613-636.pdf">Smil</a>, which estimates ≈0.025 Gt wet weight based on biomass densities per biome taken from the History Database of the Global Environment (HYDE).</p>
+
 </div>
 </div>
 </div>
@@ -11793,19 +11805,80 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">comparison_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_mammal_data.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from Christensen&#39;</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from IUCN&#39;</span><span class="p">]))</span>
-<span class="c1">#comparison_data[[&#39;Biomass estimate from Christensen&#39;,&#39;Biomass estimate from IUCN&#39;]].plot()</span>
-<span class="c1">#comparison_data.plot.scatter(x=&#39;Biomass estimate from Christensen&#39;,y=&#39;Biomass estimate from IUCN&#39;)</span>
-<span class="n">christensen</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_mammal_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Christensen&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">best_christensen</span> <span class="o">=</span> <span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Mean&#39;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.15</span>
-<span class="n">best_IUCN</span> <span class="o">=</span> <span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from IUCN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mf">1e6</span><span class="o">*</span><span class="mf">0.15</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">smil_estimate</span> <span class="o">=</span> <span class="mf">0.025e15</span>
+</pre></div>
 
-<span class="n">comparison_data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The second source is an estimate made in <a href="http://dx.doi.org/10.1073/pnas.0801918105">Barnosky</a>, which reports an estimate of ≈0.05 Gt wet weight.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">barnosky_estimate</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mf">10.72</span><span class="o">*</span><span class="mi">1000</span> <span class="c1">#From figure 3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The third source is based on data on the mass of individual mammals for each mammal species, the population density of each species, and the study area in which the population density was measured (<a href="http://dx.doi.org/10.1111/geb.12617">Novosolov et al.</a>). This dataset included data on ≈350 mammal species. Using multiple regression, a power-law (log-log) functional relation was established between body mass, study area and the total number of individuals measured in the study area. The functional relation established is: $$log_{10}(number\ of\ individuals) = 1.65-0.53×log_{10}(body\ mass) + 0.73×log_{10}(study\ area), (R^2≈0.5)$$ This relation was used to extrapolate the total number of individuals for ≈3700 mammal species for which range and mass data is available, by using range sizes from IUCN data (<a href="http://www.iucnredlist.org/technical-documents/spatial-data#mammals">http://www.iucnredlist.org/technical-documents/spatial-data#mammals</a>) as a surrogate for study area, and data on body mass (<a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2010.02390.x/full">Meiri et al.</a>; there are additional ≈1800 mammal species without mass data, but these usually have small body mass, small ranges and low population densities). From total number of individuals the total biomass is calculated by multiplying the total number of individuals by the mean body mass. This approach yielded an estimate of ≈0.006 Gt wet weight.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Estimate produced by the third approach</span>
+<span class="n">shai_meiri_estimate</span> <span class="o">=</span> <span class="mi">5454700007879</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our estimate of the total biomass of wild mammals is based on the geometric mean of these three estimates. We convert wet weight values to carbon mass assuming 70% water content and 50% carbon content out of dry weight.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Conversion factor between wet weight and carbon mass</span>
+<span class="n">wet_to_c</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="c1"># Estimate the total biomass of land mammals</span>
+<span class="n">best_land_mammal_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">smil_estimate</span><span class="p">,</span><span class="n">shai_meiri_estimate</span><span class="p">,</span><span class="n">barnosky_estimate</span><span class="p">])</span><span class="o">*</span><span class="n">wet_to_c</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the total biomass of wild land mammals is ≈</span><span class="si">%.3f</span><span class="s1"> Gt C&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">best_land_mammal_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11816,7 +11889,52 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate of the total biomass of wild land mammals is ≈0.003 Gt C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Estimating-the-biomass-of-wild-marine-mammals">Estimating the biomass of wild marine mammals<a class="anchor-link" href="#Estimating-the-biomass-of-wild-marine-mammals">&#182;</a></h2><p>For estimating the biomass of marine mammals, we rely on estimates made by <a href="https://open.library.ubc.ca/cIRcle/collections/ubctheses/831/items/1.0074892">Christensen</a>, based on using a dataset compiled by <a href="https://open.library.ubc.ca/collections/ubctheses/831/items/1.0074881">Kaschner et al.</a>, gathered from various resources. The biomass of marine mammals is dominated by whales and seals. Here is the data from Christensen:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">christensen</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_mammal_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Christensen&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">christensen</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11837,20 +11955,29 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Biomass estimate from IUCN</th>
-      <th>Biomass estimate from Christensen</th>
+      <th>Min</th>
+      <th>Mean</th>
+      <th>Max</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Biomass estimate from IUCN</th>
-      <td>1.0000</td>
-      <td>0.9753</td>
+      <th>1800</th>
+      <td>102061900000000</td>
+      <td>126185600000000</td>
+      <td>155876300000000</td>
     </tr>
     <tr>
-      <th>Biomass estimate from Christensen</th>
-      <td>0.9753</td>
-      <td>1.0000</td>
+      <th>2000</th>
+      <td>22268040000000</td>
+      <td>29690720000000</td>
+      <td>42680410000000</td>
     </tr>
   </tbody>
 </table>
@@ -11859,115 +11986,27 @@ div#notebook {
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-total-biomass-of-wild-mammals">Estimating the total biomass of wild mammals<a class="anchor-link" href="#Estimating-the-total-biomass-of-wild-mammals">&#182;</a></h1>
+<p>We the mean values for the year 2000 as our best estimate for the biomass of wild marine mammals. We convert the estimates of Chirstensen, which are of the total wet weight of marine mammals to carbon mass assuming 70% water content and 50% carbon content of dry weight:</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_wild_mammals</span> <span class="o">=</span> <span class="n">best_christensen</span><span class="o">+</span><span class="n">best_land_mammal_biomass</span>
-<span class="n">marine_mammal_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_IUCN</span><span class="p">,</span><span class="n">best_christensen</span><span class="p">])),</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Max&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Mean&#39;</span><span class="p">]])</span>
-<span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_wild_mammals</span><span class="p">,</span><span class="n">best_christensen</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">land_mammal_CI</span><span class="p">,</span><span class="n">marine_mammal_CI</span><span class="p">]))</span>
-<span class="n">mul_CI</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">best_christensen</span> <span class="o">=</span> <span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Mean&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">wet_to_c</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the total biomass of wild marine mammals is ≈</span><span class="si">%.3f</span><span class="s1"> Gt C&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">best_christensen</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11978,13 +12017,663 @@ QGYIbgDIDMENAJn5f6z+Nxp9EJpDAAAAAElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area">
+
+<div class="prompt"></div>
 
 
-<div class="output_text output_subarea output_execute_result">
-<pre>2.2644456862709692</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate of the total biomass of wild marine mammals is ≈0.004 Gt C
+</pre>
+</div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We sum our estimates for the total biomass of wild land and marine mammals to generate our best estimate for the total biomass of wild mammals:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">best_christensen</span><span class="o">+</span><span class="n">best_land_mammal_biomass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the total biomass of wild marine mammals is ≈</span><span class="si">%.3f</span><span class="s1"> Gt C&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate of the total biomass of wild marine mammals is ≈0.007 Gt C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Uncertainty-analysis">Uncertainty analysis<a class="anchor-link" href="#Uncertainty-analysis">&#182;</a></h1><p>To estimate the uncertainty associated with our estimate of the total biomass of wild mammals, we first project the uncertainty associated with our estimate of the total biomass of wild land mammals and wild marine mammals, and then combine these uncertainties.</p>
+<h2 id="Wild-land-mammals">Wild land mammals<a class="anchor-link" href="#Wild-land-mammals">&#182;</a></h2><p>Our projection of the uncertainty associated with our estimate of the total biomass of wild land mammals is based on the multiplicative 95% confidence interval around the geometric mean of the three independent estimates we use as sources for our best estimate.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">land_mammal_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">smil_estimate</span><span class="p">,</span><span class="n">shai_meiri_estimate</span><span class="p">,</span><span class="n">barnosky_estimate</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total biomass of wild land mammals is ≈</span><span class="si">%0.0f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">land_mammal_CI</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best projection for the uncertainty associated with our estimate of the total biomass of wild land mammals is ≈4-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Wild-marine-mammals">Wild marine mammals<a class="anchor-link" href="#Wild-marine-mammals">&#182;</a></h2><p>To project the uncertainty associated with our estimate of the total biomass of wild marine mammals, we rely both on the intra-study uncertainty reported by Christensen, as well as on a consistency check against data from the IUCN. Christensen reports a 95% confidence interval of ≈1.4-fold.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">marine_intra_CI</span> <span class="o">=</span> <span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Max&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Mean&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The intra-study uncertainty reported by Christensen is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">marine_intra_CI</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The intra-study uncertainty reported by Christensen is ≈1.4-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a consistency check, we compared the data for ≈30 whale species which are the main contributors to the global marine mammal biomass with data from the IUCN. The correlation between the data is high (Spearman R$^2$=0.98), and the total biomass from both methods varies about ≈1.3-fold.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load IUCN data</span>
+<span class="n">comparison_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_mammal_data.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># IUCN values reported in tons, convert to grams</span>
+<span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from IUCN&#39;</span><span class="p">]</span> <span class="o">*=</span><span class="mi">1</span><span class="n">e6</span>
+<span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from Christensen&#39;</span><span class="p">]</span> <span class="o">*=</span><span class="mi">1</span><span class="n">e6</span>
+
+<span class="c1"># Plot data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from Christensen&#39;</span><span class="p">],</span><span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from IUCN&#39;</span><span class="p">],</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Biomass estimate from Christensen [Gt wet weight]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Biomass estimate from the IUCN [Gt wet weight]&#39;</span><span class="p">)</span>
+
+<span class="c1"># Generate best estimate from the IUCN data by summing across all species and converting to carbon mass</span>
+<span class="n">best_IUCN</span> <span class="o">=</span> <span class="n">comparison_data</span><span class="p">[</span><span class="s1">&#39;Biomass estimate from IUCN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">wet_to_c</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The correlation coefficient between Christensen and the IUCN data is ≈</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">comparison_data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># Calculate the inter-study uncertainty</span>
+<span class="n">marine_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_IUCN</span><span class="p">,</span><span class="n">best_christensen</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The inter-study uncertainty between Christensen and the IUCN data is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">marine_inter_CI</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The correlation coefficient between Christensen and the IUCN data is ≈0.98
+The inter-study uncertainty between Christensen and the IUCN data is ≈1.3-fold
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As our best projection of the uncertainty associated with our estimate of the total biomass of wild marine mammals, we use the higher uncertainty out of the intra-study and intra-study uncertainties:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">marine_mammal_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">marine_inter_CI</span><span class="p">,</span><span class="n">marine_intra_CI</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To generate our projection of the total uncertainty associated with our estimate of the total biomass of wild mammals, we combine our uncertainties associated with our estimates for the total biomass of wild land and marine mammals:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_land_mammal_biomass</span><span class="p">,</span><span class="n">best_christensen</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">land_mammal_CI</span><span class="p">,</span><span class="n">marine_mammal_CI</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total biomass of wild mammals is ≈</span><span class="si">%.0f</span><span class="s1">-fold&#39;</span><span class="o">%</span><span class="k">mul_CI</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best projection for the uncertainty associated with our estimate of the total biomass of wild mammals is ≈2-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Prehuman-wild-mammal-biomass">Prehuman wild mammal biomass<a class="anchor-link" href="#Prehuman-wild-mammal-biomass">&#182;</a></h1><p>We can compare our estimates for the present day biomass of wild mammals with estimates of the prehuman biomass of wild land and marine mammals. For wild land mammals, we use the estimate of the prehuman biomass of wild land mammals reported in Barnosky of:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Taken from figure 3 in Barnosky</span>
+<span class="n">prehuman_barnosky_biomass</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mf">11.165</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="n">wet_to_c</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Based on the data in Barnosky, we estimate wild land mammal biomass decreased ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">prehuman_barnosky_biomass</span><span class="o">/</span><span class="n">best_land_mammal_biomass</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Based on the data in Barnosky, we estimate wild land mammal biomass decreased ≈7.6-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For marine mammals, we rely on estimates by Christensen on values of wild marine mammals in 1800 before commercial whaling:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">prehuman_marine_biomass</span> <span class="o">=</span> <span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1800</span><span class="p">,</span><span class="s1">&#39;Mean&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">wet_to_c</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Based on the data in Christensen, we estimate wild marine mammal biomass decreased ≈</span><span class="si">%.1f</span><span class="s1">-fold, with a range of between ≈</span><span class="si">%.1f</span><span class="s1">-fold and ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="p">((</span><span class="n">prehuman_marine_biomass</span><span class="o">/</span><span class="n">best_christensen</span><span class="p">),(</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1800</span><span class="p">,</span><span class="s1">&#39;Max&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Min&#39;</span><span class="p">])</span> <span class="p">,(</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1800</span><span class="p">,</span><span class="s1">&#39;Min&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">christensen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="s1">&#39;Max&#39;</span><span class="p">])))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Based on the data in Christensen, we estimate wild marine mammal biomass decreased ≈4.3-fold, with a range of between ≈7.0-fold and ≈2.4-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Overall, we can combine the estimates for the prehuman wild land and marine mammal biomass and estimate the reduction in total biomass of wild mammals between prehuman and present values:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">prehuman</span> <span class="o">=</span> <span class="n">prehuman_barnosky_biomass</span> <span class="o">+</span> <span class="n">prehuman_marine_biomass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the fold reduction in the biomass of wild mammals between prehuman and present values is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">prehuman</span><span class="o">/</span><span class="n">best_estimate</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate for the fold reduction in the biomass of wild mammals between prehuman and present values is ≈5.6-fold
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to the chordate biomass data</span>
+<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Wild mammals&#39;</span><span class="p">,([</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span><span class="s1">&#39;Uncertainty&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Feed results to Table 1 &amp; Fig. 1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Wild mammals&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Feed results to Fig. 2A</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Fig2A&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Terrestrial&#39;</span><span class="p">,</span><span class="s1">&#39;Wild land mammals&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_land_mammal_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">land_mammal_CI</span><span class="p">],</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Fig2A&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Marine&#39;</span><span class="p">,</span><span class="s1">&#39;Wild marine mammals&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_christensen</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">marine_mammal_CI</span><span class="p">],</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Update the data mentioned in the MS</span>
+<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="s1">&#39;Prehuman biomass of wild land mammals&#39;</span><span class="p">,</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">prehuman_barnosky_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="s1">&#39;Prehuman biomass of marine mammals&#39;</span><span class="p">,</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">prehuman_marine_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python3.5/dist-packages/ipykernel/ipkernel.py:196: PerformanceWarning: indexing past lexsort depth may impact performance.
+  res = shell.run_cell(code, store_history=store_history, silent=silent)
+/usr/local/lib/python3.5/dist-packages/IPython/core/interactiveshell.py:2683: PerformanceWarning: indexing past lexsort depth may impact performance.
+  interactivity=interactivity, compiler=compiler, result=result)
+</pre>
+</div>
 </div>
 
 </div>

@@ -1,17 +1,26 @@
 
 # coding: utf-8
 
+# In[1]:
+
+
+# Load dependencies
+import pandas as pd
+import numpy as np
+from scipy.stats import gmean
+import sys
+sys.path.insert(0,'../../statistics_helper/')
+from excel_utils import *
+
+
 # # Estimating the biomass of nematodes
 # To estimate the total biomass of nematodes, we calculate the total biomas of terrestrial and marine nematodes.
 # 
 # ## Terrestrial nematodes
 # We based our estimate of the biomass of terrestrial nematodes on data collected in a recent study by [Fierer et al.](http://dx.doi.org/10.1111/j.1461-0248.2009.01360.x). Fierer et al. collected data on the biomass density of two major groups on annelids (Enchytraeids & Earthworms) in different biomes. Here is a sample from the data:
 
-# In[1]:
+# In[2]:
 
-import pandas as pd
-import numpy as np
-from scipy.stats import gmean
 
 # Load the data taken from Fierer et al.
 data = pd.read_excel('nematode_biomass_data.xlsx','Fierer',skiprows=1,index_col='Biome')
@@ -20,7 +29,8 @@ data
 
 # The data in Fierer et al. does not include biomass density of nematodes in savanna, pastures and cropland. We use the geometric mean of values from other biomes as our best estimate for the biomass density of nematodes in these biomes:
 
-# In[2]:
+# In[3]:
+
 
 # Calculate the geometric mean of the biomass density across biomes
 average_biomass_density = gmean(data['Average biomass density [g C m^-2]'].dropna())
@@ -40,7 +50,8 @@ data.loc['Crops','Median biomass density [g C m^-2]'] = median_biomass_density
 # 
 # For each biome, we multiply the sum of the biomass density of nematodes by the total area of that biome taken from the book [Biogeochemistry: An analysis of Global Change](https://www.sciencedirect.com/science/book/9780123858740) by Schlesinger & Bernhardt.:
 
-# In[3]:
+# In[4]:
+
 
 # Load biome area data
 area = pd.read_excel('nematode_biomass_data.xlsx','Biome area', skiprows=1, index_col='Biome')
@@ -66,7 +77,8 @@ print('Our best estimate of total biomass of terrestrial nematodes based on Fier
 # 
 # Our best estimate for the total biomass of nematodes is the sum of our estimates for the biomass of terrestrial nematodes and marine nematodes:
 
-# In[4]:
+# In[5]:
+
 
 # As noted above, our best estimate for the biomass of marine nematodes is ≈0.01 Gt C
 best_marine_biomass = 0.014e15
@@ -75,4 +87,58 @@ best_marine_biomass = 0.014e15
 best_estimate = best_terrestrial_biomass+best_marine_biomass
 
 print('Our best estimate of total biomass of nematodes is %.2f Gt C' %(best_estimate/1e15))
+
+
+# # Estimating the total number of nematodes
+# We calculate the total number of nematodes by dividing our estimate of the total biomass of nematodes by the carbon content of nematodes, which is ≈0.05 µg C (Fierer et al.):
+
+# In[6]:
+
+
+# Carbon content of a single nematode based on Fierer et al.
+carbon_content = 0.05e-6
+
+# Calculate the total number of nematodes
+tot_nematode_num = best_estimate/carbon_content
+
+print('Our best estimate for the total number of nematodes is ≈%.1e' %tot_nematode_num)
+
+
+# In[7]:
+
+
+# Feed results to the animal biomass data
+old_results = pd.read_excel('../animal_biomass_estimate.xlsx',index_col=0)
+result = old_results.copy()
+result.loc['Nematodes',(['Biomass [Gt C]','Uncertainty'])] = (best_estimate/1e15,np.nan)
+result.to_excel('../animal_biomass_estimate.xlsx')
+
+# Feed results to Table 1 & Fig. 1
+update_results(sheet='Table1 & Fig1', 
+               row=('Animals','Nematodes'), 
+               col=['Biomass [Gt C]', 'Uncertainty'],
+               values=[best_estimate/1e15,None],
+               path='../../results.xlsx')
+
+
+# Feed results to Table S1
+update_results(sheet='Table S1', 
+               row=('Animals','Nematodes'), 
+               col=['Number of individuals'],
+               values=tot_nematode_num,
+               path='../../results.xlsx')
+
+# Feed results to Fig. 2A
+update_results(sheet='Fig2A', 
+               row=('Terrestrial','Nematodes'), 
+               col=['Biomass [Gt C]'],
+               values=best_terrestrial_biomass/1e15,
+               path='../../results.xlsx')
+
+# Feed results to Fig. 2A
+update_results(sheet='Fig2A', 
+               row=('Marine','Nematodes'), 
+               col=['Biomass [Gt C]'],
+               values=best_marine_biomass/1e15,
+               path='../../results.xlsx')
 

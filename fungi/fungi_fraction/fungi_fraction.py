@@ -8,6 +8,7 @@
 
 # In[1]:
 
+
 import pandas as pd
 import numpy as np
 import sys
@@ -23,6 +24,7 @@ data.head()
 
 # In[2]:
 
+
 def groupby_geo_frac_mean(input):
     return frac_mean(input['Fraction'],weights=input['N'])
 
@@ -34,6 +36,7 @@ type_method_mean
 
 # In[3]:
 
+
 method_mean = type_method_mean.apply(frac_mean)
 method_mean
 
@@ -41,6 +44,7 @@ method_mean
 # In the last stage, we calculate the geometric mean of the characteristic values from the two methods. We use the geometric mean as our best estimate for the fraction of fungi out of the total biomass of soil microbes.
 
 # In[4]:
+
 
 best_estimate = frac_mean(method_mean)
 print('Our best estimate for the fraction of fungi out of the total biomass of fungi is ≈' + '{:,.0f}%'.format(best_estimate*100))
@@ -56,6 +60,7 @@ print('Our best estimate for the fraction of fungi out of the total biomass of f
 
 # In[5]:
 
+
 def groupby_frac_CI(input):
     return frac_CI(input['Fraction'])
 
@@ -68,6 +73,7 @@ type_method_CI
 
 # In[6]:
 
+
 intra_method_CI = type_method_mean.apply(frac_CI)
 intra_method_CI
 
@@ -77,6 +83,7 @@ intra_method_CI
 
 # In[7]:
 
+
 inter_method_CI = frac_CI(method_mean)
 print('The 95' + '%'+' confidence interval of the characteristic values from each method is ≈%.1f-fold' % inter_method_CI)
 
@@ -85,6 +92,7 @@ print('The 95' + '%'+' confidence interval of the characteristic values from eac
 # Our final parameters are:
 
 # In[8]:
+
 
 mul_CI = np.max([type_method_CI.values.flatten().max(),intra_method_CI.max(),inter_method_CI])
 print('Fraction of fungi out of the total biomass of microbes:' +'{:.1f}%'.format(best_estimate*100))

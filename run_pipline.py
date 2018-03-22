@@ -1,7 +1,18 @@
-import numpy as np
 import fnmatch
 import os
+import nbformat
+from nbconvert.preprocessors import ExecutePreprocessor
 
+# Define function that runs a jypyter notebook and saves the results to the same file
+def run_nb(path):
+    with open(path) as f:
+        nb = nbformat.read(f, as_version=4)
+        ep = ExecutePreprocessor(timeout=6000, kernel_name='python3')
+        ep.preprocess(nb, {'metadata': {'path': os.path.dirname(path)}})
+    with open(path, 'wt') as f:
+        nbformat.write(nb, f)
+
+# Implementation of os.walk with alphabetical order
 def sortedWalk(top, topdown=True, onerror=None):
     from os.path import join, isdir, islink
  
@@ -14,7 +25,7 @@ def sortedWalk(top, topdown=True, onerror=None):
             dirs.append(name)
         else:
             nondirs.append(name)
- 
+
     if topdown:
         yield top, dirs, nondirs
     for name in dirs:
@@ -25,18 +36,23 @@ def sortedWalk(top, topdown=True, onerror=None):
     if not topdown:
         yield top, dirs, nondirs
 
-
-matches = []
+# Go over the current directory
 for root, dirnames, filenames in sortedWalk('.',topdown=False):
-    #root.sort()
+    
+    # Skip the figures directory
+    if root == './figures':
+        continue
+    
+    # Find all the jupyter notebook files
     for filename in fnmatch.filter(filenames, '*.ipynb'):
-        if 'checkpoint' in filename:
+        if 'checkpoint' in filename: # Ignore checkpoint files
             continue
-        print(os.path.join(root, filename))
-        matches.append(os.path.join(root, filename))
+        print('\n-----------------\nAnalyzing file %s\n-----------------' %filename)
+        # Run current notebook
+        run_nb(os.path.join(root, filename))
 
-#print(matches.__contains__('checkpoint'))
-#matches = [f for f in matches if 'checkpoint' not in f]
-#print(matches)
-os.system('jupyter nbconvert --to notebook --execute ' + matches[0])
+        # Convert notebook to python script
+        os.system('jupyter nbconvert --to script ' + os.path.join(root, filename))
 
+        # Convert notebook to html file
+        os.system('jupyter nbconvert --to html ' + os.path.join(root, filename))

@@ -11,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2536,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3027,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8758,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8984,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9120,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9209,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9253,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9549,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9569,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11244,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11556,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11569,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11629,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11701,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11724,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11748,12 +11767,34 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline  
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-biomass-of-livestock">Estimating the biomass of livestock<a class="anchor-link" href="#Estimating-the-biomass-of-livestock">&#182;</a></h1><p>To estimate the biomass of fish, we first estimate the total biomass of mesopelagic fish, and then add to this estimate the estmimate for the non-mesopelagic fish made by <a href="http://dx.doi.org/10.1126/science.1157972">Wilson et al.</a>.</p>
+<h1 id="Estimating-the-biomass-of-fish">Estimating the biomass of fish<a class="anchor-link" href="#Estimating-the-biomass-of-fish">&#182;</a></h1><p>To estimate the biomass of fish, we first estimate the total biomass of mesopelagic fish, and then add to this estimate the estmimate for the non-mesopelagic fish made by <a href="http://dx.doi.org/10.1126/science.1157972">Wilson et al.</a>.</p>
 <p>In order to estimate the biomass of mesopelagic fish, we rely on two independent methods - and estimate based on trawling by <a href="http://www.seaaroundus.org/doc/Researcher+Publications/dpauly/PDF/2005/OtherItems/MappingGlobalBiomassMesopelagicFishes.pdf">Lam &amp; Pauly</a>, and an estimate based on sonar.</p>
 <h2 id="Sonar-based-estimate">Sonar-based estimate<a class="anchor-link" href="#Sonar-based-estimate">&#182;</a></h2><p>We generate the sonar-based estimate relying on data from <a href="http://dx.doi.org/10.1038/ncomms4271">Irigoien et al.</a> and <a href="http://dx.doi.org/10.1016/j.cub.2016.11.003">Proud et al.</a>.</p>
 <p>Estimating the biomass of mesopelagic fish using sonar is a two step process. First we use estimates of the global backscatter of mesopelagic fish. This backscatter is converted to an estimate of the global biomass of mesopelagic fish by using estimates for the target strength of a single mesopelagic fish.</p>
@@ -11764,21 +11805,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline  
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="c1"># Load scatter data from Irigoien et al.</span>
-<span class="n">scatter</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;irigoien_et_al_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Total scatter&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load scatter data from Irigoien et al.</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Total scatter&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># convert scater to backscatter</span>
 <span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total sA [m^4 nmi^-2]&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1852</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -11794,7 +11825,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11864,10 +11899,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of values from Irigoien et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of values from Irigoien et al.</span>
 <span class="n">irigoien_backscatter</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The geometric mean of global backscatter from Irigoien et al. is ≈</span><span class="si">%.1e</span><span class="s1"> m^2&#39;</span> <span class="o">%</span><span class="k">irigoien_backscatter</span>)
 </pre></div>
@@ -11880,7 +11915,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The geometric mean of global backscatter from Irigoien et al. is ≈1.1e+10 m^2
 </pre>
@@ -11891,8 +11930,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11903,10 +11941,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The global backscatter reported by Proud et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The global backscatter reported by Proud et al.</span>
 <span class="n">proud_backscatter</span> <span class="o">=</span> <span class="mf">6.02e9</span>
 
 <span class="c1"># Our best estimate </span>
@@ -11922,7 +11960,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the global backscatter of mesapelagic fish is 8e+09 m^2
 </pre>
@@ -11933,8 +11975,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11947,17 +11988,17 @@ Where $TS_{kg}$ is the terget strength per kilogram biomass.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load terget strength data</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;irigoien_et_al_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Target strength&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load terget strength data</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Target strength&#39;</span><span class="p">)</span>
 
 <span class="c1"># Plot the distribution of TS for fish with or without swimbladder</span>
 <span class="n">ts</span><span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;No&#39;</span><span class="p">][</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;No swimbladder&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">ts</span><span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">][</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;With swimbladder&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Target strength per unit biomass dB kg$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">r&#39;Target strength per unit biomass dB kg$^{-1}$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -11969,181 +12010,189 @@ Where $TS_{kg}$ is the terget strength per kilogram biomass.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x7f2adcb69a20&gt;</pre>
+<pre>Text(0,0.5,&#39;Counts&#39;)</pre>
 </div>
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 
 
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,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
-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
-Gv64IMiPZTzLfzcypfZ7wuuYTUKfa1xqJxRlPcdT+v7YgMLsnqSzjWv6iaOZJV3wg/yWjgF/AxYn
-U+xFRCRYQV7DHwycDXzHzCr9x3EB9iciIgkE9vu/c+5NvLtjiYhIFtBf2oqIhIQKvohISKjgi4iE
-hAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQK
-vohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6I
-SEio4IuIhIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjgi4iERGAF38zu
-N7NPzWxhUH2IiEjygjzDfwA4JsDti4hICgIr+M65cmBjUNsXEZHU6Bq+iEhImHMuuI2bFQIvOOd6
-J2gzGhgNkJ+f33/q1KmRZdXV1eTl5SXV14JVm3cnakryW8Pabc3WXdKaK1fR/h1Sap/K69iclKsR
-ayrrTFbndCXvi9UZChNftuaCFLIV9GlyH8OHD5/vnCtJpm3GC360kpISV1FREZkuKyujtLQ0qb4K
-r30x9YBNdGVRDX9c0KrZ+ktWc+Va/ruRKbVP5XVsTsrViHF139jLeo6n9P2xGQoTX7bmghSyjWv6
-CauZJV3wdUlHRCQkgvxa5mPAHKCnma00s58E1ZeIiDQusN//nXOnB7VtERFJnS7piIiEhAq+iEhI
-qOCLiISECr6ISEio4IuIhIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjg
-i4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuI
-hIQKvohISKjgi4iEhAq+iEhIqOCLiISECr6ISEio4IuIhIQKvohISKjgi4iEhAq+iEhIBFrwzewY
-M3vfzP5jZtcG2ZeIiCQWWME3s5bAXcCxwKHA6WZ2aFD9iYhIYkGe4Q8A/uOcW+ac2wFMBU4IsD8R
-EUkgyIK/P/BJ1PRKf56IiGSAOeeC2bDZj4DvO+cu9KfPBgY45y6t1240MNqf7Am8H7W4M7A+kIC7
-R7lSo1ypUa7UZGsuaJ5sBzrn9kumYasAQ6wEDoia7gasrt/IOXcvcG+sDZhZhXOuJJh4TadcqVGu
-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
-YII=
+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
 "
 >
 </div>
@@ -12154,8 +12203,7 @@ YII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12166,10 +12214,10 @@ YII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the average TS per kg for fish with and without swimbladder</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the average TS per kg for fish with and without swimbladder</span>
 <span class="n">TS_bin</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span>
 </pre></div>
@@ -12182,7 +12230,11 @@ YII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12198,8 +12250,7 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12210,15 +12261,15 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The conversion equation from global backscatter and terget strength per unit biomass</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The conversion equation from global backscatter and terget strength per unit biomass</span>
 <span class="n">biomass_estimator</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">TS1</span><span class="p">,</span><span class="n">TS2</span><span class="p">,</span><span class="n">bs</span><span class="p">,</span><span class="n">frac</span><span class="p">:</span> <span class="n">bs</span><span class="o">/</span><span class="p">(</span><span class="n">frac</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">TS1</span><span class="o">/</span><span class="mf">10.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">frac</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">TS2</span><span class="o">/</span><span class="mf">10.</span><span class="p">))</span>
 
 <span class="c1"># Estimate biomass and convert to g C, assuming fish with or without swimbladder are both 50% of the population</span>
 <span class="n">sonar_biomass</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best sonar-based estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">sonar_biomass</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best sonar-based estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">sonar_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12229,7 +12280,11 @@ Name: dB kg^-1, dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best sonar-based estimate for the biomass of mesopelagic fish is ≈1.8 Gt C
 </pre>
@@ -12240,8 +12295,7 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12252,15 +12306,15 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The estimate of the global biomass of mesopelagic fish based on trawling reported in Lan &amp; Pauly</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The estimate of the global biomass of mesopelagic fish based on trawling reported in Lan &amp; Pauly</span>
 <span class="n">trawling_biomass</span> <span class="o">=</span> <span class="mf">1.5e14</span>
 
 <span class="c1"># Estimate the biomass of mesopelagic fish based on the geometric mean of sonar-based and trawling-based estimates</span>
-<span class="n">best_mesopelagic_bioamss</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_mesopelagic_bioamss</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="n">best_mesopelagic_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_mesopelagic_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12271,7 +12325,11 @@ Name: dB kg^-1, dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of mesopelagic fish is ≈0.5 Gt C
 </pre>
@@ -12282,8 +12340,7 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12294,14 +12351,14 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The estimate of non-mesopelagic fish based on Wilson et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The estimate of non-mesopelagic fish based on Wilson et al.</span>
 <span class="n">non_mesopelagic_fish_biomass</span> <span class="o">=</span> <span class="mf">1.5e14</span>
 
-<span class="n">best_estimate</span> <span class="o">=</span> <span class="n">best_mesopelagic_bioamss</span><span class="o">+</span><span class="n">non_mesopelagic_fish_biomass</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="n">best_estimate</span> <span class="o">=</span> <span class="n">best_mesopelagic_biomass</span><span class="o">+</span><span class="n">non_mesopelagic_fish_biomass</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12312,7 +12369,11 @@ Name: dB kg^-1, dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of fish is ≈0.7 Gt C
 </pre>
@@ -12323,8 +12384,7 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12340,10 +12400,10 @@ Name: dB kg^-1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the intra-study uncertainty of Irigoien et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the intra-study uncertainty of Irigoien et al.</span>
 <span class="n">irigoien_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">])</span>
 
 <span class="c1"># Calculate the intra-study uncertainty of Proud et al.</span>
@@ -12361,7 +12421,11 @@ Name: dB kg^-1, dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The intra-study uncertainty of the total backscatter estimate of Irigoien et al. is ≈1.1-fold
 The intra-study uncertainty of the total backscatter estimate of Proud et al. is ≈1.2-fold
@@ -12373,8 +12437,7 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12385,10 +12448,10 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the interstudy uncertainty of the global backscatter</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the interstudy uncertainty of the global backscatter</span>
 <span class="n">bs_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">irigoien_backscatter</span><span class="p">,</span><span class="n">proud_backscatter</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The interstudy uncertainty of the total backscatter  is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">bs_inter_CI</span>)
@@ -12405,7 +12468,11 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The interstudy uncertainty of the total backscatter  is ≈1.7-fold
 </pre>
@@ -12416,8 +12483,7 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12430,10 +12496,10 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the function that will estimate the 95% confidence interval</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Define the function that will estimate the 95% confidence interval</span>
 <span class="k">def</span> <span class="nf">CI_groupby</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">input</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
@@ -12468,7 +12534,11 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with the estimate of the target strength per unit biomass is ≈1.3-fold
 </pre>
@@ -12479,8 +12549,7 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12491,14 +12560,14 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sample different fractions of fish with swimbladder</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Sample different fractions of fish with swimbladder</span>
 <span class="n">ratio_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="c1"># Estiamte the biomass of mesopelagic fish using the sampled fraction</span>
-<span class="n">biomass_ratio_dist</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">ratio_range</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="o">/</span><span class="mf">1e15</span>
+<span class="n">biomass_ratio_dist</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">ratio_range</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span>
 
 <span class="c1"># Plot the results for all fractions</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ratio_range</span><span class="p">,</span><span class="n">biomass_ratio_dist</span><span class="p">)</span>
@@ -12514,210 +12583,218 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[13]:</div>
+
+
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x7f2b10682400&gt;</pre>
+<pre>Text(0,0.5,&#39;Biomass estimate [Gt C]&#39;)</pre>
 </div>
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 
 
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,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
-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
-AAAASUVORK5CYII=
+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
 "
 >
 </div>
@@ -12728,8 +12805,7 @@ AAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12740,10 +12816,10 @@ AAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the upper and lower bounds of the influence of the fraction of fish with swimbladder on biomass estimate</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the upper and lower bounds of the influence of the fraction of fish with swimbladder on biomass estimate</span>
 <span class="n">ratio_upper_CI</span> <span class="o">=</span> <span class="p">(</span><span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="mf">0.975</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="p">)</span><span class="o">/</span><span class="n">sonar_biomass</span>
 <span class="n">ratio_lower_CI</span> <span class="o">=</span> <span class="n">sonar_biomass</span><span class="o">/</span><span class="p">(</span><span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="p">)</span>
 <span class="n">ratio_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">ratio_upper_CI</span><span class="p">,</span><span class="n">ratio_lower_CI</span><span class="p">])</span>
@@ -12758,7 +12834,11 @@ AAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with the fraction of fish possessing swimbladder is ≈8.7-fold
 </pre>
@@ -12769,8 +12849,7 @@ AAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12781,10 +12860,10 @@ AAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sonar_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ratio_CI</span><span class="p">,</span><span class="n">ts_CI</span><span class="p">,</span><span class="n">bs_CI</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">sonar_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ratio_CI</span><span class="p">,</span><span class="n">ts_CI</span><span class="p">,</span><span class="n">bs_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">sonar_CI</span>)
 </pre></div>
 
@@ -12796,7 +12875,11 @@ AAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈9.4-fold
 </pre>
@@ -12807,8 +12890,7 @@ AAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12819,10 +12901,10 @@ AAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">meso_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">meso_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">meso_inter_CI</span>)
 
 <span class="c1"># Take the highest uncertainty as our best projection for the uncertainty associated with the estimate</span>
@@ -12838,7 +12920,11 @@ AAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈11.3-fold
 </pre>
@@ -12849,8 +12935,7 @@ AAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12862,15 +12947,15 @@ AAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the uncertainty of the non-mesopelagic fish biomass</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the uncertainty of the non-mesopelagic fish biomass</span>
 <span class="n">non_meso_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="mf">26.12</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="o">/</span><span class="mf">0.34</span><span class="p">])</span>
 
 <span class="c1"># Propagate the uncertainties of mesopelagic fish biomass and non-mesopelagic fish biomass to the total estimate</span>
 <span class="c1"># of fish biomass</span>
-<span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_mesopelagic_bioamss</span><span class="p">,</span><span class="n">non_mesopelagic_fish_biomass</span><span class="p">]),</span> <span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">meso_CI</span><span class="p">,</span><span class="n">non_meso_CI</span><span class="p">]))</span>
+<span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_mesopelagic_biomass</span><span class="p">,</span><span class="n">non_mesopelagic_fish_biomass</span><span class="p">]),</span> <span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">meso_CI</span><span class="p">,</span><span class="n">non_meso_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">mul_CI</span>)
 </pre></div>
 
@@ -12882,13 +12967,477 @@ AAAASUVORK5CYII=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with the estimate of the biomass of fish is ≈8.2-fold
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Prehuman-fish-biomass">Prehuman fish biomass<a class="anchor-link" href="#Prehuman-fish-biomass">&#182;</a></h1><p>To estimate the prehuman fish biomass, we rely on a study (<a href="http://dx.doi.org/10.1073/pnas.1520420113"></a>) which states that fish stocks in global fisheries are 1.17 of the Maximal Sustainable Yield biomass, when looking at all fisheries and calculating a catch-weighted average global fishery (Figure S12 in the SI Appendix of Costello et al.). Costello et al. also reports the total biomass of present day fisheries at 0.84 Gt wet weight (Table S15 in the SI Appendix of Costello et al.). Assuming 70% water content and 50% carbon content out of wet weight, this translates to:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">costello_ww</span> <span class="o">=</span> <span class="mf">0.84</span>
+<span class="n">wet_to_c</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="mf">0.5</span>
+<span class="n">costello_cc</span> <span class="o">=</span> <span class="n">costello_ww</span><span class="o">*</span><span class="n">wet_to_c</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Costello et al. estimate ≈</span><span class="si">%.2f</span><span class="s1"> Gt C of current fisheries&#39;</span> <span class="o">%</span><span class="k">costello_cc</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Costello et al. estimate ≈0.13 Gt C of current fisheries
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This number is close to the number reported by Wilson et al. Using a database of published landings data and stock assessment biomass estimates, <a href="http://dx.doi.org/10.1139/f2012-077">Thorson et al.</a> estimate that the biomass of fish at the maximum sustainable yield represent ≈40% of the biomass the population would have reached in case of no fishing. From these two numbers, we can estimate the prehuamn biomass of fish in fisheries. We use the total biomass of fisheries reported in Costello et al., divide it the bte ratio reported in Costello et al. to estimate the Maximal Sustainable Yield biomass, and then divide this number by 0.4 to arrive at the prehuman biomass of fish in fisheries. We add to this estimate the estimate of the total biomass of mesopelagic fish, assuming their biomass wasn't affected by humans.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">costello_ratio</span> <span class="o">=</span> <span class="mf">1.17</span>
+<span class="n">thorson_ratio</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">prehuman_biomass_fisheries</span> <span class="o">=</span> <span class="n">costello_cc</span><span class="o">*</span><span class="mi">1</span><span class="n">e15</span><span class="o">/</span><span class="n">costello_ratio</span><span class="o">/</span><span class="n">thorson_ratio</span>
+<span class="n">prehuman_fish_biomass</span> <span class="o">=</span> <span class="n">prehuman_biomass_fisheries</span><span class="o">+</span><span class="n">best_mesopelagic_biomass</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the total prehuman biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">prehuman_fish_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our estimate for the total prehuman biomass of fish is ≈0.8 Gt C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comparing the prehuman fish biomass to the present day fish biomass, we can estimate the human associated reduction in fish biomass:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">fish_biomass_decrease</span> <span class="o">=</span> <span class="n">prehuman_fish_biomass</span><span class="o">-</span><span class="n">best_estimate</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the decrease in the total biomass of fish is ≈</span><span class="si">%.2f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">fish_biomass_decrease</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our estimate for the decrease in the total biomass of fish is ≈0.12 Gt C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Estimating-the-total-number-of-fish">Estimating the total number of fish<a class="anchor-link" href="#Estimating-the-total-number-of-fish">&#182;</a></h1><p>To estimate the total number of fish, we divide our estimate of the total biomass of mesopelagic fish by an estimate for the characteristic carbon content of a single mesopelagic fish. 
+To estimate the mean weight of mesopelagic fish, we rely on data reported in <a href="https://doi.org/10.1111/j.1439-0426.2010.01450.x">Fock &amp; Ehrich</a> for the family Myctophidae (Lanternfish), which dominate the mesopelagic fish species. Fock &amp; Ehrich report the length range of each fish species, as well as allometric relations between fish length and weight for each species. Here is a sample of the data:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data from Fock &amp; Ehrich</span>
+<span class="n">fe_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Fock &amp; Ehrich&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Use only data for the Myctophidae family</span>
+<span class="n">fe_mycto</span> <span class="o">=</span> <span class="n">fe_data</span><span class="p">[</span><span class="n">fe_data</span><span class="p">[</span><span class="s1">&#39;Family&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Myctophidae&#39;</span><span class="p">]</span>
+
+<span class="n">fe_mycto</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Family</th>
+      <th>Genus</th>
+      <th>Species</th>
+      <th>a(SL)</th>
+      <th>b(SL)</th>
+      <th>Calculation method</th>
+      <th>Minimum length (mm)</th>
+      <th>Maximum length (mm)</th>
+      <th>1982 deviation statistic dj</th>
+      <th>1982 wj-bjregression slope</th>
+      <th>1982 sample size for regression (n=)</th>
+      <th>1983 deviation statistic dj</th>
+      <th>1983 wj-bjregression slope</th>
+      <th>1983 sample size for regression (n=)</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>95</th>
+      <td>Myctophidae</td>
+      <td>Benthosema</td>
+      <td>glaciale</td>
+      <td>1.0e-02</td>
+      <td>3.0e+00</td>
+      <td>3.0e+00</td>
+      <td>21</td>
+      <td>81</td>
+      <td>1.8e+02</td>
+      <td>4.2e-01</td>
+      <td>5</td>
+      <td>3.4e+01</td>
+      <td>8.9e-01</td>
+      <td>16</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Myctophidae</td>
+      <td>Benthosema</td>
+      <td>suborbitale</td>
+      <td>1.0e-02</td>
+      <td>3.0e+00</td>
+      <td>6.0e+00</td>
+      <td>37</td>
+      <td>37</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>Myctophidae</td>
+      <td>Bolinichthys</td>
+      <td>indicus</td>
+      <td>1.3e-02</td>
+      <td>2.9e+00</td>
+      <td>3.0e+00</td>
+      <td>31</td>
+      <td>46</td>
+      <td>1.0e+03</td>
+      <td>8.0e-02</td>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Myctophidae</td>
+      <td>Bolinichthys</td>
+      <td>supralateralis</td>
+      <td>7.5e-03</td>
+      <td>3.2e+00</td>
+      <td>3.0e+00</td>
+      <td>42</td>
+      <td>107</td>
+      <td>3.3e+01</td>
+      <td>1.9e+00</td>
+      <td>7</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Myctophidae</td>
+      <td>Ceratoscopelus</td>
+      <td>maderensis</td>
+      <td>6.8e-03</td>
+      <td>3.2e+00</td>
+      <td>3.0e+00</td>
+      <td>27</td>
+      <td>85</td>
+      <td>6.1e+02</td>
+      <td>1.3e-01</td>
+      <td>8</td>
+      <td>1.5e+01</td>
+      <td>7.7e-01</td>
+      <td>2</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The allometric parameters a and b are plugged into the following equation to produce the weight of each fish species based on the length of each fish: $$ W = a*L^b$$
+Where W is the fish weight and L is the fish length. For each fish species, we calculate the characteristic fish length by using the mean of the minimum and maximum reported fish lengths:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">fe_mean_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;Maximum length (mm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;Minimum length (mm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We plug the mean length of each fish species into the allometric equation along with its specific parameters a and b to generate the mean wet weight of each fish. We use the geometric mean of the weights of all species as our best estimate of the weight of a single mesopelagic fish. We convert wet weight to carbon mass assuming 70% water content and 50% carbon our of the dry weight.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># The allometric equation to convert fish length into fish weight. The equation takes values</span>
+<span class="c1"># in cm and the data is given in mm so we divide the length by a factor of 10</span>
+<span class="n">calculate_weight</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="n">b</span>
+
+<span class="c1"># Transform the mean lengths of each fish species into a characteristic weight of each fish species</span>
+<span class="n">fe_mean_weight</span> <span class="o">=</span> <span class="n">calculate_weight</span><span class="p">(</span><span class="n">fe_mean_length</span><span class="p">,</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;a(SL)&#39;</span><span class="p">],</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;b(SL)&#39;</span><span class="p">])</span>
+
+<span class="c1"># Conversion factor from wet weight to carbon mass</span>
+<span class="n">wet_to_c</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+<span class="c1"># Calculate the mean carbon content of a single mesopelagic fish</span>
+<span class="n">fish_cc</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">fe_mean_weight</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">*</span><span class="n">wet_to_c</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the carbon content of a single mesopelagic fish is ≈</span><span class="si">%.2f</span><span class="s1"> g C&#39;</span> <span class="o">%</span><span class="k">fish_cc</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate for the carbon content of a single mesopelagic fish is ≈0.46 g C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We estimate the total number of mesopelagic fish by dividing our best estimate for the total biomass of mesopelagic fish by our estimate for the carbon content of a single mesopelagic fish:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Estimate the total number of fish</span>
+<span class="n">tot_fish_num</span> <span class="o">=</span> <span class="n">best_mesopelagic_biomass</span><span class="o">/</span><span class="n">fish_cc</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total number of individual fish is ≈</span><span class="si">%.0e</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="k">tot_fish_num</span>)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Our best estimate for the total number of individual fish is ≈1e+15.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to the chordate biomass data</span>
+<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Fish&#39;</span><span class="p">,([</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span><span class="s1">&#39;Uncertainty&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Feed results to Table 1 &amp; Fig. 1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Fish&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Feed results to Table S1</span>
+<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table S1&#39;</span><span class="p">,</span> 
+               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Fish&#39;</span><span class="p">),</span> 
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of individuals&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">tot_fish_num</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Update the data mentioned in the MS</span>
+<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="s1">&#39;Decrease in biomass of fish&#39;</span><span class="p">,</span>
+               <span class="n">values</span><span class="o">=</span><span class="n">fish_biomass_decrease</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 

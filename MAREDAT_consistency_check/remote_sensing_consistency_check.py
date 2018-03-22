@@ -8,6 +8,7 @@
 
 # In[1]:
 
+
 # The estimates of the total biomass of the different phyotplankton groups, based on the MAREDAT database
 picophyoto_biomass = 0.42e15
 diatom_biomass = 0.3e15

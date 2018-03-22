@@ -6,11 +6,12 @@
 
 # In[1]:
 
+
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
 import matplotlib.pyplot as plt
-get_ipython().magic(u'matplotlib inline')
+get_ipython().magic('matplotlib inline')
 import sys
 sys.path.insert(0, '../../statistics_helper/')
 from CI_helper import *
@@ -25,11 +26,13 @@ data.head()
 
 # In[2]:
 
+
 phage_rad = gmean(data['Median diameter [nm]'])/2
 print('Our best estimate for the radius of a phage is ≈%i nm.' %(phage_rad))
 
 
 # In[3]:
+
 
 r = (data['95% diameter [nm]']-data['Median diameter [nm]']).mean()
 
@@ -44,6 +47,7 @@ r = (data['95% diameter [nm]']-data['Median diameter [nm]']).mean()
 # Jover et al. supply estimates for each of the parameters in the model, as well as their respective uncertainties. We plug into this model our estimates for the radius of phages in order to get an estimate for the carbon content of phages, as well as the uncertainty associated with this esitmate. We use 1.96 times the uncertainty reported in Jover et al. to calculate 95% confidence interval for the carbon content estimate.
 
 # In[4]:
+
 
 # Import uncertainties library to deal with the error propagation
 from uncertainties import ufloat
@@ -93,6 +97,7 @@ print('Our best estimate for the carbon content of a single phage is ≈{:10.1e}
 
 # In[5]:
 
+
 intra_CI = 1+gmean((data['95% diameter [nm]'] - data['5% diameter [nm]'])/data['Median diameter [nm]']/2)
 inter_CI = geo_CI_calc(data['Median diameter [nm]'])
 
@@ -108,6 +113,7 @@ rad_CI = np.max([intra_CI,inter_CI])
 # Therefore, in order to quanitfy the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage, we sample 1000 times from a log-normal distribution of radii with a mean that is equal to our best estimate for the radius of a phage, and a multiplicative standard diviation which is equal to the uncertainty for the radius of a phage we project. We feed these sampled radii into our model and calculate a carbon content for each radius, resulting in a distribution of carbon content estimates. We take the multiplicative ratio between the 2.5% and 97.5% percentiles and our best estimate for the carbon content as our best estimate for the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage.
 
 # In[6]:
+
 
 # Sample 1000 from a log-normal distribution of radii
 rad_dist = np.random.lognormal(np.log(phage_rad),np.log(rad_CI)/1.96,1000)
@@ -128,6 +134,7 @@ print('Our best estimate for the uncertainty of the carbon content of a single p
 
 # In[7]:
 
+
 model_param_CI =  1+best_estimate.std_dev*1.96/best_estimate.nominal_value
 print('The uncertainty associated with the parameters of the model is %.1f-fold' %model_param_CI)
 
@@ -135,6 +142,7 @@ print('The uncertainty associated with the parameters of the model is %.1f-fold'
 # We combine these two uncertainties as our best projection for the uncertainty associated with the carbon content of a single phage:
 
 # In[8]:
+
 
 mul_CI = CI_prod_prop(np.array([rad_cc_CI,model_param_CI]))
 print('Our best projection for the uncertainty associated with the carbon content of a single phage is ≈%.1f-fold' %mul_CI)
@@ -144,12 +152,13 @@ print('Our best projection for the uncertainty associated with the carbon conten
 
 # In[9]:
 
+
 print('Our best estimate for the carbon content of a single phage: %.0e g' % best_estimate.nominal_value)
 print('Uncertainty associated with the estiamte of the carbon content of a single phage: %.0f-fold' % mul_CI)
 
 old_results = pd.read_excel('../phage_biomass_estimate.xlsx')
 result = old_results.copy()
-result.loc[1] = pd.Series({
+result.loc[0] = pd.Series({
                 'Parameter': 'Carbon content of a single phage',
                 'Value': best_estimate.nominal_value,
                 'Units': 'g C per individual',
