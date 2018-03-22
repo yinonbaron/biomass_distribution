@@ -29,7 +29,7 @@ def update_figs2s3(row,col,values,path,round=False):
         writer.book = load_workbook(path)
         writer.sheets = dict((ws.title, ws) for ws in writer.book.worksheets)
     
-        # Feed results to Table 1 & Fig1
+        # Feed results to Fig. S2-S3
         table1 = pd.read_excel(path, 'FigS2-S3',index_col=0)
         table1.loc[row,col] = values
         table1.to_excel(writer,'FigS2-S3')
