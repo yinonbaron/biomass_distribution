@@ -1,4 +1,5 @@
 # The Biomass Distribution on Earth
+
 This repository contains all source data and code for the analysis found in "The Distribution of Biomass on Earth" by Yinon Bar-On, Rob Phillips and Ron Milo.
 
 An index for the structure of this repository is given below:
@@ -21,9 +22,11 @@ An index for the structure of this repository is given below:
 
 * **[`statistics_helper/`](./statistics_helper)|** Helper functions for generating our best estimates as well as uncertainty projections
 
-* `results.xlsx`| A file summarizing the results of the study
+* `results.xlsx`| An excel file summarizing the results of the study
 
 * `run_pipeline.py`| A script for running the entire analysis and regenerating the results
+
+* `global_biomass.ipynb`| A Jupyter notebook estimating the total biomass on Earth
 
 Each directory contain Jupyter notebooks detailing the analysis leading to our estimates. To make our analysis accessible, we provide the notebooks in three file formats: `.ipynb` files, `.html` files and `.py` files.
 
@@ -41,3 +44,5 @@ The code was tested on the following software versions:
 * gdal 1.11.3
 * matplotlib 2.2.2
 * openpyxl 2.5.0
+
+Tested on Ubuntu versions 16.04 & 17.10
