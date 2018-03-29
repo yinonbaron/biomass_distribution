@@ -11946,7 +11946,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with our estiamte of the biomass of phages is 15.2-fold
+<pre>Our best projection for the uncertainty associated with our estiamte of the biomass of phages is 15.6-fold
 </pre>
 </div>
 </div>
@@ -11963,8 +11963,8 @@ div#notebook {
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to Table 1 &amp; Fig. 1</span>
 <span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> 
                <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Viruses&#39;</span><span class="p">,</span><span class="s1">&#39;Viruses&#39;</span><span class="p">),</span> 
-               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
-               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
+               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">,</span><span class="s1">&#39;Total uncertainty&#39;</span><span class="p">],</span>
+               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
                <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../results.xlsx&#39;</span><span class="p">)</span>
 
 
@@ -11977,7 +11977,7 @@ div#notebook {
 
 <span class="c1"># Calculate non-deep subsurface virus biomass</span>
 <span class="n">phage_num</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;phage_num/phage_num_estimate.xlsx&#39;</span><span class="p">)</span>
-<span class="n">non_deep_phage</span> <span class="o">=</span> <span class="n">phage_num</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">estimate</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span>
+<span class="n">non_deep_phage</span> <span class="o">=</span> <span class="n">phage_num</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">estimate</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span>
 
 <span class="c1"># Feed results to Fig S1</span>
 <span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;FigS1&#39;</span><span class="p">,</span> 

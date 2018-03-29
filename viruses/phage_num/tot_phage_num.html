@@ -11968,7 +11968,7 @@ Here is a summary of our estimates for the total number of phages in each of the
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with our estimate of the total number of phages is 13.5-fold
+<pre>Our best projection for the uncertainty associated with our estimate of the total number of phages is 13.6-fold
 </pre>
 </div>
 </div>
@@ -11992,7 +11992,7 @@ Here is a summary of our estimates for the total number of phages in each of the
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total number of phages : </span><span class="si">%.0e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the estiamte of the total number of phages: </span><span class="si">%.0f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the estimate of the total number of phages: </span><span class="si">%.0f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 
 <span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../phage_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -12002,6 +12002,7 @@ Here is a summary of our estimates for the total number of phages in each of the
                 <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Number of individuals&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="n">mul_CI</span>
                 <span class="p">})</span>
+
 
 <span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../phage_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -12021,7 +12022,7 @@ Here is a summary of our estimates for the total number of phages in each of the
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total number of phages : 1e+31
-Uncertainty associated with the estiamte of the total number of phages: 13-fold
+Uncertainty associated with the estimate of the total number of phages: 14-fold
 </pre>
 </div>
 </div>

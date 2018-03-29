@@ -12479,6 +12479,7 @@ dtype: float64</pre>
 
 <span class="c1"># Calculate the ratio between the number of cells of protists and prokaryotes</span>
 <span class="n">best_tm_ratio_conc</span> <span class="o">=</span> <span class="n">best_tm_mean_conc</span><span class="p">[</span><span class="s1">&#39;Concentration of Flagellates [cells mL^-1]&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">best_tm_mean_conc</span><span class="p">[</span><span class="s1">&#39;Concentration of Bacteria [cells mL^-1]&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="n">best_tm_ratio_conc</span>
 </pre></div>
 
@@ -12515,8 +12516,8 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 
 <div class="output_text output_subarea output_execute_result">
 <pre>Epipelagic
-False   0.0
-True    0.0
+False   0.002
+True    0.004
 dtype: float64</pre>
 </div>
 
@@ -12540,7 +12541,8 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># For the epipelagic layer multiply cell concentration ratios by the carbon</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="c1"># For the epipelagic layer multiply cell concentration ratios by the carbon</span>
 <span class="c1"># content ratios measured by Herndl</span>
 <span class="n">epi_tm_biomass</span> <span class="o">=</span> <span class="n">best_tm_ratio_conc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span><span class="o">*</span><span class="n">herndl_cc_ratio</span>
 

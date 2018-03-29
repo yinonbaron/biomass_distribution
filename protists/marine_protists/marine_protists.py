@@ -274,6 +274,7 @@ best_tm_mean_conc = np.sqrt(arith_tm_mean_conc*geo_tm_mean_conc)
 
 # Calculate the ratio between the number of cells of protists and prokaryotes
 best_tm_ratio_conc = best_tm_mean_conc['Concentration of Flagellates [cells mL^-1]']/best_tm_mean_conc['Concentration of Bacteria [cells mL^-1]']
+pd.options.display.float_format = '{:,.3f}'.format
 best_tm_ratio_conc
 
 
@@ -282,6 +283,7 @@ best_tm_ratio_conc
 # In[22]:
 
 
+pd.options.display.float_format = '{:,.1f}'.format
 # For the epipelagic layer multiply cell concentration ratios by the carbon
 # content ratios measured by Herndl
 epi_tm_biomass = best_tm_ratio_conc.loc[True]*herndl_cc_ratio

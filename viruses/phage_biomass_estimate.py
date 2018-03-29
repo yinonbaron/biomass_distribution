@@ -52,8 +52,8 @@ print('Our best projection for the uncertainty associated with our estiamte of t
 # Feed results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 
                row=('Viruses','Viruses'), 
-               col=['Biomass [Gt C]', 'Uncertainty'],
-               values=[best_estimate/1e15,mul_CI],
+               col=['Biomass [Gt C]', 'Uncertainty','Total uncertainty'],
+               values=[best_estimate/1e15,mul_CI,mul_CI],
                path='../results.xlsx')
 
 
@@ -66,7 +66,7 @@ update_results(sheet='Table S1',
 
 # Calculate non-deep subsurface virus biomass
 phage_num = pd.read_excel('phage_num/phage_num_estimate.xlsx')
-non_deep_phage = phage_num.loc[[0,2],'Value']*estimate.loc[0,'Value']
+non_deep_phage = phage_num.loc[[0,2],'Value'].sum()*estimate.loc[0,'Value']
 
 # Feed results to Fig S1
 update_results(sheet='FigS1', 

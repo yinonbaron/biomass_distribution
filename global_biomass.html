@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>fish_biomass_estimate</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>global_biomass</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11773,14 +11773,12 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Load dependencies</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline  
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;statistics_helper/&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
@@ -11794,11 +11792,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-biomass-of-fish">Estimating the biomass of fish<a class="anchor-link" href="#Estimating-the-biomass-of-fish">&#182;</a></h1><p>To estimate the biomass of fish, we first estimate the total biomass of mesopelagic fish, and then add to this estimate the estmimate for the non-mesopelagic fish made by <a href="http://dx.doi.org/10.1126/science.1157972">Wilson et al.</a>.</p>
-<p>In order to estimate the biomass of mesopelagic fish, we rely on two independent methods - and estimate based on trawling by <a href="http://www.seaaroundus.org/doc/Researcher+Publications/dpauly/PDF/2005/OtherItems/MappingGlobalBiomassMesopelagicFishes.pdf">Lam &amp; Pauly</a>, and an estimate based on sonar.</p>
-<h2 id="Sonar-based-estimate">Sonar-based estimate<a class="anchor-link" href="#Sonar-based-estimate">&#182;</a></h2><p>We generate the sonar-based estimate relying on data from <a href="http://dx.doi.org/10.1038/ncomms4271">Irigoien et al.</a> and <a href="http://dx.doi.org/10.1016/j.cub.2016.11.003">Proud et al.</a>.</p>
-<p>Estimating the biomass of mesopelagic fish using sonar is a two step process. First we use estimates of the global backscatter of mesopelagic fish. This backscatter is converted to an estimate of the global biomass of mesopelagic fish by using estimates for the target strength of a single mesopelagic fish.</p>
-<h3 id="Total-backscatter">Total backscatter<a class="anchor-link" href="#Total-backscatter">&#182;</a></h3><p>To estimate the total backscatter of mesopelagic fish, we rely on <a href="http://dx.doi.org/10.1038/ncomms4271">Irigoien et al.</a> and <a href="http://dx.doi.org/10.1016/j.cub.2016.11.003">Proud et al.</a>. Irigoien et al. generates several different estimates for the global  nautical area scatter of mesopelagic fish. We use the geometric mean of the estimates of Irigoien et al. as one source for estimating the total backscatter of mesopelagic fish. We note that the units used by Irigoien et al. are incorrect, as nautical area scatteing coefficient (NASC) is measured in $\frac{m^2}{nm^2}$, but the order of magnitude of the values estimated by Irigoien et al. implies that they multiplied the NASC by the surface area of the ocean in units of $m^2$. This means that the values reported by Irigoien et al. are in fact in units of $\frac{m^4}{nm^2}$. We convert the values reported by Irigoein et al. from the total scatter to the total backscatter by using the equation: $$global \: backscatter \: [m^2] = \frac{global \: scatter \: [\frac{m^4}{nmi^2}]}{4\pi×\frac{1852^2 m^2}{nmi^2}}$$</p>
+<h1 id="Estimating-the-total-biomass-on-Earth">Estimating the total biomass on Earth<a class="anchor-link" href="#Estimating-the-total-biomass-on-Earth">&#182;</a></h1><p>To estimate the total biomass on Earth, we sum all of the contributions from each of the taxa. Here are our estimate of the total biomass of each taxon:</p>
 
 </div>
 </div>
@@ -11808,13 +11802,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load scatter data from Irigoien et al.</span>
-<span class="n">scatter</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Total scatter&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># convert scater to backscatter</span>
-<span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total sA [m^4 nmi^-2]&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1852</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total sA [m^4 nmi^-2]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total sA [m^4 nmi^-2]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">scatter</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;results.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results</span>
 </pre></div>
 
 </div>
@@ -11850,41 +11839,257 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>sA estimate</th>
-      <th>Total sA [m^4 nmi^-2]</th>
-      <th>Total backscatter [m^2]</th>
+      <th></th>
+      <th>Biomass [Gt C]</th>
+      <th>Rounded biomass [Gt C]</th>
+      <th>Uncertainty</th>
+      <th>Total biomass [Gt C]</th>
+      <th>Rounded total biomass [Gt C]</th>
+      <th>Total uncertainty</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>OLS: sA = 2384.4* ln(PP) – 11678</td>
-      <td>4.2e+17</td>
-      <td>9.8e+09</td>
+      <th rowspan="4" valign="top">Bacteria</th>
+      <th>Terrestrial deep subsurface</th>
+      <td>58.069294</td>
+      <td>60.000</td>
+      <td>20.746506</td>
+      <td>73.396742</td>
+      <td>70.0</td>
+      <td>9.683912</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>OLS: ln (sA) = 1.52* ln(PP) – 1.36</td>
-      <td>4.7e+17</td>
-      <td>1.1e+10</td>
+      <th>Marine</th>
+      <td>1.326934</td>
+      <td>1.400</td>
+      <td>1.809006</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>GWR: ln(sA) = 1.36*ln (PP) – 0.2</td>
-      <td>5.6e+17</td>
-      <td>1.3e+10</td>
+      <th>Soil</th>
+      <td>7.352298</td>
+      <td>7.000</td>
+      <td>6.390906</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>GWR different equations for PP above and below...</td>
-      <td>4.4e+17</td>
-      <td>1.0e+10</td>
+      <th>Marine deep subsurface</th>
+      <td>6.648217</td>
+      <td>7.000</td>
+      <td>7.643075</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Cruise average sA  × ocean surface deeper than...</td>
-      <td>4.1e+17</td>
-      <td>9.6e+09</td>
+      <th rowspan="4" valign="top">Archaea</th>
+      <th>Terrestrial deep subsurface</th>
+      <td>3.706551</td>
+      <td>4.000</td>
+      <td>63.007910</td>
+      <td>7.403225</td>
+      <td>8.0</td>
+      <td>13.010903</td>
+    </tr>
+    <tr>
+      <th>Marine</th>
+      <td>0.331734</td>
+      <td>0.300</td>
+      <td>2.686053</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Soil</th>
+      <td>0.515705</td>
+      <td>0.500</td>
+      <td>3.644866</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Marine deep subsurface</th>
+      <td>2.849236</td>
+      <td>3.000</td>
+      <td>7.931545</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Fungi</th>
+      <th>Terrestrial</th>
+      <td>11.802005</td>
+      <td>NaN</td>
+      <td>3.459751</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>3.320525</td>
+    </tr>
+    <tr>
+      <th>Marine</th>
+      <td>0.324820</td>
+      <td>NaN</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="11" valign="top">Animals</th>
+      <th>Annelids</th>
+      <td>0.198506</td>
+      <td>0.200</td>
+      <td>NaN</td>
+      <td>2.467224</td>
+      <td>3.0</td>
+      <td>4.885262</td>
+    </tr>
+    <tr>
+      <th>Terrestrial arthropods</th>
+      <td>0.211568</td>
+      <td>0.200</td>
+      <td>14.881347</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Marine arthropods</th>
+      <td>0.922340</td>
+      <td>1.000</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Cnidarians</th>
+      <td>0.089617</td>
+      <td>0.100</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Molluscs</th>
+      <td>0.181985</td>
+      <td>0.200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Nematodes</th>
+      <td>0.024075</td>
+      <td>0.020</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Fish</th>
+      <td>0.667611</td>
+      <td>0.700</td>
+      <td>8.306086</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Livestock</th>
+      <td>0.107147</td>
+      <td>0.100</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Humans</th>
+      <td>0.055373</td>
+      <td>0.050</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Wild birds</th>
+      <td>0.001658</td>
+      <td>0.002</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Wild mammals</th>
+      <td>0.007344</td>
+      <td>0.007</td>
+      <td>1.810929</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Protists</th>
+      <th>Marine</th>
+      <td>2.059715</td>
+      <td>NaN</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>5.560795</td>
+    </tr>
+    <tr>
+      <th>Terrestrial</th>
+      <td>1.597868</td>
+      <td>NaN</td>
+      <td>7.466958</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Viruses</th>
+      <th>Viruses</th>
+      <td>0.220216</td>
+      <td>0.200</td>
+      <td>15.573013</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>15.573013</td>
+    </tr>
+    <tr>
+      <th>Plants</th>
+      <th>Plants</th>
+      <td>450.000000</td>
+      <td>450.000</td>
+      <td>1.193955</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.193955</td>
+    </tr>
+    <tr>
+      <th>Total biomass</th>
+      <th>Total biomass</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>550.0</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -11902,9 +12107,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of values from Irigoien et al.</span>
-<span class="n">irigoien_backscatter</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The geometric mean of global backscatter from Irigoien et al. is ≈</span><span class="si">%.1e</span><span class="s1"> m^2&#39;</span> <span class="o">%</span><span class="k">irigoien_backscatter</span>)
+<div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the global biomass on Earth is ≈%.d Gt C&#39;</span> <span class="o">%</span><span class="k">round</span>(best_estimate,-1))
 </pre></div>
 
 </div>
@@ -11921,7 +12125,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The geometric mean of global backscatter from Irigoien et al. is ≈1.1e+10 m^2
+<pre>Our best estimate for the global biomass on Earth is ≈550 Gt C
 </pre>
 </div>
 </div>
@@ -11934,7 +12138,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As our best estimate for the global backscatter of mesopelagic fish, we use the geometric mean of the average value from Irigoien et al. and the value reported in Proud et al.</p>
+<h1 id="Uncertainty-analysis">Uncertainty analysis<a class="anchor-link" href="#Uncertainty-analysis">&#182;</a></h1><p>To project the uncertainty associated with our estimate of the total biomass on Earth, we sum the biomass of the different kingdoms of life and take into account the uncertainty in our estimates of their biomass:</p>
 
 </div>
 </div>
@@ -11944,12 +12148,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># The global backscatter reported by Proud et al.</span>
-<span class="n">proud_backscatter</span> <span class="o">=</span> <span class="mf">6.02e9</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">kingdoms</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Total biomass&#39;</span><span class="p">)</span>
 
-<span class="c1"># Our best estimate </span>
-<span class="n">best_backscatter</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">irigoien_backscatter</span><span class="p">,</span><span class="n">proud_backscatter</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the global backscatter of mesapelagic fish is </span><span class="si">%.0e</span><span class="s1"> m^2&#39;</span> <span class="o">%</span><span class="k">best_backscatter</span>)
+<span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">kingdoms</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">],</span> <span class="n">mul_CIs</span><span class="o">=</span><span class="n">kingdoms</span><span class="p">[</span><span class="s1">&#39;Total uncertainty&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total biomass on Earth is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">mul_CI</span>)
 </pre></div>
 
 </div>
@@ -11966,7 +12168,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the global backscatter of mesapelagic fish is 8e+09 m^2
+<pre>Our best projection for the uncertainty associated with our estimate of the total biomass on Earth is ≈1.7-fold
 </pre>
 </div>
 </div>
@@ -11974,1467 +12176,13 @@ div#notebook {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Target-strength">Target strength<a class="anchor-link" href="#Target-strength">&#182;</a></h3><p>In order to convert the global backscatter into biomass, we use reported values for the target strength per unit biomass of mesopelagic fish. The target strength is a measure of the the backscattering cross-section in dB, which is defined as $TS = 10 \times log_{10}(\sigma_{bs})$ with units of dB 1 re $m^2$. By measuring the relation between the target strength and biomass of mesopelagic fish, one can calculate the target strength per unit biomass in units of db 1 re $\frac{m^2}{kg}$. We can use the global backscatter to calculate the total biomass of mesopelagic fish based on the equation provided in <a href="https://doi.org/10.1006/jmsc.2001.1158">MacLennan et al.</a>: $$biomass_{fish} \:[kg]= \frac{global \: backscatter \: [m^2]}{10^{\frac{TS_{kg}}{10}} [m^2 kg^{-1}]}$$
-Where $TS_{kg}$ is the terget strength per kilogram biomass.</p>
-<p>The main source affecting the target strength of mesopelagic fish is their swimbaldder, as the swimbladder serves as a strong acoustic reflector at the frequencies used to measure the backscattering of mesopelagic fish. Irigoien et al. provide a list of values from the literature of target strength per unit biomass for mesopelagic fish with or without swimbladder. It is clear from the data that the presence or absence of swimbladder segregates the data into two distinct groups:</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load terget strength data</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Target strength&#39;</span><span class="p">)</span>
-
-<span class="c1"># Plot the distribution of TS for fish with or without swimbladder</span>
-<span class="n">ts</span><span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;No&#39;</span><span class="p">][</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;No swimbladder&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">ts</span><span class="p">[</span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Yes&#39;</span><span class="p">][</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;With swimbladder&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">r&#39;Target strength per unit biomass dB kg$^{-1}$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Text(0,0.5,&#39;Counts&#39;)</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To estimate the characteristic target strength per unit biomass of mesopelagic fish, we first estiamte the characteristic target strength per unit biomass of fish with or without swimbladder. We assume that fish with and without swimbladder represent an equal portion of the population of mesopelagic fish. We test the uncertainty associated with this assumption in the uncertainty analysis section.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the average TS per kg for fish with and without swimbladder</span>
-<span class="n">TS_bin</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Swimbladder
-No    -4.3e+01
-Yes   -2.9e+01
-Name: dB kg^-1, dtype: float64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We use our best estimate for the target strength per unit biomass to estimate the total biomass of mesopelagic fish. We transform the TS to backscattering cross-section, and then calculate the effective population backscattering cross-section based on the assumption that fish with or without swimbladder represent equal portions of the population.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># The conversion equation from global backscatter and terget strength per unit biomass</span>
-<span class="n">biomass_estimator</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">TS1</span><span class="p">,</span><span class="n">TS2</span><span class="p">,</span><span class="n">bs</span><span class="p">,</span><span class="n">frac</span><span class="p">:</span> <span class="n">bs</span><span class="o">/</span><span class="p">(</span><span class="n">frac</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">TS1</span><span class="o">/</span><span class="mf">10.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">frac</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">TS2</span><span class="o">/</span><span class="mf">10.</span><span class="p">))</span>
-
-<span class="c1"># Estimate biomass and convert to g C, assuming fish with or without swimbladder are both 50% of the population</span>
-<span class="n">sonar_biomass</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best sonar-based estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">sonar_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best sonar-based estimate for the biomass of mesopelagic fish is ≈1.8 Gt C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As noted in the Supplementary Information, there are several caveats which might bias the results. We use the geometric mean of estimates based on sonar and earlier estimates based on trawling to generate a robust estimate for the biomass of mesopelagic fish.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># The estimate of the global biomass of mesopelagic fish based on trawling reported in Lan &amp; Pauly</span>
-<span class="n">trawling_biomass</span> <span class="o">=</span> <span class="mf">1.5e14</span>
-
-<span class="c1"># Estimate the biomass of mesopelagic fish based on the geometric mean of sonar-based and trawling-based estimates</span>
-<span class="n">best_mesopelagic_biomass</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_mesopelagic_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the biomass of mesopelagic fish is ≈0.5 Gt C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, we add to our estimate of the biomass of mesopelagic fish the estimate of biomass of non-mesopelagic fish made by <a href="http://dx.doi.org/10.1126/science.1157972">Wilson et al.</a> to generate our estimate for the total biomass of fish.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># The estimate of non-mesopelagic fish based on Wilson et al.</span>
-<span class="n">non_mesopelagic_fish_biomass</span> <span class="o">=</span> <span class="mf">1.5e14</span>
-
-<span class="n">best_estimate</span> <span class="o">=</span> <span class="n">best_mesopelagic_biomass</span><span class="o">+</span><span class="n">non_mesopelagic_fish_biomass</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the biomass of fish is ≈0.7 Gt C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Uncertainty-analysis">Uncertainty analysis<a class="anchor-link" href="#Uncertainty-analysis">&#182;</a></h1><p>In order to assess the uncertainty associated with our estimate for the biomass of fish, we assess the uncertainty associated with the sonar-based estimate of the biomass of mesopelagic fish, as well as for the non-mesopelagic fish biomass.</p>
-<h2 id="Mesopelagic-fish-uncertainty">Mesopelagic fish uncertainty<a class="anchor-link" href="#Mesopelagic-fish-uncertainty">&#182;</a></h2><p>To quantify the uncertainty associated with our estimate of the biomass of mesopelagic fish, we assess the uncertainty associated with the sonar-based estimate, and the inter-method uncertainty between the sonar-based and trawling-based estimates. We do not assess the uncertainty of the trawling-based estimate as no data regarding the uncertainty of the estimate is available.</p>
-<h3 id="Sonar-based-estimate-uncertainty">Sonar-based estimate uncertainty<a class="anchor-link" href="#Sonar-based-estimate-uncertainty">&#182;</a></h3><p>The main parameters influencing the uncertainty of the sonar-based estimates are the global backscatter and the characteristic target-strength per unit biomass. We calculate the uncertainty associated with each one of those parameters, and them combine these uncertainties to quantify the uncertainty of the sonar-based estimate.</p>
-<h4 id="Global-Backscatter">Global Backscatter<a class="anchor-link" href="#Global-Backscatter">&#182;</a></h4><p>For calculating the global backscatter, we rely in two sources of data - Data from Irigoien et al. and data from Proud et al. We survery both the intra-study uncertainty and interstudy uncertainty associated with the global backscatter.</p>
-<h5 id="Intra-study-uncertainty">Intra-study uncertainty<a class="anchor-link" href="#Intra-study-uncertainty">&#182;</a></h5><p>Irigoien et al. provides several estimates for the global scatter based on several different types of equations characterizing the relationship between primary productivity and the NASC. We calculate the 95% confidence interval of the geometric mean of these different estimates.</p>
-<p>Proud et al. estimate a global backscatter of 6.02×$10^9$ $m^2$ ± 1.4×$10^9$ $m^2$. We thus use this range as a measure of the intra-study uncertainty in the estimate of Proud et al.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the intra-study uncertainty of Irigoien et al.</span>
-<span class="n">irigoien_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">scatter</span><span class="p">[</span><span class="s1">&#39;Total backscatter [m^2]&#39;</span><span class="p">])</span>
-
-<span class="c1"># Calculate the intra-study uncertainty of Proud et al.</span>
-<span class="n">proud_CI</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.4e9</span><span class="o">+</span><span class="mf">6.02e9</span><span class="p">)</span><span class="o">/</span><span class="mf">6.02e9</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The intra-study uncertainty of the total backscatter estimate of Irigoien et al. is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">irigoien_CI</span>)
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The intra-study uncertainty of the total backscatter estimate of Proud et al. is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">proud_CI</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The intra-study uncertainty of the total backscatter estimate of Irigoien et al. is ≈1.1-fold
-The intra-study uncertainty of the total backscatter estimate of Proud et al. is ≈1.2-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Interstudy-uncertainty">Interstudy uncertainty<a class="anchor-link" href="#Interstudy-uncertainty">&#182;</a></h5><p>As a measure of the interstudy uncertainty of the global backscatter, we calculate the 95% confidence interval of the geometric mean of the estimate from Irigoien et al. and Proud et al.:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the interstudy uncertainty of the global backscatter</span>
-<span class="n">bs_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">irigoien_backscatter</span><span class="p">,</span><span class="n">proud_backscatter</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The interstudy uncertainty of the total backscatter  is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">bs_inter_CI</span>)
-
-<span class="c1"># Take the highest uncertainty as our best projection of the uncertainty associates with the global backscatter</span>
-<span class="n">bs_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">irigoien_CI</span><span class="p">,</span><span class="n">proud_CI</span><span class="p">,</span><span class="n">bs_inter_CI</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The interstudy uncertainty of the total backscatter  is ≈1.7-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We use the highest uncertainty among these different kinds of uncertainty measures as our best projection of the uncertainty of the global backscatter, which is ≈1.7-fold.</p>
-<h4 id="Target-strength-per-unit-biomass">Target strength per unit biomass<a class="anchor-link" href="#Target-strength-per-unit-biomass">&#182;</a></h4><p>To assess the uncertainty associated with the target strength per unit biomass, we calculate the uncertainty in estimating the characteristic target strength per unit biomass of fish with or without swimbladders, adn the uncertainty associated with the fraction of the population that either has or lacks swimbladder</p>
-<h5 id="Uncertainty-of-characteristic-target-strength-per-unit-biomass-of-fish-with-or-without-swimbladder">Uncertainty of characteristic target strength per unit biomass of fish with or without swimbladder<a class="anchor-link" href="#Uncertainty-of-characteristic-target-strength-per-unit-biomass-of-fish-with-or-without-swimbladder">&#182;</a></h5><p>We calculate the 95% confidence interval of the target strength of fish with or withour swimbladder, and propagate this confidence interval to the total estimate of biomass to assess the uncertainty associated with the estimate of the target strength. We calculated an uncertainty of ≈1.3-fold. associated with te estimate of the target strength per unit biomass of fish.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Define the function that will estimate the 95% confidence interval</span>
-<span class="k">def</span> <span class="nf">CI_groupby</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">input</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="c1"># Group target strength values by the presence of absence of swimbladder</span>
-<span class="n">ts_bin</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Swimbladder&#39;</span><span class="p">)</span>
-
-<span class="c1"># Calculate sandard error of those values</span>
-<span class="n">ts_bin_CI</span> <span class="o">=</span> <span class="n">ts_bin</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">CI_groupby</span><span class="p">)</span>
-<span class="n">ts_CI</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># For the target strength of fish with or without swimbladder, sample 1000 times from the distribution</span>
-<span class="c1"># of target strengths, and calculate the estimate of the total biomass of fish. Then calcualte the 95%</span>
-<span class="c1"># confidence interval of the resulting distribution as a measure of the uncertainty in the biomass </span>
-<span class="c1"># estimate resulting from the uncertainty in the target strength</span>
-
-<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">instance</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ts_bin_CI</span><span class="p">):</span>
-    <span class="n">ts_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">instance</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">biomass_dist</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="n">ts_dist</span><span class="p">,</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">][</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span>
-    <span class="n">upper_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">biomass_dist</span><span class="p">,</span><span class="mf">97.5</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biomass_dist</span><span class="p">)</span>
-    <span class="n">lower_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biomass_dist</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">biomass_dist</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
-    <span class="n">ts_CI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">upper_CI</span><span class="p">,</span><span class="n">lower_CI</span><span class="p">]))</span>
-<span class="c1"># Take the maximum uncertainty of the with or with out swimbladder as our best projection</span>
-<span class="n">ts_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ts_CI</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the target strength per unit biomass is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">ts_CI</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the estimate of the target strength per unit biomass is ≈1.3-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Uncertainty-of-the-fraction-of-the-population-possessing-swimbladder">Uncertainty of the fraction of the population possessing swimbladder<a class="anchor-link" href="#Uncertainty-of-the-fraction-of-the-population-possessing-swimbladder">&#182;</a></h5><p>As a measure of the uncertainty associated with the assumption that fish with or without swimbladder contributed similar portions to the total population of mesopelagic fish, we sample different ratios of fish with and without swimbladder, and calculate the biomass estimate for those fractions.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Sample different fractions of fish with swimbladder</span>
-<span class="n">ratio_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="c1"># Estiamte the biomass of mesopelagic fish using the sampled fraction</span>
-<span class="n">biomass_ratio_dist</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">ratio_range</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span>
-
-<span class="c1"># Plot the results for all fractions</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ratio_range</span><span class="p">,</span><span class="n">biomass_ratio_dist</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fraction of the population possessing swimbladder&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Biomass estimate [Gt C]&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Text(0,0.5,&#39;Biomass estimate [Gt C]&#39;)</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We take the 95% range of distribution of fraction of fish with swimbladder account and calculate the uncertainty this fraction introduces into the sonar-based estimate of mesopelagic fish biomass. In this range the confidence interval of the biomass estimate is ≈8.7-fold.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the upper and lower bounds of the influence of the fraction of fish with swimbladder on biomass estimate</span>
-<span class="n">ratio_upper_CI</span> <span class="o">=</span> <span class="p">(</span><span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="mf">0.975</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="p">)</span><span class="o">/</span><span class="n">sonar_biomass</span>
-<span class="n">ratio_lower_CI</span> <span class="o">=</span> <span class="n">sonar_biomass</span><span class="o">/</span><span class="p">(</span><span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="p">)</span>
-<span class="n">ratio_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">ratio_upper_CI</span><span class="p">,</span><span class="n">ratio_lower_CI</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the fraction of fish possessing swimbladder is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">ratio_CI</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the fraction of fish possessing swimbladder is ≈8.7-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To calculate the total uncertainty associated with the sonar-based estimate, we propagate the uncertainties associated with the total backscatter, the target strength per unit biomass and the fraction of fish with swimbladder.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">sonar_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ratio_CI</span><span class="p">,</span><span class="n">ts_CI</span><span class="p">,</span><span class="n">bs_CI</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">sonar_CI</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈9.4-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Inter-method-uncertainty">Inter-method uncertainty<a class="anchor-link" href="#Inter-method-uncertainty">&#182;</a></h3><p>As a measure of the inter-method uncertainty of our estimate of the biomass of mesopelagic fish, we calculate the 95% confidence interval of the geometric mean of the sonar-based estiamte and the trawling-based estimate.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">meso_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sonar_biomass</span><span class="p">,</span><span class="n">trawling_biomass</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">meso_inter_CI</span>)
-
-<span class="c1"># Take the highest uncertainty as our best projection for the uncertainty associated with the estimate</span>
-<span class="c1"># of the biomass of mesopelagic fish</span>
-<span class="n">meso_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">meso_inter_CI</span><span class="p">,</span><span class="n">sonar_CI</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈11.3-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comparing our projections for the uncertainty of the sonar-based estimate of the biomass of mesopelagic fish and the inter-method uncertainty, our best projection for the biomass of mesopelagic fish is about one order of magnitude.</p>
-<h2 id="Non-mesopelagic-fish-biomass-uncertainty">Non-mesopelagic fish biomass uncertainty<a class="anchor-link" href="#Non-mesopelagic-fish-biomass-uncertainty">&#182;</a></h2><p>For estimating the biomass of non-mesopelagic fish, we rely on estimates by Wilson et al., which does not report an uncertainty range for the biomass of non-meso pelagic fish. A later study (<a href="https://doi.org/10.1371/journal.pone.0133794">Jennings et al.</a>, gave an estimate for the total biomass of fish with body weight of 1 g to 1000 kg, based on ecological models. Jenning et al. reports a 90% confidence interval of 0.34-26.12 Gt wet weight, with a median estimate of ≈5 Gt wet weight. We take this range as a crude measure of the uncertainty associated with the estimate of the biomass of non-mesopelagic fish.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the uncertainty of the non-mesopelagic fish biomass</span>
-<span class="n">non_meso_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="mf">26.12</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="o">/</span><span class="mf">0.34</span><span class="p">])</span>
-
-<span class="c1"># Propagate the uncertainties of mesopelagic fish biomass and non-mesopelagic fish biomass to the total estimate</span>
-<span class="c1"># of fish biomass</span>
-<span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_mesopelagic_biomass</span><span class="p">,</span><span class="n">non_mesopelagic_fish_biomass</span><span class="p">]),</span> <span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">meso_CI</span><span class="p">,</span><span class="n">non_meso_CI</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with the estimate of the biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">mul_CI</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the estimate of the biomass of fish is ≈8.3-fold
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Prehuman-fish-biomass">Prehuman fish biomass<a class="anchor-link" href="#Prehuman-fish-biomass">&#182;</a></h1><p>To estimate the prehuman fish biomass, we rely on a study (<a href="http://dx.doi.org/10.1073/pnas.1520420113"></a>) which states that fish stocks in global fisheries are 1.17 of the Maximal Sustainable Yield biomass, when looking at all fisheries and calculating a catch-weighted average global fishery (Figure S12 in the SI Appendix of Costello et al.). Costello et al. also reports the total biomass of present day fisheries at 0.84 Gt wet weight (Table S15 in the SI Appendix of Costello et al.). Assuming 70% water content and 50% carbon content out of wet weight, this translates to:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">costello_ww</span> <span class="o">=</span> <span class="mf">0.84</span>
-<span class="n">wet_to_c</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="mf">0.5</span>
-<span class="n">costello_cc</span> <span class="o">=</span> <span class="n">costello_ww</span><span class="o">*</span><span class="n">wet_to_c</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Costello et al. estimate ≈</span><span class="si">%.2f</span><span class="s1"> Gt C of current fisheries&#39;</span> <span class="o">%</span><span class="k">costello_cc</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Costello et al. estimate ≈0.13 Gt C of current fisheries
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This number is close to the number reported by Wilson et al. Using a database of published landings data and stock assessment biomass estimates, <a href="http://dx.doi.org/10.1139/f2012-077">Thorson et al.</a> estimate that the biomass of fish at the maximum sustainable yield represent ≈40% of the biomass the population would have reached in case of no fishing. From these two numbers, we can estimate the prehuamn biomass of fish in fisheries. We use the total biomass of fisheries reported in Costello et al., divide it the bte ratio reported in Costello et al. to estimate the Maximal Sustainable Yield biomass, and then divide this number by 0.4 to arrive at the prehuman biomass of fish in fisheries. We add to this estimate the estimate of the total biomass of mesopelagic fish, assuming their biomass wasn't affected by humans.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">costello_ratio</span> <span class="o">=</span> <span class="mf">1.17</span>
-<span class="n">thorson_ratio</span> <span class="o">=</span> <span class="mf">0.4</span>
-<span class="n">prehuman_biomass_fisheries</span> <span class="o">=</span> <span class="n">costello_cc</span><span class="o">*</span><span class="mi">1</span><span class="n">e15</span><span class="o">/</span><span class="n">costello_ratio</span><span class="o">/</span><span class="n">thorson_ratio</span>
-<span class="n">prehuman_fish_biomass</span> <span class="o">=</span> <span class="n">prehuman_biomass_fisheries</span><span class="o">+</span><span class="n">best_mesopelagic_biomass</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the total prehuman biomass of fish is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">prehuman_fish_biomass</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our estimate for the total prehuman biomass of fish is ≈0.8 Gt C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comparing the prehuman fish biomass to the present day fish biomass, we can estimate the human associated reduction in fish biomass:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">fish_biomass_decrease</span> <span class="o">=</span> <span class="n">prehuman_fish_biomass</span><span class="o">-</span><span class="n">best_estimate</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the decrease in the total biomass of fish is ≈</span><span class="si">%.2f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">fish_biomass_decrease</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our estimate for the decrease in the total biomass of fish is ≈0.12 Gt C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Estimating-the-total-number-of-fish">Estimating the total number of fish<a class="anchor-link" href="#Estimating-the-total-number-of-fish">&#182;</a></h1><p>To estimate the total number of fish, we divide our estimate of the total biomass of mesopelagic fish by an estimate for the characteristic carbon content of a single mesopelagic fish. 
-To estimate the mean weight of mesopelagic fish, we rely on data reported in <a href="https://doi.org/10.1111/j.1439-0426.2010.01450.x">Fock &amp; Ehrich</a> for the family Myctophidae (Lanternfish), which dominate the mesopelagic fish species. Fock &amp; Ehrich report the length range of each fish species, as well as allometric relations between fish length and weight for each species. Here is a sample of the data:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data from Fock &amp; Ehrich</span>
-<span class="n">fe_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;fish_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Fock &amp; Ehrich&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Use only data for the Myctophidae family</span>
-<span class="n">fe_mycto</span> <span class="o">=</span> <span class="n">fe_data</span><span class="p">[</span><span class="n">fe_data</span><span class="p">[</span><span class="s1">&#39;Family&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Myctophidae&#39;</span><span class="p">]</span>
-
-<span class="n">fe_mycto</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Family</th>
-      <th>Genus</th>
-      <th>Species</th>
-      <th>a(SL)</th>
-      <th>b(SL)</th>
-      <th>Calculation method</th>
-      <th>Minimum length (mm)</th>
-      <th>Maximum length (mm)</th>
-      <th>1982 deviation statistic dj</th>
-      <th>1982 wj-bjregression slope</th>
-      <th>1982 sample size for regression (n=)</th>
-      <th>1983 deviation statistic dj</th>
-      <th>1983 wj-bjregression slope</th>
-      <th>1983 sample size for regression (n=)</th>
-      <th>Remarks</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>95</th>
-      <td>Myctophidae</td>
-      <td>Benthosema</td>
-      <td>glaciale</td>
-      <td>1.0e-02</td>
-      <td>3.0e+00</td>
-      <td>3.0e+00</td>
-      <td>21</td>
-      <td>81</td>
-      <td>1.8e+02</td>
-      <td>4.2e-01</td>
-      <td>5</td>
-      <td>3.4e+01</td>
-      <td>8.9e-01</td>
-      <td>16</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>Myctophidae</td>
-      <td>Benthosema</td>
-      <td>suborbitale</td>
-      <td>1.0e-02</td>
-      <td>3.0e+00</td>
-      <td>6.0e+00</td>
-      <td>37</td>
-      <td>37</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>Myctophidae</td>
-      <td>Bolinichthys</td>
-      <td>indicus</td>
-      <td>1.3e-02</td>
-      <td>2.9e+00</td>
-      <td>3.0e+00</td>
-      <td>31</td>
-      <td>46</td>
-      <td>1.0e+03</td>
-      <td>8.0e-02</td>
-      <td>3</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>Myctophidae</td>
-      <td>Bolinichthys</td>
-      <td>supralateralis</td>
-      <td>7.5e-03</td>
-      <td>3.2e+00</td>
-      <td>3.0e+00</td>
-      <td>42</td>
-      <td>107</td>
-      <td>3.3e+01</td>
-      <td>1.9e+00</td>
-      <td>7</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>Myctophidae</td>
-      <td>Ceratoscopelus</td>
-      <td>maderensis</td>
-      <td>6.8e-03</td>
-      <td>3.2e+00</td>
-      <td>3.0e+00</td>
-      <td>27</td>
-      <td>85</td>
-      <td>6.1e+02</td>
-      <td>1.3e-01</td>
-      <td>8</td>
-      <td>1.5e+01</td>
-      <td>7.7e-01</td>
-      <td>2</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The allometric parameters a and b are plugged into the following equation to produce the weight of each fish species based on the length of each fish: $$ W = a*L^b$$
-Where W is the fish weight and L is the fish length. For each fish species, we calculate the characteristic fish length by using the mean of the minimum and maximum reported fish lengths:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">fe_mean_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;Maximum length (mm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;Minimum length (mm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We plug the mean length of each fish species into the allometric equation along with its specific parameters a and b to generate the mean wet weight of each fish. We use the geometric mean of the weights of all species as our best estimate of the weight of a single mesopelagic fish. We convert wet weight to carbon mass assuming 70% water content and 50% carbon our of the dry weight.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># The allometric equation to convert fish length into fish weight. The equation takes values</span>
-<span class="c1"># in cm and the data is given in mm so we divide the length by a factor of 10</span>
-<span class="n">calculate_weight</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="n">b</span>
-
-<span class="c1"># Transform the mean lengths of each fish species into a characteristic weight of each fish species</span>
-<span class="n">fe_mean_weight</span> <span class="o">=</span> <span class="n">calculate_weight</span><span class="p">(</span><span class="n">fe_mean_length</span><span class="p">,</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;a(SL)&#39;</span><span class="p">],</span><span class="n">fe_mycto</span><span class="p">[</span><span class="s1">&#39;b(SL)&#39;</span><span class="p">])</span>
-
-<span class="c1"># Conversion factor from wet weight to carbon mass</span>
-<span class="n">wet_to_c</span> <span class="o">=</span> <span class="mf">0.15</span>
-
-<span class="c1"># Calculate the mean carbon content of a single mesopelagic fish</span>
-<span class="n">fish_cc</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">fe_mean_weight</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">*</span><span class="n">wet_to_c</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the carbon content of a single mesopelagic fish is ≈</span><span class="si">%.2f</span><span class="s1"> g C&#39;</span> <span class="o">%</span><span class="k">fish_cc</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the carbon content of a single mesopelagic fish is ≈0.46 g C
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We estimate the total number of mesopelagic fish by dividing our best estimate for the total biomass of mesopelagic fish by our estimate for the carbon content of a single mesopelagic fish:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Estimate the total number of fish</span>
-<span class="n">tot_fish_num</span> <span class="o">=</span> <span class="n">best_mesopelagic_biomass</span><span class="o">/</span><span class="n">fish_cc</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total number of individual fish is ≈</span><span class="si">%.0e</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="k">tot_fish_num</span>)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the total number of individual fish is ≈1e+15.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Feed results to the chordate biomass data</span>
-<span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">old_results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Fish&#39;</span><span class="p">,([</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span><span class="s1">&#39;Uncertainty&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">)</span>
-<span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../../animal_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
-
-<span class="c1"># Feed results to Table 1 &amp; Fig. 1</span>
-<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span> 
-               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Fish&#39;</span><span class="p">),</span> 
-               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Biomass [Gt C]&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">],</span>
-               <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span><span class="n">mul_CI</span><span class="p">],</span>
-               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
-
-
-<span class="c1"># Feed results to Table S1</span>
-<span class="n">update_results</span><span class="p">(</span><span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table S1&#39;</span><span class="p">,</span> 
-               <span class="n">row</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animals&#39;</span><span class="p">,</span><span class="s1">&#39;Fish&#39;</span><span class="p">),</span> 
-               <span class="n">col</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of individuals&#39;</span><span class="p">],</span>
-               <span class="n">values</span><span class="o">=</span><span class="n">tot_fish_num</span><span class="p">,</span>
-               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
-
-<span class="c1"># Update the data mentioned in the MS</span>
-<span class="n">update_MS_data</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="s1">&#39;Decrease in biomass of fish&#39;</span><span class="p">,</span>
-               <span class="n">values</span><span class="o">=</span><span class="n">fish_biomass_decrease</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
-               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../../results.xlsx&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">update_results</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;results.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet</span><span class="o">=</span><span class="s1">&#39;Table1 &amp; Fig1&#39;</span><span class="p">,</span><span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Total biomass&#39;</span><span class="p">,</span><span class="s1">&#39;Total biomass&#39;</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Total uncertainty&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">mul_CI</span><span class="p">)</span>
 </pre></div>
 
 </div>

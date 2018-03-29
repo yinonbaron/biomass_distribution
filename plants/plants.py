@@ -99,8 +99,8 @@ tot_tree_num = 3e12
 # Feed results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 
                row=('Plants','Plants'), 
-               col=['Biomass [Gt C]', 'Uncertainty'],
-               values=[best_estimate/1e15,mul_CI],
+               col=['Biomass [Gt C]', 'Uncertainty','Total uncertainty'],
+               values=[best_estimate/1e15,mul_CI,mul_CI],
                path='../results.xlsx')
 
 # Feed results to Fig. 2C

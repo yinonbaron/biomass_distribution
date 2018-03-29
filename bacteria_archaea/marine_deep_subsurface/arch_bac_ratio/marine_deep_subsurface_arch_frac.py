@@ -28,8 +28,6 @@ ml_in_m3 = 1e6
 # In[2]:
 
 
-
-
 # Load the dataset
 lloyd = pd.read_excel('marine_deep_subsurface_arch_frac_data.xlsx','Lloyd')
 lloyd.head()

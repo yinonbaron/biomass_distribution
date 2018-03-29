@@ -61,7 +61,7 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 
 print('Our best estimate for the total number of phages : %.0e' % best_estimate)
-print('Uncertainty associated with the estiamte of the total number of phages: %.0f-fold' % mul_CI)
+print('Uncertainty associated with the estimate of the total number of phages: %.0f-fold' % mul_CI)
 
 old_results = pd.read_excel('../phage_biomass_estimate.xlsx')
 result = old_results.copy()
@@ -71,6 +71,7 @@ result.loc[1] = pd.Series({
                 'Units': 'Number of individuals',
                 'Uncertainty': mul_CI
                 })
+
 
 result.to_excel('../phage_biomass_estimate.xlsx',index=False)
 
