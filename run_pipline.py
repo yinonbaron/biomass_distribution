@@ -61,7 +61,14 @@ for root, dirnames, filenames in sortedWalk('.',topdown=False):
         # Convert notebook to html file
         os.system('jupyter nbconvert --to html ' + os.path.join(root, filename))
 
-os.chdir('./figures/figure_code')
+# Run the analysis comparing plants and bacteria
+# Run current notebook
+run_nb('./figures/plant_bacteria_comparison.ipynb')
+os.system('jupyter nbconvert --to script ./figures/plant_bacteria_comparison.ipynb')
+os.system('jupyter nbconvert --to html ' ./figures/plant_bacteria_comparison.ipynb')
 
+
+# Run the scripts that generate the figures
+os.chdir('./figures/figure_code')
 for script in os.listdir('.'):
     os.system('python ' + script)
