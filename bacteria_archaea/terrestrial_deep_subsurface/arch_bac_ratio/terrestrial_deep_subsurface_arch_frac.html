@@ -11767,6 +11767,26 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11779,18 +11799,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
-
-<span class="c1"># Define a function that will calculate the geometric mean of fractions for each bin of a groupby</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Define a function that will calculate the geometric mean of fractions for each bin of a groupby</span>
 <span class="k">def</span> <span class="nf">frac_geo_mean_groupby</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">frac_mean</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;Archaea fraction&#39;</span><span class="p">])</span>
 
@@ -11813,7 +11825,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -11930,7 +11942,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">seq_bin</span> <span class="o">=</span> <span class="n">seq_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">)</span>
@@ -11949,7 +11961,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -11980,7 +11992,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">seq_mean</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">seq_study_mean</span><span class="p">)</span>
@@ -12021,7 +12033,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">qpcr_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_deep_subsurface_arch_frac_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;qPCR&#39;</span><span class="p">)</span>
@@ -12038,7 +12050,7 @@ dtype: float64</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -12155,7 +12167,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">qpcr_bin</span> <span class="o">=</span> <span class="n">qpcr_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">)</span>
@@ -12174,7 +12186,7 @@ dtype: float64</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -12204,7 +12216,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">qpcr_mean</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">qpcr_study_mean</span><span class="p">)</span>
@@ -12246,7 +12258,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># As a third data source we use our estimate for the fraction of archaea out of the total population of bacteria</span>
@@ -12294,7 +12306,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">seq_arc_CI</span> <span class="o">=</span> <span class="n">seq_bin</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_CI_groupby</span><span class="p">)</span>
@@ -12370,7 +12382,7 @@ dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">qpcr_arc_CI</span> <span class="o">=</span> <span class="n">qpcr_bin</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_CI_groupby</span><span class="p">)</span>
@@ -12403,15 +12415,15 @@ dtype: float64
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The intra-study uncertainty of the qPCR-based estimate of the fraction of archaea out of the population of bacteria nad archaea are:
 Study
-Bomberg et al.   3.6e+00
+Bomberg et al.   3.7e+00
 Purkamo et al.   1.3e+01
-Takai et al.     1.7e+01
+Takai et al.     1.8e+01
 dtype: float64
 The intra-study uncertainty of the qPCR-based estimate of the fraction of bacteria out of the population of bacteria nad archaea are:
 Study
 Bomberg et al.   1.1e+00
 Purkamo et al.   1.0e+00
-Takai et al.     1.6e+00
+Takai et al.     1.5e+00
 dtype: float64
 </pre>
 </div>
@@ -12432,7 +12444,7 @@ dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_seq_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">seq_study_mean</span><span class="p">)</span>
@@ -12476,7 +12488,7 @@ The interstudy uncertainty of the 16S rDNA sequencing-based estimate of the frac
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_qpcr_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">qpcr_study_mean</span><span class="p">)</span>
@@ -12520,7 +12532,7 @@ The interstudy uncertainty of the qPCR-based estimate of the fraction of bacteri
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_method_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">seq_mean</span><span class="p">,</span><span class="n">qpcr_mean</span><span class="p">,</span><span class="n">subseafloor_sed_arch_frac</span><span class="p">]))</span>
@@ -12543,7 +12555,7 @@ The interstudy uncertainty of the qPCR-based estimate of the fraction of bacteri
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The inter-method uncertainty of the estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈7.3-fold
+<pre>The inter-method uncertainty of the estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈7.2-fold
 The inter-method uncertainty of the estimate of the fraction of bacteria out of the population of bacteria nad archaea is ≈1.2-fold
 </pre>
 </div>
@@ -12566,7 +12578,7 @@ The inter-method uncertainty of the estimate of the fraction of bacteria out of 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Take the maximum uncertainty as our best projection of uncertainty</span>
@@ -12618,8 +12630,8 @@ The inter-method uncertainty of the estimate of the fraction of bacteria out of 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fraction of archaea out of the total population of terrestrial deep subsurface bacteria and archaea: 6 percent
 Fraction of bacteria out of the total population of terrestrial deep subsurface bacteria and archaea: 94 percent
-Uncertainty associated with the fraction of marine archaea: 17.1-fold
-Uncertainty associated with the fraction of marine bacteria: 1.6-fold
+Uncertainty associated with the fraction of marine archaea: 17.8-fold
+Uncertainty associated with the fraction of marine bacteria: 1.5-fold
 </pre>
 </div>
 </div>

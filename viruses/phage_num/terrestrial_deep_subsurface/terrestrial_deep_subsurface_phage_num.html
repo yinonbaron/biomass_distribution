@@ -11767,6 +11767,26 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11779,7 +11799,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">naive_ratio</span> <span class="o">=</span> <span class="mi">10</span>
@@ -11802,7 +11822,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">engelhardt_ratio</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">271.8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mf">0.768</span>
@@ -11825,7 +11845,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">kyle_ratio</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="mf">1.3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">0.62</span><span class="p">)</span>
@@ -11847,18 +11867,10 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper/&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="n">pan_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_deep_subsurface_phage_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Pan&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">pan_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_deep_subsurface_phage_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Pan&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">pan_ratio</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">pan_data</span><span class="p">[</span><span class="s1">&#39;Virus-to-cell ratio (VCR)&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the ratio between the concentration of phage-like particles and prokaryotes based on Pan et al. is ≈</span><span class="si">%.0f</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">pan_ratio</span><span class="p">)</span>
 </pre></div>
@@ -11897,7 +11909,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">roundnew_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;terrestrial_deep_subsurface_phage_num_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Roundnew&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -11943,7 +11955,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the concentrations of prokaryotes in each depth bin from our analysis of the biomass</span>
@@ -11963,7 +11975,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12068,7 +12080,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the total volume of groundwater in each depth bin from our analysis of the biomass</span>
@@ -12088,7 +12100,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -12183,7 +12195,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">tot_prok</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -12205,7 +12217,7 @@ Where V is the concentrations of phage-like particles and P is the concentration
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -12233,7 +12245,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Estimate the total number of prokaryotes in groundwater as the geometric mean of the estimates based on </span>
@@ -12278,7 +12290,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Define the scaling factor from number of cells in groundwater to cells relevant for calculating the total</span>
@@ -12335,7 +12347,7 @@ Our estimate for the total number of phages in the terrestrial deep subsurface b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">engelhardt_phage_conc_geo_mean</span> <span class="o">=</span> <span class="n">engelhardt_ratio</span><span class="p">(</span><span class="n">prok_concentration</span><span class="p">[</span><span class="s1">&#39;Geometric mean cell concentration [cells mL-1]&#39;</span><span class="p">])</span>
@@ -12361,7 +12373,7 @@ Our estimate for the total number of phages in the terrestrial deep subsurface b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">engelhardt_tot_phage_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">engelhardt_phage_conc_mean</span><span class="o">*</span><span class="n">water_vol</span><span class="p">[</span><span class="s1">&#39;Water volume [mL]&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="n">scaling_factor</span>
@@ -12387,7 +12399,7 @@ Our estimate for the total number of phages in the terrestrial deep subsurface b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">engelhardt_tot_phage</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">engelhardt_tot_phage_geo_mean</span><span class="p">,</span><span class="n">engelhardt_tot_phage_mean</span><span class="p">])</span>
@@ -12432,7 +12444,7 @@ Our best estimate for the total number of phages in the terrestrial deep subsurf
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">estimates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">tot_phage_naive</span><span class="p">,</span><span class="n">tot_phage_pan</span><span class="p">,</span><span class="n">tot_phage_roundnew</span><span class="p">,</span><span class="n">engelhardt_tot_phage</span><span class="p">,</span><span class="n">kyle_tot_phage</span><span class="p">],</span>
@@ -12450,7 +12462,7 @@ Our best estimate for the total number of phages in the terrestrial deep subsurf
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -12481,7 +12493,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
@@ -12524,7 +12536,7 @@ dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">pan_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">pan_data</span><span class="p">[</span><span class="s1">&#39;Virus-to-cell ratio (VCR)&#39;</span><span class="p">])</span>
@@ -12568,7 +12580,7 @@ The 95 percent confidence interval of the geometric mean of the values in Roundn
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">ratio_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
@@ -12613,7 +12625,7 @@ The 95 percent confidence interval of the geometric mean of the values in Roundn
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># For the naive estimate, the Pan et al. based ratio and the Roundnew et al. based ratio</span>
@@ -12666,7 +12678,7 @@ The 95 percent confidence interval of the geometric mean of the values in Roundn
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">scaling_factor_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">]))</span>
@@ -12707,7 +12719,7 @@ The 95 percent confidence interval of the geometric mean of the values in Roundn
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ratio_CI</span><span class="p">,</span><span class="n">tot_prok_CI</span><span class="p">,</span><span class="n">scaling_factor_CI</span><span class="p">]))</span>
@@ -12748,7 +12760,7 @@ The 95 percent confidence interval of the geometric mean of the values in Roundn
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total number of phages in the terrestrial deep subsurface: </span><span class="si">%.0e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="p">)</span>

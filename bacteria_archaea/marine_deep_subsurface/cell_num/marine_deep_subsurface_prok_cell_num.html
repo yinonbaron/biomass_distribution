@@ -11767,6 +11767,25 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11778,17 +11797,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="c1">#Kallmeyer et al. estimate ≈2.9×10^29 cells in the marine deep subsurface</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1">#Kallmeyer et al. estimate ≈2.9×10^29 cells in the marine deep subsurface</span>
 <span class="n">kallmeyer</span> <span class="o">=</span> <span class="mf">2.9e29</span>
 <span class="c1">#Parkes et al. estimate ≈5.4×10^29 cells in the marine deep subsurface</span>
 <span class="n">parkes</span> <span class="o">=</span> <span class="mf">5.4e29</span>
@@ -11833,7 +11845,7 @@ Parkes et al. reports a 95% confidence interval of $1.95×10^{29}-4.35×10^{30}$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">parkes_low</span> <span class="o">=</span> <span class="mf">1.95e29</span>
@@ -11884,7 +11896,7 @@ Parkes et al. reports a 95% confidence interval of $1.95×10^{29}-4.35×10^{30}$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">kallmeyer_low</span> <span class="o">=</span> <span class="mf">1.2e29</span>
@@ -11933,7 +11945,7 @@ Parkes et al. reports a 95% confidence interval of $1.95×10^{29}-4.35×10^{30}$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_mul_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">parkes</span><span class="p">,</span><span class="n">kallmeyer</span><span class="p">]))</span>
@@ -11975,7 +11987,7 @@ Parkes et al. reports a 95% confidence interval of $1.95×10^{29}-4.35×10^{30}$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Take the maximal uncetainty as our best projection of uncertainty</span>

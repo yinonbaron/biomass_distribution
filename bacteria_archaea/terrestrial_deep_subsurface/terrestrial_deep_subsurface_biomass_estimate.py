@@ -21,12 +21,6 @@ from excel_utils import *
 # In[2]:
 
 
-import numpy as np
-import pandas as pd
-pd.options.display.float_format = '{:,.1e}'.format
-import sys
-sys.path.insert(0, '../../statistics_helper')
-from CI_helper import *
 results = pd.read_excel('terrestrial_deep_subsurface_prok_biomass_estimate.xlsx')
 results
 

@@ -1,12 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the characteristic size of phages
-# In order to estimate the characteristic size of phages, we rely of data from quantitative transmission electron microscopy (qTEM) measurement of samples from 41 sites across the world's oceans, reported by [Brum et al.](http://dx.doi.org/10.1126/science.1261498). We extracted the data from figure 1 in Brum et al.:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -17,6 +15,13 @@ sys.path.insert(0, '../../statistics_helper/')
 from CI_helper import *
 pd.options.display.float_format = '{:,.0f}'.format
 
+
+# # Estimating the characteristic size of phages
+# In order to estimate the characteristic size of phages, we rely of data from quantitative transmission electron microscopy (qTEM) measurement of samples from 41 sites across the world's oceans, reported by [Brum et al.](http://dx.doi.org/10.1126/science.1261498). We extracted the data from figure 1 in Brum et al.:
+
+# In[2]:
+
+
 # Load the data extracted from Brum et al.
 data = pd.read_excel('phage_size_data.xlsx',skiprows=1)
 data.head()
@@ -24,14 +29,14 @@ data.head()
 
 # We use the geometric mean of the median diameters from each site as our best estimate for the characteristic diameter of phages:
 
-# In[2]:
+# In[3]:
 
 
 phage_rad = gmean(data['Median diameter [nm]'])/2
 print('Our best estimate for the radius of a phage is ≈%i nm.' %(phage_rad))
 
 
-# In[3]:
+# In[4]:
 
 
 r = (data['95% diameter [nm]']-data['Median diameter [nm]']).mean()
@@ -46,7 +51,7 @@ r = (data['95% diameter [nm]']-data['Median diameter [nm]']).mean()
 # 
 # Jover et al. supply estimates for each of the parameters in the model, as well as their respective uncertainties. We plug into this model our estimates for the radius of phages in order to get an estimate for the carbon content of phages, as well as the uncertainty associated with this esitmate. We use 1.96 times the uncertainty reported in Jover et al. to calculate 95% confidence interval for the carbon content estimate.
 
-# In[4]:
+# In[5]:
 
 
 # Import uncertainties library to deal with the error propagation
@@ -95,7 +100,7 @@ print('Our best estimate for the carbon content of a single phage is ≈{:10.1e}
 # # Uncertainty analysis
 # To assess the uncertainty associated with the estimate of the radius of a single phage, we use the variability of capsid radii in the sites reported in Brum et al. We calculate the relative multiplicative uncertainty of the variation within a site and between sites. We take the higher uncertainty of the two as our best estimate for the uncertainty associated with the radius of phages.
 
-# In[5]:
+# In[6]:
 
 
 intra_CI = 1+gmean((data['95% diameter [nm]'] - data['5% diameter [nm]'])/data['Median diameter [nm]']/2)
@@ -112,7 +117,7 @@ rad_CI = np.max([intra_CI,inter_CI])
 # To propagate the uncertainty in the radius of a single phage into the uncertainty in the carbon content of a single phage, we use a numerical approach. We chose to use this approach as propagating the uncertainty in the radius of phages creates a probability distribution of the carbon content of a single phage which is not gaussian, and thus the uncertainty ranges a normal error propagation procedure will output will be non-informative. Namely, the additive standard error that we will get will be higher than the nominal estimate, but in reality there is no phage with a netagive radius length.
 # Therefore, in order to quanitfy the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage, we sample 1000 times from a log-normal distribution of radii with a mean that is equal to our best estimate for the radius of a phage, and a multiplicative standard diviation which is equal to the uncertainty for the radius of a phage we project. We feed these sampled radii into our model and calculate a carbon content for each radius, resulting in a distribution of carbon content estimates. We take the multiplicative ratio between the 2.5% and 97.5% percentiles and our best estimate for the carbon content as our best estimate for the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage.
 
-# In[6]:
+# In[7]:
 
 
 # Sample 1000 from a log-normal distribution of radii
@@ -132,7 +137,7 @@ print('Our best estimate for the uncertainty of the carbon content of a single p
 
 # The uncertainty associated with the parameters of the model is ≈1.2-fold:
 
-# In[7]:
+# In[8]:
 
 
 model_param_CI =  1+best_estimate.std_dev*1.96/best_estimate.nominal_value
@@ -141,7 +146,7 @@ print('The uncertainty associated with the parameters of the model is %.1f-fold'
 
 # We combine these two uncertainties as our best projection for the uncertainty associated with the carbon content of a single phage:
 
-# In[8]:
+# In[9]:
 
 
 mul_CI = CI_prod_prop(np.array([rad_cc_CI,model_param_CI]))
@@ -150,7 +155,7 @@ print('Our best projection for the uncertainty associated with the carbon conten
 
 # Our final parameters are:
 
-# In[9]:
+# In[10]:
 
 
 print('Our best estimate for the carbon content of a single phage: %.0e g' % best_estimate.nominal_value)

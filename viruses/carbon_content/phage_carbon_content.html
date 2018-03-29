@@ -11767,6 +11767,28 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.0f}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11778,20 +11800,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.0f}&#39;</span><span class="o">.</span><span class="n">format</span>
-
-<span class="c1"># Load the data extracted from Brum et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data extracted from Brum et al.</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;phage_size_data.xlsx&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11806,7 +11818,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -11893,7 +11905,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">phage_rad</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Median diameter [nm]&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
@@ -11925,7 +11937,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;95</span><span class="si">% d</span><span class="s1">iameter [nm]&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Median diameter [nm]&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -11951,7 +11963,7 @@ Where $C_{head}$ is the total number of carbon atoms, $r_c$ is the radius of the
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Import uncertainties library to deal with the error propagation</span>
@@ -12032,7 +12044,7 @@ Our best estimate for the carbon content of a single phage is ≈   2.3e-17+/-  
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">intra_CI</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">gmean</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;95</span><span class="si">% d</span><span class="s1">iameter [nm]&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;5</span><span class="si">% d</span><span class="s1">iameter [nm]&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Median diameter [nm]&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
@@ -12081,7 +12093,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Sample 1000 from a log-normal distribution of radii</span>
@@ -12113,7 +12125,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best estimate for the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage is ≈2.3-fold
+<pre>Our best estimate for the uncertainty of the carbon content of a single phage stemming from the uncertainty in our estimate for the radius of a single phage is ≈2.2-fold
 </pre>
 </div>
 </div>
@@ -12133,7 +12145,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">model_param_CI</span> <span class="o">=</span>  <span class="mi">1</span><span class="o">+</span><span class="n">best_estimate</span><span class="o">.</span><span class="n">std_dev</span><span class="o">*</span><span class="mf">1.96</span><span class="o">/</span><span class="n">best_estimate</span><span class="o">.</span><span class="n">nominal_value</span>
@@ -12174,7 +12186,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rad_cc_CI</span><span class="p">,</span><span class="n">model_param_CI</span><span class="p">]))</span>
@@ -12195,7 +12207,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our best projection for the uncertainty associated with the carbon content of a single phage is ≈2.3-fold
+<pre>Our best projection for the uncertainty associated with the carbon content of a single phage is ≈2.2-fold
 </pre>
 </div>
 </div>
@@ -12215,7 +12227,7 @@ Therefore, in order to quanitfy the uncertainty of the carbon content of a singl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the carbon content of a single phage: </span><span class="si">%.0e</span><span class="s1"> g&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="o">.</span><span class="n">nominal_value</span><span class="p">)</span>

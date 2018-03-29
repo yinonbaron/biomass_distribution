@@ -11767,6 +11767,30 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
+
+<span class="c1"># Genaral parameters used in the estimate</span>
+<span class="n">ocean_area</span> <span class="o">=</span> <span class="mf">3.6e14</span>
+<span class="n">liters_in_m3</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e3</span>
+<span class="n">ml_in_m3</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11779,22 +11803,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1e}&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="c1"># Genaral parameters used in the estimate</span>
-<span class="n">ocean_area</span> <span class="o">=</span> <span class="mf">3.6e14</span>
-<span class="n">liters_in_m3</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e3</span>
-<span class="n">ml_in_m3</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span>
-
-<span class="c1"># Load the dataset</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the dataset</span>
 <span class="n">lloyd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_deep_subsurface_arch_frac_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Lloyd&#39;</span><span class="p">)</span>
 <span class="n">lloyd</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11809,7 +11821,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -11999,7 +12011,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than</span>
@@ -12050,7 +12062,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than</span>
@@ -12103,7 +12115,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fish_frac</span><span class="p">,</span><span class="n">qpcr_frac</span><span class="p">]))</span>
@@ -12145,7 +12157,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">fish_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">lloyd_fish</span><span class="p">[</span><span class="s1">&#39;Fraction Arc CARDFISH&#39;</span><span class="p">])</span>
@@ -12189,7 +12201,7 @@ The uncertainty of the CARD-FISH-based estimate of the fraction of bacteria out 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">qpcr_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">lloyd_qpcr</span><span class="p">[</span><span class="s1">&#39;Fraction Arc qPCR&#39;</span><span class="p">])</span>
@@ -12233,7 +12245,7 @@ The uncertainty of the qPCR-based estimate of the fraction of bacteria out of th
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_arc_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fish_frac</span><span class="p">,</span><span class="n">qpcr_frac</span><span class="p">]))</span>
@@ -12280,7 +12292,7 @@ Similarly, the highest inter-method uncertainty for the fraction of bacteria is 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Take the maximum uncertainty as our best projection of uncertainty</span>

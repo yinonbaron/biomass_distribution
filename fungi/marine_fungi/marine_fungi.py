@@ -7,7 +7,6 @@
 # Load dependencies
 import pandas as pd
 import numpy as np
-import gdal
 from scipy.stats import gmean
 import sys
 sys.path.insert(0,'../../statistics_helper/')

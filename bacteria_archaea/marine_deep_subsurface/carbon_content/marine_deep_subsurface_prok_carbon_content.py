@@ -1,16 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the carbon content of marine bacteria and archaea
-# 
-# In order to estimate the characteristic carbon content of marine bacteria and archaea, we rely on two main methodologies - volume based estimates and amino acid based estimates.
-# 
-# ## Volume-based estimates
-# We collected measurements of the characeteristic volume of bacteria and archaea in the marine deep subsurface from 4 different studies. For 3 of those studies, we collected reported average cell volumes. Here are the average values we collected from those three studies:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -18,13 +12,25 @@ import sys
 sys.path.insert(0, '../../../statistics_helper')
 from CI_helper import *
 pd.options.display.float_format = '{:,.2f}'.format
+
+
+# # Estimating the carbon content of marine bacteria and archaea
+# 
+# In order to estimate the characteristic carbon content of marine bacteria and archaea, we rely on two main methodologies - volume based estimates and amino acid based estimates.
+# 
+# ## Volume-based estimates
+# We collected measurements of the characeteristic volume of bacteria and archaea in the marine deep subsurface from 4 different studies. For 3 of those studies, we collected reported average cell volumes. Here are the average values we collected from those three studies:
+
+# In[2]:
+
+
 volumes = pd.read_excel('marine_deep_subsurface_prok_carbon_content_data.xlsx','Volume based')
 volumes
 
 
 # In addition we used data from [Braun et al.](http://dx.doi.org/10.3389/fmicb.2016.01375) which measured cell volumes for three cell morphologies (coccoid, elongated and filamentous), along with the relative fraction of each morphology in each site sampled. Here is the data extracted from Braun et al.:
 
-# In[2]:
+# In[3]:
 
 
 braun_volumes = pd.read_excel('marine_deep_subsurface_prok_carbon_content_data.xlsx','Braun', skiprows=1)
@@ -33,7 +39,7 @@ braun_volumes
 
 # We first calculate the characteristic volume of a single cell from the data in Braun et al. to be able to compare it with the other resources:
 
-# In[3]:
+# In[4]:
 
 
 # Group by depth
@@ -59,7 +65,7 @@ volumes.append(pd.DataFrame.from_dict([{'Study': 'Braun et al.', 'Mean cell volu
 # $$C = 88.1 \times V^{0.59}$$
 # Where C is the carbon content of a single cell [fg C cell$^{-1}$], and V is cell volume [$µm^3$]. We apply these two independent conversion equations to the volumes we gathered from the literature to produce 10 estimates for the characteristic carbon content of bacterial and archaeal cells in the marine deep subsurface.
 
-# In[4]:
+# In[5]:
 
 
 # Apply the conversion equations to the volumes reported in the literature
@@ -71,7 +77,7 @@ volumes
 
 # We calculate the geometric mean of the values from different studies using the same conversion equation to generate a characteristic carbon content for each conversion method.
 
-# In[5]:
+# In[6]:
 
 
 fry_volume_mean = gmean(volumes['Fry et al.'])
@@ -83,7 +89,7 @@ print('The characteristic carbon content of a single bacterial or archaeal cell 
 
 # We compute the geometric mean of the characteristic values from the two volume to carbon content conversion methods and use it as our best estimate for the carbon content of bacterial and archaeal cells in the marine deep subsurface, based on volume measurements.
 
-# In[6]:
+# In[7]:
 
 
 vol_best_carbon_content = gmean([fry_volume_mean,sa_volume_mean])
@@ -93,7 +99,7 @@ print('Our best volume-based estimate for the carbon content of bacterial and ar
 # ## Amino acid-based estimate
 # We rely on the study by Braun et al., which measured carobon content of bacterial and archaeal cells in the marine deep subsurface based on amino acid carbon mass, and assuming ≈55% of the carbon mass of single cells is stored in amino acids. Here are the values reported by Braun et al.:
 
-# In[7]:
+# In[8]:
 
 
 aa_based = pd.read_excel('marine_deep_subsurface_prok_carbon_content_data.xlsx', 'Amino acid based', skiprows=1)
@@ -102,7 +108,7 @@ aa_based
 
 # We use the geometric mean of the values reported by Braun et al. as our best estimate for the amino acid-based estimate of the carbon content of bacterial and archaeal cells in the marine deep subsurface.
 
-# In[8]:
+# In[9]:
 
 
 aa_best_carbon_content = gmean(aa_based['Carbon content (fg C cell-1)'])
@@ -112,7 +118,7 @@ print('Our best amino acid-based estimate for the carbon content of bacterial an
 
 # As our best estimate for the carbon content of bacterial and archaeal cells in the marine deep subsurface, we use the geometric mean of the volume-based and amino acid-based estimates.
 
-# In[9]:
+# In[10]:
 
 
 best_estimate = gmean([vol_best_carbon_content,aa_best_carbon_content])
@@ -127,7 +133,7 @@ print('Our best estimate for the carbon content of bacterial and archaeal cells 
 # ### intra-study uncertainty
 # For the volume based approaches, we had data on intra-study uncertainty only for the Braun et al. study. We calculate the intra study uncertainty of the volumes reported in Braun et al. by calculating the 95% confidence interval of the values reported in Braun et al.
 
-# In[10]:
+# In[11]:
 
 
 vol_braun_intra_CI = geo_CI_calc(braun_weighted_average)
@@ -138,7 +144,7 @@ print('The intra-study uncertainty for Braun et al. is ≈%.1f-fold' %vol_braun_
 # As a measure of the interstudy uncertainty, we compare the 95% confidence interval for the geometric mean of the carbon content from different studies, using the same conversion method.
 # We also use the 95% confidence interval for the geometric mean of the carbon content estimates from the two different conversion methods (Fry et al. and Simon & Azam) as a measure of interstudy uncertainty.
 
-# In[11]:
+# In[12]:
 
 
 carbon_content_fry_CI = geo_CI_calc(volumes['Fry et al.'])
@@ -155,7 +161,7 @@ print('The interstudy uncertainty of the geometric mean of carbon content betwee
 # ### Intra-study uncertainty
 # We calculate the 95% confidence interval of the geometric mean of values for the carbon content from Braun et al. as a measure of the intra-study uncertainty.
 
-# In[12]:
+# In[13]:
 
 
 aa_intra_CI = geo_CI_calc(aa_based['Carbon content (fg C cell-1)'])
@@ -165,7 +171,7 @@ print('The intra-study uncertainty of amino acid-based carbon content estimates 
 # ## Inter-method uncertainty
 # As another measure of uncertainty we calculate the 95% confidence interval of the geometric mean of the estimates for carbon content calculated using either the volume-based method or the amino acid-based method.
 
-# In[13]:
+# In[14]:
 
 
 inter_method_CI = geo_CI_calc([vol_best_carbon_content,aa_best_carbon_content])
@@ -176,7 +182,7 @@ print('The intra-method uncertainty for the caron content of bacretial and archa
 # 
 # Our final parameters are:
 
-# In[14]:
+# In[15]:
 
 
 # Take the maximal uncetainty as our best projection of uncertainty

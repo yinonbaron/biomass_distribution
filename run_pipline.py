@@ -1,5 +1,9 @@
 import fnmatch
 import os
+
+# You should install dependencies before running this script
+# Use the command "sudo pip install -r requirements.txt" to install dependencies
+
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 
@@ -56,3 +60,8 @@ for root, dirnames, filenames in sortedWalk('.',topdown=False):
 
         # Convert notebook to html file
         os.system('jupyter nbconvert --to html ' + os.path.join(root, filename))
+
+os.chdir('./figures/figure_code')
+
+for script in os.listdir('.'):
+    os.system('python ' + script)

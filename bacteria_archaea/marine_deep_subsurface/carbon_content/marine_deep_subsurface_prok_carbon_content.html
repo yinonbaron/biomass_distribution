@@ -11767,6 +11767,26 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.2f}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11779,17 +11799,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.2f}&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="n">volumes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_deep_subsurface_prok_carbon_content_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Volume based&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">volumes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_deep_subsurface_prok_carbon_content_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Volume based&#39;</span><span class="p">)</span>
 <span class="n">volumes</span>
 </pre></div>
 
@@ -11803,7 +11816,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -11878,7 +11891,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">braun_volumes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_deep_subsurface_prok_carbon_content_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Braun&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -11895,7 +11908,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -12094,7 +12107,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Group by depth</span>
@@ -12137,7 +12150,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -12220,7 +12233,7 @@ Where C is the carbon content of a single cell [fg C cell$^{-1}$], and V is cell
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Apply the conversion equations to the volumes reported in the literature</span>
@@ -12240,7 +12253,7 @@ Where C is the carbon content of a single cell [fg C cell$^{-1}$], and V is cell
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -12325,7 +12338,7 @@ Where C is the carbon content of a single cell [fg C cell$^{-1}$], and V is cell
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">fry_volume_mean</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">volumes</span><span class="p">[</span><span class="s1">&#39;Fry et al.&#39;</span><span class="p">])</span>
@@ -12371,7 +12384,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">vol_best_carbon_content</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">fry_volume_mean</span><span class="p">,</span><span class="n">sa_volume_mean</span><span class="p">])</span>
@@ -12412,7 +12425,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">aa_based</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_deep_subsurface_prok_carbon_content_data.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Amino acid based&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -12429,7 +12442,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -12514,7 +12527,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">aa_best_carbon_content</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">aa_based</span><span class="p">[</span><span class="s1">&#39;Carbon content (fg C cell-1)&#39;</span><span class="p">])</span>
@@ -12556,7 +12569,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">vol_best_carbon_content</span><span class="p">,</span><span class="n">aa_best_carbon_content</span><span class="p">])</span>
@@ -12598,7 +12611,7 @@ The characteristic carbon content of a single bacterial or archaeal cell in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">vol_braun_intra_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">braun_weighted_average</span><span class="p">)</span>
@@ -12640,7 +12653,7 @@ We also use the 95% confidence interval for the geometric mean of the carbon con
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">carbon_content_fry_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">volumes</span><span class="p">[</span><span class="s1">&#39;Fry et al.&#39;</span><span class="p">])</span>
@@ -12688,7 +12701,7 @@ The interstudy uncertainty of the geometric mean of carbon content between conve
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">aa_intra_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">aa_based</span><span class="p">[</span><span class="s1">&#39;Carbon content (fg C cell-1)&#39;</span><span class="p">])</span>
@@ -12729,7 +12742,7 @@ The interstudy uncertainty of the geometric mean of carbon content between conve
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_method_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">vol_best_carbon_content</span><span class="p">,</span><span class="n">aa_best_carbon_content</span><span class="p">])</span>
@@ -12771,7 +12784,7 @@ The interstudy uncertainty of the geometric mean of carbon content between conve
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Take the maximal uncetainty as our best projection of uncertainty</span>

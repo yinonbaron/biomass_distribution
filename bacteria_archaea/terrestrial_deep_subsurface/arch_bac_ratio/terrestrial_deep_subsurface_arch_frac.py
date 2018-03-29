@@ -1,16 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the fraction of archaea out of the total marine deep subsurface prokaryote population
-# 
-# In order to estimate the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we rely of three sources of data. Two of those sources are measurements made in the terrestrial deep subsurface of the fraction of archaea using two independent methods: 16S rDNA sequencing (FISH) and quantitative PCR (qPCR). For each method we collect several studies which used the method to measure the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface. We calculate the geometric means of samples within each study. We then calculate the geometric mean of the average estimates from each study using the same method to generate a characteristic estimate for the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface for each method. 
-# 
-# ## 16S rDNA sequencing-based estimate
-# For our 16S rDNA sequencing-based estimate we rely on data from [Rempfert et al.](http://dx.doi.org/10.3389/fmicb.2017.00056), [Lau et al.](http://dx.doi.org/10.1073/pnas.1612244113), [Osburn et al.](http://dx.doi.org/10.3389/fmicb.2014.00610), and [Simkus et al.](http://dx.doi.org/10.1016/j.gca.2015.10.003). Here is a sample of the data:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 import sys
@@ -18,6 +12,17 @@ sys.path.insert(0, '../../../statistics_helper')
 from fraction_helper import *
 
 pd.options.display.float_format = '{:,.1e}'.format
+
+
+# # Estimating the fraction of archaea out of the total marine deep subsurface prokaryote population
+# 
+# In order to estimate the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we rely of three sources of data. Two of those sources are measurements made in the terrestrial deep subsurface of the fraction of archaea using two independent methods: 16S rDNA sequencing (FISH) and quantitative PCR (qPCR). For each method we collect several studies which used the method to measure the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface. We calculate the geometric means of samples within each study. We then calculate the geometric mean of the average estimates from each study using the same method to generate a characteristic estimate for the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface for each method. 
+# 
+# ## 16S rDNA sequencing-based estimate
+# For our 16S rDNA sequencing-based estimate we rely on data from [Rempfert et al.](http://dx.doi.org/10.3389/fmicb.2017.00056), [Lau et al.](http://dx.doi.org/10.1073/pnas.1612244113), [Osburn et al.](http://dx.doi.org/10.3389/fmicb.2014.00610), and [Simkus et al.](http://dx.doi.org/10.1016/j.gca.2015.10.003). Here is a sample of the data:
+
+# In[2]:
+
 
 # Define a function that will calculate the geometric mean of fractions for each bin of a groupby
 def frac_geo_mean_groupby(input):
@@ -34,7 +39,7 @@ seq_data.head()
 
 # We calculate the geometric mean of the fraction of archaea out of the total population of bacteria and archea for each study:
 
-# In[2]:
+# In[3]:
 
 
 seq_bin = seq_data.groupby('Study')
@@ -45,7 +50,7 @@ seq_study_mean
 
 # We calculate the geometric mean of the average fractions from each study:
 
-# In[3]:
+# In[4]:
 
 
 seq_mean = frac_mean(seq_study_mean)
@@ -55,7 +60,7 @@ print('The characteristic 16S rDNA sequencing-based fraction of archaea out of t
 # ## qPCR-based estimate
 # For our qPCR-based estimate we rely on data from [Purkamo et al.](https://helda.helsinki.fi/handle/10138/165462), [Takai et al.](http://dx.doi.org/10.1128/AEM.67.21.5750-5760.2001), and [Bomberg et al.](http://dx.doi.org/10.5194/bg-13-6031-2016). Here is a sample of the data:
 
-# In[4]:
+# In[5]:
 
 
 qpcr_data = pd.read_excel('terrestrial_deep_subsurface_arch_frac_data.xlsx','qPCR')
@@ -64,7 +69,7 @@ qpcr_data.head()
 
 # We calculate the geometric mean of the fraction of archaea out of the total population of bacteria and archea for each study:
 
-# In[5]:
+# In[6]:
 
 
 qpcr_bin = qpcr_data.groupby('Study')
@@ -75,7 +80,7 @@ qpcr_study_mean
 
 # We calculate the geometric mean of the average fractions from each study:
 
-# In[6]:
+# In[7]:
 
 
 qpcr_mean = frac_mean(qpcr_study_mean)
@@ -86,7 +91,7 @@ print('The characteristic qPCR-based fraction of archaea out of the total popula
 # 
 # Our best estimate for the fraction of archaea out of the total population of bacteria and archaea is the geometric mean of these three sources of data:
 
-# In[7]:
+# In[8]:
 
 
 # As a third data source we use our estimate for the fraction of archaea out of the total population of bacteria
@@ -106,7 +111,7 @@ print('Our best estimate for the fraction of archaea out of the total population
 # ### 16S rDNA sequencing-based method
 # We calculate the intra-study 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using 16S rDNA seuqencing.
 
-# In[8]:
+# In[9]:
 
 
 seq_arc_CI = seq_bin.apply(frac_CI_groupby)
@@ -126,7 +131,7 @@ print(seq_bac_CI)
 # ### qPCR-based method
 # We calculate the intra-study 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using qPCR.
 
-# In[9]:
+# In[10]:
 
 
 qpcr_arc_CI = qpcr_bin.apply(frac_CI_groupby)
@@ -147,7 +152,7 @@ print(qpcr_bac_CI)
 # ### 16S rDNA sequencing-based method
 # We calculate the interstudy 95% confidence inteval for the geometric mean of the average values from each study for the fraction of archaea out of the total population of bacteria and archaea measured using 16S rDNA sequencing.
 
-# In[10]:
+# In[11]:
 
 
 inter_seq_arc_CI = frac_CI(seq_study_mean)
@@ -159,7 +164,7 @@ print('The interstudy uncertainty of the 16S rDNA sequencing-based estimate of t
 # ### qPCR-based method
 # We calculate the interstudy 95% confidence inteval for the geometric mean of the average values from each study for the fraction of archaea out of the total population of bacteria and archaea measured using qPCR.
 
-# In[11]:
+# In[12]:
 
 
 inter_qpcr_arc_CI = frac_CI(qpcr_study_mean)
@@ -171,7 +176,7 @@ print('The interstudy uncertainty of the qPCR-based estimate of the fraction of 
 # ## Inter-method uncertainty
 # We calculate the interstudy 95% confidence inteval for the geometric mean of the estimates from the three different sources - the 16S rDNA sequencing-based estimate, the pPCR-based estiamte and the estimate for the fraction of archea out of the total population of bacteria and archaea in subseafloor sediments.
 
-# In[12]:
+# In[13]:
 
 
 inter_method_arc_CI = frac_CI(np.array([seq_mean,qpcr_mean,subseafloor_sed_arch_frac]))
@@ -186,7 +191,7 @@ print('The inter-method uncertainty of the estimate of the fraction of bacteria 
 # 
 # Our final parameters are:
 
-# In[13]:
+# In[14]:
 
 
 # Take the maximum uncertainty as our best projection of uncertainty

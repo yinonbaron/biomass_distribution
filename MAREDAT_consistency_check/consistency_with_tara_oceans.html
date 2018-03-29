@@ -11767,6 +11767,21 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11785,13 +11800,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># Load data on the total number of reads of each taxon from de Vargas et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the total number of reads of each taxon from de Vargas et al.</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tara_oceans_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;de Vargas W6&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11806,7 +11818,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -11911,7 +11923,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1">#Load data on the total number of reads in each size fraction</span>
@@ -11929,7 +11941,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -11988,7 +12000,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the total number of reads for the Nano and Micro fractions</span>
@@ -12024,7 +12036,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -12081,7 +12093,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Load 18S sequecing data of mesozooplankton</span>
@@ -12126,7 +12138,7 @@ The average fraction of Rhizaria in 18S rDNA sequencing data in the deep chlorop
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># The estimate of the biomass of rhizaria based on Biard et al.</span>
@@ -12164,7 +12176,7 @@ The average fraction of Rhizaria in 18S rDNA sequencing data in the deep chlorop
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The fraction of arthropods out of the total number of reads in nanoplankton and microplankton&#39;</span><span class="p">)</span>
@@ -12208,7 +12220,7 @@ The mean fraction of arthropods out of the total number of reads in nanoplankton
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">tot_nano_micro_biomass</span> <span class="o">=</span> <span class="n">nano_micro_arth</span><span class="o">/</span><span class="n">metazoa_frac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>

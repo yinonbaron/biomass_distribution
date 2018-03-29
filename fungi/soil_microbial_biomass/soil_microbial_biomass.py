@@ -1,15 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the biomass of soil microbes
-# 
-# In order to estimate the total biomass of soil microbes, we rely on two recent studies - [Xu et al.](http://dx.doi.org/10.1111/geb.12029) and [Serna-Chavez et al.](http://dx.doi.org/10.1111/geb.12070)
-# 
-# We use the final estimates in each of the studies as two independent estimates of the biomass of soil microbes. Xu et al. estimate a biomass of ≈23 Gt C of soil microbes, whereas Serna-Chavez et al. estimate ≈15 Gt C.
-
 # In[1]:
 
 
+# Load dependencies
 from scipy.stats import gmean
 import pandas as pd
 import numpy as np
@@ -18,6 +13,17 @@ sys.path.insert(0, '../../statistics_helper')
 from CI_helper import *
 from fraction_helper import *
 pd.options.display.float_format = '{:,.1f}'.format
+
+
+# # Estimating the biomass of soil microbes
+# 
+# In order to estimate the total biomass of soil microbes, we rely on two recent studies - [Xu et al.](http://dx.doi.org/10.1111/geb.12029) and [Serna-Chavez et al.](http://dx.doi.org/10.1111/geb.12070)
+# 
+# We use the final estimates in each of the studies as two independent estimates of the biomass of soil microbes. Xu et al. estimate a biomass of ≈23 Gt C of soil microbes, whereas Serna-Chavez et al. estimate ≈15 Gt C.
+
+# In[2]:
+
+
 # Define the values for the estimates of the biomass of soil microbes from Xu et al. and Serna-Chavez et al.
 xu = 23.2e15
 serna_chavez = 14.6e15
@@ -25,7 +31,7 @@ serna_chavez = 14.6e15
 
 # As our best estimate for the biomass of soil microbes, we use the geometric mean of the values from Xu et al. and Serna-Chavez et al.
 
-# In[2]:
+# In[3]:
 
 
 # Our best estimate is the geometric mean of values from Xu et al. and Serna-Chavez et al.
@@ -40,7 +46,7 @@ print('Our best estimate for the biomass of soil microbes is ≈%.0f Gt C' % (be
 # 
 # We use the fitted $\beta$ coefficients from Jackson et al., along with estimates for the total microbial biomass in the top meter fo soils in each biome from Xu et al. to estimate the amount of biomass present in soil layers deeper than 1 meter.
 
-# In[3]:
+# In[4]:
 
 
 # Load data on the microbial biomass from each biome and the coefficients for the depth distribution of roots
@@ -57,7 +63,7 @@ print('The fraction of microbial biomass in layers deeper than 1 meter based on 
 
 # As an additional source for estimating the fraction of biomass of microbes in soil layers deeper than 1 meter, we use the concentration of bacterial cells present in layers deeper than 1 meter reported in [Whitman et al.](https://www.ncbi.nlm.nih.gov/pubmed/9618454). Whitman et al. estimate that in forests there are ≈$4×10^7$ cells per gram in the top 1 meter and ≈$10^6$ cells per gram in depths of 1-8 meters. For other soils, Whitman et al. estimate ≈$2×10^9$ cells per gram in the top 1 meterand ≈$10^8$ cells per gram in depth of 1-8 meters. Assuming cells in deeper layers are similar in size to cells in the top 1 meter, this is equivalent to: 
 
-# In[4]:
+# In[5]:
 
 
 # Concentration of cells in top 1 meter of forest soils
@@ -87,7 +93,7 @@ print('The average fraction of cells found in deeper layers is ' + '{:,.0f}%'.fo
 
 # As our estimate for the fraction of biomass present in layers deeper than 1 meter, we take the geometric mean of the fractions estimated by Xu et al. and by Whitman et al.
 
-# In[5]:
+# In[6]:
 
 
 # Calculate the geometric mean of the estimates by Xu et al. and Whitman et al.
@@ -107,7 +113,7 @@ print('Our best estimate for the biomass of soil microbes, including contributio
 # ### Intra-study uncertainty
 # As noted above, our estimate is based on two studies which report the total biomass of soil microbes - [Xu et al.](http://dx.doi.org/10.1111/geb.12029) and [Serna-Chavez et al.](http://dx.doi.org/10.1111/geb.12070). Xu et al. does not report uncertainties associated with the total estimate of microbial biomass. However, Xu et al. report 95% confidence intervals for the average microbial biomass densities in each biome. We use these ranges as a measure of the intra-study uncertainty in Xu et al. The highest uncertainty across biomes is ≈1.5-fold.
 
-# In[6]:
+# In[7]:
 
 
 # We calculate the upper and lower multiplicative 95% confidence interval of the average microbial 
@@ -120,7 +126,7 @@ data['95% confidence interval'] = (pd.concat([xu_upper_CI,xu_lower_CI],axis=1).m
 data[['Biome','95% confidence interval']]
 
 
-# In[7]:
+# In[8]:
 
 
 print('The maximal intra-study uncertainty in Xu et al. across biomes is %.1f-fold' % data['95% confidence interval'].max())
@@ -131,7 +137,7 @@ print('The maximal intra-study uncertainty in Xu et al. across biomes is %.1f-fo
 # ### Interstudy uncertainty
 # We estimate the 95% multiplicative error of the geometric mean of the estimates from Xu et al. and Serna-Chavez et al. 
 
-# In[8]:
+# In[9]:
 
 
 mul_CI_top = geo_CI_calc([xu,serna_chavez])
@@ -144,7 +150,7 @@ print('The interstudy uncertainty is ≈%.1f-fold' % mul_CI_top)
 # ### Intra-study uncertainty
 # We estimate the intra-study uncetainty in the fraction of microbial biomass located in soil layers deeper than 1 meter in Xu et al. and in Whitman et al. For Xu et al. we calculating the 95% confidence interval of the $\beta^d$ measure across biomes. For Whitman et al. we calculate the 95% confidence interval of the estimates for the fraction of bacterial cells in depth of 1-8 meters out of the total number of cells in forests and other soil types.
 
-# In[9]:
+# In[10]:
 
 
 xu_deep_frac_CI = frac_CI(data['beta']**100)
@@ -156,7 +162,7 @@ print('The intra-study uncertainty of the fraction of microbial biomass present 
 # ### Interstudy uncertainty
 # We calculate the 95% confidence interval from the average estimates of Xu et al. and Whitman et al. and use them as a measure of the interstudy uncertainty.
 
-# In[10]:
+# In[11]:
 
 
 inter_deep_frac_CI = frac_CI(np.array([total_deeper_relative_fraction,whitman_mean_frac]))
@@ -166,7 +172,7 @@ print('The interstudy uncertainty of the fraction of microbial biomass present i
 # We take the highest uncertainty of the intra-study and interstudy uncertainty of ≈7.5-fold. This uncertainty relates to the fraction of biomass present in soil layers deeper than 1 meter. In order to propagate this uncertainty to the estimate of the total biomass of soil microbes, we sample 1000 times from a lognormal distribution with a mean and std of the fraction biomass from layers deeper than 1 meter, and add 1 to each sample to estimate the coefficient by which the total biomass of soil microbes should be corrected.
 # The 97.5% and 2.5% percentiles of the resulting distribution of coefficients will be used as an estimate for the uncertainty of the total biomass of soil microbes contributed by the uncertainty in the estimate of the fraction of the biomass of microbes in soil layers deeper than 1 meter.
 
-# In[11]:
+# In[12]:
 
 
 # Calculate the maximal uncertainty between the intra-study and interstudy uncertainty
@@ -187,7 +193,7 @@ print('Our estimate for the uncertainty of the total biomass of soil microbes co
 # ## Total uncertainty
 # To estimate the total uncertainty of the biomass of soil microbes, we combine the ucnertainty assoicated with the estiamte of biomass of soil microbes in the top 1 meter of soil, and the uncertainty of the correction coefficient to include biomass contribution from soil layer deeper than 1 meter.
 
-# In[12]:
+# In[13]:
 
 
 mul_CI = CI_prod_prop(np.array([mul_CI_top,cor_coeff_CI]))
@@ -196,7 +202,7 @@ print('The total uncertainty for the biomass of soil microbes is %.1f-fold' % mu
 
 # We also take into account additional sources of uncertainty which are difficult to quantify, as detailed in the section about soil fungi in the Supplementary Information. We thus project an uncertainty of ≈2-fold for the biomass of soil microbes. Our final parameters are:
 
-# In[13]:
+# In[14]:
 
 
 print('Total biomass of soil microbes: %.0f Gt C' % (best_estimate/1e15))

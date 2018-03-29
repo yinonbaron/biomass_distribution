@@ -38,7 +38,6 @@ picophyto_biomsss = gmean([0.28e15,0.64e15])
 
 euk_frac = gmean([0.49,0.69])
 auto_picoeuk_biomass = picophyto_biomsss*euk_frac
-auto_picoeuk_biomass/2e15
 
 
 # Picoeukaryotes contain both protists and plant species (like chlorophytes). It seems that, from the available literature, the biomass distribution between them is not strongly favored towards one class ([Li et al.](http://dx.doi.org/10.1016/0198-0149(92)90085-8)). We thus estimate the protist fraction at about 50% of the biomass of picoeukaryotes:
@@ -381,12 +380,20 @@ result.to_excel('../protists_biomass_estimate.xlsx',index=False)
 
 # Feed results to Fig. 2C
 
-# Feed picophytoplankton biomass
-update_fig2c(row=23,col=1,values=picophyto_biomsss/1e15, path='../../results.xlsx')
+# Feed green algae picophytoplankton biomass
+update_fig2c(row=23,col=1,values=auto_picoeuk_biomass*(1-auto_pico_protists_fraction)/1e15, path='../../results.xlsx')
+
+
+# Feed bacterial picophytoplankton biomass
+update_fig2c(row=24,col=1,values=picophyto_biomsss*(1-euk_frac)/1e15, path='../../results.xlsx')
+
+
+# Feed protist picophytoplankton biomass
+update_fig2c(row=25,col=1,values=auto_picoeuk_biomass*auto_pico_protists_fraction/1e15, path='../../results.xlsx')
 
 # Feed diatom biomass
-update_fig2c(row=24,col=1,values=diatom_biomsss/1e15, path='../../results.xlsx')
+update_fig2c(row=26,col=1,values=diatom_biomsss/1e15, path='../../results.xlsx')
 
 # Feed Phaeocystis biomass
-update_fig2c(row=25,col=1,values=phaeocystis_biomsss/1e15, path='../../results.xlsx')
+update_fig2c(row=27,col=1,values=phaeocystis_biomsss/1e15, path='../../results.xlsx')
 

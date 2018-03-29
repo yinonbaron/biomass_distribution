@@ -1,12 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the total number of marine phages
-# To estimate the total number of phages, we rely on a recent study which characterized the abundance of marine phages and prokaryotes globally [Wigington et al.](http://dx.doi.org/10.1038/nmicrobiol.2015.24). Here is a sample of the data:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,13 +12,21 @@ get_ipython().magic('matplotlib inline')
 from scipy.stats import  gmean
 from scipy.optimize import curve_fit
 pd.options.display.float_format = '{:,.1e}'.format
+
+
+# # Estimating the total number of marine phages
+# To estimate the total number of phages, we rely on a recent study which characterized the abundance of marine phages and prokaryotes globally [Wigington et al.](http://dx.doi.org/10.1038/nmicrobiol.2015.24). Here is a sample of the data:
+
+# In[2]:
+
+
 data = pd.read_excel('marine_phage_data.xls')
 data.head()
 
 
 # We bin the data based to ten depth bins so that each bin contains the same amount of data. The abundance of virions seems to follow an exponential deacy with depth:
 
-# In[2]:
+# In[3]:
 
 
 # Bin data to 10 depth bins with equal data
@@ -48,7 +54,7 @@ plt.legend()
 
 # We calculate the total number of virions by multiplying the average concentration of virions in each depth bin by the total volume of each depth bin:
 
-# In[3]:
+# In[4]:
 
 
 # Ocean surface area in m^2

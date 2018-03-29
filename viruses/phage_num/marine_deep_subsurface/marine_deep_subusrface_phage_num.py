@@ -1,12 +1,10 @@
 
 # coding: utf-8
 
-# # Estimating the number of phages in subseafloor sediments
-# To estimate the total number of phages in subseafloor sediments, we rely on two recent papers which measured the ratio between the number of prokaryotes in subseafloor sediments and the number of phage like particles ([Engelhardt et al.](http://dx.doi.org/10.1038/ismej.2013.245) and [Middelboe et al.](https://doi.org/10.3354/ame01485). We extracted the data from figure 3 of Engelhardt et al. and from figure 2 of Middelboe et al.:
-
 # In[1]:
 
 
+# Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
@@ -15,6 +13,13 @@ get_ipython().magic('matplotlib inline')
 import sys
 sys.path.insert(0, '../../../statistics_helper')
 from CI_helper import *
+
+
+# # Estimating the number of phages in subseafloor sediments
+# To estimate the total number of phages in subseafloor sediments, we rely on two recent papers which measured the ratio between the number of prokaryotes in subseafloor sediments and the number of phage like particles ([Engelhardt et al.](http://dx.doi.org/10.1038/ismej.2013.245) and [Middelboe et al.](https://doi.org/10.3354/ame01485). We extracted the data from figure 3 of Engelhardt et al. and from figure 2 of Middelboe et al.:
+
+# In[2]:
+
 
 # Load data extracted from Engelhardt et al.
 data = pd.read_excel('marine_deep_subsurface_phage_data.xlsx',skiprows=1)
@@ -36,7 +41,7 @@ plt.legend()
 
 # As the data from the two studies seem to correspond well to the same fit used in Engelhardt et al., we combined the data from the two studies and calculate the geometic mean of the ratios between phage-like particles and prokaryotes across measurements in Engelhardt et al.:
 
-# In[2]:
+# In[3]:
 
 
 # Merge data from Engelhardt et al. and Middelboe et al.
@@ -47,7 +52,7 @@ print('Our best estimate for the ratio between the concentration of phage-like p
 
 # To calculate the total number of phages in subseafloor sediments, we multiply the ratio of phage-like particles to prokaryotes by our estimate for the total number of prokaryotes in subseafloor sediments.
 
-# In[3]:
+# In[4]:
 
 
 prokaryote_estimate = pd.read_excel('../../../bacteria_archaea/marine_deep_subsurface/marine_deep_subsurface_prok_biomass_estimate.xlsx')

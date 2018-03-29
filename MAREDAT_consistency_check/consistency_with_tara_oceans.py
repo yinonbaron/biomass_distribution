@@ -1,6 +1,14 @@
 
 # coding: utf-8
 
+# In[1]:
+
+
+# Load dependencies
+import pandas as pd
+import numpy as np
+
+
 # # Consistency check between the MAREDAT data and *Tara* Oceans data
 # Our estimates of the global biomass of several marine taxa are based on data from the MAREDAT database. As stated in the specific sections relying on data from the database, there are many sources of uncertainty associated with the estimates stemming from the MAREDAT data. Many of those sources of uncertainty are hard to quantify, and no uncertainty estimate is provided in the literature on estimates based on the MAREDAT database.
 # 
@@ -21,11 +29,8 @@
 # ### de Vargas et al.
 # We use data on the total number of reads of different taxa in each size fraction. The data originates from de Vargas et al. from Database W6 in the companion website, as well as from Figure 3 in the main text. Here is a sample of the data:
 
-# In[1]:
+# In[2]:
 
-
-import pandas as pd
-import numpy as np
 
 # Load data on the total number of reads of each taxon from de Vargas et al.
 data = pd.read_excel('tara_oceans_data.xlsx','de Vargas W6',skiprows=1)
@@ -34,7 +39,7 @@ data.head()
 
 # We also use data on the total number of reads from each size fraction from Figure 2 in de Vargas et al.:
 
-# In[2]:
+# In[3]:
 
 
 #Load data on the total number of reads in each size fraction
@@ -45,7 +50,7 @@ tot_reads
 # In de Vargas et al., diatoms appear mainly in the nanoplankton (5-20 µm in diameter) and microplankton (20-180 µm) size fractions. However, the microzooplankton biomass estimates in the MAREDAT database do not include copepods, which were moved to the mesozooplankton group. Fragile protists such as Rhizaria, are probably also undersampled in the MAREDAT database. Therefore, to correct for these effects such that we could compare the MAREDAT and Tara Oceans datasets, we remove metazoa (dominated by arthropods) and Rhizaria reads from the relevant size fractions in the Tara Oceans dataset (nano and microplakton):
 # 
 
-# In[3]:
+# In[4]:
 
 
 # Calculate the total number of reads for the Nano and Micro fractions
@@ -67,7 +72,7 @@ read_data.loc[1]/corrected_total_reads
 # 
 # We assume that this biomass represents the biomass of Rhizaria in mesozooplankton. As we calculated in the marine arthropod section, Rhizaria represent ≈40% of the total mesoplankton biomass:
 
-# In[4]:
+# In[5]:
 
 
 # Load 18S sequecing data of mesozooplankton
@@ -79,7 +84,7 @@ print('The average fraction of Rhizaria in 18S rDNA sequencing data in the deep 
 
 # The remaining 60% are made up mainly of arthropods. This would put the total mesozooplankton arthropods biomass at ≈0.3 Gt C. Our estimate for the total biomass of arthropods in the nano, micro and mesozooplankton size fraction is ≈0.56 Gt C (see the marine arthropod section for details). Subtracting the fraction of As which leaves ≈0.2 Gt C of nano and microzooplankton arthropod biomass.
 
-# In[5]:
+# In[6]:
 
 
 # The estimate of the biomass of rhizaria based on Biard et al.
@@ -103,7 +108,7 @@ nano_micro_arth = nano_micro_mezo_arthropod - meso_arth
 
 # Based on the Tara Oceans data, the nano and microzooplankton arthropod biomass accounts for ≈40-75% of the total nano and microplankton biomass:
 
-# In[6]:
+# In[7]:
 
 
 print('The fraction of arthropods out of the total number of reads in nanoplankton and microplankton')
@@ -114,7 +119,7 @@ print('The mean fraction of arthropods out of the total number of reads in nanop
 
 # We use the estimate we just calculated of ≈0.2 Gt C of arthropods in the nano and microplankton size fractions, and combine it with the estimate of the biomass fraction of arthropods in the nano and microplankton size fractions from the Tara Oceans dataset. This yields an estimate for the total nano and microplankton biomass which is about ≈0.5 Gt C:
 
-# In[7]:
+# In[8]:
 
 
 tot_nano_micro_biomass = nano_micro_arth/metazoa_frac.mean(axis=1)

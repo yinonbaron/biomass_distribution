@@ -11767,6 +11767,27 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11779,18 +11800,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="c1"># Define the values for the estimates of the biomass of soil microbes from Xu et al. and Serna-Chavez et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Define the values for the estimates of the biomass of soil microbes from Xu et al. and Serna-Chavez et al.</span>
 <span class="n">xu</span> <span class="o">=</span> <span class="mf">23.2e15</span>
 <span class="n">serna_chavez</span> <span class="o">=</span> <span class="mf">14.6e15</span>
 </pre></div>
@@ -11811,7 +11824,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Our best estimate is the geometric mean of values from Xu et al. and Serna-Chavez et al.</span>
@@ -11855,7 +11868,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the microbial biomass from each biome and the coefficients for the depth distribution of roots</span>
@@ -11904,7 +11917,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Concentration of cells in top 1 meter of forest soils</span>
@@ -11967,7 +11980,7 @@ The average fraction of cells found in deeper layers is 20%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates by Xu et al. and Whitman et al.</span>
@@ -12015,7 +12028,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># We calculate the upper and lower multiplicative 95% confidence interval of the average microbial </span>
@@ -12038,7 +12051,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12139,7 +12152,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The maximal intra-study uncertainty in Xu et al. across biomes is </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;95</span><span class="si">% c</span><span class="s1">onfidence interval&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
@@ -12180,7 +12193,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">mul_CI_top</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">xu</span><span class="p">,</span><span class="n">serna_chavez</span><span class="p">])</span>
@@ -12222,7 +12235,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">xu_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">100</span><span class="p">)</span>
@@ -12264,7 +12277,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">inter_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">total_deeper_relative_fraction</span><span class="p">,</span><span class="n">whitman_mean_frac</span><span class="p">]))</span>
@@ -12306,7 +12319,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the maximal uncertainty between the intra-study and interstudy uncertainty</span>
@@ -12338,7 +12351,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Our estimate for the uncertainty of the total biomass of soil microbes contributed by the uncertainty in the esti,ate of the fraction of the biomass of microbes in soil layers deeper than 1 meter is 1.3-fold
+<pre>Our estimate for the uncertainty of the total biomass of soil microbes contributed by the uncertainty in the esti,ate of the fraction of the biomass of microbes in soil layers deeper than 1 meter is 1.2-fold
 </pre>
 </div>
 </div>
@@ -12358,7 +12371,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mul_CI_top</span><span class="p">,</span><span class="n">cor_coeff_CI</span><span class="p">]))</span>
@@ -12399,7 +12412,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total biomass of soil microbes: </span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>

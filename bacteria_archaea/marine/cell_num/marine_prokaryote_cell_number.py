@@ -1,6 +1,24 @@
 
 # coding: utf-8
 
+# In[1]:
+
+
+# Load dependencies
+import pandas as pd
+import numpy as np
+from scipy.stats import gmean
+pd.options.display.float_format = '{:,.1e}'.format
+import sys
+sys.path.insert(0, '../../../statistics_helper')
+from CI_helper import *
+
+# Genaral parameters used in the estimate
+ocean_area = 3.6e14
+liters_in_m3 = 1e3
+ml_in_m3 = 1e6
+
+
 # # Estimating the total number of marine bacteria and archaea
 
 # This notebook details the procedure for estimating the total number of marine bacteria and archaea.
@@ -9,22 +27,6 @@
 # [Buitenhuis et al.](http://dx.doi.org/10.5194/essd-4-101-2012), and
 # [Lloyd et al.](http://dx.doi.org/10.1128/AEM.02090-13)
 # 
-
-# In[1]:
-
-
-import pandas as pd
-import numpy as np
-from scipy.stats import gmean
-pd.options.display.float_format = '{:,.1e}'.format
-import sys
-sys.path.insert(0, '../../../statistics_helper')
-from CI_helper import *
-# Genaral parameters used in the estimate
-ocean_area = 3.6e14
-liters_in_m3 = 1e3
-ml_in_m3 = 1e6
-
 
 # In[2]:
 

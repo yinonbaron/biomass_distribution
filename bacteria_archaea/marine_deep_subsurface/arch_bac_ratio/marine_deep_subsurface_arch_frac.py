@@ -1,6 +1,23 @@
 
 # coding: utf-8
 
+# In[1]:
+
+
+# Load dependencies
+import pandas as pd
+import numpy as np
+import sys
+sys.path.insert(0, '../../../statistics_helper')
+from fraction_helper import *
+pd.options.display.float_format = '{:,.1e}'.format
+
+# Genaral parameters used in the estimate
+ocean_area = 3.6e14
+liters_in_m3 = 1e3
+ml_in_m3 = 1e6
+
+
 # # Estimating the fraction of archaea out of the total marine deep subsurface prokaryote population
 # 
 # In order to estimate the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we rely of two independent methods:  catalyzed reporter deposition fluorescent in-situ hybridization (CARD-FISH) and quantitative PCR (qPCR). Both methods have been found reliable for reporting the fraction of archaea out of the population of marine deep subsurface bacteria and archaea
@@ -8,20 +25,10 @@
 # ### CARD-FISH based estimate
 # For our CARD-FISH based estimate we rely on data from [Lloyd et al.](http://dx.doi.org/10.1128/AEM.02090-13). Here is a sample of the data:
 
-# In[1]:
+# In[2]:
 
 
-import pandas as pd
-import numpy as np
-import sys
-sys.path.insert(0, '../../../statistics_helper')
-from fraction_helper import *
 
-pd.options.display.float_format = '{:,.1e}'.format
-# Genaral parameters used in the estimate
-ocean_area = 3.6e14
-liters_in_m3 = 1e3
-ml_in_m3 = 1e6
 
 # Load the dataset
 lloyd = pd.read_excel('marine_deep_subsurface_arch_frac_data.xlsx','Lloyd')
@@ -30,7 +37,7 @@ lloyd.head()
 
 # We use values reported in Lloyd et al. for sediments deeper than 10 cm and using CARD-FISH with proteinase K permeabilization (this mathod generates reliable results). We calculate the geometric mean fraction of archaea out of the population of archaea and bacteria in this dataset.
 
-# In[2]:
+# In[3]:
 
 
 # Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than
@@ -50,7 +57,7 @@ print('The geometric mean of the fraction of archaea out of the population of ba
 # ## qPCR-based estimate
 # For the qPCR-based estimate of the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we also rely on data from Lloyd et al. We also consider only samples deeper than 10 cm. We exclude measurements using the ARCH516 as an archaeal primer or TaqMan probe, as measurements based on these primers of probes were shown to be unreliable.
 
-# In[3]:
+# In[4]:
 
 
 # Filter the data in Lloyd et al. to contain only samples which have been measured in sediments deeper than
@@ -71,7 +78,7 @@ print('The geometric mean of the fraction of archaea out of the population of ba
 
 # Our best estimate for the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea is the geometric mean of the estimates based on CARD-FISH and qPCR.
 
-# In[4]:
+# In[5]:
 
 
 
@@ -87,7 +94,7 @@ print('Our best estimate for the fraction of archaea out of the population marin
 # ### CARD-FISH-based method
 # We calculate the 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using CARD-FISH.
 
-# In[5]:
+# In[6]:
 
 
 fish_arc_CI = frac_CI(lloyd_fish['Fraction Arc CARDFISH'])
@@ -99,7 +106,7 @@ print('The uncertainty of the CARD-FISH-based estimate of the fraction of bacter
 # ### qPCR-based method
 # We calculate the 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using qPCR.
 
-# In[6]:
+# In[7]:
 
 
 qpcr_arc_CI = frac_CI(lloyd_qpcr['Fraction Arc qPCR'])
@@ -111,7 +118,7 @@ print('The uncertainty of the qPCR-based estimate of the fraction of bacteria ou
 # ## Inter-method uncertainty 
 # We calculate the 95% confidence inteval for the geometric mean of the estiamtes based on CARD-FISH and qPCR for the fraction of archaea out of the total population of bacteria and archaea. This serves as a measure of the inter-method uncertainty of our estimate.
 
-# In[7]:
+# In[8]:
 
 
 inter_arc_CI = frac_CI(np.array([fish_frac,qpcr_frac]))
@@ -127,7 +134,7 @@ print('The inter-method uncertainty of the estimate of the fraction of bacteria 
 # 
 # Our final parameters are:
 
-# In[8]:
+# In[9]:
 
 
 # Take the maximum uncertainty as our best projection of uncertainty
