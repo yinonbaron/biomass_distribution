@@ -11776,7 +11776,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
-
+<span class="kn">from</span> <span class="nn">openpyxl</span> <span class="k">import</span> <span class="n">load_workbook</span>
 <span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
@@ -12205,6 +12205,28 @@ div#notebook {
                <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Number of individuals&#39;</span><span class="p">,</span>
                <span class="n">values</span><span class="o">=</span> <span class="n">tot_cnidaria_num</span><span class="p">,</span>
                <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+
+<span class="c1"># We need to use the results on the biomass of gelatinous zooplankton </span>
+<span class="c1"># for our estimate of the total biomass of marine arthropods, so we </span>
+<span class="c1"># feed these results to the data used in the estimate of the total </span>
+<span class="c1"># biomass of marine arthropods</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../arthropods/marine_arthropods/marine_arthropods_data.xlsx&#39;</span>
+<span class="n">marine_arthropods_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s1">&#39;Other macrozooplankton&#39;</span><span class="p">)</span>
+
+<span class="n">marine_arthropods_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+                <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Biomass of gelatinous zooplankton&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="n">planktonic_cnidarian_biomass</span><span class="p">,</span>
+                <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;g C&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">})</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">book</span> <span class="o">=</span> <span class="n">book</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">sheets</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">ws</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">ws</span><span class="p">)</span> <span class="k">for</span> <span class="n">ws</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">worksheets</span><span class="p">)</span>
+
+
+<span class="n">marine_arthropods_data</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;Other macrozooplankton&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </pre></div>
 
 </div>
