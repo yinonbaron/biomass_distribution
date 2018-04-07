@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -23,14 +22,12 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Load global stocks data
 stocks = pd.read_csv('FAOSTAT_stock_data_mammals.csv')
 stocks.head()
 
 
 # In[3]:
-
 
 # Load species body mass data
 body_mass = pd.read_excel('livestock_body_mass.xlsx',skiprows=1,index_col=0) 
@@ -40,7 +37,6 @@ body_mass.head()
 # We pivot the stocks DataFrame to have a view of each kind of animal at each region:
 
 # In[4]:
-
 
 # Replace NaN with zeros
 stocks.fillna(value=0,inplace=True)
@@ -56,7 +52,6 @@ stock_pivot
 # There is also a difference in body mass between breeding and non-breeding pigs. We assume 90% of the population is breeding based on IPCC, 2006, Vol.4, Ch.10,Table.10.19.
 
 # In[5]:
-
 
 # Load data on the number of dairy producing cattle
 dairy = pd.read_csv('FAOSTAT_cattle_dairy_data.csv')
@@ -89,7 +84,6 @@ stock_pivot
 
 # In[6]:
 
-
 # Preprocessing the stocks DataFrame
 
 # Calculate the total number of animals in Latin America by subtracting values for Northern America from the total
@@ -114,7 +108,6 @@ stock_pivot
 
 # In[7]:
 
-
 wet_biomass =(body_mass*stock_pivot)
 wet_biomass
 
@@ -122,7 +115,6 @@ wet_biomass
 # We sum over all regions and convert units from kg wet weight to Gt C carbon by assuming carbon is ≈15% of the wet weight (30% dry weight of wet weight and carbon is 50% of dry weight).
 
 # In[8]:
-
 
 pd.options.display.float_format = '{:,.3f}'.format
 
@@ -136,13 +128,11 @@ total_biomass
 
 # In[9]:
 
-
 best_estimate = total_biomass.sum()
 print('Our best estimate for the biomass of mammal livestock is %.1f Gt C' % best_estimate)
 
 
 # In[10]:
-
 
 # Feed results to the chordate biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)

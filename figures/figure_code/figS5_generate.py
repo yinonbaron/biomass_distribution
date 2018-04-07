@@ -44,5 +44,7 @@ ax.spines['top'].set_visible(False)
 ax.yaxis.set_ticks_position('left')
 ax.xaxis.set_ticks_position('bottom')
 
+plt.title('Figure S5')
 plt.savefig('../output/figS5.pdf')
+plt.savefig('../output/figS5.svg')
 plt.show()

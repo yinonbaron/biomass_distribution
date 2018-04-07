@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -30,18 +29,16 @@ ml_in_m3 = 1e6
 
 # In[2]:
 
-
 # Load the datasets
-buitenhuis = pd.read_excel('marine_prok_cell_num_data.xlsx','Buitenhuis')
-aristegui = pd.read_excel('marine_prok_cell_num_data.xlsx','Aristegui')
+buitenhuis = pd.read_excel('marine_prok_cell_num_data.xlsx','Buitenhuis',skiprows=1)
+aristegui = pd.read_excel('marine_prok_cell_num_data.xlsx','Aristegui',skiprows=1)
 aristegui[['Cell abundance (cells m-2)','SE']] = aristegui[['Cell abundance (cells m-2)','SE']].astype(float)
-lloyd = pd.read_excel('marine_prok_cell_num_data.xlsx','Lloyd')
+lloyd = pd.read_excel('marine_prok_cell_num_data.xlsx','Lloyd',skiprows=1)
 
 
 # Here are samples from the data in Aristegui et al.:
 
 # In[3]:
-
 
 aristegui.head()
 
@@ -50,14 +47,12 @@ aristegui.head()
 
 # In[4]:
 
-
 buitenhuis.head()
 
 
 # And from Llyod et al.:
 
 # In[5]:
-
 
 lloyd.head()
 
@@ -66,7 +61,6 @@ lloyd.head()
 
 # In[6]:
 
-
 aristegui_total = (aristegui['Cell abundance (cells m-2)']*ocean_area).sum()
 print('Total number of cells based on Aristegui et al.: %.1e' % aristegui_total)
 
@@ -74,7 +68,6 @@ print('Total number of cells based on Aristegui et al.: %.1e' % aristegui_total)
 # For Buitenhuis et al. we bin the data along 100 meter depth bins, and estimate the average cell abundance in each bin. We then multiply the total number of cells per liter by the volume at each depth and sum across layers.
 
 # In[7]:
-
 
 # Define depth range every 100 m from 0 to 4000 meters
 depth_range = np.linspace(0,4000,41)
@@ -85,7 +78,7 @@ buitenhuis['Depth_bin'] = pd.cut(buitenhuis['Depth'], depth_range)
 #For each bin, calculate the average number of cells per liter
 buitenhuis_bins = buitenhuis.groupby(['Depth_bin']).mean()['Bact/L']
 
-#Multiply each average concentration by the total volume at each bin: 100 meters depth time the surface area of the oceac
+#Multiply each average concentration by the total volume at each bin: 100 meters depth times the surface area of the oceac
 
 buitenhuis_bins *= 100*ocean_area*liters_in_m3
 
@@ -94,10 +87,9 @@ buitenhuis_total = buitenhuis_bins.sum()
 print('Total number of cells based on Buitenhuis et al.: %.1e' % buitenhuis_total)
 
 
-# For Lloyd et al., we rely on the sum of the total number of bacteria and archaea. The estimate for the number of bacteria and archaea is based on the regression of the concentration of bacteria and archaea with depth. We use the equations reported in Lloyd et al. to extrapolate the number of cells of bacteria and archaea across the average ocean depth of 4000 km.
+# For Lloyd et al., we rely on the sum of the total number of bacteria and archaea. The estimate for the number of bacteria and archaea is based on the regression of the concentration of bacteria and archaea with depth. We use the equations reported in Lloyd et al. to extrapolate the number of cells of bacteria and archaea across the average ocean depth of 4000 m.
 
 # In[8]:
-
 
 # Define the regression equation for the number of bacteria in the top 64 m:
 def bac_surf(depth):
@@ -147,7 +139,6 @@ print('Total number of cells based on Lloyd et al.: %.1e' % lloyd_total)
 
 # In[9]:
 
-
 fish_yield = lloyd['FISH yield'].dropna()
 
 # Values which are not feasible are turned to the maximal value. We do not use 1 because of numerical reasons
@@ -170,7 +161,6 @@ print('After correcting for FISH yield, the estimate for the total number of bac
 
 # In[10]:
 
-
 estimates = [aristegui_total,buitenhuis_total,lloyd_total]
 best_estimate = 10**(np.log10(estimates).mean())
 
@@ -182,7 +172,7 @@ print('Our best estimate for the total number of marine bacteria and archaea is 
 # To calculate the uncertainty associated with the estimate for the total number of of bacteria and archaea, we first collect all available uncertainties and then take the largest value as our best projection for the uncertainty. 
 # 
 # ## Intra-study uncertainties 
-# We first survey the uncertainties reported in each of the studies. Aristegui et al. report a sandard error of ≈10% for the average cell concentration per unit area. Buitenhuis et al. and Lloyd et al. do not report uncertainties.
+# We first survey the uncertainties reported in each of the studies. Aristegui et al. report a standard error of ≈10% for the average cell concentration per unit area. Buitenhuis et al. and Lloyd et al. do not report uncertainties.
 # 
 # ## Interstudy uncertainties
 # 
@@ -190,17 +180,15 @@ print('Our best estimate for the total number of marine bacteria and archaea is 
 
 # In[11]:
 
-
 mul_CI = geo_CI_calc(estimates)
 
-print('The interstudy uncertainty is about %.1f' % mul_CI)
+print('The interstudy uncertainty is about %.1f-fold' % mul_CI)
 
 
 # We thus take the highest uncertainty from our collection which is ≈1.4-fold.
 # Our final parameters are:
 
 # In[12]:
-
 
 print('Total number of marine bacteria and archaea: %.1e' % best_estimate)
 print('Uncertainty associated with the total number of marine bacteria and archaea: %.1f-fold' % mul_CI)

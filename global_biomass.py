@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 # Load dependencies
 import pandas as pd
@@ -20,13 +19,11 @@ from excel_utils import *
 
 # In[2]:
 
-
 results = pd.read_excel('results.xlsx','Table1 & Fig1', index_col=[0,1])
 results
 
 
 # In[3]:
-
 
 best_estimate = results['Biomass [Gt C]'].sum()
 print('Our best estimate for the global biomass on Earth is ≈%.d Gt C' %round(best_estimate,-1))
@@ -37,7 +34,6 @@ print('Our best estimate for the global biomass on Earth is ≈%.d Gt C' %round(
 
 # In[4]:
 
-
 kingdoms = results.groupby(level=0).apply(sum).drop('Total biomass')
 
 mul_CI = CI_sum_prop(estimates=kingdoms['Biomass [Gt C]'], mul_CIs=kingdoms['Total uncertainty'])
@@ -45,7 +41,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 
 # In[5]:
-
 
 update_results(path='results.xlsx', sheet='Table1 & Fig1',row = ('Total biomass','Total biomass'), col='Total uncertainty', values=mul_CI)
 

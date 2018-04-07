@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -20,7 +19,6 @@ from excel_utils import *
 # In order to quantify the probability of plants having more biomass than bacteria, we randomly sample from the distribution of our estimates for the biomass of plants and bacteria.
 
 # In[2]:
-
 
 # Load results
 results = pd.read_excel('../results.xlsx','Table1 & Fig1',index_col=[0,1])
@@ -54,7 +52,6 @@ print('The probability of plants having more biomass than bacteria is ≈%.2f' %
 
 
 # In[3]:
-
 
 # Plot the distributions    
 bins = 10**(np.linspace(0,4,1000))

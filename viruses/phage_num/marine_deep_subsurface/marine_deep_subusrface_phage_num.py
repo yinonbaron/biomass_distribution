@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -19,7 +18,6 @@ from CI_helper import *
 # To estimate the total number of phages in subseafloor sediments, we rely on two recent papers which measured the ratio between the number of prokaryotes in subseafloor sediments and the number of phage like particles ([Engelhardt et al.](http://dx.doi.org/10.1038/ismej.2013.245) and [Middelboe et al.](https://doi.org/10.3354/ame01485). We extracted the data from figure 3 of Engelhardt et al. and from figure 2 of Middelboe et al.:
 
 # In[2]:
-
 
 # Load data extracted from Engelhardt et al.
 data = pd.read_excel('marine_deep_subsurface_phage_data.xlsx',skiprows=1)
@@ -43,7 +41,6 @@ plt.legend()
 
 # In[3]:
 
-
 # Merge data from Engelhardt et al. and Middelboe et al.
 merged_data = pd.concat([(data['Phage concentration [virions cm^-3]']/data['Cells concentration [cells cm^-3]']),(middelboe['Viral abundance [cm^-3]']/middelboe['Prokaryote abundance [cm^-3]'])])
 geo_mean_ratio = gmean(merged_data)
@@ -53,7 +50,6 @@ print('Our best estimate for the ratio between the concentration of phage-like p
 # To calculate the total number of phages in subseafloor sediments, we multiply the ratio of phage-like particles to prokaryotes by our estimate for the total number of prokaryotes in subseafloor sediments.
 
 # In[4]:
-
 
 prokaryote_estimate = pd.read_excel('../../../bacteria_archaea/marine_deep_subsurface/marine_deep_subsurface_prok_biomass_estimate.xlsx')
 best_estimate = prokaryote_estimate.loc[0]['Value']*geo_mean_ratio

@@ -1,5 +1,9 @@
 import fnmatch
 import os
+import sys
+
+# Get the path of the script
+file_path = os.path.dirname(os.path.realpath(__file__))
 
 # You should install dependencies before running this script
 # Use the command "sudo pip install -r requirements.txt" to install dependencies
@@ -43,10 +47,10 @@ def sortedWalk(top, topdown=True, onerror=None):
         yield top, dirs, nondirs
 
 # Go over the current directory
-for root, dirnames, filenames in sortedWalk('.',topdown=False):
-    
+for root, dirnames, filenames in sortedWalk(file_path,topdown=False):
+
     # Skip the figures directory
-    if root == './figures':
+    if '/figures' in root:
         continue
     
     # Find all the jupyter notebook files
@@ -65,12 +69,12 @@ for root, dirnames, filenames in sortedWalk('.',topdown=False):
 
 # Run the analysis comparing plants and bacteria
 # Run current notebook
-run_nb('./figures/plant_bacteria_comparison.ipynb')
-os.system('jupyter nbconvert --to script ./figures/plant_bacteria_comparison.ipynb')
-os.system('jupyter nbconvert --to html  ./figures/plant_bacteria_comparison.ipynb')
-
+run_nb(file_path + '/figures/plant_bacteria_comparison.ipynb')
+os.system('jupyter nbconvert --to script ' + file_path + '/figures/plant_bacteria_comparison.ipynb')
+os.system('jupyter nbconvert --to html ' + file_path + '/figures/plant_bacteria_comparison.ipynb')
 
 # Run the scripts that generate the figures
-os.chdir('./figures/figure_code')
+os.chdir(file_path + '/figures/figure_code')
+sys.path.insert(0, file_path + '/figures/figure_code')
 for script in os.listdir('.'):
-    os.system('python ' + script)
+    __import__(os.path.splitext(script)[0])

@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -22,7 +21,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Load data from Poorter et al.
 fractions = pd.read_excel('non_wood_biomass_data.xlsx','Poorter',skiprows=1,index_col=0)
 fractions
@@ -32,7 +30,6 @@ fractions
 
 # In[3]:
 
-
 # Load data on the total plant biomass in each biome from Erb et al.
 biomes = pd.read_excel('non_wood_biomass_data.xlsx','Erb',skiprows=1)
 biomes
@@ -41,7 +38,6 @@ biomes
 # The specific biomes in Erb et al. are not fully matching the biomes in Poorter et al., and thus we traslate between the biomes in the two studies:
 
 # In[4]:
-
 
 # Calculate the sum of the mass fractions of leaves and roots
 non_wood_frac = (fractions['LMF']+fractions['RMF'])/fractions.sum(axis=1)
@@ -66,7 +62,6 @@ print('Our global average for non-woody mass fraction is ≈%.0f percent' %(mean
 # In[5]:
 
 
-
 # Our best estimate for the total biomass
 tot_plant_biomass = 450e15
 
@@ -82,14 +77,12 @@ print('Our best estimate for the total non-wood plant biomass based on the fract
 
 # In[6]:
 
-
 roots_jackson = 146e15
 
 
 # To estimate the total biomass of leaves, we rely on biome averages on the leaf area index (LAI) from [Asner et al.](http://dx.doi.org/10.1046/j.1466-822X.2003.00026.x). Here is the data from Asner et al.:
 
 # In[7]:
-
 
 biome_LAI = pd.read_excel('non_wood_biomass_data.xlsx','Asner',skiprows=1,index_col=0)
 biome_LAI
@@ -98,7 +91,6 @@ biome_LAI
 # We use data on the area on each biome from the book "Biogeochemistry", and multiply the LAI in each biome by the total area of each biome to estimate the global leaf area:
 
 # In[8]:
-
 
 # Load biome area data
 biome_area = pd.read_excel('non_wood_biomass_data.xlsx','Biome area',skiprows=1,index_col=0)
@@ -127,9 +119,8 @@ print('Our estimate for the total leaf area is ≈%.1e m^2' % tot_leaf_area)
 
 # In[9]:
 
-
 # Load the glopnet data
-glopnet_data = pd.read_excel('non_wood_biomass_data.xlsx','glopnet_data')
+glopnet_data = pd.read_excel('non_wood_biomass_data.xlsx','glopnet_data',skiprows=1)
 
 # Calculate the geometric mean of the LMA
 geomean_LMA = 10**glopnet_data.loc[glopnet_data['GF']=='T',['log LMA']].mean()
@@ -144,7 +135,6 @@ print('Our estimate for the global leaf biomass is ≈%.1f Gt C' %(tot_leaf_biom
 
 # In[10]:
 
-
 method2_non_wood_biomass = tot_leaf_biomass + roots_jackson
 print('Our best estimate for the total non-wood plant biomass based on estimates of the total biomass of roots and leaves is ≈%.0f Gt C' %(method2_non_wood_biomass/1e15))
 
@@ -152,7 +142,6 @@ print('Our best estimate for the total non-wood plant biomass based on estimates
 # We use the geometric mean of our estimates from the two methods as our best estimate for the total non-woody plant biomass:
 
 # In[11]:
-
 
 best_non_wood_biomass = gmean([method1_non_wood_biomass,method2_non_wood_biomass])
 print('Our best estimate for the total non-wood plant biomass is ≈%.0f Gt C' %(best_non_wood_biomass/1e15))
@@ -164,7 +153,6 @@ print('Our best estimate for the total non-wood plant biomass is ≈%.0f Gt C' %
 # To estimate the global average root mass fractions, we rely on a recent meta-analysis which collected data on the lead, shoot and root mass fractions in several different biomes ([Poorter et al.](http://dx.doi.org/10.1111/j.1469-8137.2011.03952.x)). We calculate the global average root mass fraction by taking into account the relative plant biomass present in each biome, based on data from [Erb et al.](http://dx.doi.org/10.1038/ngeo2782).
 
 # In[12]:
-
 
 # Calculate the root mass fraction in each biome based on data from Poorter et al.
 root_frac = (fractions['RMF'])/fractions.sum(axis=1)
@@ -186,7 +174,6 @@ print('Our estimate for the global average root mass fraction is ≈%.1f percent
 
 # In[13]:
 
-
 method1_root_biomass = mean_root_frac*tot_plant_biomass
 
 print('Our estimate of the total root biomass based on the global average root mass fraction is ≈%0.1f Gt C' %(method1_root_biomass/1e15))
@@ -196,14 +183,12 @@ print('Our estimate of the total root biomass based on the global average root m
 
 # In[14]:
 
-
 best_root_biomass = gmean([method1_root_biomass,roots_jackson])
 
 print('Our best estimate for the total belowground plant biomass is ≈%0.1f Gt C' %(best_root_biomass/1e15))
 
 
 # In[15]:
-
 
 # Feed results to Fig S1
 update_results(sheet='FigS1', 

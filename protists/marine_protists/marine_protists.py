@@ -3,13 +3,13 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
 from scipy.stats import gmean
 import sys
 sys.path.insert(0, '../../statistics_helper/')
+from fraction_helper import *
 from excel_utils import *
 
 
@@ -25,7 +25,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for picophytoplankton
 picophyto_biomsss = gmean([0.28e15,0.64e15])
@@ -35,15 +34,13 @@ picophyto_biomsss = gmean([0.28e15,0.64e15])
 
 # In[3]:
 
-
-euk_frac = gmean([0.49,0.69])
+euk_frac = frac_mean(np.array([0.49,0.69]))
 auto_picoeuk_biomass = picophyto_biomsss*euk_frac
 
 
 # Picoeukaryotes contain both protists and plant species (like chlorophytes). It seems that, from the available literature, the biomass distribution between them is not strongly favored towards one class ([Li et al.](http://dx.doi.org/10.1016/0198-0149(92)90085-8)). We thus estimate the protist fraction at about 50% of the biomass of picoeukaryotes:
 
 # In[4]:
-
 
 auto_pico_protists_fraction = 0.5
 auto_pico_protists_biomass = auto_picoeuk_biomass*auto_pico_protists_fraction
@@ -55,7 +52,6 @@ auto_pico_protists_biomass = auto_picoeuk_biomass*auto_pico_protists_fraction
 
 # In[5]:
 
-
 pd.options.display.float_format = '{:,.1f}'.format
 # Load data from de Vargas on the ratio between autotrophic and heterotrophic protists
 pico_nano_data = pd.read_excel('marine_protists_data.xlsx',skiprows=1)
@@ -66,7 +62,6 @@ pico_nano_data.head()
 
 # In[6]:
 
-
 hetero_photo_ratio = gmean(pico_nano_data['Heterotrophic protist'])/gmean(pico_nano_data['Phototrophic protists'])
 print('Our best estimate of the ratio between heterotrophic and phototrophic protists in pico-nanoplankton is ≈%.f-fold' %hetero_photo_ratio)
 
@@ -74,7 +69,6 @@ print('Our best estimate of the ratio between heterotrophic and phototrophic pro
 # We add the contribution of heterotrophic pico-nanoprotists to our estimate:
 
 # In[7]:
-
 
 pico_protists_biomass = (1+hetero_photo_ratio)*auto_pico_protists_biomass
 
@@ -86,7 +80,6 @@ pico_protists_biomass = (1+hetero_photo_ratio)*auto_pico_protists_biomass
 
 # In[8]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for microzooplankton
 microzoo_biomsss = gmean([0.48e15,0.73e15])
@@ -97,7 +90,6 @@ microzoo_biomsss = gmean([0.48e15,0.73e15])
 
 # In[9]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for diatoms
 diatom_biomsss = gmean([0.1e15,0.94e15])
@@ -107,7 +99,6 @@ diatom_biomsss = gmean([0.1e15,0.94e15])
 # For Phaeocystis, reports a "minimum" estimate of 0.11 Gt C and a "maximum" estimate of 0.71 Gt C for the biomass of picophytoplankton. We calculate the geometric mean of those estimates:
 
 # In[10]:
-
 
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 # for Phaeocystis
@@ -120,7 +111,6 @@ phaeocystis_biomsss = gmean([0.11e15,0.71e15])
 # For rhizaria, our estimate relies on data from Biard et al. Biard et al. divided the data into three depth layers (0-100 m, 100-200 m, and 200-500 m), and multiplied median biomass concentrations at each depth layer across the entire volume of water at that layer to generate global estimate. The biomass of Rhizaria in the top 500 meters of the ocean is estimated at ≈0.2 Gt C. 
 
 # In[11]:
-
 
 rhizaria_biomass = 0.2e15
 
@@ -135,7 +125,6 @@ rhizaria_biomass = 0.2e15
 
 # In[12]:
 
-
 # Load the data from Bochdansky et al.
 bochdansky_data = pd.read_excel('marine_protists_data.xlsx','Bochdansky ratio',skiprows=1,index_col=0)
 protists = bochdansky_data.loc['All Eukaryotes'] - bochdansky_data.loc['Fungi']
@@ -145,7 +134,6 @@ print('The mean ratio between the number of particle-attached protists and proka
 # Our of the total number of eukaryotes, we exclude the group of *Labyrinthulomycetes*, as their biomass was estimated seperatly by Bochdansky et al., as we will see later. This leaves us with protists which are not *Labyrinthulomycetes*, mainly flagellates. To estimate the ratio of the biomass of these remaining protists, we rely on a study which has measured the carbon content of free-living protists in the deep sea ([Pernice et al.](https://dx.doi.org/10.1038%2Fismej.2014.168)). We use the carbon content of free-living protists in the deep sea as our best estimate of the carbon content of particle-attached protists in the deep-sea. For the carbon content of particle-attached prokaryotes, we use our best estimate from the particle-attached prokaryotes section.
 
 # In[13]:
-
 
 # Calculate the non-Labyrinthulomycetes protists
 flagellates = protists-bochdansky_data.loc['Labyrinthulomycetes']
@@ -165,7 +153,6 @@ biomass_ratio_flagellates = flagellates*(deep_flagellates_cc*1000/prok_cc)
 
 # In[14]:
 
-
 # Load the data on the biomass ratio of Labyrinthulomycetes
 lab_biomass_data = pd.read_excel('marine_protists_data.xlsx','Bochdansky biomass',skiprows=1)
 
@@ -178,7 +165,6 @@ lab_biomass_ratio = gmean(gmean(lab_biomass_data.iloc[:,1:],axis=1))
 
 # In[15]:
 
-
 best_bochdansky = biomass_ratio_flagellates + lab_biomass_ratio
 
 print('Our best estimate for the biomass ratio between particle-attached protists and prokaryotes in the bathypelagic layer is ≈%.1f ' %best_bochdansky)
@@ -189,7 +175,6 @@ print('Our best estimate for the biomass ratio between particle-attached protist
 # For Turley & Mackie and Herndl, we have data on the concentrations of prokaryotes and protists on particles. For each study, we fist calculate the mean concentration of prokaryotes and protists, and divide the two mean concentrations to generate an estimate for the ratio between the number of cells of protists and prokaryotes. To estimate the mean concentrations of prokaryotes and protists, we generate two types of estimates: an estimate which uses the arithmetic mean of the different measurements, and an estimate which uses the geometric mean of the different measuremetns. The estimate based on the arithmetic mean is more susceptible to sampling bias, as even a single measurement which is not characteristic of the global population (such as samples which have some technical biases associated with them) might shift the average concentration significantly. On the other hand, the estimate based on the geometric mean might underestimate global biomass as it will reduce the effect of biologically relevant high population densities. As a compromise between these two caveats, we chose to use as our best estimate the geometric mean of the estimates from the two methodologies.
 
 # In[16]:
-
 
 # Load data from Turley & Mackie and Herndl
 poc_ratio = pd.read_excel('marine_protists_data.xlsx','POC')
@@ -214,7 +199,6 @@ best_ratio_conc
 
 # In[17]:
 
-
 herndl_flagellates_vol = 11
 herndl_flagellates_cc = herndl_flagellates_vol*0.22
 
@@ -222,7 +206,6 @@ herndl_flagellates_cc = herndl_flagellates_vol*0.22
 # For prokaryotes, he measures a biovolume of ≈0.25 $µm^3$ for rod cells and 0.067 $µm^3$ for coccoid cells. We convert these volume to carbon content using the following coversion euqation from [Gundersen et al.](onlinelibrary.wiley.com/doi/10.4319/lo.2002.47.5.1525/abstract): $$ carbon\ content = 108.8×V^{0.898}$$
 
 # In[18]:
-
 
 rod_vol = 0.25
 coccoid_vol = 0.067
@@ -235,14 +218,12 @@ coccoid_cc = conversion_eq(coccoid_vol)
 
 # In[19]:
 
-
 herndl_prok_cc = np.mean([rod_cc,coccoid_cc])
 
 
 # We calculate the ratio in carbon contents between protists and prokaryotes as reported by Herndl, and multiply it by the ratio of the number of cells of protists and prokaryotes. This gives us an estimate for the ratio of the biomass of particle-attached protists and prokaryotes.
 
 # In[20]:
-
 
 herndl_cc_ratio = herndl_flagellates_cc*1000/herndl_prok_cc
 herndl_biomass_ratio = best_ratio_conc.loc['Herndl']*herndl_cc_ratio
@@ -253,7 +234,6 @@ print('Our estimate for the ratio between the biomass of particle-attached proti
 # For Turley & Mackie, we only have measurements of the ratio between the number of cells of particle-attached protists and prokaryotes. Turkey & Mackie report measurements both in the epipelagic layer and in the mesopelagic layer. We calculate the mean concentrations of protists and prokaryotes in each layer. As we noted above we first calculate the arithmetic and geometric means of the measurements in each layer, and then use the geometric mean between the two values generate by using the arithmetric mean and geometric mean as our best estimate.
 
 # In[21]:
-
 
 # Take the data in Turley & Mackie
 tm_data = poc_ratio[poc_ratio['Reference'] =='Turley & Mackie']
@@ -282,7 +262,6 @@ best_tm_ratio_conc
 
 # In[22]:
 
-
 pd.options.display.float_format = '{:,.1f}'.format
 # For the epipelagic layer multiply cell concentration ratios by the carbon
 # content ratios measured by Herndl
@@ -306,7 +285,6 @@ meso_biomass_ratio = best_tm_ratio_conc.loc[False]*meso_cc_ratio
 
 # In[23]:
 
-
 best_biomass_ratio = np.average([gmean([herndl_biomass_ratio,epi_tm_biomass]),meso_biomass_ratio,best_bochdansky], weights=[200,800,3000])
 print('Our best estimate for the biomass ratio between particle-attached protists and prokaryotes is ≈%.1f' %best_biomass_ratio)
 
@@ -314,7 +292,6 @@ print('Our best estimate for the biomass ratio between particle-attached protist
 # We use our best estimate for the total biomass of particle attached prokaryotes and multiply it by our estimate of the biomass ratio between particle-attached protists and prokaryotes to estimate the total biomass of particle-attached protists.
 
 # In[24]:
-
 
 poc_prok = pd.read_excel('../../bacteria_archaea/marine/marine_prok_biomass_estimate.xlsx').loc[[0,1,4],'Value'].prod()*1e-15
 
@@ -328,7 +305,6 @@ print('Our best estimate for the total biomass of particle-attached protists is 
 
 # In[25]:
 
-
 best_estimate = rhizaria_biomass + phaeocystis_biomsss + diatom_biomsss + microzoo_biomsss + pico_protists_biomass + best_poc_protists
 
 print('Our best estimate for the total biomass of marine protists is ≈%.1f Gt C' %(best_estimate/1e15))
@@ -341,7 +317,6 @@ print('Our best estimate for the total biomass of marine protists is ≈%.1f Gt 
 
 # In[26]:
 
-
 # We crudely estimate and uncertainty of an order of magnitude
 mul_CI = 10
 
@@ -349,7 +324,6 @@ mul_CI = 10
 # Our final parameters are:
 
 # In[27]:
-
 
 
 print('Biomass of marine protists: %.1f Gt C' %(best_estimate/1e15))

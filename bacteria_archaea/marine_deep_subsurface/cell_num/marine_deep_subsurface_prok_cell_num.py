@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -17,7 +16,6 @@ from CI_helper import *
 # In order to estimate the total number of cells of bacteria and archaea in the marine deep subsurface, we rely of estimates from two studies - [Parkes et al.](http://www.sciencedirect.com/science/article/pii/S0025322714000425), and [Kallmeyer et al.](http://dx.doi.org/10.1073/pnas.1203849109). Our best esimate for the total number of cells of bacteria and archaea in the marine deep subsurface is the geometric mean of the estimates by Parkes et al. and Kallmeyer et al.
 
 # In[2]:
-
 
 #Kallmeyer et al. estimate ≈2.9×10^29 cells in the marine deep subsurface
 kallmeyer = 2.9e29
@@ -38,7 +36,6 @@ print('Our best estimate for the total number of cells of bacteria and archaea t
 
 # In[3]:
 
-
 parkes_low = 1.95e29
 parkes_high = 4.34e30
 parkes_mean_ex_ocean_gyre = 8.65e29
@@ -57,7 +54,6 @@ print('The intra-study uncertainty of the estimate by Parkes et al. is %.1f-fold
 
 # In[4]:
 
-
 kallmeyer_low = 1.2e29
 kallmeyer_high = 8e29
 
@@ -75,7 +71,6 @@ print('The intra-study uncertainty of the estimate by Kallmeyer et al. is %.1f-f
 
 # In[5]:
 
-
 inter_mul_CI = geo_CI_calc(np.array([parkes,kallmeyer]))
 
 print('The interstudy uncertainty of the geometric mean of the estimates by Parkes et al. and Kallmeyer et al. is %.1f-fold' % inter_mul_CI)
@@ -84,7 +79,6 @@ print('The interstudy uncertainty of the geometric mean of the estimates by Park
 # We use the highest uncertainty among the intra-study and interstudy uncertainties as our projection of the uncertainty associated with the estimate of the total number of cells of bacteria and archaea in the marine deep subsurface. Are final parameters are:
 
 # In[6]:
-
 
 # Take the maximal uncetainty as our best projection of uncertainty
 mul_CI = np.max([parkes_mul_CI,kallmeyer_mul_CI,inter_mul_CI])

@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import numpy as np
 import pandas as pd
@@ -19,7 +18,6 @@ pd.options.display.float_format = '{:,.1e}'.format
 
 # In[2]:
 
-
 results = pd.read_excel('fungi_biomass_estimate.xlsx')
 
 
@@ -27,12 +25,10 @@ results = pd.read_excel('fungi_biomass_estimate.xlsx')
 
 # In[3]:
 
-
 results
 
 
 # In[4]:
-
 
 # Calculate the total biomass of fungi
 soil_fungi_biomass = results.loc[[0,1],'Value'].prod()
@@ -51,7 +47,6 @@ print('The uncertainty associated with the estimate for the biomass of soil fung
 
 # In[5]:
 
-
 marine_fungi = results.loc[2,'Value']
 marine_fungi_CI = results.loc[2,'Uncertainty']
 
@@ -59,7 +54,6 @@ marine_fungi_CI = results.loc[2,'Uncertainty']
 # We combine all the biomass contributions of fungi from the different environments, and combine their uncertainties:
 
 # In[6]:
-
 
 total_fungi_biomass = soil_fungi_biomass + marine_fungi
 
@@ -80,7 +74,6 @@ print('The uncertainty associated with the estimate for the biomass of fungi is 
 
 # In[7]:
 
-
 # Carbon content of a single fungal cell based on Veses et al.
 carbon_content = 15e-12
 
@@ -91,7 +84,6 @@ print('Our best estimate for the total number of fungal cells is ≈%.0e.' %(soi
 
 
 # In[8]:
-
 
 # Feed soil fungi results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 

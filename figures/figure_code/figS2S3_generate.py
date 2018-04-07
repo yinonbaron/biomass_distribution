@@ -81,6 +81,7 @@ plt.ylabel('Biomass [Gt C]')
 plt.xlabel('Number of species')
 plt.xlim([1e3,1e7])
 
+plt.title('Figure S3')
 plt.savefig('../output/figS3.pdf')
 plt.savefig('../output/figS3.svg')
 
@@ -111,6 +112,7 @@ for txt in (data[data['Number of individuals'] != np.nan].index):
 plt.ylabel('Biomass [Gt C]')
 plt.xlabel('Number of individuals')
 plt.xticks([1e10,1e15,1e20,1e25,1e30])
+plt.title('Figure S2')
 plt.savefig('../output/figS2.pdf')
 plt.savefig('../output/figS2.svg')
 

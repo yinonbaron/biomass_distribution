@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import numpy as np
 import pandas as pd
@@ -20,7 +19,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 results = pd.read_excel('terrestrial_deep_subsurface_prok_biomass_estimate.xlsx')
 results
 
@@ -28,7 +26,6 @@ results
 # We multiply all the relevant parameters to arrive at our best estimate for the biomass of terrestrial deep subsurface archaea and bacteria, and propagate the uncertainties associated with each parameter to calculate the uncertainty associated with the estimate for the total biomass.
 
 # In[3]:
-
 
 # Calculate the total biomass of marine archaea and bacteria
 total_arch_biomass = results['Value'][0]*results['Value'][1]
@@ -47,7 +44,6 @@ print('The uncertainty associated with the estimate for the biomass of bacteria 
 
 
 # In[4]:
-
 
 # Feed bacteria results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 

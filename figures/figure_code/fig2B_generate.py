@@ -61,5 +61,8 @@ ax.yaxis.set_ticks_position('left')
 ax.xaxis.set_ticks_position('bottom')
 
 ax.tick_params(axis='both', which='both', length=0)
+plt.title('Figure 2B')
+plt.savefig('../output/fig2B.svg')
 plt.savefig('../output/fig2B.pdf')
+
 plt.show()

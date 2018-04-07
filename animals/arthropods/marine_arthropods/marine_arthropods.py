@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,6 +12,18 @@ import sys
 sys.path.insert(0, '../../../statistics_helper/')
 from fraction_helper import *
 from excel_utils import *
+
+# Define function that runs a jypyter notebook and saves the results to the same file
+def run_nb(path):
+    import nbformat
+    from nbconvert.preprocessors import ExecutePreprocessor
+    import os
+    with open(path) as f:
+        nb = nbformat.read(f, as_version=4)
+        ep = ExecutePreprocessor(timeout=6000, kernel_name='python3')
+        ep.preprocess(nb, {'metadata': {'path': os.path.dirname(path)}})
+    with open(path, 'wt') as f:
+        nbformat.write(nb, f)
 
 
 # # Estimating the biomass of marine arthropods
@@ -41,9 +52,8 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Load 18S sequecing data
-seq_data = pd.read_excel('mesozooplankton_data.xlsx',sheet_name='de Vargas',skiprows=1)
+seq_data = pd.read_excel('marine_arthropods_data.xlsx',sheet_name='de Vargas',skiprows=1)
 
 print('The average fraction of Rhizaria in 18S rDNA sequencing data in surface waters is ' + '{:,.0f}%'.format(seq_data['Rhizaria surface'].mean()*100))
 print('The average fraction of Rhizaria in 18S rDNA sequencing data in the deep chlorophyll maximum is ' + '{:,.0f}%'.format(seq_data['Rhizaria DCM'].mean()*100))
@@ -57,7 +67,6 @@ print('The average fraction of Rhizaria in 18S rDNA sequencing data in the deep 
 # 
 
 # In[3]:
-
 
 # Define the relative fraction of arthropods out of the total mesozooplankton excluding Rhizaria
 arth_frac_surf = seq_data['Arthropod surface']/(1-seq_data['Rhizaria surface'])
@@ -76,7 +85,6 @@ print('The average fraction of arthropods out of the total biomass of mesozoopla
 
 # In[4]:
 
-
 # Calculate the geometric mean of the "minimum" and "maximum" estimates from Buitenhuis et al.
 buitenhuis_estimate = gmean([0.33e15,0.59e15])
 
@@ -84,7 +92,6 @@ buitenhuis_estimate = gmean([0.33e15,0.59e15])
 # We than use 80% of the geometric mean as an estimate for the biomass of mesozooplankton arthropods:
 
 # In[5]:
-
 
 # Calculate the mean fraction of arthropods between surface water and DCM
 arth_frac = frac_mean(np.array([mean_arth_frac_dcm,mean_arth_frac_surf]))
@@ -96,7 +103,6 @@ meso_arth_biomass = buitenhuis_estimate*arth_frac
 # Most of the data in the MAREDAT databased was collected using 300 µm nets, and thus some of the lower size fraction of mesozooplankton was not collected. To correct for this fact, we use a relation between biomass estimated using 200 µm nets and 300 µm nets [O'brian 2005](https://www.st.nmfs.noaa.gov/copepod/2005/documents/fspo73_abbreviated.pdf). The relation is: $$ B_{300} = 0.619× B_{200}$$ Where $B_{300}$ is the biomass sampled with 300 µm nets and $B_{200}$ is the biomass sampled with 200 µm nets. We correct for this factor to get our best estimate for the biomass of mesozooplankton arthropods:
 
 # In[6]:
-
 
 # Correct for the use of 300 µm nets when sampling mesozooplankton biomass
 meso_arth_biomass /= 0.619
@@ -111,7 +117,6 @@ print('Our best estimate for the biomass of mesozooplankton arthropods is ≈%.2
 
 # In[7]:
 
-
 macro_biomass = gmean([0.2e15,1.5e15])
 print('Our best estimate for the biomass of macrozooplankton is ≈%.1f Gt C' %(macro_biomass/1e15))
 
@@ -122,18 +127,26 @@ print('Our best estimate for the biomass of macrozooplankton is ≈%.1f Gt C' %(
 
 # In[8]:
 
-
 # Calculate the total biomass of macrozooplankton arthropods by
 # subtacting the biomass of pteropods and gelatinous zooplankton
 # from the total biomass of macrozooplankton
-macro_arth_biomass = macro_biomass -0.15e15 -0.04e15
+
+# Load biomass estimates for pteropods and gelatinous zooplankton
+other_macrozooplankton = pd.read_excel('marine_arthropods_data.xlsx','Other macrozooplankton')
+
+# In other zooplankton biomass estimate is empty, run the scripts 
+if(other_macrozooplankton.shape[0]<2):
+    run_nb('../../cnidarians/cnidarians.ipynb')
+    run_nb('../../molluscs/molluscs.ipynb')
+    other_macrozooplankton = pd.read_excel('marine_arthropods_data.xlsx','Other macrozooplankton')
+
+macro_arth_biomass = macro_biomass - other_macrozooplankton['Value'].sum()
 print('our best estimate for the total biomass of macrozooplankton arthropods is ≈%.1f Gt C' %(macro_arth_biomass/1e15))
 
 
 # We sum up the biomass of arthropods in the mesezooplankton and macrozooplankton size fractions as our best estimate for the biomass of marine arthropods:
 
 # In[9]:
-
 
 best_estimate = meso_arth_biomass+macro_arth_biomass
 print('Our best estimate for the biomass of marine arthropods is %.1f Gt C' %(best_estimate/1e15))
@@ -144,7 +157,6 @@ print('Our best estimate for the biomass of marine arthropods is %.1f Gt C' %(be
 
 # In[10]:
 
-
 # We project an uncertainty of an order of magnitude (see MAREDAT consistency check section)
 mul_CI = 10
 
@@ -153,7 +165,6 @@ mul_CI = 10
 # We consider only the mesozooplankton as they are the smallest group of marine arthropods (by the definitions of the MAREDAT database they also contain microzooplankton). To estimate the total number of marine arthropods, we divide our estimate for the total biomass of mesozooplankton by an estimate for the characteristic carbon content of an individual copepod, which dominate the mesozooplankton biomass. As the basis of our estimate for the charactristic  carbon content of a single copepod, we rely on data from [Viñas et al.](http://dx.doi.org/10.1590/S1679-87592010000200008) and [Dai et al.](https://doi.org/10.1016/j.jmarsys.2015.11.004), which range from 0.15 µg C to 100 µg C per individual. We use the geometric mean of this range, which is ≈4 µg C per individual, as our best estimate of the carbon content of a single copepod.
 
 # In[11]:
-
 
 # The carbon content of copepods
 copepod_carbon_content = 4e-6
@@ -165,7 +176,6 @@ print('Our best estimate for the total number of marine arthropods is ≈%.0e' %
 
 
 # In[12]:
-
 
 # Feed results to the animal biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)

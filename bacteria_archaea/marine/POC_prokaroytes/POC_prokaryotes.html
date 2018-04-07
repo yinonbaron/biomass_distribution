@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>POC_prokaryotes</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>POC_prokaryotes</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11,8 +13,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,6 +1109,7 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2535,6 +2538,7 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3025,6 +3029,7 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8755,9 +8760,6 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
-[dir="rtl"] #ipython_notebook {
-  float: right !important;
-}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,14 +8962,8 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
-[dir="rtl"] #tabs li {
-  float: right;
-}
 ul#tabs {
   margin-bottom: 4px;
-}
-[dir="rtl"] ul#tabs {
-  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8990,16 +8986,6 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
-}
-[dir="rtl"] .list_toolbar .tree-buttons {
-  float: left !important;
-}
-[dir="rtl"] .list_toolbar .pull-right {
-  padding-top: 1px;
-  float: left !important;
-}
-[dir="rtl"] .list_toolbar .pull-left {
-  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9136,9 +9122,6 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
-[dir="rtl"] #tree-selector a {
-  float: right;
-}
 #button-select-all {
   min-width: 50px;
 }
@@ -9228,9 +9211,6 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
-[dir="rtl"] #new-menu {
-  text-align: right;
-}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9275,9 +9255,6 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
-}
-[dir="rtl"] #running .col-sm-8 {
-  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9574,7 +9551,6 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
-  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9595,6 +9571,11 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
+}
+@-moz-document url-prefix() {
+  div.inner_cell {
+    overflow-x: hidden;
+  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11265,7 +11246,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 21ex;
+  width: 20ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11577,7 +11558,6 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
-  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11591,9 +11571,6 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
-}
-.terminal-app .terminal .xterm-rows {
-  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11654,8 +11631,10 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11666,9 +11645,11 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11722,7 +11703,9 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}@media print {
+}
+
+@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11743,7 +11726,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11772,7 +11755,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Import dependencies</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import dependencies</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
@@ -11781,7 +11764,7 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">openpyxl</span> <span class="k">import</span> <span class="n">load_workbook</span>
 <span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.2f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 </pre></div>
 
 </div>
@@ -11789,7 +11772,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11804,7 +11788,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data</span>
 <span class="n">macro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;poc_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Macroaggregates&#39;</span><span class="p">)</span>
 <span class="n">macro</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -11817,11 +11801,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[2]:</div>
-
-
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11937,7 +11917,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11951,7 +11932,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the mean fraction of particle-attached cells whitin each study</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the mean fraction of particle-attached cells whitin each study</span>
 <span class="n">macro_study_mean</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of cells in aggregates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">)</span>
 <span class="n">macro_study_gmean</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of cells in aggregates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_mean</span><span class="p">)</span>
 </pre></div>
@@ -11964,13 +11945,9 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python3.5/dist-packages/pandas/core/groupby.py:1880: RuntimeWarning: Mean of empty slice
+<pre>/home/yinon/.local/lib/python3.6/site-packages/pandas/core/groupby.py:1880: RuntimeWarning: Mean of empty slice
   res = f(group)
 </pre>
 </div>
@@ -11980,7 +11957,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11994,7 +11972,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the mean fraction of particle-attached cells between different studies</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the mean fraction of particle-attached cells between different studies</span>
 <span class="n">macro_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">macro_study_mean</span><span class="p">)</span>
 <span class="n">macro_gmean</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">macro_study_gmean</span><span class="p">)</span>
 
@@ -12012,11 +11990,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the fraction of the toal number of marine bacteria and archaea which is attached to macroaggregates is ≈3 percent
 </pre>
@@ -12027,7 +12001,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12041,7 +12016,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the concentration of macroaggregates in the deep-sea</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data on the concentration of macroaggregates in the deep-sea</span>
 <span class="n">deep_sea_macro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;poc_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Macroaggregate concentration&#39;</span><span class="p">)</span>
 
 <span class="c1"># Calculate the mean concentration of macroaggregates in the deep-sea</span>
@@ -12058,11 +12033,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The average concentration of macroaggregates in the deep-sea is ≈2 aggregates per liter
 </pre>
@@ -12073,7 +12044,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12087,7 +12059,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">mean_shallow_macro</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Concentration of macroaggregates [# L^1-]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mean_shallow_macro</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Concentration of macroaggregates [# L^1-]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average concentration of macroaggregates in reported in the studies on which we rely is ≈</span><span class="si">%.0f</span><span class="s1"> aggregates per liter&#39;</span> <span class="o">%</span><span class="k">mean_shallow_macro</span>)
 </pre></div>
@@ -12100,24 +12072,16 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The average concentration of macroaggregates in reported in the studies on which we rely is ≈1 aggregates per liter
 </pre>
 </div>
 </div>
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python3.5/dist-packages/pandas/core/groupby.py:1880: RuntimeWarning: Mean of empty slice
+<pre>/home/yinon/.local/lib/python3.6/site-packages/pandas/core/groupby.py:1880: RuntimeWarning: Mean of empty slice
   res = f(group)
 </pre>
 </div>
@@ -12127,7 +12091,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12141,7 +12106,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data on microaggregates</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data on microaggregates</span>
 <span class="n">micro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;poc_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Microaggregates&#39;</span><span class="p">)</span>
 <span class="n">micro</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -12154,11 +12119,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12244,7 +12205,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12258,7 +12220,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the mean fraction of particle-attached cells whitin each study</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the mean fraction of particle-attached cells whitin each study</span>
 <span class="n">micro_study_mean</span> <span class="o">=</span> <span class="n">micro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of attached cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">)</span>
 <span class="n">micro_study_gmean</span> <span class="o">=</span> <span class="n">micro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of attached cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_mean</span><span class="p">)</span>
 </pre></div>
@@ -12268,7 +12230,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12282,7 +12245,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the mean fraction of particle-attached cells between different studies</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the mean fraction of particle-attached cells between different studies</span>
 <span class="n">micro_mean</span> <span class="o">=</span> <span class="n">micro_study_mean</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">micro_gmean</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">micro_study_gmean</span><span class="p">)</span>
 
@@ -12300,11 +12263,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the fraction of the toal number of marine bacteria and archaea which is attached to microaggregates is ≈4 percent
 </pre>
@@ -12315,7 +12274,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12330,7 +12290,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the relative size of particle attached cells within each study</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the relative size of particle attached cells within each study</span>
 <span class="n">rel_size_study</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span><span class="s1">&#39;Reference&#39;</span><span class="p">])[</span><span class="s1">&#39;Size of cells relative to free-living cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">gmean</span><span class="p">)</span>
 
 <span class="c1"># Calculate the geometric mean of the values reported in different studies as our best estimate</span>
@@ -12347,11 +12307,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the size of particle-attached cells relative to free-living cells is ≈3-fold
 </pre>
@@ -12362,7 +12318,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12378,7 +12335,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the volume of particle-attached cells reported within each study</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the volume of particle-attached cells reported within each study</span>
 <span class="n">vol_study</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Volume of cells [µm^3]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">gmean</span><span class="p">)</span>
 </pre></div>
 
@@ -12387,7 +12344,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12401,7 +12359,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of volumes reported in different studies</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of volumes reported in different studies</span>
 <span class="n">best_vol</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">vol_study</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
 
 <span class="c1"># The allometric model reported by Simon &amp; Azam</span>
@@ -12427,11 +12385,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the carbon content of particle-attached cells relative to free-living cells based on volume is ≈3-fold
 </pre>
@@ -12442,7 +12396,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12456,7 +12411,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">best_rel_cc</span><span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">best_rel_size</span><span class="p">,</span><span class="n">vol_rel_size</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_rel_cc</span><span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">best_rel_size</span><span class="p">,</span><span class="n">vol_rel_size</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the carbon content of particle-attached cells relative to free-living cells is ≈%1.f-fold&#39;</span> <span class="o">%</span> <span class="n">best_rel_cc</span><span class="p">)</span>
 </pre></div>
 
@@ -12468,11 +12423,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the carbon content of particle-attached cells relative to free-living cells is ≈3-fold
 </pre>
@@ -12483,7 +12434,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12497,7 +12449,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_macro_frac</span><span class="o">+</span><span class="n">best_micro_frac</span><span class="p">)</span><span class="o">*</span><span class="n">best_rel_cc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_macro_frac</span><span class="o">+</span><span class="n">best_micro_frac</span><span class="p">)</span><span class="o">*</span><span class="n">best_rel_cc</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the fraction of the total biomass of marine bacteria and archaea which is particle-attached is ≈</span><span class="si">%.0f</span><span class="s1"> percent&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
@@ -12510,11 +12462,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the fraction of the total biomass of marine bacteria and archaea which is particle-attached is ≈20 percent
 </pre>
@@ -12525,7 +12473,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12542,7 +12491,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
 <span class="c1"># within each study</span>
 <span class="n">micro_study_CI</span> <span class="o">=</span> <span class="n">micro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of attached cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_CI</span><span class="p">)</span>
 </pre></div>
@@ -12552,7 +12501,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12566,7 +12516,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
 <span class="c1"># between different studies</span>
 <span class="n">micro_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">micro_study_gmean</span><span class="p">)</span>
 </pre></div>
@@ -12576,7 +12526,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12590,7 +12541,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means</span>
 <span class="c1"># and geometric means</span>
 <span class="n">micro_inter_method_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">micro_mean</span><span class="p">,</span><span class="n">micro_gmean</span><span class="p">]))</span>
 </pre></div>
@@ -12600,7 +12551,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12614,7 +12566,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">micro_frac_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">micro_inter_method_CI</span><span class="p">,</span><span class="n">micro_study_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">micro_CI</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">micro_frac_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">micro_inter_method_CI</span><span class="p">,</span><span class="n">micro_study_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">micro_CI</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to microaggregates is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">micro_frac_CI</span>)
 </pre></div>
 
@@ -12626,11 +12578,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to microaggregates is ≈2.3-fold
 </pre>
@@ -12641,7 +12589,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12656,7 +12605,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to macroaggregates </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to macroaggregates </span>
 <span class="c1"># within each study</span>
 <span class="n">macro_study_CI</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Fraction of cells in aggregates&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">frac_CI</span><span class="p">)</span>
 </pre></div>
@@ -12669,13 +12618,9 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python3.5/dist-packages/numpy/lib/function_base.py:4291: RuntimeWarning: Invalid value encountered in percentile
+<pre>/home/yinon/.local/lib/python3.6/site-packages/numpy/lib/function_base.py:4274: RuntimeWarning: Invalid value encountered in percentile
   interpolation=interpolation)
 </pre>
 </div>
@@ -12685,7 +12630,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12699,7 +12645,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the mean fraction of cells attached to microaggregates </span>
 <span class="c1"># between different studies</span>
 <span class="n">macro_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">macro_study_gmean</span><span class="p">)</span>
 </pre></div>
@@ -12709,7 +12655,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12723,7 +12670,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the 95% confidence interval around the geometric mean of the estimates based on arithmetic means</span>
 <span class="c1"># and geometric means</span>
 <span class="n">macro_inter_method_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">macro_mean</span><span class="p">,</span><span class="n">macro_gmean</span><span class="p">]))</span>
 </pre></div>
@@ -12733,7 +12680,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12747,7 +12695,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">macro_frac_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">macro_inter_method_CI</span><span class="p">,</span><span class="n">macro_study_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">macro_CI</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">macro_frac_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">macro_inter_method_CI</span><span class="p">,</span><span class="n">macro_study_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">macro_CI</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to macroaggregates is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">macro_frac_CI</span>)
 </pre></div>
 
@@ -12759,11 +12707,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is attached to macroaggregates is ≈7.6-fold
 </pre>
@@ -12774,7 +12718,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12788,7 +12733,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Propagate the uncertainties of the fraction of cells attached to micro- and macroaggregates</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Propagate the uncertainties of the fraction of cells attached to micro- and macroaggregates</span>
 <span class="c1"># to the estiamte of the fraction of cells which is particle-attached</span>
 <span class="n">num_frac_CI</span> <span class="o">=</span> <span class="n">CI_sum_prop</span><span class="p">(</span><span class="n">estimates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">best_micro_frac</span><span class="p">,</span><span class="n">best_macro_frac</span><span class="p">]),</span><span class="n">mul_CIs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">micro_frac_CI</span><span class="p">,</span><span class="n">macro_frac_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is particle-attached is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">num_frac_CI</span>)
@@ -12802,11 +12747,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with our estimate of the total number of bacteria and archaea which is particle-attached is ≈2.8-fold
 </pre>
@@ -12817,7 +12758,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12833,7 +12775,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">size_intra_CI</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span><span class="s1">&#39;Reference&#39;</span><span class="p">])[</span><span class="s1">&#39;Size of cells relative to free-living cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">geo_CI_calc</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">size_intra_CI</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span><span class="s1">&#39;Reference&#39;</span><span class="p">])[</span><span class="s1">&#39;Size of cells relative to free-living cells&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">geo_CI_calc</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12841,7 +12783,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12855,7 +12798,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">size_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">rel_size_study</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">size_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">rel_size_study</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12863,7 +12806,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12878,7 +12822,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">vol_intra_CI</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Volume of cells [µm^3]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">geo_CI_calc</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vol_intra_CI</span> <span class="o">=</span> <span class="n">macro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Reference&#39;</span><span class="p">)[</span><span class="s1">&#39;Volume of cells [µm^3]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">geo_CI_calc</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12886,7 +12830,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12900,7 +12845,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">vol_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">vol_study</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vol_inter_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">vol_study</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12908,7 +12853,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12922,7 +12868,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">cc_inter_method_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vol_rel_size</span><span class="p">,</span><span class="n">best_rel_size</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_inter_method_CI</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vol_rel_size</span><span class="p">,</span><span class="n">best_rel_size</span><span class="p">]))</span>
 </pre></div>
 
 </div>
@@ -12930,7 +12876,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12944,7 +12891,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">cc_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">cc_inter_method_CI</span><span class="p">,</span><span class="n">vol_inter_CI</span><span class="p">,</span><span class="n">vol_intra_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">size_inter_CI</span><span class="p">,</span><span class="n">size_intra_CI</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">cc_inter_method_CI</span><span class="p">,</span><span class="n">vol_inter_CI</span><span class="p">,</span><span class="n">vol_intra_CI</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">size_inter_CI</span><span class="p">,</span><span class="n">size_intra_CI</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the relative carbon content of particles-attached bacteria and archaea is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">cc_CI</span>)
 </pre></div>
 
@@ -12956,11 +12903,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with our estimate of the relative carbon content of particles-attached bacteria and archaea is ≈2.9-fold
 </pre>
@@ -12971,7 +12914,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12985,7 +12929,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cc_CI</span><span class="p">,</span><span class="n">num_frac_CI</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cc_CI</span><span class="p">,</span><span class="n">num_frac_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best projection for the uncertainty associated with our estimate of the fraction of the total biomass of marine bactetia and archaea which is particle-attached is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span><span class="k">mul_CI</span>)
 </pre></div>
 
@@ -12997,11 +12941,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best projection for the uncertainty associated with our estimate of the fraction of the total biomass of marine bactetia and archaea which is particle-attached is ≈4.4-fold
 </pre>
@@ -13012,7 +12952,8 @@ We first calculate the geometric mean of volumes within each study:</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13026,7 +12967,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fraction of the total biomass of marine bacteria and archaea which is particle-attahced: </span><span class="si">%.1e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fraction of the total biomass of marine bacteria and archaea which is particle-attahced: </span><span class="si">%.1e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">best_estimate</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the fraction of the biomass of marine bacteria and archaea which is particle-attached: </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 
 <span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
@@ -13039,12 +12980,12 @@ We first calculate the geometric mean of volumes within each study:</p>
                 <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Fraction of the total biomass of marine bacteria and archaea which is particle-attached&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="n">best_estimate</span><span class="p">,</span>
                 <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Unitless&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="s2">&quot;{0:.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mul_CI</span><span class="p">)</span>
+                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mul_CI</span><span class="p">)</span>
                 <span class="p">})</span>
 
 <span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># We need to use the results on the carcon content of particle-attached cells</span>
+<span class="c1"># We need to use the results on the carbon content of particle-attached cells</span>
 <span class="c1"># for our estimate of the total biomass of particle-attached protists, </span>
 <span class="c1"># so we feed these results to the data used in the estimate of the total</span>
 <span class="c1"># biomass of particle-attached protists</span>
@@ -13075,11 +13016,7 @@ We first calculate the geometric mean of volumes within each study:</p>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fraction of the total biomass of marine bacteria and archaea which is particle-attahced: 2.0e-01
 Uncertainty associated with the fraction of the biomass of marine bacteria and archaea which is particle-attached: 4.4-fold
@@ -13094,8 +13031,4 @@ Uncertainty associated with the fraction of the biomass of marine bacteria and a
     </div>
   </div>
 </body>
-
- 
-
-
 </html>

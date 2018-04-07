@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -25,14 +24,12 @@ from excel_utils import *
 
 # In[2]:
 
-
 smil_estimate = 0.025e15
 
 
 # The second source is an estimate made in [Barnosky](http://dx.doi.org/10.1073/pnas.0801918105), which reports an estimate of ≈0.05 Gt wet weight.
 
 # In[3]:
-
 
 barnosky_estimate = 10**10.72*1000 #From figure 3
 
@@ -41,7 +38,6 @@ barnosky_estimate = 10**10.72*1000 #From figure 3
 
 # In[4]:
 
-
 # Estimate produced by the third approach
 shai_meiri_estimate = 5454700007879
 
@@ -49,7 +45,6 @@ shai_meiri_estimate = 5454700007879
 # Our estimate of the total biomass of wild mammals is based on the geometric mean of these three estimates. We convert wet weight values to carbon mass assuming 70% water content and 50% carbon content out of dry weight.
 
 # In[5]:
-
 
 # Conversion factor between wet weight and carbon mass
 wet_to_c = 0.15
@@ -65,7 +60,6 @@ print('Our best estimate of the total biomass of wild land mammals is ≈%.3f Gt
 
 # In[6]:
 
-
 christensen = pd.read_excel('marine_mammal_data.xlsx','Christensen',skiprows=1,index_col=0)
 christensen
 
@@ -73,7 +67,6 @@ christensen
 # We the mean values for the year 2000 as our best estimate for the biomass of wild marine mammals. We convert the estimates of Chirstensen, which are of the total wet weight of marine mammals to carbon mass assuming 70% water content and 50% carbon content of dry weight:  
 
 # In[7]:
-
 
 best_christensen = christensen.loc[2000,'Mean']*wet_to_c
 
@@ -83,7 +76,6 @@ print('Our best estimate of the total biomass of wild marine mammals is ≈%.3f 
 # We sum our estimates for the total biomass of wild land and marine mammals to generate our best estimate for the total biomass of wild mammals:
 
 # In[8]:
-
 
 best_estimate = best_christensen+best_land_mammal_biomass
 
@@ -98,7 +90,6 @@ print('Our best estimate of the total biomass of wild marine mammals is ≈%.3f 
 
 # In[9]:
 
-
 land_mammal_CI = geo_CI_calc(np.array([smil_estimate,shai_meiri_estimate,barnosky_estimate]))
 
 print('Our best projection for the uncertainty associated with our estimate of the total biomass of wild land mammals is ≈%0.0f-fold' %land_mammal_CI)
@@ -109,7 +100,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 
 # In[10]:
 
-
 marine_intra_CI = christensen.loc[2000,'Max']/christensen.loc[2000,'Mean']
 
 print('The intra-study uncertainty reported by Christensen is ≈%.1f-fold' %marine_intra_CI)
@@ -118,7 +108,6 @@ print('The intra-study uncertainty reported by Christensen is ≈%.1f-fold' %mar
 # As a consistency check, we compared the data for ≈30 whale species which are the main contributors to the global marine mammal biomass with data from the IUCN. The correlation between the data is high (Spearman R$^2$=0.98), and the total biomass from both methods varies about ≈1.3-fold. 
 
 # In[11]:
-
 
 # Load IUCN data
 comparison_data = pd.read_excel('marine_mammal_data.xlsx',index_col=0)
@@ -145,14 +134,12 @@ print('The inter-study uncertainty between Christensen and the IUCN data is ≈%
 
 # In[12]:
 
-
 marine_mammal_CI = np.max([marine_inter_CI,marine_intra_CI])
 
 
 # To generate our projection of the total uncertainty associated with our estimate of the total biomass of wild mammals, we combine our uncertainties associated with our estimates for the total biomass of wild land and marine mammals:
 
 # In[13]:
-
 
 mul_CI = CI_sum_prop(np.array([best_land_mammal_biomass,best_christensen]), np.array([land_mammal_CI,marine_mammal_CI]))
 print('Our best projection for the uncertainty associated with our estimate of the total biomass of wild mammals is ≈%.0f-fold'%mul_CI)
@@ -162,7 +149,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 # We can compare our estimates for the present day biomass of wild mammals with estimates of the prehuman biomass of wild land and marine mammals. For wild land mammals, we use the estimate of the prehuman biomass of wild land mammals reported in Barnosky of:
 
 # In[14]:
-
 
 # Taken from figure 3 in Barnosky
 prehuman_barnosky_biomass = 10**11.165*1000*wet_to_c 
@@ -174,7 +160,6 @@ print('Based on the data in Barnosky, we estimate wild land mammal biomass decre
 
 # In[15]:
 
-
 prehuman_marine_biomass = christensen.loc[1800,'Mean']*wet_to_c
 
 print('Based on the data in Christensen, we estimate wild marine mammal biomass decreased ≈%.1f-fold, with a range of between ≈%.1f-fold and ≈%.1f-fold' %((prehuman_marine_biomass/best_christensen),(christensen.loc[1800,'Max']/christensen.loc[2000,'Min']) ,(christensen.loc[1800,'Min']/christensen.loc[2000,'Max'])))
@@ -184,14 +169,12 @@ print('Based on the data in Christensen, we estimate wild marine mammal biomass 
 
 # In[16]:
 
-
 prehuman = prehuman_barnosky_biomass + prehuman_marine_biomass
 
 print('Our best estimate for the fold reduction in the biomass of wild mammals between prehuman and present values is ≈%.1f-fold' %(prehuman/best_estimate))
 
 
 # In[17]:
-
 
 # Feed results to the chordate biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)

@@ -3,12 +3,11 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import sys
 sys.path.insert(0,'../../statistics_helper/')
-
+from openpyxl import load_workbook
 from excel_utils import *
 
 
@@ -21,7 +20,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 planktonic_cnidarian_biomass = 0.04e15
 
 
@@ -32,7 +30,6 @@ planktonic_cnidarian_biomass = 0.04e15
 
 # In[3]:
 
-
 # Total surface area of coral reefs
 coral_reef_area = 0.25e12
 
@@ -40,7 +37,6 @@ coral_reef_area = 0.25e12
 # We estimate that 20% of the reef area is covered by corals based on [De'ath et al.](http://dx.doi.org/10.1073/pnas.1208909109).
 
 # In[4]:
-
 
 # Coverage of coral reef area by corals
 coverage = 0.2
@@ -50,7 +46,6 @@ coverage = 0.2
 
 # In[5]:
 
-
 # The conversion factor from projected surface area to actual surface area
 sa_3d_2a = 5
 
@@ -58,7 +53,6 @@ sa_3d_2a = 5
 # Multiplying these factors, we get an estimate for the total surface area of corals:
 
 # In[6]:
-
 
 # Calculate the total surface area of corals
 method1_sa = coral_reef_area*coverage*sa_3d_2a
@@ -70,7 +64,6 @@ print('Our estimate of the global surface area of corals based on our first meth
 
 # In[7]:
 
-
 # Global annual calcufocation rate of  corals [g CaCO3 yr^-1]
 annual_cal = 0.75e15
 
@@ -78,7 +71,6 @@ annual_cal = 0.75e15
 # We divide this rate by the surface area specific calcification rate of corals based on values from [McNeil](http://dx.doi.org/10.1029/2004GL021541) and [Kuffner et al.](http://dx.doi.org/10.1007/s00338-013-1047-8). Our best estimate for the surface area specific calcification rate is the geometric mean of values from the two sources above.
 
 # In[8]:
-
 
 from scipy.stats import gmean
 # Surface area specific calcification rate from McNeil, taken from figure 1 [g CaCO3 m^-2 yr^-1]
@@ -101,7 +93,6 @@ print('Our estimate of the global surface area of corals based on our second met
 
 # In[9]:
 
-
 best_sa = gmean([method1_sa,method2_sa])
 print('Our best estimate of the global surface area of corals is ≈%.1f×10^11 m^2' % (best_sa/1e11))
 
@@ -109,7 +100,6 @@ print('Our best estimate of the global surface area of corals is ≈%.1f×10^11 
 # To convert the total surface area to biomass, we use estimates for the tissue biomass per unit surface area of corals from [Odum & Odum](http://dx.doi.org/10.2307/1943285):
 
 # In[10]:
-
 
 # Tissue biomass based on Odum & Odum [g C m^-2]
 carbon_per_sa = 400
@@ -126,7 +116,6 @@ print('Our best estimate for the biomass of corals is ≈%.2f Gt C' %(coral_biom
 
 # In[11]:
 
-
 best_estimate = planktonic_cnidarian_biomass + coral_biomass
 
 print('Our best estimate for the biomass of cnidarians is ≈%.1f Gt C' %(best_estimate/1e15))
@@ -136,7 +125,6 @@ print('Our best estimate for the biomass of cnidarians is ≈%.1f Gt C' %(best_e
 # To estimate the total number of cnidarians, we divide the total biomass of jellyfish by the characteristic carbon content of a single jellyfish. We do not consider corals as they are colonial organisms, and therefore it is hard to robustly define an individual. To estimate the characteristic carbon content of a single jellyfish, we rely on the data from Lucas et al.. We calculate the mean and median carbon content of all the species considered in the study, and use the geometric mean or the median and mean carbon contents as our best estimate of the characteristic carbon content of a single jellyfish.
 
 # In[12]:
-
 
 # Load data from Lucas et al.
 data = pd.read_excel('carbon_content_data.xls', 'Biometric equations', skiprows=1)
@@ -155,7 +143,6 @@ print('Our best estimate for the total number of cnidarians is ≈%.1e.' %tot_cn
 
 
 # In[13]:
-
 
 # Feed results to the chordate biomass data
 old_results = pd.read_excel('../animal_biomass_estimate.xlsx',index_col=0)
@@ -176,4 +163,26 @@ update_results(sheet='Table S1',
                col='Number of individuals',
                values= tot_cnidaria_num,
                path='../../results.xlsx')
+
+# We need to use the results on the biomass of gelatinous zooplankton 
+# for our estimate of the total biomass of marine arthropods, so we 
+# feed these results to the data used in the estimate of the total 
+# biomass of marine arthropods
+path = '../arthropods/marine_arthropods/marine_arthropods_data.xlsx'
+marine_arthropods_data = pd.read_excel(path,'Other macrozooplankton')
+
+marine_arthropods_data.loc[0] = pd.Series({
+                'Parameter': 'Biomass of gelatinous zooplankton',
+                'Value': planktonic_cnidarian_biomass,
+                'Units': 'g C',
+                'Uncertainty': None
+                })
+writer = pd.ExcelWriter(path, engine = 'openpyxl')
+book = load_workbook(path)
+writer.book = book
+writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
+
+
+marine_arthropods_data.to_excel(writer, sheet_name = 'Other macrozooplankton',index=False)
+writer.save()
 

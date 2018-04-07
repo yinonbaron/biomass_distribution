@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -25,14 +24,12 @@ from excel_utils import *
 
 # In[2]:
 
-
 tot_num_birds = 3e11
 
 
 # To convert this total number of birds into an estimate of the total biomass of wild birds, we use data on the relation between population density and body weight reported in [Nee et al.](https://doi.org/10.1038/351312a0). Here is a sample of the data in Nee et al:
 
 # In[3]:
-
 
 # Load Nee et al. data
 nee = pd.read_excel('wild_bird_data.xlsx',skiprows=1)
@@ -47,7 +44,6 @@ plt.ylabel('Population size')
 
 # In[4]:
 
-
 wet_to_c = 0.15
 avg_bird_cc = np.average(nee['Wet body weight [g]'],weights=nee['Population size'])*wet_to_c
 
@@ -55,7 +51,6 @@ avg_bird_cc = np.average(nee['Wet body weight [g]'],weights=nee['Population size
 # We multiply our estimate of the total number of birds by our estimate of the average carbon content of a single bird to generate our estimate for the total biomass of wild birds:
 
 # In[5]:
-
 
 estimate_1 = tot_num_birds*avg_bird_cc
 
@@ -69,7 +64,6 @@ print('Our best estimate for the total biomass of wild birds using method 1 is â
 
 # In[6]:
 
-
 estimate_2 = 5012745870861*wet_to_c
 print('Our best estimate for the total biomass of wild birds using method 2 is â‰ˆ%.3f Gt C' %(estimate_2/1e15))
 
@@ -78,14 +72,12 @@ print('Our best estimate for the total biomass of wild birds using method 2 is â
 
 # In[7]:
 
-
 best_estimate = gmean([estimate_1,estimate_2])
 
 print('Our best estimate for the total biomass of wild birds is â‰ˆ%.3f Gt C' %(best_estimate/1e15))
 
 
 # In[8]:
-
 
 # Feed results to the chordate biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)

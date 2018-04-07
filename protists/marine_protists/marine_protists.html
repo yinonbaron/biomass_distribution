@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>marine_protists</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>marine_protists</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11,8 +13,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1107,6 +1109,7 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2535,6 +2538,7 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3025,6 +3029,7 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
+  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8755,9 +8760,6 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
-[dir="rtl"] #ipython_notebook {
-  float: right !important;
-}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8960,14 +8962,8 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
-[dir="rtl"] #tabs li {
-  float: right;
-}
 ul#tabs {
   margin-bottom: 4px;
-}
-[dir="rtl"] ul#tabs {
-  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8990,16 +8986,6 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
-}
-[dir="rtl"] .list_toolbar .tree-buttons {
-  float: left !important;
-}
-[dir="rtl"] .list_toolbar .pull-right {
-  padding-top: 1px;
-  float: left !important;
-}
-[dir="rtl"] .list_toolbar .pull-left {
-  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9136,9 +9122,6 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
-[dir="rtl"] #tree-selector a {
-  float: right;
-}
 #button-select-all {
   min-width: 50px;
 }
@@ -9228,9 +9211,6 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
-[dir="rtl"] #new-menu {
-  text-align: right;
-}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9275,9 +9255,6 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
-}
-[dir="rtl"] #running .col-sm-8 {
-  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9574,7 +9551,6 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
-  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9595,6 +9571,11 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
+}
+@-moz-document url-prefix() {
+  div.inner_cell {
+    overflow-x: hidden;
+  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11265,7 +11246,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 21ex;
+  width: 20ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11577,7 +11558,6 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
-  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11591,9 +11571,6 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
-}
-.terminal-app .terminal .xterm-rows {
-  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11654,8 +11631,10 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11666,9 +11645,11 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11722,7 +11703,9 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}@media print {
+}
+
+@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11743,7 +11726,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11772,12 +11755,13 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load dependencies</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper/&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">excel_utils</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
@@ -11786,7 +11770,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11803,7 +11788,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
 <span class="c1"># for picophytoplankton</span>
 <span class="n">picophyto_biomsss</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="mf">0.28e15</span><span class="p">,</span><span class="mf">0.64e15</span><span class="p">])</span>
 </pre></div>
@@ -11813,7 +11798,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11827,7 +11813,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">euk_frac</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="mf">0.49</span><span class="p">,</span><span class="mf">0.69</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">euk_frac</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.49</span><span class="p">,</span><span class="mf">0.69</span><span class="p">]))</span>
 <span class="n">auto_picoeuk_biomass</span> <span class="o">=</span> <span class="n">picophyto_biomsss</span><span class="o">*</span><span class="n">euk_frac</span>
 </pre></div>
 
@@ -11836,7 +11822,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11850,7 +11837,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">auto_pico_protists_fraction</span> <span class="o">=</span> <span class="mf">0.5</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">auto_pico_protists_fraction</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">auto_pico_protists_biomass</span> <span class="o">=</span> <span class="n">auto_picoeuk_biomass</span><span class="o">*</span><span class="n">auto_pico_protists_fraction</span>
 </pre></div>
 
@@ -11859,7 +11846,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11874,7 +11862,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="c1"># Load data from de Vargas on the ratio between autotrophic and heterotrophic protists</span>
 <span class="n">pico_nano_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_protists_data.xlsx&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">pico_nano_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -11888,11 +11876,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[5]:</div>
-
-
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -11966,7 +11950,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11980,7 +11965,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">hetero_photo_ratio</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">pico_nano_data</span><span class="p">[</span><span class="s1">&#39;Heterotrophic protist&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">gmean</span><span class="p">(</span><span class="n">pico_nano_data</span><span class="p">[</span><span class="s1">&#39;Phototrophic protists&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hetero_photo_ratio</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">(</span><span class="n">pico_nano_data</span><span class="p">[</span><span class="s1">&#39;Heterotrophic protist&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">gmean</span><span class="p">(</span><span class="n">pico_nano_data</span><span class="p">[</span><span class="s1">&#39;Phototrophic protists&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate of the ratio between heterotrophic and phototrophic protists in pico-nanoplankton is ≈%.f-fold&#39;</span> <span class="o">%</span><span class="k">hetero_photo_ratio</span>)
 </pre></div>
 
@@ -11992,11 +11977,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate of the ratio between heterotrophic and phototrophic protists in pico-nanoplankton is ≈2-fold
 </pre>
@@ -12007,7 +11988,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12021,7 +12003,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">pico_protists_biomass</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">hetero_photo_ratio</span><span class="p">)</span><span class="o">*</span><span class="n">auto_pico_protists_biomass</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pico_protists_biomass</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">hetero_photo_ratio</span><span class="p">)</span><span class="o">*</span><span class="n">auto_pico_protists_biomass</span>
 </pre></div>
 
 </div>
@@ -12029,7 +12011,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12044,7 +12027,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
 <span class="c1"># for microzooplankton</span>
 <span class="n">microzoo_biomsss</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="mf">0.48e15</span><span class="p">,</span><span class="mf">0.73e15</span><span class="p">])</span>
 </pre></div>
@@ -12054,7 +12037,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12068,7 +12052,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
 <span class="c1"># for diatoms</span>
 <span class="n">diatom_biomsss</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="mf">0.1e15</span><span class="p">,</span><span class="mf">0.94e15</span><span class="p">])</span>
 </pre></div>
@@ -12078,7 +12062,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12092,7 +12077,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the &quot;minimum&quot; and &quot;maximum&quot; estimates from Buitenhuis et al.</span>
 <span class="c1"># for Phaeocystis</span>
 <span class="n">phaeocystis_biomsss</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="mf">0.11e15</span><span class="p">,</span><span class="mf">0.71e15</span><span class="p">])</span>
 </pre></div>
@@ -12102,7 +12087,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12117,7 +12103,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">rhizaria_biomass</span> <span class="o">=</span> <span class="mf">0.2e15</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rhizaria_biomass</span> <span class="o">=</span> <span class="mf">0.2e15</span>
 </pre></div>
 
 </div>
@@ -12125,7 +12111,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12141,7 +12128,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data from Bochdansky et al.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data from Bochdansky et al.</span>
 <span class="n">bochdansky_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_protists_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Bochdansky ratio&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">protists</span> <span class="o">=</span> <span class="n">bochdansky_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All Eukaryotes&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">bochdansky_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Fungi&#39;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The mean ratio between the number of particle-attached protists and prokaryotes reported in Bochdansky et al. is ≈</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">protists</span>)
@@ -12155,11 +12142,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The mean ratio between the number of particle-attached protists and prokaryotes reported in Bochdansky et al. is ≈0.004
 </pre>
@@ -12170,7 +12153,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12184,7 +12168,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the non-Labyrinthulomycetes protists</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the non-Labyrinthulomycetes protists</span>
 <span class="n">flagellates</span> <span class="o">=</span> <span class="n">protists</span><span class="o">-</span><span class="n">bochdansky_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Labyrinthulomycetes&#39;</span><span class="p">]</span>
 
 <span class="c1"># Load data on the carbon content of flagellates from the deep-sea</span>
@@ -12203,7 +12187,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12217,7 +12202,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load the data on the biomass ratio of Labyrinthulomycetes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data on the biomass ratio of Labyrinthulomycetes</span>
 <span class="n">lab_biomass_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_protists_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;Bochdansky biomass&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Calculate the geometric mean of the different estimates for the biomass ratio of</span>
@@ -12230,7 +12215,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12244,7 +12230,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">best_bochdansky</span> <span class="o">=</span> <span class="n">biomass_ratio_flagellates</span> <span class="o">+</span> <span class="n">lab_biomass_ratio</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_bochdansky</span> <span class="o">=</span> <span class="n">biomass_ratio_flagellates</span> <span class="o">+</span> <span class="n">lab_biomass_ratio</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass ratio between particle-attached protists and prokaryotes in the bathypelagic layer is ≈</span><span class="si">%.1f</span><span class="s1"> &#39;</span> <span class="o">%</span><span class="k">best_bochdansky</span>)
 </pre></div>
@@ -12257,11 +12243,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass ratio between particle-attached protists and prokaryotes in the bathypelagic layer is ≈1.3 
 </pre>
@@ -12272,7 +12254,8 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12286,7 +12269,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data from Turley &amp; Mackie and Herndl</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data from Turley &amp; Mackie and Herndl</span>
 <span class="n">poc_ratio</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;marine_protists_data.xlsx&#39;</span><span class="p">,</span><span class="s1">&#39;POC&#39;</span><span class="p">)</span>
 
 <span class="c1">#  Calculate the arithmetic mean of the measurements in each study</span>
@@ -12313,11 +12296,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[16]:</div>
-
-
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12333,7 +12312,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12347,7 +12327,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">herndl_flagellates_vol</span> <span class="o">=</span> <span class="mi">11</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">herndl_flagellates_vol</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="n">herndl_flagellates_cc</span> <span class="o">=</span> <span class="n">herndl_flagellates_vol</span><span class="o">*</span><span class="mf">0.22</span>
 </pre></div>
 
@@ -12356,7 +12336,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12370,7 +12351,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">rod_vol</span> <span class="o">=</span> <span class="mf">0.25</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rod_vol</span> <span class="o">=</span> <span class="mf">0.25</span>
 <span class="n">coccoid_vol</span> <span class="o">=</span> <span class="mf">0.067</span>
 <span class="n">conversion_eq</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">108.8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mf">0.898</span>
 <span class="n">rod_cc</span> <span class="o">=</span> <span class="n">conversion_eq</span><span class="p">(</span><span class="n">rod_vol</span><span class="p">)</span>
@@ -12382,7 +12363,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12396,7 +12378,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">herndl_prok_cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">rod_cc</span><span class="p">,</span><span class="n">coccoid_cc</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">herndl_prok_cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">rod_cc</span><span class="p">,</span><span class="n">coccoid_cc</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12404,7 +12386,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12418,7 +12401,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">herndl_cc_ratio</span> <span class="o">=</span> <span class="n">herndl_flagellates_cc</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">herndl_prok_cc</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">herndl_cc_ratio</span> <span class="o">=</span> <span class="n">herndl_flagellates_cc</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="n">herndl_prok_cc</span>
 <span class="n">herndl_biomass_ratio</span> <span class="o">=</span> <span class="n">best_ratio_conc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Herndl&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">herndl_cc_ratio</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our estimate for the ratio between the biomass of particle-attached protists and prokaryotes based on Herndl is ≈</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">herndl_biomass_ratio</span>)
 </pre></div>
@@ -12431,11 +12414,7 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the ratio between the biomass of particle-attached protists and prokaryotes based on Herndl is ≈2.7
 </pre>
@@ -12446,7 +12425,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12460,7 +12440,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># Take the data in Turley &amp; Mackie</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Take the data in Turley &amp; Mackie</span>
 <span class="n">tm_data</span> <span class="o">=</span> <span class="n">poc_ratio</span><span class="p">[</span><span class="n">poc_ratio</span><span class="p">[</span><span class="s1">&#39;Reference&#39;</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;Turley &amp; Mackie&#39;</span><span class="p">]</span>
 
 <span class="c1"># Divide the data to data in the epipelagic and mesopelagic layers</span>
@@ -12479,7 +12459,7 @@ dtype: float64</pre>
 
 <span class="c1"># Calculate the ratio between the number of cells of protists and prokaryotes</span>
 <span class="n">best_tm_ratio_conc</span> <span class="o">=</span> <span class="n">best_tm_mean_conc</span><span class="p">[</span><span class="s1">&#39;Concentration of Flagellates [cells mL^-1]&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">best_tm_mean_conc</span><span class="p">[</span><span class="s1">&#39;Concentration of Bacteria [cells mL^-1]&#39;</span><span class="p">]</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.3f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="n">best_tm_ratio_conc</span>
 </pre></div>
 
@@ -12491,13 +12471,9 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:5: SettingWithCopyWarning: 
+<pre>/usr/lib/python3/dist-packages/ipykernel_launcher.py:5: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -12507,11 +12483,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 </div>
 </div>
 
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12527,7 +12499,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12541,7 +12514,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
 <span class="c1"># For the epipelagic layer multiply cell concentration ratios by the carbon</span>
 <span class="c1"># content ratios measured by Herndl</span>
 <span class="n">epi_tm_biomass</span> <span class="o">=</span> <span class="n">best_tm_ratio_conc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span><span class="o">*</span><span class="n">herndl_cc_ratio</span>
@@ -12564,7 +12537,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12578,7 +12552,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">best_biomass_ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">([</span><span class="n">gmean</span><span class="p">([</span><span class="n">herndl_biomass_ratio</span><span class="p">,</span><span class="n">epi_tm_biomass</span><span class="p">]),</span><span class="n">meso_biomass_ratio</span><span class="p">,</span><span class="n">best_bochdansky</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">3000</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_biomass_ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">([</span><span class="n">gmean</span><span class="p">([</span><span class="n">herndl_biomass_ratio</span><span class="p">,</span><span class="n">epi_tm_biomass</span><span class="p">]),</span><span class="n">meso_biomass_ratio</span><span class="p">,</span><span class="n">best_bochdansky</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">3000</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass ratio between particle-attached protists and prokaryotes is ≈</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">best_biomass_ratio</span>)
 </pre></div>
 
@@ -12590,11 +12564,7 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass ratio between particle-attached protists and prokaryotes is ≈1.1
 </pre>
@@ -12605,7 +12575,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12619,11 +12590,11 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">poc_prok</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../bacteria_archaea/marine/marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span><span class="o">*</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">15</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">poc_prok</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../../bacteria_archaea/marine/marine_prok_biomass_estimate.xlsx&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span><span class="o">*</span><span class="mf">1e-15</span>
 
 <span class="n">best_poc_protists</span> <span class="o">=</span> <span class="n">poc_prok</span><span class="o">*</span><span class="n">best_biomass_ratio</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total biomass of particle-attached protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_poc_protists</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total biomass of particle-attached protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_poc_protists</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12634,11 +12605,7 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total biomass of particle-attached protists is ≈0.3 Gt C
 </pre>
@@ -12649,7 +12616,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12663,9 +12631,9 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">rhizaria_biomass</span> <span class="o">+</span> <span class="n">phaeocystis_biomsss</span> <span class="o">+</span> <span class="n">diatom_biomsss</span> <span class="o">+</span> <span class="n">microzoo_biomsss</span> <span class="o">+</span> <span class="n">pico_protists_biomass</span> <span class="o">+</span> <span class="n">best_poc_protists</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">best_estimate</span> <span class="o">=</span> <span class="n">rhizaria_biomass</span> <span class="o">+</span> <span class="n">phaeocystis_biomsss</span> <span class="o">+</span> <span class="n">diatom_biomsss</span> <span class="o">+</span> <span class="n">microzoo_biomsss</span> <span class="o">+</span> <span class="n">pico_protists_biomass</span> <span class="o">+</span> <span class="n">best_poc_protists</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total biomass of marine protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the total biomass of marine protists is ≈</span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12676,11 +12644,7 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the total biomass of marine protists is ≈2.1 Gt C
 </pre>
@@ -12691,7 +12655,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12705,7 +12670,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c1"># We crudely estimate and uncertainty of an order of magnitude</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We crudely estimate and uncertainty of an order of magnitude</span>
 <span class="n">mul_CI</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 
@@ -12714,7 +12679,8 @@ dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12728,7 +12694,7 @@ dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Biomass of marine protists: </span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Biomass of marine protists: </span><span class="si">%.1f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the estimate of the total biomass of marine protists: ≈</span><span class="si">%.0f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 
 
@@ -12741,14 +12707,14 @@ dtype: float64</pre>
 
 <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
                 <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Biomass of marine protists&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">best_estimate</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">best_estimate</span><span class="p">)</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span>
                 <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Gt C&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="n">mul_CI</span>
                 <span class="p">})</span>
 
 <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
                 <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Biomass of pico-nanoprotists&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">pico_protists_biomass</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span>
+                <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">pico_protists_biomass</span><span class="p">)</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span>
                 <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;Gt C&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="kc">None</span>
                 <span class="p">})</span>
@@ -12759,21 +12725,21 @@ dtype: float64</pre>
 <span class="c1"># Feed results to Fig. 2C</span>
 
 <span class="c1"># Feed green algae picophytoplankton biomass</span>
-<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">auto_picoeuk_biomass</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">auto_pico_protists_fraction</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">auto_picoeuk_biomass</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">auto_pico_protists_fraction</span><span class="p">)</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
 
 
 <span class="c1"># Feed bacterial picophytoplankton biomass</span>
-<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">picophyto_biomsss</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">euk_frac</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">picophyto_biomsss</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">euk_frac</span><span class="p">)</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
 
 
 <span class="c1"># Feed protist picophytoplankton biomass</span>
-<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">auto_picoeuk_biomass</span><span class="o">*</span><span class="n">auto_pico_protists_fraction</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">auto_picoeuk_biomass</span><span class="o">*</span><span class="n">auto_pico_protists_fraction</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
 
 <span class="c1"># Feed diatom biomass</span>
-<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">diatom_biomsss</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">diatom_biomsss</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
 
 <span class="c1"># Feed Phaeocystis biomass</span>
-<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">phaeocystis_biomsss</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
+<span class="n">update_fig2c</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="n">phaeocystis_biomsss</span><span class="o">/</span><span class="mf">1e15</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../results.xlsx&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12784,11 +12750,7 @@ dtype: float64</pre>
 <div class="output">
 
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Biomass of marine protists: 2.1 Gt C
 Uncertainty associated with the estimate of the total biomass of marine protists: ≈10-fold
@@ -12803,8 +12765,4 @@ Uncertainty associated with the estimate of the total biomass of marine protists
     </div>
   </div>
 </body>
-
- 
-
-
 </html>

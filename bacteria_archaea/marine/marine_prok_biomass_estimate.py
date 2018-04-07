@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import numpy as np
 import pandas as pd
@@ -20,7 +19,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 results = pd.read_excel('marine_prok_biomass_estimate.xlsx')
 
 
@@ -28,14 +26,12 @@ results = pd.read_excel('marine_prok_biomass_estimate.xlsx')
 
 # In[3]:
 
-
 results.head()
 
 
 # We multiply all the relevant parameters to arrive at our best estimate for the biomass of marine archaea and bacteria, and propagate the uncertainties associated with each parameter to calculate the uncertainty associated with the estimate for the total biomass
 
 # In[4]:
-
 
 # Calculate the total biomass of marine archaea and bacteria
 total_arch_biomass = results['Value'][0]*results['Value'][1]*(1+results['Value'][4])*1e-15*results['Value'][2]
@@ -56,7 +52,6 @@ print('The uncertainty associated with the estimate for the biomass of bacteria 
 
 
 # In[5]:
-
 
 # Feed bacteria results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 

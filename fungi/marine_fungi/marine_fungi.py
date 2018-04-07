@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -27,7 +26,6 @@ pd.options.display.float_format = '{:,.1e}'.format
 
 # In[2]:
 
-
 qPCR_data = pd.read_excel('marine_fungi_data.xlsx','Wang',skiprows=1)
 qPCR_data.head()
 
@@ -35,7 +33,6 @@ qPCR_data.head()
 # We calculate the ratio of fungal DNA copy number to bacterial DNA copy number:
 
 # In[3]:
-
 
 # Calculate the total DNA copy number of fungi
 fungal_DNA = qPCR_data['Basidiomycota [ng µl^-1]']+qPCR_data['Ascomycota [ng µl^-1]']
@@ -50,7 +47,6 @@ print('The ratio of fungal DNA copy number and bacterial DNA copy number is ≈%
 # As an independent method for estimating the total biomass of marine fungi in the epipelagic layer, we use a study which measured the carbon concentration of fungi in the epipelagic layer in upwelling ecosystem off Chile using direct counts ([Gutiérrez et al.]( https://doi.org/10.1007/s00227-010-1552-z)). We calculate the average concentration of fungal carbon in relation to the carbon concentration of prokaryotes in the same site:
 
 # In[4]:
-
 
 # Load data on direct counts of fungal carbon concentration
 direct_data = pd.read_excel('marine_fungi_data.xlsx','Gutiérrez',skiprows=1)
@@ -70,7 +66,6 @@ print('The ratio of fungal carbon and bacterial carbon is ≈%.0f' %(direct_fung
 
 # In[5]:
 
-
 best_fungal_fraction = gmean([qPCR_fungal_fraction,direct_fungal_fraction])
 print('The ratio of fungal carbon and bacterial carbon is ≈%.0f' %(best_fungal_fraction*100) + '%')
 
@@ -78,7 +73,6 @@ print('The ratio of fungal carbon and bacterial carbon is ≈%.0f' %(best_fungal
 # To estimate the total biomass of fungi using qPCR, we rely on our estimate from the total biomass of bacteria and archaea in the top 200 meters, which we estimate in the marine bacteria and archaea section:
 
 # In[6]:
-
 
 # Load total biomass of marine bacteria and archaea
 marine_prok_biomass = pd.read_excel('../../bacteria_archaea/marine/marine_prok_biomass_estimate.xlsx')
@@ -96,7 +90,6 @@ print('Our estimate for the total biomass of bacteria and archaea in the epipela
 
 # In[7]:
 
-
 best_epi_fungi = epi_prok_biomass*best_fungal_fraction
 
 print('Our estimate for the total biomass of free-living epipelagic fungi based of qPCR is ≈%.2f Gt C' %(best_epi_fungi/1e15))
@@ -107,7 +100,6 @@ print('Our estimate for the total biomass of free-living epipelagic fungi based 
 
 # In[8]:
 
-
 pernice_data = pd.read_excel('marine_fungi_data.xlsx','Pernice',skiprows=1)
 pernice_data
 
@@ -115,7 +107,6 @@ pernice_data
 # We estimate the total biomass of microbial eukaryotes by multiplying the the measured biomass densities by the depth range of the measurements, and applying the concentrations to the total ≈3.6×10$^{14}\ m^2$ of ocean.
 
 # In[9]:
-
 
 depth_range = pernice_data['Max depth [m]']-pernice_data['Min depth [m]']
 
@@ -133,7 +124,6 @@ print('Our best estimate for the biomass of deep-sea microbial eukaryotes is ≈
 
 # In[10]:
 
-
 deep_sea_fungi = miceuk_biomass*0.15
 
 print('Our estimate of the biomass of deep-sea fungi based on 18S rDNA sequencing is ≈%.2f Gt C' %(deep_sea_fungi/1e15))
@@ -142,7 +132,6 @@ print('Our estimate of the biomass of deep-sea fungi based on 18S rDNA sequencin
 # Pernice et al. were mainly focused on measuring the biomass of heterotrophic protists, and thus they might capture only unicellular fungi and not filamentous fungi. To take into account the possibility of  deep-sea filamentous fungi, we extend our estimate of the ratio between planktonic fungi and prokaryotes to the mesopelagic and bathypelagic realms.
 
 # In[11]:
-
 
 # Estimate the total biomass of prokaryotes in the mesopelagic and bathypelagic layers
 meso_bathy_prok_biomass = marine_prok_biomass.iloc[0:2,1].prod()*1e-15*(1-epi_frac['Value'])
@@ -157,7 +146,6 @@ print('Our estimate of the biomass of deep-sea fungi based on the ratio between 
 
 # In[12]:
 
-
 best_deep_fungi = gmean([deep_sea_fungi,meso_bathy_fungi])
 print('Our best estimate of the biomass of deep-sea fungi is ≈%.2f Gt C' %(best_deep_fungi/1e15))
 
@@ -167,7 +155,6 @@ print('Our best estimate of the biomass of deep-sea fungi is ≈%.2f Gt C' %(bes
 
 # In[13]:
 
-
 poc_fungi_biomass_data = pd.read_excel('marine_fungi_data.xlsx','Bochdansky',skiprows=1,index_col=0)
 poc_fungi_biomass_data
 
@@ -175,7 +162,6 @@ poc_fungi_biomass_data
 # To estimate the ratio between the biomass of particle-attached fungi and prokaryotes in the bathypelagic layer, we first calculate the geometric mean of the range provided by Bochdansky et al. for each method:
 
 # In[14]:
-
 
 method_mean_fungi_ratio = poc_fungi_biomass_data.apply(gmean,axis=1)
 method_mean_fungi_ratio
@@ -185,7 +171,6 @@ method_mean_fungi_ratio
 
 # In[15]:
 
-
 best_poc_fungi_ratio = gmean(method_mean_fungi_ratio)
 print('Our best estimate of the ratio between the biomass of particle-attached fungi and prokaryotes in the bathypelagic layer is ≈%.1f' %best_poc_fungi_ratio)
 
@@ -193,7 +178,6 @@ print('Our best estimate of the ratio between the biomass of particle-attached f
 # We could not find reliable data on the ratio between the biomass of particle-attached fungi and prokaryotes in shallower layers of the ocean, and thus we apply this ratio throughout all the layers of the ocean. We estimate the total biomass of particle-attached fungi in the ocean by using our estimate of the total biomass of particle-attached prokaryotes, and multiplying it by our best estimate for the ratio between the biomass of fungi and prokaryotes:
 
 # In[16]:
-
 
 # Use our estimate of the total biomass of particle-attached prokaryotes
 poc_prok_biomass = marine_prok_biomass.iloc[[0,1,4],1].prod()*1e-15
@@ -208,7 +192,6 @@ print('Our best estimate of the total biomass of particle-attached fungi is ≈%
 
 # In[17]:
 
-
 best_estimate = poc_fungi_biomass + best_epi_fungi + best_deep_fungi
 print('Our best estimate of the total biomass of marine fungi is ≈%.1f Gt C' %(best_estimate/1e15))
 
@@ -217,7 +200,6 @@ print('Our best estimate of the total biomass of marine fungi is ≈%.1f Gt C' %
 # The available data on the biomass of marine fungi is scarce, and thus we chose to use a crude estimate of an order of magnitude as our projection for the uncertainty associated with the estimate of the total biomass of marine fungi. Our final parameters are
 
 # In[18]:
-
 
 mul_CI = 10
 

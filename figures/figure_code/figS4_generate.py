@@ -31,6 +31,9 @@ for x in animals.index:
 
 animals.plot(kind='pie',colors=['#ff525d','#6385e7','#e9afaf','#de8787','#ff5200','#fd3cea','#64c7d1','#fff6d3','#9e675f','934028'],ax=axes[1])
 
+plt.title('Figure S4')
 plt.show()
 
+
 plt.savefig('../output/figS4AB.pdf')
+plt.savefig('../output/figS4AB.svg')

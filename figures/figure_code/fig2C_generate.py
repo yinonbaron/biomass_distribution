@@ -75,6 +75,8 @@ for ax in axes:
 
 axes[0].set_xlim([0,8])
 axes[1].set_xlim([0,480])
+plt.title('Figure 2B')
+plt.savefig('../output/fig2C.svg')
 plt.savefig('../output/fig2C.pdf')
 plt.show()
 

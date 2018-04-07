@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import sys
@@ -20,7 +19,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Load estimates for the total number of phages and for the carbon cont
 estimate = pd.read_excel('phage_biomass_estimate.xlsx')
 estimate
@@ -29,7 +27,6 @@ estimate
 # In order to estimate the total biomass of phages, we multiply our estimate of the total number of phages by our estimate of the carbon content of a single phage.
 
 # In[3]:
-
 
 best_estimate = estimate['Value'].prod()
 
@@ -40,14 +37,16 @@ print('Our best estimate for the total biomass of phages is %.1f Gt C' %(best_es
 
 # In[4]:
 
-
 mul_CI = CI_prod_prop(estimate['Uncertainty'])
 
 print('Our best projection for the uncertainty associated with our estiamte of the biomass of phages is %.1f-fold' %mul_CI)
 
 
+# Due to the scarcity of data on the different parameters used to estimate the total biomass of phages, we use a higher uncertainty projection of ≈20-fold.
+
 # In[5]:
 
+mul_CI = 20
 
 # Feed results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 

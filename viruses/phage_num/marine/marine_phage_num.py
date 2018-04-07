@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -19,15 +18,13 @@ pd.options.display.float_format = '{:,.1e}'.format
 
 # In[2]:
 
-
-data = pd.read_excel('marine_phage_data.xls')
+data = pd.read_excel('marine_phage_data.xls',skiprows=1)
 data.head()
 
 
 # We bin the data based to ten depth bins so that each bin contains the same amount of data. The abundance of virions seems to follow an exponential deacy with depth:
 
 # In[3]:
-
 
 # Bin data to 10 depth bins with equal data
 data['Depth_bin_equal'], bins = pd.qcut(data['DEPTH'], 10, retbins=True)
@@ -55,7 +52,6 @@ plt.legend()
 # We calculate the total number of virions by multiplying the average concentration of virions in each depth bin by the total volume of each depth bin:
 
 # In[4]:
-
 
 # Ocean surface area in m^2
 ocean_surface_area = 3.6e14

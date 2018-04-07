@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 #Load dependencies
 import pandas as pd
 import numpy as np
@@ -27,7 +26,6 @@ pd.options.display.float_format = '{:,.1f}'.format
 
 # In[2]:
 
-
 # Load global stocks data
 gc_data = pd.read_excel('terrestrial_arthropods_data.xlsx','Gist & Crossley',skiprows=1)
 gc_data.head()
@@ -37,7 +35,6 @@ gc_data.head()
 
 # In[3]:
 
-
 bm_data = pd.read_excel('terrestrial_arthropods_data.xlsx','Brockie & Moeed',skiprows=1)
 bm_data.head()
 
@@ -45,7 +42,6 @@ bm_data.head()
 # We calculate the sum of biomass of all the groups of arthropods in each study to provide an estimate for the total biomass density of arthropods in litter:
 
 # In[4]:
-
 
 gc_study = gc_data.groupby('Study').sum()
 bm_study = bm_data.groupby('Study').sum()
@@ -56,7 +52,6 @@ bm_study
 
 # In[5]:
 
-
 print('The estimate from Gist & Crossley:')
 gc_study
 
@@ -65,17 +60,14 @@ gc_study
 
 # In[6]:
 
-
 # Concat the data from the two studies
 conc = pd.concat([gc_study,bm_study])
 conc_mean = conc.groupby(conc.index).mean()
-conc_mean
 
 
 # We calculate from the dry weight and wet weight estimates the biomass density in g C $m^{-2}$ by assuming 70% water content and 50% carbon in dry mass:
 
 # In[7]:
-
 
 # Fill places with no dry weight estimate with 30% of the wet weight estimate 
 conc_mean['Dry weight [g m^-2]'].fillna(conc_mean['Wet weight [g m^-2]']*0.3,inplace=True)
@@ -89,7 +81,6 @@ conc_mean['Biomass density [g C m^-2]']
 
 # In[8]:
 
-
 litter_biomass_density = gmean(conc_mean.iloc[0:5,3])
 print('Our best estimate for the biomass density of arthropods in litter is ≈%.0f g C m^-2' %litter_biomass_density)
 
@@ -98,7 +89,6 @@ print('Our best estimate for the biomass density of arthropods in litter is ≈%
 # As our source for estimating the biomass of soil arthropods, we use these data collected from the literature, which are detailed below:
 
 # In[9]:
-
 
 # Load additional data
 soil_data = pd.read_excel('terrestrial_arthropods_data.xlsx','Soil',index_col='Reference')
@@ -109,11 +99,11 @@ soil_data
 
 # In[10]:
 
-
 # Calculate the geometric mean of the estimates of the biomass density of soil arthropods
 soil_biomass_density = gmean(soil_data['Biomass density [g C m^-2]'])
 
 print('Our best estimate for the biomass density of arthropods in soils is ≈%.0f g C m^-2' %soil_biomass_density)
+gmean(soil_data['Biomass density [g C m^-2]'])
 
 
 # If we sum the biomass density of soil and litter arthropods, we arrive at an estimate of ≈2 g C m^-2, which is inline with the data from Kitazawa et al. of 1-2 g C m^-2.
@@ -122,7 +112,6 @@ print('Our best estimate for the biomass density of arthropods in soils is ≈%.
 # Data on the biomass density of canopy arthropods is much less abundant. We extracted from the literature the following values:
 
 # In[11]:
-
 
 # Load the data on the biomass density of canopy arthropods
 canopy_data = pd.read_excel('terrestrial_arthropods_data.xlsx', 'Canopy',index_col='Reference')
@@ -133,7 +122,6 @@ canopy_data
 
 # In[12]:
 
-
 # Calculate the geometric mean of the estimates of biomass densitiy of canopy arthropods
 canopy_biomass_density = gmean(canopy_data['Biomass density [g C m^-2]'])
 print('Our best estimate for the biomass density of arthropods in canopies is ≈%.1f g C m^-2' %canopy_biomass_density)
@@ -142,7 +130,6 @@ print('Our best estimate for the biomass density of arthropods in canopies is �
 # To generate our best estimate for the biomass of arthropods using estimates of biomass densities, we sum the estimates for the biomass density of arthropods in soils and in canopies, and apply this density over the entire ice-free land surface of $1.3×10^{14} \: m^2$:
 
 # In[13]:
-
 
 # Sum the biomass densities of arthropods in soils and in canopies
 total_denisty = litter_biomass_density+soil_biomass_density+canopy_biomass_density
@@ -159,7 +146,6 @@ print('Our best estimate for the biomass of terrestrial arthropods using average
 
 # In[14]:
 
-
 pd.options.display.float_format = '{:,.1e}'.format
 
 # Calculate the carbon content of a single arthropod by dividing the dry weight by 2 (assuming 50% carbon in
@@ -173,7 +159,6 @@ gc_study
 
 # In[15]:
 
-
 # Load additional data sources
 other_carbon_content_data = pd.read_excel('terrestrial_arthropods_data.xlsx', 'Carbon content',index_col='Reference')
 
@@ -184,7 +169,6 @@ other_carbon_content_data
 
 # In[16]:
 
-
 # Calculate the geometric mean of the estimates from the different studies on the average carbon content of a single arthropod.
 average_carbon_content = gmean(pd.concat([other_carbon_content_data,gc_study])['Carbon content [g C per individual]'])
 print('Our best estimate for the carbon content of a characteristic arthropod is %.1e g C' % average_carbon_content)
@@ -193,7 +177,6 @@ print('Our best estimate for the carbon content of a characteristic arthropod is
 # To estimate the total biomass of arthropods using the characteristic carbon content method, we multiply our best estiamte of the carbon content of a single arthropod by an estimate of the total number of arthropods made by [Williams](http://dx.doi.org/10.1086/282115). Williams estiamted a total of $~10^{18}$ individual insects in soils. We assume this estimate of the total number of insects is close to the total number of arthropods (noting that in this estimate Williams also included collembola which back in 1960 were considered insects, and are usually very numerous because of their small size). To estimate the total biomass of arthropods, we multiply the carbon content of a single arthropod by the the estimate for the total number of arthropods:
 
 # In[17]:
-
 
 # Total number of insects estimated by Williams
 tot_num_arthropods = 1e18
@@ -206,7 +189,6 @@ print('Our best estimate for the biomass of terrestrial arthropods using average
 # Our best estimate for the biomass of arthropods is the geometric mean of the estimates from the two methods:
 
 # In[18]:
-
 
 # Calculate the geometric mean of the estimates using the two methods
 best_estimate = gmean([method1_estimate,method2_estimate])
@@ -221,7 +203,6 @@ print('Our best estimate for the biomass of terrestrial arthropods is ≈%.1f Gt
 
 # In[19]:
 
-
 litter_CI = geo_CI_calc(conc_mean['Biomass density [g C m^-2]'])
 soil_CI = geo_CI_calc(soil_data['Biomass density [g C m^-2]'])
 canopy_CI = geo_CI_calc(canopy_data['Biomass density [g C m^-2]'])
@@ -234,7 +215,6 @@ print('The 95 percent confidence interval for the average biomass density of can
 
 # In[20]:
 
-
 method1_CI = CI_sum_prop(estimates=np.array([litter_biomass_density,soil_biomass_density,canopy_biomass_density]),mul_CIs=np.array([litter_CI,soil_CI,canopy_CI]))
 print('The 95 percent confidence interval biomass of arthropods using the biomass densities method is ≈%.1f-fold' %method1_CI)
 
@@ -244,7 +224,6 @@ print('The 95 percent confidence interval biomass of arthropods using the biomas
 
 # In[21]:
 
-
 carbon_content_CI = geo_CI_calc(pd.concat([other_carbon_content_data,gc_study])['Carbon content [g C per individual]'])
 print('The 95 percent confidence interval of the carbon content of a single arthropod is ≈%.1f-fold' %carbon_content_CI)
 
@@ -252,7 +231,6 @@ print('The 95 percent confidence interval of the carbon content of a single arth
 # We combine this uncertainty of the average carbon content of a single arthropod with the uncertainty reported in Williams on the total number of insects of about one order of magnitude. This provides us with a measure of the uncertainty of the estimate of the biomass of arthropods using the average carbon content method.
 
 # In[22]:
-
 
 # The uncertainty of the total number of insects from Williams
 tot_num_arthropods_CI = 10
@@ -268,7 +246,6 @@ print('The 95 percent confidence interval biomass of arthropods using the averag
 
 # In[23]:
 
-
 inter_CI = geo_CI_calc(np.array([method1_estimate,method2_estimate]))
 print('The inter-method uncertainty of the geometric mean of the estimates of the biomass of arthropods is ≈%.1f' % inter_CI)
 
@@ -276,7 +253,6 @@ print('The inter-method uncertainty of the geometric mean of the estimates of th
 # As our best projection for the uncertainty associated with the estimate of the biomass of terrestrial arthropods, we take the highest uncertainty among the collection of uncertainties we generate, which is the ≈15-fold uncertainty of the average carbon content method. 
 
 # In[24]:
-
 
 mul_CI = np.max([inter_CI,method1_CI,method2_CI])
 print('Our best projection for the uncertainty associated with the estimate of the biomass of terrestrial arthropods is ≈%.1f-fold' %mul_CI)
@@ -286,7 +262,6 @@ print('Our best projection for the uncertainty associated with the estimate of t
 # As we state in the Supplementary Information, there are some groups of terrestrial arthropods for which better estimates are available. An example is the biomass of termites. We use the data in [Sanderson](http://dx.doi.org/10.1029/96GB01893) to estimate the global biomass of termites:
 
 # In[25]:
-
 
 # Load termite data
 termite_data = pd.read_excel('terrestrial_arthropods_data.xlsx', 'Sanderson', skiprows=1, index_col=0)
@@ -301,7 +276,6 @@ print('The estimate of the total biomass of termites based on Sanderson is ≈%.
 
 
 # In[26]:
-
 
 # Feed results to the animal biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)

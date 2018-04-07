@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import sys
@@ -19,7 +18,6 @@ pd.options.display.float_format = '{:,.1e}'.format
 
 # In[2]:
 
-
 estimate = pd.read_excel('phage_num_estimate.xlsx')
 estimate
 
@@ -27,7 +25,6 @@ estimate
 # Our best estimate of the total number of phages is the sum of our estimates for the number of phages in all the environments we cover:
 
 # In[3]:
-
 
 # Calculate the total number of phages
 best_estimate = estimate.sum()['Value']
@@ -41,7 +38,6 @@ print('Our best estimate for the total number of phages is %.1e' %best_estimate)
 # We combine the uncertainties for the number of phages in each of the environments to produce our projection for the uncertainty associated with our estimate of the total number of phages:
 
 # In[4]:
-
 
 # Set the uncertainty associated with our estimate of the total number of phages
 # in the marine environment and in the marine deep subsurface as one and a half
@@ -58,7 +54,6 @@ print('Our best projection for the uncertainty associated with our estimate of t
 # Our final parameters are:
 
 # In[5]:
-
 
 print('Our best estimate for the total number of phages : %.0e' % best_estimate)
 print('Uncertainty associated with the estimate of the total number of phages: %.0f-fold' % mul_CI)

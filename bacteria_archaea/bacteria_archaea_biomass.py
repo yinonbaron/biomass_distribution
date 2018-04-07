@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -19,7 +18,6 @@ from excel_utils import *
 
 # In[2]:
 
-
 data = pd.read_excel('../results.xlsx','Table1 & Fig1',index_col=[0,1])
 data.loc[['Bacteria','Archaea']]
 
@@ -27,7 +25,6 @@ data.loc[['Bacteria','Archaea']]
 # We sum all these different contributions to produce our best estimate for the biomass of animals:
 
 # In[3]:
-
 
 best_estimate_bac = data.loc['Bacteria','Biomass [Gt C]'].sum()
 best_estimate_arch = data.loc['Archaea','Biomass [Gt C]'].sum()
@@ -41,7 +38,6 @@ print('Our best estimate for the biomass of archaea is ≈%.1f Gt C' %best_estim
 
 # In[4]:
 
-
 mul_CI_bac = CI_sum_prop(estimates=data.loc['Bacteria','Biomass [Gt C]'].values, mul_CIs = data.loc['Bacteria','Uncertainty'].values)
 mul_CI_arch = CI_sum_prop(estimates=data.loc['Archaea','Biomass [Gt C]'].values, mul_CIs = data.loc['Archaea','Uncertainty'].values)
 
@@ -50,7 +46,6 @@ print('Our projection for the uncertainty of our estimate of the total biomass o
 
 
 # In[5]:
-
 
 # Feed bacteria results to Table 1 & Fig. 1
 update_results(sheet='Table1 & Fig1', 

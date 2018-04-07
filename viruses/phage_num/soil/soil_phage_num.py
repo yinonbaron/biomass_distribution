@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 from scipy.stats import gmean
@@ -18,7 +17,6 @@ from CI_helper import *
 # Based on these data, the values for the concentration of phages in soils appears to be ~$10^8-10^9$ phages per gram of soil. Assuming bulk soil density of ≈1.5 g cm$^3$, and soil depth of 10 meters (based on [Shangguan et al.](http://dx.doi.org/10.1002/2016MS000686)), we estimate the total number of phages per $m^2$ to be:
 
 # In[2]:
-
 
 # Lower and upper bounds for the concentration of phages per gram
 lower_concentration = 1e8
@@ -44,7 +42,6 @@ print('The upper bound of the number of phages per m^2 of soil is ≈%.1e phages
 
 # In[3]:
 
-
 # Use the geometric mean of the lower and upper phage concentrations as our best estimate
 best_phage_per_m2 = gmean([lower_phage_per_m2,upper_phage_per_m2])
 
@@ -63,7 +60,6 @@ print('Our best estimate for the total number of phages in soils is ≈%.1e phag
 # Our final parameters are:
 
 # In[4]:
-
 
 mul_CI = 10**1.5
 

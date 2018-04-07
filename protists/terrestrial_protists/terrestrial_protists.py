@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -27,7 +26,6 @@ pd.options.display.float_format = '{:,.1e}'.format
 
 # In[2]:
 
-
 # Load data
 data = pd.read_excel('terrestrial_protist_data.xlsx','Density of Individuals')
 data.head()
@@ -36,7 +34,6 @@ data.head()
 # To estimate the total number of protists, we group our samples to different habitats and to the study in which they were taken. We calculate the characteristic number of each of the groups of protists per gram of soil. To do this we first derive a representative value for each study in case there was more than one measurement done in it. We calculate the representative value for each study in each habitat. Then we calculate the average of different representative values from different studies within the same habitat. We calculate the averages either by using the arithmetic mean or the geometric mean.
 
 # In[3]:
-
 
 # Define the function to calculate the geometric mean of number of each group of protists per gram
 def groupby_gmean(input):
@@ -72,16 +69,14 @@ habitat_mean.set_index(habitat_mean.index.droplevel(1),inplace=True)
 
 # In[4]:
 
-
 habitat_gmean
 
 
 # For some groups, not all habitats have values. We fill values for missing data by the following scheme. For missing values in the boreal forest biome, we use values from the temperate forest biome. If we have data for the group of protists from the "General" habitat, which is based on expert assessment of the characteristic number of individuals for that group per gram of soil, we fill the missing values with the value for the "General" habitat.
 # 
-# The only other missing data was for ciliates in tropical forests and tundra. For tropical forest, we used the values from temperate forests forests. For tundra, we use the mean over all the different habitats to fill the value:
+# The only other missing data was for ciliates in tropical forests and tundra. For tropical forest, we used the values from temperate forests. For tundra, we use the mean over all the different habitats to fill the value:
 
 # In[5]:
-
 
 # Fill missing values for boreal forests
 habitat_mean.loc['Boreal Forest',['Number of ciliates [# g^-1]','Number of flagellates [# g^-1]','Number of naked amoebae [# g^-1]']] = habitat_mean.loc['Temperate Forest',['Number of ciliates [# g^-1]','Number of flagellates [# g^-1]','Number of naked amoebae [# g^-1]']]
@@ -108,7 +103,6 @@ habitat_gmean
 
 # In[6]:
 
-
 # Load soil density map from Hengl et al. (in the top 15 cm, reduced in resolution to 1 degree resolution)
 gtif = gdal.Open('bulk_density_data.tif')
 bulk_density_map = np.array(gtif.GetRasterBand(1).ReadAsArray())
@@ -118,13 +112,11 @@ bulk_density_map[bulk_density_map == bulk_density_map[0,1]] = np.nan
 # Mean soil bulk density from Hengl et al. [in g per m^3]
 bulk_density = np.nanmean(bulk_density_map[:])*1000
 print('Our best estimate for the global mean bulk density of soil in the top 15 cm is ≈%.1e g m^3' %bulk_density)
-#of ≈1.3 g $cm^3$
 
 
 # Measuring the density of individuals per gram of soil does not take into account the distribution on biomass along the soil profile. Most of the measurements of the number of individual protists per gram of soil are done in shallow soil depths. We calculate the average sampling depth across studies:
 
 # In[7]:
-
 
 # Calculate the average sampling depth 
 sampling_depth = data.groupby('DOI').mean().mean()['Sampling Depth [cm]']
@@ -135,7 +127,6 @@ print('The average sampling depth of soil protists is ≈%.0f cm' %sampling_dept
 # It is not obvious what is the fraction of the total biomass of soil protists that is found in the top 8 cm of soil. To estimate the fraction of the biomass of soil protists found in the top 8 cm, we rely on two methodologies. The first is based on the distribution of microbial biomass with depth as discussed in Xu et al. Xu et al. extrapolate the microbial biomass across the soil profile based on empirical equations for the distribution of root biomass along soil depth from [Jackson et al.](http://dx.doi.org/10.1007/BF00333714). The empirical equations are biome-specific, and follow the general form: $$Y = 1-\beta^d$$ Where Y is the cumulative fraction of roots, d is depth in centimeters, and $\beta$ is a coefficient fitted for each biome. On a global scale, the best fit for $\beta$ as reported in Jackson et al., is ≈0.966. We use this coefficient to calculate the fraction of total biomass of soil protists found in the top 8 cm: 
 
 # In[8]:
-
 
 # The beta coefficient from Jackson et al.
 jackson_beta = 0.966
@@ -153,7 +144,6 @@ print('Our estimate for the fraction of biomass of soil protists found in soil l
 
 # In[9]:
 
-
 # The fraction of microbial biomass found in layer shallower than depth x based on Fierer et al.
 fierer_eq = lambda x: 1-(-0.132*np.log(x)+0.605)
 fierer_frac = fierer_eq(sampling_depth)
@@ -164,7 +154,6 @@ print('Our estimate for the fraction of biomass of soil protists found in soil l
 
 # In[10]:
 
-
 best_depth_frac = frac_mean(np.array([jackson_fraction,fierer_frac]))
 print('Our best estimate for the fraction of biomass of soil protists found in soil layers sampled is ≈%.0f percent' %(best_depth_frac*100))
 
@@ -172,7 +161,6 @@ print('Our best estimate for the fraction of biomass of soil protists found in s
 # To convert the measurements per gram of soil to number of individuals per $m^2$, we calculate the average sampling depth across studies. We calculate the volume of soil held within this sampling depth. We use the bulk density to calculate the total weight of soil within one $m^2$ of soil with depth equal to the sampling depth. We multiply the estimates per gram of soil by the total weight of soil per $m^2$. To account for biomass present in lower layers, we divide the total number of individual protists per $m^2$ by our best estimate for the fraction of the total biomass of soil protists found in layer shallower than 8 cm.
 
 # In[11]:
-
 
 # convert number of individuals per gram soil to number of individuals per m^2
 habitat_per_m2_gmean = (habitat_gmean*bulk_density*sampling_depth/100/best_depth_frac)
@@ -183,7 +171,6 @@ habitat_per_m2_mean = (habitat_mean*bulk_density*sampling_depth/100/best_depth_f
 
 # In[12]:
 
-
 habitat_area = pd.read_excel('terrestrial_protist_data.xlsx','Biome area', skiprows=1,index_col=0)
 habitat_area
 
@@ -192,31 +179,24 @@ habitat_area
 
 # In[13]:
 
-
 habitat_per_m2_gmean.loc['Tropical Savanna'] = gmean(habitat_per_m2_gmean.loc[['Tropical Forest','Woodland','Shrubland','Grassland']])
-habitat_per_m2_mean.loc['Tropical Savanna'] = habitat_per_m2_gmean.loc[['Tropical Forest','Woodland','Shrubland','Grassland']].mean(axis=0)
+habitat_per_m2_mean.loc['Tropical Savanna'] = habitat_per_m2_mean.loc[['Tropical Forest','Woodland','Shrubland','Grassland']].mean(axis=0)
 
 tot_num_gmean = habitat_per_m2_gmean.mul(habitat_area['Area [m^2]'],axis=0)
 tot_num_mean = habitat_per_m2_mean.mul(habitat_area['Area [m^2]'],axis=0)
-print(tot_num_mean.sum())
-print(tot_num_gmean.sum())
-print(gmean([tot_num_mean.sum(),tot_num_gmean.sum()]))
 
 
 # We generated two types of estimates for the total number of soil protists: an estimate which uses the arithmetic mean of the number of individuals at each habitat, and an estimate which uses the geometric mean of the number of individuals at each habitat. The estimate based on the arithmetic mean is more susceptible to sampling bias, as even a single measurement which is not characteristic of the global population (such as samples which are contaminated with organic carbon sources, or samples which have some technical biases associated with them) might shift the average concentration significantly. On the other hand, the estimate based on the geometric mean might underestimate global biomass as it will reduce the effect of biologically relevant high biomass concentrations. As a compromise between these two caveats, we chose to use as our best estimate the geometric mean of the estimates from the two methodologies.
 
 # In[14]:
 
-
 tot_num_protist = gmean([tot_num_mean.sum(),tot_num_gmean.sum()])
-tot_num_protist
 
 
 # ## Carbon content of protists
 # We estimate the characteristic carbon content of a single protist from each of the morphological groups of protists  based on data from several sources. Here is a sample of the data:
 
 # In[15]:
-
 
 cc_data =  pd.read_excel('terrestrial_protist_data.xlsx', 'Carbon content')
 cc_data.head()
@@ -225,7 +205,6 @@ cc_data.head()
 # We combine this data with an additional source from [Finlay & Fenchel](http://dx.doi.org/10.1078/1434-4610-00060). We calculate the average cell length for each group. 
 
 # In[16]:
-
 
 # Load data from Finlay & Fenchel
 ff_data = pd.read_excel('terrestrial_protist_data.xlsx', 'Finlay & Fenchel', skiprows=1)
@@ -243,7 +222,6 @@ cell_lengths = ff_data.groupby('Protist type').apply(weighted_av_groupby)
 
 # In[17]:
 
-
 cell_volumes = 0.6*cell_lengths**2.36
 cell_volumes
 
@@ -251,7 +229,6 @@ cell_volumes
 # We convert cell volumes to carbon content assuming ≈150 fg C µm$^3$:
 
 # In[18]:
-
 
 ff_carbon_content = cell_volumes*150e-15
 pd.options.display.float_format = '{:,.1e}'.format
@@ -261,7 +238,6 @@ ff_carbon_content
 # We add these numbers as an additional source for calculating the carbon content of protists:
 
 # In[19]:
-
 
 cc_data.loc[cc_data.index[-1]+1] = pd.Series({'Reference': 'Finlay & Fenchel',
                    'DOI': 'http://dx.doi.org/10.1078/1434-4610-00060',
@@ -276,7 +252,6 @@ cc_data.loc[cc_data.index[-1]+1] = pd.Series({'Reference': 'Finlay & Fenchel',
 
 # In[20]:
 
-
 def groupby_gmean(input):
     return pd.DataFrame({'Carbon content of ciliates [g C cell^-1]': gmean(input['Carbon content of ciliates [g C cell^-1]'].dropna()),
                         'Carbon content of naked amoebae [g C cell^-1]': gmean(input['Carbon content of naked amoebae [g C cell^-1]'].dropna()),
@@ -290,7 +265,6 @@ mean_cc = study_mean_cc.reset_index().groupby('level_1').apply(groupby_gmean)
 
 # In[21]:
 
-
 gmean(study_mean_cc['Carbon content of flagellates [g C cell^-1]'].dropna())
 mean_cc.T
 
@@ -298,7 +272,6 @@ mean_cc.T
 # To estimate the total biomass of soil protists based on the total number of individuals and their carbon content, we multiply our estimate for the total number of individuals for each morphological type by its characteristic carbon content. We sum over all morophological types of protists to generate our best estimate for the global biomass of soil protists
 
 # In[22]:
-
 
 # Calculate the total biomass of protists
 best_estimate = (tot_num_protist*mean_cc).sum(axis=1)
@@ -316,7 +289,6 @@ print('Our best estimate of the total biomass of soil protists is ≈%.1f Gt C' 
 # For each study which reports more than one value, we calculate 95% confidence interval around the geometric mean of those values. We take the maximal uncertainty in each habitat as our measure of the intra-study uncertainty
 
 # In[23]:
-
 
 pd.options.display.float_format = '{:,.1f}'.format
 
@@ -341,7 +313,6 @@ intra_num_CI = intra_study_num_CI.groupby('Habitat').max()
 
 # In[24]:
 
-
 # Group the representative values by habitat, and calculate the 95% confidence interval
 # around the geometric mean of values within habitat
 inter_study_habitat_num_CI = grouped_data_gmean.groupby('Habitat').apply(groupby_geo_CI)
@@ -350,32 +321,30 @@ inter_study_habitat_num_CI
 
 
 # ### Inter-habitat uncertainty
-# We first use the maximum of the intra-study and interstudy uncertainty in each habitat as our best projection for the uncertainty associated with the estimate of the total number of protists in the habitat. For habitats with missing uncertainty projections, we use the maximum of the uncertainties for the same group of protists in other habitats.
+# We first use the maximum of the intra-study and interstudy uncertainty in each habitat as our best projection for the uncertainty associated with the estimate of the total number of protists in the habitat. For habitats with missing uncertainty projections, we use the geometric mean of the uncertainties for the same group of protists in other habitats.
 
 # In[25]:
-
 
 # Use the maximum of the intra-study and interstudy uncertainty as our best projection of the uncertainty 
 # of the number of protists in each habitat
 tot_num_habitat_CI = inter_study_habitat_num_CI.where(inter_study_habitat_num_CI > intra_num_CI, intra_num_CI).fillna(inter_study_habitat_num_CI)
 
-# Fill missing values for each habitat with the mean of the uncertainties for the same group of 
+# Fill missing values for each habitat with the geometric mean of the uncertainties for the same group of 
 # protists in the other habitats
-tot_num_habitat_CI['Number of ciliates [# g^-1]'].fillna(tot_num_habitat_CI['Number of ciliates [# g^-1]'].max(),inplace=True)
-tot_num_habitat_CI['Number of flagellates [# g^-1]'].fillna(tot_num_habitat_CI['Number of flagellates [# g^-1]'].max(),inplace=True)
-tot_num_habitat_CI['Number of naked amoebae [# g^-1]'].fillna(tot_num_habitat_CI['Number of naked amoebae [# g^-1]'].max(),inplace=True)
-tot_num_habitat_CI['Number of testate amoebae [# g^-1]'].fillna(tot_num_habitat_CI['Number of testate amoebae [# g^-1]'].max(),inplace=True)
+tot_num_habitat_CI['Number of ciliates [# g^-1]'].fillna(gmean(tot_num_habitat_CI['Number of ciliates [# g^-1]'].dropna()),inplace=True)
+tot_num_habitat_CI['Number of flagellates [# g^-1]'].fillna(gmean(tot_num_habitat_CI['Number of flagellates [# g^-1]'].dropna()),inplace=True)
+tot_num_habitat_CI['Number of naked amoebae [# g^-1]'].fillna(gmean(tot_num_habitat_CI['Number of naked amoebae [# g^-1]'].dropna()),inplace=True)
+tot_num_habitat_CI['Number of testate amoebae [# g^-1]'].fillna(gmean(tot_num_habitat_CI['Number of testate amoebae [# g^-1]'].dropna()),inplace=True)
 
-# Fill the uncertainty of the values for the tropical savanna with the mean the uncertainties 
+# Fill the uncertainty of the values for the tropical savanna with the geometric mean the uncertainties 
 # for the same group of protists in the other habitats
-tot_num_habitat_CI.loc['Tropical Savanna'] = tot_num_habitat_CI.max()
+tot_num_habitat_CI.loc['Tropical Savanna'] = gmean(tot_num_habitat_CI)
 tot_num_habitat_CI
 
 
 # We propagate the uncertainties associated with the estimates of the total number of protists per gram soil in each habitat to the estimate of the sum across all habitats:
 
 # In[26]:
-
 
 tot_num_habitat_CI = tot_num_habitat_CI.loc[tot_num_gmean.dropna().index.values]
 
@@ -392,7 +361,6 @@ num_per_g_CI
 
 # In[27]:
 
-
 inter_method_num_CI = geo_CI_calc(pd.DataFrame([tot_num_mean.sum(),tot_num_gmean.sum()]))
 inter_method_num_CI
 
@@ -400,7 +368,6 @@ inter_method_num_CI
 # We use the maximum of the uncertainty stemming from the intra-study and interstudy variability and the inter-method uncertainty as our best projection of the uncertainty associated with our estimate of the number of individual protists per gram of soil:
 
 # In[28]:
-
 
 best_num_CI = np.max([num_per_g_CI,inter_method_num_CI],axis=0)
 best_num_CI = pd.Series(best_num_CI,index= inter_method_num_CI.index)
@@ -417,7 +384,6 @@ best_num_CI
 
 # In[29]:
 
-
 # We use a crude estimate of ≈2-fold as our measure of the uncertainty associated with
 # the average bulk density of soils
 bulk_density_CI = 2
@@ -431,7 +397,6 @@ print('Our projection for the uncertainty associated with our estimate of the fr
 # We combine the uncertainties associated with the total number of individual protists per gram soil with the uncertainties associated with the average bulk density of soil and the uncertainty associated with the fraction of the total biomass of soil protists found in the top 8 cm of soil:
 
 # In[30]:
-
 
 ciliate_num_CI = CI_prod_prop(np.array([best_num_CI['Number of ciliates [# g^-1]'],bulk_density_CI,depth_frac_CI]))
 flagellates_num_CI = CI_prod_prop(np.array([best_num_CI['Number of flagellates [# g^-1]'],bulk_density_CI,depth_frac_CI]))
@@ -448,7 +413,6 @@ tot_num_CI
 
 # In[31]:
 
-
 def groupby_geo_CI(input):
     return pd.DataFrame({'Carbon content of ciliates [g C cell^-1]': geo_CI_calc(input['Carbon content of ciliates [g C cell^-1]'].dropna()),
                         'Carbon content of naked amoebae [g C cell^-1]': geo_CI_calc(input['Carbon content of naked amoebae [g C cell^-1]'].dropna()),
@@ -464,7 +428,6 @@ cc_intra_CI = cc_data.groupby('DOI').apply(groupby_geo_CI).max()
 
 # In[32]:
 
-
 cc_inter_CI = geo_CI_calc(study_mean_cc)
 cc_inter_CI
 
@@ -472,7 +435,6 @@ cc_inter_CI
 # We use the maximum of the intra-study and interstudy uncertainties as our best projection of the uncertainty associated with the estimate of the carbon content of protists.
 
 # In[33]:
-
 
 best_cc_CI = np.max([cc_intra_CI,cc_inter_CI],axis=0)
 best_cc_CI = pd.Series(best_cc_CI,index=cc_inter_CI.index)
@@ -484,7 +446,6 @@ best_cc_CI
 
 # In[34]:
 
-
 ciliate_biomass_CI = CI_prod_prop(np.array([ciliate_num_CI,best_cc_CI['Carbon content of ciliates [g C cell^-1]']]))
 flagellates_biomass_CI = CI_prod_prop(np.array([flagellates_num_CI,best_cc_CI['Carbon content of flagellates [g C cell^-1]']]))
 naked_amoebae_biomass_CI = CI_prod_prop(np.array([naked_amoebae_num_CI,best_cc_CI['Carbon content of naked amoebae [g C cell^-1]']]))
@@ -495,7 +456,6 @@ testate_amoebae_biomass_CI = CI_prod_prop(np.array([testate_amoebae_num_CI,best_
 
 # In[35]:
 
-
 mul_CI = CI_sum_prop(estimates=(tot_num_protist*mean_cc).values.squeeze(), mul_CIs= np.array([ciliate_biomass_CI, flagellates_biomass_CI, naked_amoebae_biomass_CI, testate_amoebae_biomass_CI]))
 print('Our best projection for the uncertainty associated with the estimate of the total biomass of terrestrial protists is ≈%0.f-fold' % mul_CI)
 
@@ -503,7 +463,6 @@ print('Our best projection for the uncertainty associated with the estimate of t
 # Our final parameters are:
 
 # In[36]:
-
 
 
 print('Biomass of terrestrial protists: %.1f Gt C' %(best_estimate/1e15))

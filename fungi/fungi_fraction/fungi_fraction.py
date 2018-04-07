@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -21,15 +20,13 @@ pd.options.display.float_format = '{:,.3f}'.format
 # In[2]:
 
 
-
-data = pd.read_excel('fungi_fraction_data.xlsx')
+data = pd.read_excel('fungi_fraction_data.xlsx',skiprows=1)
 data.head()
 
 
 # Our general methodology for calculating the fraction of fungi out of the biomass of soil microbes is the following. We calculate the geometric mean of all values reported from the same soil type using the same method. This gives us estimates for characteric fraction of fungi in each soil type for each method. 
 
 # In[3]:
-
 
 def groupby_geo_frac_mean(input):
     return frac_mean(input['Fraction'],weights=input['N'])
@@ -42,7 +39,6 @@ type_method_mean
 
 # In[4]:
 
-
 method_mean = type_method_mean.apply(frac_mean)
 method_mean
 
@@ -50,7 +46,6 @@ method_mean
 # In the last stage, we calculate the geometric mean of the characteristic values from the two methods. We use the geometric mean as our best estimate for the fraction of fungi out of the total biomass of soil microbes.
 
 # In[5]:
-
 
 best_estimate = frac_mean(method_mean)
 print('Our best estimate for the fraction of fungi out of the total biomass of fungi is ≈' + '{:,.0f}%'.format(best_estimate*100))
@@ -66,7 +61,6 @@ print('Our best estimate for the fraction of fungi out of the total biomass of f
 
 # In[6]:
 
-
 def groupby_frac_CI(input):
     return frac_CI(input['Fraction'])
 
@@ -79,7 +73,6 @@ type_method_CI
 
 # In[7]:
 
-
 intra_method_CI = type_method_mean.apply(frac_CI)
 intra_method_CI
 
@@ -89,7 +82,6 @@ intra_method_CI
 
 # In[8]:
 
-
 inter_method_CI = frac_CI(method_mean)
 print('The 95' + '%'+' confidence interval of the characteristic values from each method is ≈%.1f-fold' % inter_method_CI)
 
@@ -98,7 +90,6 @@ print('The 95' + '%'+' confidence interval of the characteristic values from eac
 # Our final parameters are:
 
 # In[9]:
-
 
 mul_CI = np.max([type_method_CI.values.flatten().max(),intra_method_CI.max(),inter_method_CI])
 print('Fraction of fungi out of the total biomass of microbes:' +'{:.1f}%'.format(best_estimate*100))

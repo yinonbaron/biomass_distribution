@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -21,14 +20,12 @@ from excel_utils import *
 
 # In[2]:
 
-
 # Load bird data
 bird = pd.read_csv('FAOSTAT_data_bird.csv')
 bird.head()
 
 
 # In[3]:
-
 
 # Load body mass data
 body_mass = pd.read_csv('ipcc_animal_weight.csv')
@@ -39,7 +36,6 @@ body_mass.head()
 # We pivot the stocks DataFrame to have a view of each kind of animal at each region:
 
 # In[4]:
-
 
 
 # Replace NaN with zeros
@@ -57,7 +53,6 @@ bird_pivot
 # There is a difference between the body mass of a egg laying chicken to a non-egg laying chicken. We thus count seperately the egg laying chicken from the non-egg laying chicken. Data about the amount of egg laying chicken comes from the FAOStat domain Production - Livestock Primary.
 
 # In[5]:
-
 
 # Load data about egg laying chicken
 egg = pd.read_csv('FAOSTAT_data_eggs.csv')
@@ -86,7 +81,6 @@ bird_pivot_filt
 
 # In[6]:
 
-
 # Convert units
 bird_pivot_filt *= 1e3
 
@@ -111,7 +105,6 @@ bird_pivot_filt
 
 # In[7]:
 
-
 wet_bird_biomass = (body_mass_filt*bird_pivot_filt)
 wet_bird_biomass
 
@@ -119,7 +112,6 @@ wet_bird_biomass
 # We sum over all regions and convert units from kg wet weight to Gt C carbon by assuming carbon is ≈15% of the wet weight (30% dry weight of wet weight and carbon is 50% of dry weight).
 
 # In[8]:
-
 
 pd.options.display.float_format = '{:,.3f}'.format
 
@@ -131,13 +123,11 @@ total_biomass
 
 # In[9]:
 
-
 best_estimate = total_biomass.sum()
 print('Our estimate for the total biomass of poultry is ≈%.3f Gt C' % best_estimate)
 
 
 # In[10]:
-
 
 update_MS_data(row='Biomass of poultry',values= best_estimate,path='../../../../results.xlsx')
 
