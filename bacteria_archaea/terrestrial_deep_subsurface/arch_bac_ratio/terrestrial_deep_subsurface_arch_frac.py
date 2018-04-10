@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -13,14 +14,15 @@ from fraction_helper import *
 pd.options.display.float_format = '{:,.1e}'.format
 
 
-# # Estimating the fraction of archaea out of the total marine deep subsurface prokaryote population
+# # Estimating the fraction of archaea out of the total terrestrial deep subsurface prokaryote population
 # 
-# In order to estimate the fraction of archaea out of the total population of marine deep subsurface bacteria and archaea, we rely of three sources of data. Two of those sources are measurements made in the terrestrial deep subsurface of the fraction of archaea using two independent methods: 16S rDNA sequencing (FISH) and quantitative PCR (qPCR). For each method we collect several studies which used the method to measure the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface. We calculate the geometric means of samples within each study. We then calculate the geometric mean of the average estimates from each study using the same method to generate a characteristic estimate for the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface for each method. 
+# In order to estimate the fraction of archaea out of the total population of terrestrial deep subsurface bacteria and archaea, we rely of three sources of data. Two of those sources are measurements made in the terrestrial deep subsurface of the fraction of archaea using two independent methods: 16S rDNA sequencing (FISH) and quantitative PCR (qPCR). For each method we collect several studies which used the method to measure the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface. We calculate the geometric means of samples within each study. We then calculate the geometric mean of the average estimates from each study using the same method to generate a characteristic estimate for the fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface for each method. 
 # 
 # ## 16S rDNA sequencing-based estimate
 # For our 16S rDNA sequencing-based estimate we rely on data from [Rempfert et al.](http://dx.doi.org/10.3389/fmicb.2017.00056), [Lau et al.](http://dx.doi.org/10.1073/pnas.1612244113), [Osburn et al.](http://dx.doi.org/10.3389/fmicb.2014.00610), and [Simkus et al.](http://dx.doi.org/10.1016/j.gca.2015.10.003). Here is a sample of the data:
 
 # In[2]:
+
 
 # Define a function that will calculate the geometric mean of fractions for each bin of a groupby
 def frac_geo_mean_groupby(input):
@@ -39,6 +41,7 @@ seq_data.head()
 
 # In[3]:
 
+
 seq_bin = seq_data.groupby('Study')
 
 seq_study_mean = seq_bin.apply(frac_geo_mean_groupby)
@@ -49,6 +52,7 @@ seq_study_mean
 
 # In[4]:
 
+
 seq_mean = frac_mean(seq_study_mean)
 print('The characteristic 16S rDNA sequencing-based fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep susurface is ' + '{:,.1f}%'.format(seq_mean*100))
 
@@ -58,6 +62,7 @@ print('The characteristic 16S rDNA sequencing-based fraction of archaea out of t
 
 # In[5]:
 
+
 qpcr_data = pd.read_excel('terrestrial_deep_subsurface_arch_frac_data.xlsx','qPCR')
 qpcr_data.head()
 
@@ -65,6 +70,7 @@ qpcr_data.head()
 # We calculate the geometric mean of the fraction of archaea out of the total population of bacteria and archea for each study:
 
 # In[6]:
+
 
 qpcr_bin = qpcr_data.groupby('Study')
 
@@ -76,6 +82,7 @@ qpcr_study_mean
 
 # In[7]:
 
+
 qpcr_mean = frac_mean(qpcr_study_mean)
 print('The characteristic qPCR-based fraction of archaea out of the total population of bacteria and archaea in the terrestrial deep susurface is ' + '{:,.1f}%'.format(qpcr_mean*100))
 
@@ -85,6 +92,7 @@ print('The characteristic qPCR-based fraction of archaea out of the total popula
 # Our best estimate for the fraction of archaea out of the total population of bacteria and archaea is the geometric mean of these three sources of data:
 
 # In[8]:
+
 
 # As a third data source we use our estimate for the fraction of archaea out of the total population of bacteria
 # and archaea in subseafloor sediments.
@@ -97,13 +105,14 @@ print('Our best estimate for the fraction of archaea out of the total population
 
 
 # # Uncertainty analysis
-# In order to assess the uncertainty associated with our estimate for the fraction of marine archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface, we gather all possible indices of uncertainty. We compare the uncertainty of values within each one of the methods and the uncertainty stemming from the variability of the values provided by the two methods. 
+# In order to assess the uncertainty associated with our estimate for the fraction of terrestrial deep subsurface archaea out of the total population of bacteria and archaea in the terrestrial deep subsurface, we gather all possible indices of uncertainty. We compare the uncertainty of values within each one of the methods and the uncertainty stemming from the variability of the values provided by the two methods. 
 # 
 # ## Intra-study uncertainty 
 # ### 16S rDNA sequencing-based method
 # We calculate the intra-study 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using 16S rDNA seuqencing.
 
 # In[9]:
+
 
 seq_arc_CI = seq_bin.apply(frac_CI_groupby)
 
@@ -123,6 +132,7 @@ print(seq_bac_CI)
 # We calculate the intra-study 95% confidence inteval for the geometric mean of the values for the fraction of archaea out of the total population of bacteria and archaea measured using qPCR.
 
 # In[10]:
+
 
 qpcr_arc_CI = qpcr_bin.apply(frac_CI_groupby)
 
@@ -144,6 +154,7 @@ print(qpcr_bac_CI)
 
 # In[11]:
 
+
 inter_seq_arc_CI = frac_CI(seq_study_mean)
 inter_seq_bac_CI = frac_CI(1-seq_study_mean)
 print('The interstudy uncertainty of the 16S rDNA sequencing-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' % inter_seq_arc_CI)
@@ -155,6 +166,7 @@ print('The interstudy uncertainty of the 16S rDNA sequencing-based estimate of t
 
 # In[12]:
 
+
 inter_qpcr_arc_CI = frac_CI(qpcr_study_mean)
 inter_qpcr_bac_CI = frac_CI(1-qpcr_study_mean)
 print('The interstudy uncertainty of the qPCR-based estimate of the fraction of archaea out of the population of bacteria nad archaea is ≈%.1f-fold' % inter_qpcr_arc_CI)
@@ -165,6 +177,7 @@ print('The interstudy uncertainty of the qPCR-based estimate of the fraction of 
 # We calculate the interstudy 95% confidence inteval for the geometric mean of the estimates from the three different sources - the 16S rDNA sequencing-based estimate, the pPCR-based estiamte and the estimate for the fraction of archea out of the total population of bacteria and archaea in subseafloor sediments.
 
 # In[13]:
+
 
 inter_method_arc_CI = frac_CI(np.array([seq_mean,qpcr_mean,subseafloor_sed_arch_frac]))
 inter_method_bac_CI = frac_CI(1-np.array([seq_mean,qpcr_mean,subseafloor_sed_arch_frac]))
@@ -180,14 +193,15 @@ print('The inter-method uncertainty of the estimate of the fraction of bacteria 
 
 # In[14]:
 
+
 # Take the maximum uncertainty as our best projection of uncertainty
 arc_mul_CI = np.max([seq_arc_CI.max(),qpcr_arc_CI.max(),inter_seq_arc_CI,inter_method_arc_CI])
 bac_mul_CI = np.max([seq_bac_CI.max(),qpcr_bac_CI.max(),inter_seq_bac_CI,inter_qpcr_bac_CI,inter_method_bac_CI])
 
 print('Fraction of archaea out of the total population of terrestrial deep subsurface bacteria and archaea: %.0f percent' %(best_estimate*100))
 print('Fraction of bacteria out of the total population of terrestrial deep subsurface bacteria and archaea: %.0f percent' %(100.-best_estimate*100))
-print('Uncertainty associated with the fraction of marine archaea: %.1f-fold' % arc_mul_CI)
-print('Uncertainty associated with the fraction of marine bacteria: %.1f-fold' % bac_mul_CI)
+print('Uncertainty associated with the fraction of terrestrial deep subsurface archaea: %.1f-fold' % arc_mul_CI)
+print('Uncertainty associated with the fraction of terrestrial deep subsurface bacteria: %.1f-fold' % bac_mul_CI)
 
 old_results = pd.read_excel('../terrestrial_deep_subsurface_prok_biomass_estimate.xlsx')
 result = old_results.copy()
