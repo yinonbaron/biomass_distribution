@@ -15,11 +15,16 @@ Created on Tue May 16 13:51:01 2017
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import os
+
+# Get the path of the script
+file_path = os.path.dirname(os.path.realpath(__file__))
+
 data = pd.DataFrame(index = ['plants','fungi','protists','animals','bacteria','archaea'],columns=['terrestrial','marine','deep subsurface'])
 
-fig1 = pd.read_excel('../../results.xlsx', 'Table1 & Fig1',index_col=(0,1))
-fig2a = pd.read_excel('../../results.xlsx', 'Fig2A',index_col=(0,1))
-fig2c = pd.read_excel('../../results.xlsx', 'Fig2C')
+fig1 = pd.read_excel(file_path + '/../../results.xlsx', 'Table1 & Fig1',index_col=(0,1))
+fig2a = pd.read_excel(file_path + '/../../results.xlsx', 'Fig2A',index_col=(0,1))
+fig2c = pd.read_excel(file_path + '/../../results.xlsx', 'Fig2C')
 
 data.loc['plants'] = [fig1.loc[('Plants','Plants'),'Biomass [Gt C]'], fig2c.iloc[20:23,1].sum(),0]
 data.loc['fungi'] = [fig1.loc[('Fungi','Terrestrial'),'Biomass [Gt C]'], fig1.loc[('Fungi','Marine'),'Biomass [Gt C]'],0]
@@ -61,8 +66,5 @@ ax.yaxis.set_ticks_position('left')
 ax.xaxis.set_ticks_position('bottom')
 
 ax.tick_params(axis='both', which='both', length=0)
-plt.title('Figure 2B')
-plt.savefig('../output/fig2B.svg')
-plt.savefig('../output/fig2B.pdf')
-
+plt.savefig(file_path + '/../output/fig2B.pdf')
 plt.show()

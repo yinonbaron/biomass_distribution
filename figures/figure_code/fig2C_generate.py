@@ -9,13 +9,18 @@ import numpy as np
 import pandas as pd
 import matplotlib
 from openpyxl import load_workbook
+import os
+
+# Get the path of the script
+file_path = os.path.dirname(os.path.realpath(__file__))
+
 matplotlib.rc('xtick', labelsize=20) 
 y_pos = [0,0.8]
 colormap = np.array([(9,176,20),(205,23,7)])/255
 
-fig1 = pd.read_excel('../../results.xlsx', 'Table1 & Fig1',index_col=(0,1))
-fig2a = pd.read_excel('../../results.xlsx', 'Fig2A',index_col=(0,1))
-fig2c = pd.read_excel('../../results.xlsx', 'Fig2C')
+fig1 = pd.read_excel(file_path + '/../../results.xlsx', 'Table1 & Fig1',index_col=(0,1))
+fig2a = pd.read_excel(file_path + '/../../results.xlsx', 'Fig2A',index_col=(0,1))
+fig2c = pd.read_excel(file_path + '/../../results.xlsx', 'Fig2C')
 
 data = pd.DataFrame(data=[], index=['Marine','Terrestrial'],columns=['Producers','Consumers'])
 
@@ -54,7 +59,7 @@ fig.set_figheight(1)
 axes[0].barh(y_pos,data.loc['Marine'], left=0,color=colormap)
 axes[0].set_title('marine',fontsize=20)
 axes[0].text(data.loc['Marine','Producers']+0.3,-0.25,int(np.round(data.loc['Marine','Producers'])),fontsize=20)
-axes[0].text(data.loc['Marine','Consumers']+0.3,0.57,int(np.round(data.loc['Marine','Consumers'])),fontsize=20)
+axes[0].text(data.loc['Marine','Consumers']+0.3,0.57,int(np.floor(data.loc['Marine','Consumers'])),fontsize=20)
 
 axes[1].barh(y_pos,data.loc['Terrestrial'], left=0,color=colormap)
 axes[1].set_title('terrestrial',fontsize=20)
@@ -76,7 +81,7 @@ for ax in axes:
 axes[0].set_xlim([0,8])
 axes[1].set_xlim([0,480])
 plt.title('Figure 2B')
-plt.savefig('../output/fig2C.svg')
-plt.savefig('../output/fig2C.pdf')
+plt.savefig(file_path + '/../output/fig2C.svg')
+plt.savefig(file_path + '/../output/fig2C.pdf')
 plt.show()
 

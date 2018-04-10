@@ -3,19 +3,21 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
+import os
+
+# Get the path of the script
+file_path = os.path.dirname(os.path.realpath(__file__))
 
 
-plt.figure()
-ax= plt.gca() 
 font = {'family' : 'normal',
         'weight' : 'normal',
         'size'   : 15}
 
 matplotlib.rc('font', **font)
 
-data = pd.read_excel('../../results.xlsx','FigS2-S3',index_col=0)
-biomass = pd.read_excel('../../results.xlsx','Table1 & Fig1',index_col=[0,1])
-ind_num = pd.read_excel('../../results.xlsx','Table S1',index_col=[0,1])
+data = pd.read_excel(file_path + '/../../results.xlsx','FigS2-S3',index_col=0)
+biomass = pd.read_excel(file_path + '/../../results.xlsx','Table1 & Fig1',index_col=[0,1])
+ind_num = pd.read_excel(file_path + '/../../results.xlsx','Table S1',index_col=[0,1])
 data.loc['Plants','Number of individuals'] = np.nan
 data.loc['Chordates','Number of individuals'] = np.nan
 
@@ -55,10 +57,13 @@ data.loc['Protists','Number of individuals'] = ind_num.loc['Protists','Number of
 lower_error = data['Biomass [Gt C]'] - data['Biomass [Gt C]']/data['Uncertainty']
 upper_error = data['Biomass [Gt C]']*data['Uncertainty'] - data['Biomass [Gt C]']
 
-# Fig S2
+# Fig S3
+figs2 = data[~pd.isnull(data['Number of species'])]
+figs3 = data[~pd.isnull(data['Number of individuals'])]
 
-figs2 = data[~np.isnan(data['Number of species'])]
-figs3 = data[~np.isnan(data['Number of individuals'])]
+
+plt.figure()
+ax= plt.gca() 
 
 plt.errorbar(figs2['Number of species'],
              figs2['Biomass [Gt C]'],
@@ -77,16 +82,16 @@ ax.set_xscale("log", nonposx='clip')
 ax.set_yscale("log", nonposy='clip')
 for txt in (data[data['Number of species'] != np.nan].index):
     ax.annotate(txt,(data.loc[txt,'Number of species']*1.1,data.loc[txt,'Biomass [Gt C]']*1.11))
-plt.ylabel('Biomass [Gt C]')
-plt.xlabel('Number of species')
+plt.ylabel('Biomass [Gt C]', fontsize=15)
+plt.xlabel('Number of species', fontsize=15)
 plt.xlim([1e3,1e7])
 
 plt.title('Figure S3')
-plt.savefig('../output/figS3.pdf')
-plt.savefig('../output/figS3.svg')
+plt.savefig(file_path + '/../output/figS3.pdf')
+plt.savefig(file_path + '/../output/figS3.svg')
 
 
-# Fig S3
+# Fig S2
 
 plt.figure()
 ax= plt.gca()
@@ -109,11 +114,11 @@ ax.set_xscale("log", nonposx='clip')
 ax.set_yscale("log", nonposy='clip')
 for txt in (data[data['Number of individuals'] != np.nan].index):
     ax.annotate(txt,(data.loc[txt,'Number of individuals']*1.1,data.loc[txt,'Biomass [Gt C]']*1.1))
-plt.ylabel('Biomass [Gt C]')
-plt.xlabel('Number of individuals')
+plt.ylabel('Biomass [Gt C]', fontsize=15)
+plt.xlabel('Number of individuals', fontsize=15)
 plt.xticks([1e10,1e15,1e20,1e25,1e30])
 plt.title('Figure S2')
-plt.savefig('../output/figS2.pdf')
-plt.savefig('../output/figS2.svg')
+plt.savefig(file_path + '/../output/figS2.pdf')
+plt.savefig(file_path + '/../output/figS2.svg')
 
 plt.show()
