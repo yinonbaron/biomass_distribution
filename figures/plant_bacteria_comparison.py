@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -19,6 +20,7 @@ from excel_utils import *
 # In order to quantify the probability of plants having more biomass than bacteria, we randomly sample from the distribution of our estimates for the biomass of plants and bacteria.
 
 # In[2]:
+
 
 # Load results
 results = pd.read_excel('../results.xlsx','Table1 & Fig1',index_col=[0,1])
@@ -48,10 +50,12 @@ plants = sample(results.loc[('Plants','Plants'),'Biomass [Gt C]'],results.loc[('
 # Calculate the probability of plant biomass being higher than that of bacteria
 p_val = (plants[:,0] > bac_sum).sum()/sample_size
 
-print('The probability of plants having more biomass than bacteria is ≈%.2f' %(p_val*100) + '%')
+print('The probability of plants having more biomass than bacteria is ≈%.0f' %(p_val*100) + '%')
+update_MS_data(row='Probability of plant biomass being larger than bacterial biomass',values=p_val,path='../results.xlsx')
 
 
 # In[3]:
+
 
 # Plot the distributions    
 bins = 10**(np.linspace(0,4,1000))
