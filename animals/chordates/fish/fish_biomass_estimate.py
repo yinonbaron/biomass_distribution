@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 # Load dependencies
 import numpy as np
 import pandas as pd
@@ -31,6 +32,7 @@ from excel_utils import *
 
 # In[2]:
 
+
 # Load scatter data from Irigoien et al.
 scatter = pd.read_excel('fish_biomass_data.xlsx', 'Total scatter',skiprows=1)
 
@@ -42,6 +44,7 @@ scatter
 
 # In[3]:
 
+
 # Calculate the geometric mean of values from Irigoien et al.
 irigoien_backscatter = gmean(scatter['Total backscatter [m^2]'])
 print('The geometric mean of global backscatter from Irigoien et al. is ≈%.1e m^2' %irigoien_backscatter)
@@ -50,6 +53,7 @@ print('The geometric mean of global backscatter from Irigoien et al. is ≈%.1e 
 # As our best estimate for the global backscatter of mesopelagic fish, we use the geometric mean of the average value from Irigoien et al. and the value reported in Proud et al.
 
 # In[4]:
+
 
 # The global backscatter reported by Proud et al.
 proud_backscatter = 6.02e9
@@ -67,6 +71,7 @@ print('Our best estimate for the global backscatter of mesapelagic fish is %.0e 
 
 # In[5]:
 
+
 # Load terget strength data
 ts = pd.read_excel('fish_biomass_data.xlsx', 'Target strength',skiprows=1)
 
@@ -82,6 +87,7 @@ plt.ylabel('Counts')
 
 # In[6]:
 
+
 # Calculate the average TS per kg for fish with and without swimbladder
 TS_bin = ts.groupby('Swimbladder').mean()
 TS_bin['dB kg^-1']
@@ -90,6 +96,7 @@ TS_bin['dB kg^-1']
 # We use our best estimate for the target strength per unit biomass to estimate the total biomass of mesopelagic fish. We transform the TS to backscattering cross-section, and then calculate the effective population backscattering cross-section based on the assumption that fish with or without swimbladder represent equal portions of the population.
 
 # In[7]:
+
 
 # The conversion equation from global backscatter and terget strength per unit biomass
 biomass_estimator = lambda TS1,TS2,bs,frac: bs/(frac*10**(TS1/10.) + (1.-frac)*10**(TS2/10.))
@@ -103,6 +110,7 @@ print('Our best sonar-based estimate for the biomass of mesopelagic fish is ≈%
 
 # In[8]:
 
+
 # The estimate of the global biomass of mesopelagic fish based on trawling reported in Lan & Pauly
 trawling_biomass = 1.5e14
 
@@ -114,6 +122,7 @@ print('Our best estimate for the biomass of mesopelagic fish is ≈%.1f Gt C' %(
 # Finally, we add to our estimate of the biomass of mesopelagic fish the estimate of biomass of non-mesopelagic fish made by [Wilson et al.](http://dx.doi.org/10.1126/science.1157972) to generate our estimate for the total biomass of fish.
 
 # In[9]:
+
 
 # The estimate of non-mesopelagic fish based on Wilson et al.
 non_mesopelagic_fish_biomass = 1.5e14
@@ -142,6 +151,7 @@ print('Our best estimate for the biomass of fish is ≈%.1f Gt C' %(best_estimat
 
 # In[10]:
 
+
 # Calculate the intra-study uncertainty of Irigoien et al.
 irigoien_CI = geo_CI_calc(scatter['Total backscatter [m^2]'])
 
@@ -156,6 +166,7 @@ print('The intra-study uncertainty of the total backscatter estimate of Proud et
 # As a measure of the interstudy uncertainty of the global backscatter, we calculate the 95% confidence interval of the geometric mean of the estimate from Irigoien et al. and Proud et al.:
 
 # In[11]:
+
 
 # Calculate the interstudy uncertainty of the global backscatter
 bs_inter_CI = geo_CI_calc([irigoien_backscatter,proud_backscatter])
@@ -175,6 +186,7 @@ bs_CI = np.max([irigoien_CI,proud_CI,bs_inter_CI])
 # We calculate the 95% confidence interval of the target strength of fish with or withour swimbladder, and propagate this confidence interval to the total estimate of biomass to assess the uncertainty associated with the estimate of the target strength. We calculated an uncertainty of ≈1.3-fold. associated with te estimate of the target strength per unit biomass of fish.
 
 # In[12]:
+
 
 # Define the function that will estimate the 95% confidence interval
 def CI_groupby(input):
@@ -208,6 +220,7 @@ print('Our best projection for the uncertainty associated with the estimate of t
 
 # In[13]:
 
+
 # Sample different fractions of fish with swimbladder
 ratio_range = np.linspace(0,1,1000)
 
@@ -224,6 +237,7 @@ plt.ylabel('Biomass estimate [Gt C]')
 
 # In[14]:
 
+
 # Calculate the upper and lower bounds of the influence of the fraction of fish with swimbladder on biomass estimate
 ratio_upper_CI = (biomass_estimator(*TS_bin['dB kg^-1'],best_backscatter,0.975)*1000*0.15)/sonar_biomass
 ratio_lower_CI = sonar_biomass/(biomass_estimator(*TS_bin['dB kg^-1'],best_backscatter,0)*1000*0.15)
@@ -236,14 +250,16 @@ print('Our best projection for the uncertainty associated with the fraction of f
 
 # In[15]:
 
+
 sonar_CI = CI_prod_prop(np.array([ratio_CI,ts_CI,bs_CI]))
 print('Our best projection for the uncertainty associated with the sonar-based estimate for the biomass of mesopelagic fish is ≈%.1f-fold' %sonar_CI)
 
 
 # ### Inter-method uncertainty
-# As a measure of the inter-method uncertainty of our estimate of the biomass of mesopelagic fish, we calculate the 95% confidence interval of the geometric mean of the sonar-based estiamte and the trawling-based estimate.
+# As a measure of the inter-method uncertainty of our estimate of the biomass of mesopelagic fish, we calculate the 95% confidence interval of the geometric mean of the sonar-based estimate and the trawling-based estimate.
 
 # In[16]:
+
 
 meso_inter_CI = geo_CI_calc(np.array([sonar_biomass,trawling_biomass]))
 print('Our best projection for the inter method uncertainty associated with estimate of the biomass of mesopelagic fish is ≈%.1f-fold' %meso_inter_CI)
@@ -260,6 +276,7 @@ meso_CI = np.max([meso_inter_CI,sonar_CI])
 
 # In[17]:
 
+
 # Calculate the uncertainty of the non-mesopelagic fish biomass
 non_meso_CI = np.max([26.12/5,5/0.34])
 
@@ -270,9 +287,10 @@ print('Our best projection for the uncertainty associated with the estimate of t
 
 
 # # Prehuman fish biomass
-# To estimate the prehuman fish biomass, we rely on a study ([](http://dx.doi.org/10.1073/pnas.1520420113)) which states that fish stocks in global fisheries are 1.17 of the Maximal Sustainable Yield biomass, when looking at all fisheries and calculating a catch-weighted average global fishery (Figure S12 in the SI Appendix of Costello et al.). Costello et al. also reports the total biomass of present day fisheries at 0.84 Gt wet weight (Table S15 in the SI Appendix of Costello et al.). Assuming 70% water content and 50% carbon content out of wet weight, this translates to:
+# To estimate the prehuman fish biomass, we rely on a study ([Costello et al.](http://dx.doi.org/10.1073/pnas.1520420113)) which states that fish stocks in global fisheries are 1.17 of the Maximal Sustainable Yield biomass, when looking at all fisheries and calculating a catch-weighted average global fishery (Figure S12 in the SI Appendix of Costello et al.). Costello et al. also reports the total biomass of present day fisheries at 0.84 Gt wet weight (Table S15 in the SI Appendix of Costello et al.). Assuming 70% water content and 50% carbon content out of wet weight, this translates to:
 
 # In[18]:
+
 
 costello_ww = 0.84
 wet_to_c = 0.3*0.5
@@ -283,6 +301,7 @@ print('Costello et al. estimate ≈%.2f Gt C of current fisheries' %costello_cc)
 # This number is close to the number reported by Wilson et al. Using a database of published landings data and stock assessment biomass estimates, [Thorson et al.](http://dx.doi.org/10.1139/f2012-077) estimate that the biomass of fish at the maximum sustainable yield represent ≈40% of the biomass the population would have reached in case of no fishing. From these two numbers, we can estimate the prehuamn biomass of fish in fisheries. We use the total biomass of fisheries reported in Costello et al., divide it the bte ratio reported in Costello et al. to estimate the Maximal Sustainable Yield biomass, and then divide this number by 0.4 to arrive at the prehuman biomass of fish in fisheries. We add to this estimate the estimate of the total biomass of mesopelagic fish, assuming their biomass wasn't affected by humans.
 
 # In[19]:
+
 
 costello_ratio = 1.17
 thorson_ratio = 0.4
@@ -295,15 +314,19 @@ print('Our estimate for the total prehuman biomass of fish is ≈%.1f Gt C' %(pr
 
 # In[20]:
 
+
 fish_biomass_decrease = prehuman_fish_biomass-best_estimate
 print('Our estimate for the decrease in the total biomass of fish is ≈%.2f Gt C' %(fish_biomass_decrease/1e15))
 
+
+# Which means that, based on the assumptions in our calculation, the decrease in the total biomass of fish is about the same as the remaining total mass of fish in all fisheries (disregarding mesopalegic fish).
 
 # # Estimating the total number of fish
 # To estimate the total number of fish, we divide our estimate of the total biomass of mesopelagic fish by an estimate for the characteristic carbon content of a single mesopelagic fish. 
 # To estimate the mean weight of mesopelagic fish, we rely on data reported in [Fock & Ehrich](https://doi.org/10.1111/j.1439-0426.2010.01450.x) for the family Myctophidae (Lanternfish), which dominate the mesopelagic fish species. Fock & Ehrich report the length range of each fish species, as well as allometric relations between fish length and weight for each species. Here is a sample of the data:
 
 # In[21]:
+
 
 # Load the data from Fock & Ehrich
 fe_data = pd.read_excel('fish_biomass_data.xlsx','Fock & Ehrich', skiprows=1)
@@ -319,12 +342,14 @@ fe_mycto.head()
 
 # In[22]:
 
+
 fe_mean_length = np.mean([fe_mycto['Maximum length (mm)'].astype(float),fe_mycto['Minimum length (mm)'].astype(float)])
 
 
 # We plug the mean length of each fish species into the allometric equation along with its specific parameters a and b to generate the mean wet weight of each fish. We use the geometric mean of the weights of all species as our best estimate of the weight of a single mesopelagic fish. We convert wet weight to carbon mass assuming 70% water content and 50% carbon our of the dry weight.
 
 # In[23]:
+
 
 # The allometric equation to convert fish length into fish weight. The equation takes values
 # in cm and the data is given in mm so we divide the length by a factor of 10
@@ -346,6 +371,7 @@ print('Our best estimate for the carbon content of a single mesopelagic fish is 
 
 # In[24]:
 
+
 # Estimate the total number of fish
 tot_fish_num = best_mesopelagic_biomass/fish_cc
 
@@ -353,6 +379,7 @@ print('Our best estimate for the total number of individual fish is ≈%.0e.' %t
 
 
 # In[25]:
+
 
 # Feed results to the chordate biomass data
 old_results = pd.read_excel('../../animal_biomass_estimate.xlsx',index_col=0)
