@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>soil_microbial_biomass</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>soil_microbial_biomass</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -13,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1109,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2538,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3029,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8760,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8962,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8986,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9122,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9211,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9255,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9551,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9571,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11246,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11558,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11571,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11631,10 +11654,8 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11645,11 +11666,9 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11703,9 +11722,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11726,7 +11743,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11755,7 +11772,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load dependencies</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load dependencies</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gmean</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -11763,7 +11780,7 @@ div#notebook {
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;../../statistics_helper&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">CI_helper</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">fraction_helper</span> <span class="k">import</span> <span class="o">*</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;{:,.1f}&#39;</span><span class="o">.</span><span class="n">format</span>
 </pre></div>
 
 </div>
@@ -11771,8 +11788,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11787,7 +11803,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the values for the estimates of the biomass of soil microbes from Xu et al. and Serna-Chavez et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Define the values for the estimates of the biomass of soil microbes from Xu et al. and Serna-Chavez et al.</span>
 <span class="n">xu</span> <span class="o">=</span> <span class="mf">23.2e15</span>
 <span class="n">serna_chavez</span> <span class="o">=</span> <span class="mf">14.6e15</span>
 </pre></div>
@@ -11797,8 +11813,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11812,9 +11827,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Our best estimate is the geometric mean of values from Xu et al. and Serna-Chavez et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Our best estimate is the geometric mean of values from Xu et al. and Serna-Chavez et al.</span>
 <span class="n">best_estimate</span> <span class="o">=</span> <span class="n">gmean</span><span class="p">([</span><span class="n">xu</span><span class="p">,</span><span class="n">serna_chavez</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of soil microbes is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of soil microbes is ≈</span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11825,7 +11840,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the biomass of soil microbes is ≈18 Gt C
 </pre>
@@ -11836,8 +11855,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11853,7 +11871,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data on the microbial biomass from each biome and the coefficients for the depth distribution of roots</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Load data on the microbial biomass from each biome and the coefficients for the depth distribution of roots</span>
 <span class="c1"># in each biome</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;soil_microbial_biomass_data.xlsx&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -11862,7 +11880,7 @@ div#notebook {
 
 <span class="c1"># Calculate the relative fraction of total microbial biomass that is present in layers deeper than 1 meter</span>
 <span class="n">total_deeper_relative_fraction</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Total microbial biomass 100 cm (g C)&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">biome_deeper_frac</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">xu</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The fraction of microbial biomass in layers deeper than 1 meter based on Xu et al. is &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_deeper_relative_fraction</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The fraction of microbial biomass in layers deeper than 1 meter based on Xu et al. is &#39;</span> <span class="o">+</span> <span class="s1">&#39;{:,.0f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_deeper_relative_fraction</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11873,7 +11891,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The fraction of microbial biomass in layers deeper than 1 meter based on Xu et al. is 2%
 </pre>
@@ -11884,8 +11906,7 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11899,20 +11920,20 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Concentration of cells in top 1 meter of forest soils</span>
-<span class="n">forest_upper</span> <span class="o">=</span> <span class="mf">4e7</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Concentration of cells in top 1 meter of forest soils</span>
+<span class="n">forest_upper</span> <span class="o">=</span> <span class="mi">4</span><span class="n">e7</span>
 <span class="c1"># Top 1 meter is 1 meter in depth</span>
 <span class="n">forest_upper_depth</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="c1"># Concentration of cells in depths of 1-7 meters of forest soils</span>
-<span class="n">forest_lower</span> <span class="o">=</span> <span class="mf">1e6</span>
+<span class="n">forest_lower</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span>
 <span class="c1"># The deeper layer of soils is 1-8 meters - 7 meters in depth</span>
 <span class="n">forest_lower_depth</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="c1"># Concentration of cells in top 1 meter of other soils</span>
-<span class="n">other_upper</span> <span class="o">=</span> <span class="mf">2e9</span>
+<span class="n">other_upper</span> <span class="o">=</span> <span class="mi">2</span><span class="n">e9</span>
 <span class="c1"># Top 1 meter is 1 meter in depth</span>
 <span class="n">other_upper_depth</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="c1"># Concentration of cells in depths of 1-7 meters of other soils</span>
-<span class="n">other_lower</span> <span class="o">=</span> <span class="mf">1e8</span>
+<span class="n">other_lower</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e8</span>
 <span class="c1"># The deeper layer of soils is 1-8 meters - 7 meters in depth</span>
 <span class="n">other_lower_depth</span> <span class="o">=</span> <span class="mi">7</span>
 
@@ -11920,8 +11941,8 @@ div#notebook {
 <span class="n">forest_lower_frac</span> <span class="o">=</span> <span class="n">forest_lower</span><span class="o">*</span><span class="n">forest_lower_depth</span><span class="o">/</span><span class="p">(</span><span class="n">forest_lower</span><span class="o">*</span><span class="n">forest_lower_depth</span> <span class="o">+</span> <span class="n">forest_upper</span><span class="o">*</span><span class="n">forest_upper_depth</span><span class="p">)</span>
 <span class="n">other_lower_frac</span> <span class="o">=</span> <span class="n">other_lower</span><span class="o">*</span><span class="n">other_lower_depth</span><span class="o">/</span><span class="p">(</span><span class="n">other_lower</span><span class="o">*</span><span class="n">other_lower_depth</span> <span class="o">+</span> <span class="n">other_upper</span><span class="o">*</span><span class="n">other_upper_depth</span><span class="p">)</span>
 <span class="n">whitman_mean_frac</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">forest_lower_frac</span><span class="p">,</span><span class="n">other_lower_frac</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The fraction of cells found in soil layers deeper than 1 meter is &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">forest_lower_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in forests and &#39;</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">other_lower_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in other soils.&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average fraction of cells found in deeper layers is &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">whitman_mean_frac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The fraction of cells found in soil layers deeper than 1 meter is &#39;</span> <span class="o">+</span> <span class="s1">&#39;{:,.0f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">forest_lower_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in forests and &#39;</span> <span class="s1">&#39;{:,.0f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">other_lower_frac</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in other soils.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average fraction of cells found in deeper layers is &#39;</span> <span class="o">+</span> <span class="s1">&#39;{:,.0f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">whitman_mean_frac</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11932,7 +11953,11 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The fraction of cells found in soil layers deeper than 1 meter is 15% in forests and 26% in other soils.
 The average fraction of cells found in deeper layers is 20%
@@ -11944,8 +11969,7 @@ The average fraction of cells found in deeper layers is 20%
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -11959,13 +11983,13 @@ The average fraction of cells found in deeper layers is 20%
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the geometric mean of the estimates by Xu et al. and Whitman et al.</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the geometric mean of the estimates by Xu et al. and Whitman et al.</span>
 <span class="n">mean_deep_frac</span> <span class="o">=</span> <span class="n">frac_mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">total_deeper_relative_fraction</span><span class="p">,</span><span class="n">whitman_mean_frac</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the fraction of biomass present in layers deeper than 1 meter is &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">mean_deep_frac</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the fraction of biomass present in layers deeper than 1 meter is &#39;</span> <span class="o">+</span> <span class="s1">&#39;{:,.0f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">mean_deep_frac</span><span class="p">))</span>
 
 <span class="c1"># Correct out best estimate to account for the biomass of microbes in soil layers deeper than 1 meter</span>
 <span class="n">best_estimate_corrected</span> <span class="o">=</span> <span class="n">best_estimate</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">mean_deep_frac</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of soil microbes, including contributions from microbes present in layers deeper than 1 meter is </span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate_corrected</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Our best estimate for the biomass of soil microbes, including contributions from microbes present in layers deeper than 1 meter is </span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate_corrected</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11976,7 +12000,11 @@ The average fraction of cells found in deeper layers is 20%
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our best estimate for the fraction of biomass present in layers deeper than 1 meter is 7%
 Our best estimate for the biomass of soil microbes, including contributions from microbes present in layers deeper than 1 meter is 20 Gt C
@@ -11988,8 +12016,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12004,7 +12031,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We calculate the upper and lower multiplicative 95% confidence interval of the average microbial </span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># We calculate the upper and lower multiplicative 95% confidence interval of the average microbial </span>
 <span class="c1"># biomass density for each biome</span>
 <span class="n">xu_upper_CI</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;upper 95</span><span class="si">% c</span><span class="s1">onfidence interval of Cmic&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Cmic (0-30 cm) [mmol C kg^-1]&#39;</span><span class="p">]</span>
 <span class="n">xu_lower_CI</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Cmic (0-30 cm) [mmol C kg^-1]&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lower 95</span><span class="si">% c</span><span class="s1">onfidence interval of Cmic&#39;</span><span class="p">]</span>
@@ -12022,7 +12049,11 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12124,7 +12155,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The maximal intra-study uncertainty in Xu et al. across biomes is </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;95</span><span class="si">% c</span><span class="s1">onfidence interval&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The maximal intra-study uncertainty in Xu et al. across biomes is </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;95</span><span class="si">% c</span><span class="s1">onfidence interval&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12135,7 +12166,11 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The maximal intra-study uncertainty in Xu et al. across biomes is 1.5-fold
 </pre>
@@ -12146,8 +12181,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12162,7 +12196,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mul_CI_top</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">xu</span><span class="p">,</span><span class="n">serna_chavez</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI_top</span> <span class="o">=</span> <span class="n">geo_CI_calc</span><span class="p">([</span><span class="n">xu</span><span class="p">,</span><span class="n">serna_chavez</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The interstudy uncertainty is ≈</span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI_top</span><span class="p">)</span>
 </pre></div>
 
@@ -12174,7 +12208,11 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The interstudy uncertainty is ≈1.6-fold
 </pre>
@@ -12185,8 +12223,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12201,7 +12238,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xu_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">100</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">xu_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">whitman_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">forest_lower_frac</span><span class="p">,</span><span class="n">other_lower_frac</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The intra-study uncertainty of the fraction of microbial biomass present in soil layers deeper than 1 meter is ≈</span><span class="si">%.1f</span><span class="s1">-fold for Xu et al. and ≈</span><span class="si">%.1f</span><span class="s1">-fold for Whitman et al.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">xu_deep_frac_CI</span><span class="p">,</span><span class="n">whitman_deep_frac_CI</span><span class="p">))</span>
 </pre></div>
@@ -12214,7 +12251,11 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The intra-study uncertainty of the fraction of microbial biomass present in soil layers deeper than 1 meter is ≈2.7-fold for Xu et al. and ≈1.7-fold for Whitman et al.
 </pre>
@@ -12225,8 +12266,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12240,7 +12280,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inter_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">total_deeper_relative_fraction</span><span class="p">,</span><span class="n">whitman_mean_frac</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">inter_deep_frac_CI</span> <span class="o">=</span> <span class="n">frac_CI</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">total_deeper_relative_fraction</span><span class="p">,</span><span class="n">whitman_mean_frac</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The interstudy uncertainty of the fraction of microbial biomass present in soil layers deeper than 1 meter is ≈</span><span class="si">%.1f</span><span class="s1">-fold.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">inter_deep_frac_CI</span><span class="p">))</span>
 </pre></div>
 
@@ -12252,7 +12292,11 @@ Our best estimate for the biomass of soil microbes, including contributions from
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The interstudy uncertainty of the fraction of microbial biomass present in soil layers deeper than 1 meter is ≈8.2-fold.
 </pre>
@@ -12263,8 +12307,7 @@ Our best estimate for the biomass of soil microbes, including contributions from
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12279,7 +12322,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate the maximal uncertainty between the intra-study and interstudy uncertainty</span>
+<div class=" highlight hl-ipython3"><pre><span class="c1"># Calculate the maximal uncertainty between the intra-study and interstudy uncertainty</span>
 <span class="n">best_deep_frac_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">xu_deep_frac_CI</span><span class="p">,</span><span class="n">whitman_deep_frac_CI</span><span class="p">,</span><span class="n">inter_deep_frac_CI</span><span class="p">])</span>
 <span class="c1"># Sample the fraction of biomass in soil layers deeper than 1 meter from a lognormal distribution </span>
 <span class="n">deep_frac_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mean_deep_frac</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">best_deep_frac_CI</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">1.96</span><span class="p">)),</span><span class="mi">1000</span><span class="p">)</span>
@@ -12302,7 +12345,11 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Our estimate for the uncertainty of the total biomass of soil microbes contributed by the uncertainty in the esti,ate of the fraction of the biomass of microbes in soil layers deeper than 1 meter is 1.3-fold
 </pre>
@@ -12313,12 +12360,11 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Total-uncertainty">Total uncertainty<a class="anchor-link" href="#Total-uncertainty">&#182;</a></h2><p>To estimate the total uncertainty of the biomass of soil microbes, we combine the ucnertainty assoicated with the estiamte of biomass of soil microbes in the top 1 meter of soil, and the uncertainty of the correction coefficient to include biomass contribution from soil layer deeper than 1 meter.</p>
+<h2 id="Total-uncertainty">Total uncertainty<a class="anchor-link" href="#Total-uncertainty">&#182;</a></h2><p>To estimate the total uncertainty of the biomass of soil microbes, we combine the ucnertainty assoicated with the estimate of biomass of soil microbes in the top 1 meter of soil, and the uncertainty of the correction coefficient to include biomass contribution from soil layer deeper than 1 meter.</p>
 
 </div>
 </div>
@@ -12328,7 +12374,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mul_CI_top</span><span class="p">,</span><span class="n">cor_coeff_CI</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">mul_CI</span> <span class="o">=</span> <span class="n">CI_prod_prop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mul_CI_top</span><span class="p">,</span><span class="n">cor_coeff_CI</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The total uncertainty for the biomass of soil microbes is </span><span class="si">%.1f</span><span class="s1">-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 </pre></div>
 
@@ -12340,7 +12386,11 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The total uncertainty for the biomass of soil microbes is 1.7-fold
 </pre>
@@ -12351,8 +12401,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12366,7 +12415,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total biomass of soil microbes: </span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mf">1e15</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total biomass of soil microbes: </span><span class="si">%.0f</span><span class="s1"> Gt C&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">best_estimate</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uncertainty associated with the estimate of the total biomass of soil microbes ≈2-fold&#39;</span> <span class="o">%</span> <span class="n">mul_CI</span><span class="p">)</span>
 
 <span class="n">old_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;../fungi_biomass_estimate.xlsx&#39;</span><span class="p">)</span>
@@ -12375,7 +12424,7 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
                 <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="s1">&#39;Total biomass of soil microbes&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_estimate_corrected</span><span class="p">),</span>
                 <span class="s1">&#39;Units&#39;</span><span class="p">:</span> <span class="s1">&#39;g C&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="s1">&#39;Uncertainty&#39;</span><span class="p">:</span> <span class="s2">&quot;{0:.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
                 <span class="p">})</span>
 
 <span class="n">result</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;../fungi_biomass_estimate.xlsx&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -12389,7 +12438,11 @@ The 97.5% and 2.5% percentiles of the resulting distribution of coefficients wil
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total biomass of soil microbes: 18 Gt C
 Uncertainty associated with the estimate of the total biomass of soil microbes ≈2-fold
@@ -12404,4 +12457,8 @@ Uncertainty associated with the estimate of the total biomass of soil microbes �
     </div>
   </div>
 </body>
+
+ 
+
+
 </html>
