@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -20,6 +21,7 @@ from excel_utils import *
 
 # In[2]:
 
+
 # Load the data taken from Fierer et al.
 data = pd.read_excel('nematode_biomass_data.xlsx','Fierer',skiprows=1,index_col='Biome')
 data
@@ -28,6 +30,7 @@ data
 # The data in Fierer et al. does not include biomass density of nematodes in savanna, pastures and cropland. We use the geometric mean of values from other biomes as our best estimate for the biomass density of nematodes in these biomes:
 
 # In[3]:
+
 
 # Calculate the geometric mean of the biomass density across biomes
 average_biomass_density = gmean(data['Average biomass density [g C m^-2]'].dropna())
@@ -49,6 +52,7 @@ data.loc['Crops','Median biomass density [g C m^-2]'] = median_biomass_density
 
 # In[4]:
 
+
 # Load biome area data
 area = pd.read_excel('nematode_biomass_data.xlsx','Biome area', skiprows=1, index_col='Biome')
 
@@ -63,7 +67,7 @@ print('The total biomass of terrestrial nematodes based on Fierer et al. based o
 # estimate based on the median biomass density as our best estimate for the biomass of
 # nematodes
 best_terrestrial_biomass = gmean([total_biomass_mean,total_biomass_median])
-print('Our best estimate of total biomass of terrestrial nematodes based on Fierer et al. is %.2f Gt C' %(best_terrestrial_biomass/1e15))
+print('Our best estimate of total biomass of terrestrial nematodes based on Fierer et al. is %.3f Gt C' %(best_terrestrial_biomass/1e15))
 
 
 # ## Marine nematodes
@@ -74,6 +78,7 @@ print('Our best estimate of total biomass of terrestrial nematodes based on Fier
 # Our best estimate for the total biomass of nematodes is the sum of our estimates for the biomass of terrestrial nematodes and marine nematodes:
 
 # In[5]:
+
 
 # As noted above, our best estimate for the biomass of marine nematodes is ≈0.01 Gt C
 best_marine_biomass = 0.014e15
@@ -89,6 +94,7 @@ print('Our best estimate of total biomass of nematodes is %.2f Gt C' %(best_esti
 
 # In[6]:
 
+
 # Carbon content of a single nematode based on Fierer et al.
 carbon_content = 0.05e-6
 
@@ -99,6 +105,7 @@ print('Our best estimate for the total number of nematodes is ≈%.1e' %tot_nema
 
 
 # In[7]:
+
 
 # Feed results to the animal biomass data
 old_results = pd.read_excel('../animal_biomass_estimate.xlsx',index_col=0)
