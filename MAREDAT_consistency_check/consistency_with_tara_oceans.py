@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 # Load dependencies
 import pandas as pd
 import numpy as np
@@ -30,6 +31,7 @@ import numpy as np
 
 # In[2]:
 
+
 # Load data on the total number of reads of each taxon from de Vargas et al.
 data = pd.read_excel('tara_oceans_data.xlsx','de Vargas W6',skiprows=1)
 data.head()
@@ -38,6 +40,7 @@ data.head()
 # We also use data on the total number of reads from each size fraction from Figure 2 in de Vargas et al.:
 
 # In[3]:
+
 
 #Load data on the total number of reads in each size fraction
 tot_reads = pd.read_excel('tara_oceans_data.xlsx','Total number of reads', skiprows=1)
@@ -48,6 +51,7 @@ tot_reads
 # 
 
 # In[4]:
+
 
 # Calculate the total number of reads for the Nano and Micro fractions
 read_data = pd.DataFrame()
@@ -70,6 +74,7 @@ read_data.loc[1]/corrected_total_reads
 
 # In[5]:
 
+
 # Load 18S sequecing data of mesozooplankton
 seq_data = pd.read_excel('../animals/arthropods/marine_arthropods/marine_arthropods_data.xlsx',sheet_name='de Vargas',skiprows=1)
 
@@ -80,6 +85,7 @@ print('The average fraction of Rhizaria in 18S rDNA sequencing data in the deep 
 # The remaining 60% are made up mainly of arthropods. This would put the total mesozooplankton arthropods biomass at ≈0.3 Gt C. Our estimate for the total biomass of arthropods in the nano, micro and mesozooplankton size fraction is ≈0.56 Gt C (see the marine arthropod section for details). Subtracting the fraction of As which leaves ≈0.2 Gt C of nano and microzooplankton arthropod biomass.
 
 # In[6]:
+
 
 # The estimate of the biomass of rhizaria based on Biard et al.
 rhizaria_biomass = 0.2e15
@@ -104,15 +110,17 @@ nano_micro_arth = nano_micro_mezo_arthropod - meso_arth
 
 # In[7]:
 
+
 print('The fraction of arthropods out of the total number of reads in nanoplankton and microplankton')
 metazoa_frac = read_data[data['Group'] == 'Metazoa']/tot_reads[['Nano reads','Micro reads']]
 
 print('The mean fraction of arthropods out of the total number of reads in nanoplankton and microplankton is ≈' + '{:,.0f}%'.format(float(metazoa_frac.mean(axis=1)*100)))
 
 
-# We use the estimate we just calculated of ≈0.2 Gt C of arthropods in the nano and microplankton size fractions, and combine it with the estimate of the biomass fraction of arthropods in the nano and microplankton size fractions from the Tara Oceans dataset. This yields an estimate for the total nano and microplankton biomass which is about ≈0.5 Gt C:
+# We use the estimate we just calculated of ≈0.2 Gt C of arthropods in the nano and microplankton size fractions, and combine it with the estimate of the biomass fraction of arthropods in the nano and microplankton size fractions from the Tara Oceans dataset. This yields an estimate for the total nano and microplankton biomass which is about ≈0.4 Gt C:
 
 # In[8]:
+
 
 tot_nano_micro_biomass = nano_micro_arth/metazoa_frac.mean(axis=1)
 
