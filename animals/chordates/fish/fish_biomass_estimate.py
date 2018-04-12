@@ -83,7 +83,7 @@ plt.xlabel(r'Target strength per unit biomass dB kg$^{-1}$')
 plt.ylabel('Counts')
 
 
-# To estimate the characteristic target strength per unit biomass of mesopelagic fish, we first estiamte the characteristic target strength per unit biomass of fish with or without swimbladder. We assume that fish with and without swimbladder represent an equal portion of the population of mesopelagic fish. We test the uncertainty associated with this assumption in the uncertainty analysis section.
+# To estimate the characteristic target strength per unit biomass of mesopelagic fish, we first estimate the characteristic target strength per unit biomass of fish with or without swimbladder. We assume that fish with and without swimbladder represent an equal portion of the population of mesopelagic fish. We test the uncertainty associated with this assumption in the uncertainty analysis section.
 
 # In[6]:
 
@@ -224,7 +224,7 @@ print('Our best projection for the uncertainty associated with the estimate of t
 # Sample different fractions of fish with swimbladder
 ratio_range = np.linspace(0,1,1000)
 
-# Estiamte the biomass of mesopelagic fish using the sampled fraction
+# Estimate the biomass of mesopelagic fish using the sampled fraction
 biomass_ratio_dist = biomass_estimator(*TS_bin['dB kg^-1'],best_backscatter,ratio_range)*1000*0.15/1e15
 
 # Plot the results for all fractions

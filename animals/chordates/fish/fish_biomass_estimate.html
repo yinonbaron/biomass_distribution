@@ -12207,7 +12207,7 @@ SKjgi4iEhAq+iEhI/H8Sc0dAvwCF2gAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To estimate the characteristic target strength per unit biomass of mesopelagic fish, we first estiamte the characteristic target strength per unit biomass of fish with or without swimbladder. We assume that fish with and without swimbladder represent an equal portion of the population of mesopelagic fish. We test the uncertainty associated with this assumption in the uncertainty analysis section.</p>
+<p>To estimate the characteristic target strength per unit biomass of mesopelagic fish, we first estimate the characteristic target strength per unit biomass of fish with or without swimbladder. We assume that fish with and without swimbladder represent an equal portion of the population of mesopelagic fish. We test the uncertainty associated with this assumption in the uncertainty analysis section.</p>
 
 </div>
 </div>
@@ -12566,7 +12566,7 @@ The intra-study uncertainty of the total backscatter estimate of Proud et al. is
 <div class=" highlight hl-ipython3"><pre><span class="c1"># Sample different fractions of fish with swimbladder</span>
 <span class="n">ratio_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="c1"># Estiamte the biomass of mesopelagic fish using the sampled fraction</span>
+<span class="c1"># Estimate the biomass of mesopelagic fish using the sampled fraction</span>
 <span class="n">biomass_ratio_dist</span> <span class="o">=</span> <span class="n">biomass_estimator</span><span class="p">(</span><span class="o">*</span><span class="n">TS_bin</span><span class="p">[</span><span class="s1">&#39;dB kg^-1&#39;</span><span class="p">],</span><span class="n">best_backscatter</span><span class="p">,</span><span class="n">ratio_range</span><span class="p">)</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="mf">0.15</span><span class="o">/</span><span class="mi">1</span><span class="n">e15</span>
 
 <span class="c1"># Plot the results for all fractions</span>
