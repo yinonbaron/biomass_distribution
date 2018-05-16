@@ -1,6 +1,6 @@
 # The Biomass Distribution on Earth
 
-This repository contains all source data and code for the analysis found in "The Distribution of Biomass on Earth" by Yinon Bar-On, Rob Phillips and Ron Milo.
+This repository contains all source data and code for the analysis found in "The biomass of distribution on Earth" by Yinon Bar-On, Rob Phillips and Ron Milo.
 
 An index for the structure of this repository is given below:
 
